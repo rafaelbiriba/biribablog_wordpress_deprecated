@@ -8,7 +8,7 @@ set :deploy_via, :copy
 
 set :copy_cache, true
 
-set :copy_exclude, `git ls-files`.split($/).reject{ |f| f =~ /public_deprecated_wordpress/  }
+set :copy_exclude, Dir.entries(".").reject{ |f| f =~ /public_deprecated_wordpress/ }
 
 set :user, "deploy"
 
