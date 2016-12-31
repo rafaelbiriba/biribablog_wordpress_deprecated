@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Redes &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/redes/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>VirtualBox: VMs com IPs estáticos e internet de maneira simples</title>
+		<link>https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html</link>
+		<comments>https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html#comments</comments>
+		<pubDate>Mon, 22 Feb 2010 11:30:07 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Redes]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[dhcp]]></category>
+		<category><![CDATA[host]]></category>
+		<category><![CDATA[maquina]]></category>
+		<category><![CDATA[nat]]></category>
+		<category><![CDATA[network]]></category>
+		<category><![CDATA[rede]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[vboxnet0]]></category>
+		<category><![CDATA[virtual]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1875</guid>
+		<description><![CDATA[Tem certas coisas que você só aprende tentando&#8230; Mas esse assunto foi muito além desse princípio. Durante toda a semana, procurei por soluções para colocar 2 máquinas virtuais acessíveis pela minha máquina hospedeira, com ip fixo e com internet. O que acontece é o seguinte: Quem possui as versões mais atuais do virtualbox (a minha &#8230; <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox: VMs com IPs estáticos e internet de maneira simples</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="size-full wp-image-1877 alignleft" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="virtualbox-image" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" />Tem certas coisas que você só aprende tentando&#8230; Mas esse assunto foi muito além desse princípio.</p>
+<p style="text-align: justify;">Durante toda a semana, procurei por soluções para colocar 2 máquinas virtuais acessíveis pela minha máquina hospedeira, com ip fixo e com internet.</p>
+<p style="text-align: justify;">O que acontece é o seguinte: Quem possui as versões mais atuais do virtualbox (a minha é a 3.1.2), possui uma opção de adaptador de rede, que se chama <strong>host-only</strong>. Ela cria uma conexão de rede em seu sistema hospedeiro, e utiliza um DHCP próprio para gerenciar as VMs, e com isso você consegue tanto utilizar internet, quanto se comunicar entre máquina real e máquina virtual.</p>
+<p style="text-align: justify;">O problema é que preciso garantir que estou dando SSH para a VM certa. O DHCP pode comprometer essa garantia.</p>
+<p style="text-align: justify;">O que tentei fazer&#8230; Atribuir um ip fixo na máquina virtual. Mas sem utilizar o DHCP, faz com que a VM fique sem conectividade com a internet.</p>
+<p style="text-align: justify;">Procurando pelo google, vi várias soluções que se resumiam em criar interfaces de redes virtuais para cada VM e compartilhando a conexão de internet entre elas, alterando tudo no arquivo <strong>/etc/netwotk/interfaces</strong> (ubuntu) e mais algumas outras coisas.</p>
+<p style="text-align: justify;">Eu não só testei várias soluções, como nenhuma delas funcionou, e ainda fiquei com alguns problemas de rede, mas que foram facilmente resolvidos.</p>
+<p style="text-align: justify;">Não querendo complicar uma coisa tão simples, consegui achar uma solução que resolve tudo com apenas alguns cliques, sem alterar nenhuma configuração e nem arriscar problemas na sua rede atual (<strong>eth0</strong>) =D</p>
+<p style="text-align: justify;">Então, vamos para a <span style="color: #ff0000;"><strong>solução final</strong></span>:</p>
+<p style="text-align: justify;">Existe uma outra opção para sua interface de rede no virtualbox: NAT. Ela atribui um IP para sua VM, que é inacessível não só entre a maquina real e a virtual, quanto entre as máquinas virtuais também&#8230; Essa opção apenas libera o acesso à internet para a VM.</p>
+<p style="text-align: justify;">A solução foi utilizar 2 interfaces de rede para cada VM. A primeira interface foi definida como <strong>NAT</strong> e a segunda como <strong>host-only</strong>. A ordem é importante&#8230; Certifique-se que a primeira interface é a NAT. Também é necessário <span style="color: #ff0000;">desativar o DHCP</span> <span style="color: #ff0000;">do host-only</span> (Vá em Arquivo &gt; Preferências &gt; Rede &gt; &#8220;Edite a Rede Virtual do Host-Only&#8221; &gt; &#8220;Na aba Servidor DHCP, desmarque a opção Habilitar Servidor&#8221;).</p>
+<p style="text-align: justify;">Feito isso, inicie a VM e atribua um IP fixo para a interface que utiliza o host-only&#8230; E como eu disse acima, essa interface com ip fixo fica acessível entre as máquinas virtuais e a real, perdendo apenas a conexão com a internet. Mas como você configurou uma interface NAT anteriormente, o problema está resolvido! <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><img class="aligncenter size-full wp-image-1893" title="virtual-box-rede-2-interfaces" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg" alt="virtual-box-rede-2-interfaces" width="434" height="77" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg 434w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces-300x53.jpg 300w" sizes="(max-width: 434px) 100vw, 434px" /></p>
+<p style="text-align: justify;">A imagem acima é um pedaço da descrição de uma das minhas máquinas virtuais que rodam num virtualbox para windows. A idéia é a mesma tanto para windows quanto para linux. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;"><strong>Curiosidade:</strong> Note que no windows o nome do adaptador de rede para o host-only é &#8220;VirtualBox Host-Only Ethernet Adapter&#8221; e no linux é &#8220;vboxnet0&#8221;.</p>
+<p style="text-align: justify;"><strong>Dica rápida: </strong>Se o seu virtualbox foi instalado pelo aptitude/synaptic do ubuntu (linux), certamente você possui uma versão velha e com poucos recursos&#8230; Sugiro baixar uma versão mais atual no site do <a title="http://www.virtualbox.org" href="http://www.virtualbox.org" target="_blank">virtualbox</a>.</p>
+<p style="text-align: justify;">Se conseguir uma outra solução, não deixe de compartilhar aqui! <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />Espero ter ajudado !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="1" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="2" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="3" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="4" data-poid="in-1106" data-post-type="none" ><small class="wp_rp_publish_date">02/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" class="wp_rp_title">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;title=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html/feed</wfw:commentRss>
+		<slash:comments>182</slash:comments>
+		</item>
+		<item>
+		<title>Tunneling com Tsocks</title>
+		<link>https://rafaelbiriba.com/2009/11/28/tunneling-com-tsocks.html</link>
+		<comments>https://rafaelbiriba.com/2009/11/28/tunneling-com-tsocks.html#comments</comments>
+		<pubDate>Sat, 28 Nov 2009 17:42:26 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Redes]]></category>
+		<category><![CDATA[bloqueio]]></category>
+		<category><![CDATA[porta]]></category>
+		<category><![CDATA[proxy]]></category>
+		<category><![CDATA[rede]]></category>
+		<category><![CDATA[restrinção]]></category>
+		<category><![CDATA[server]]></category>
+		<category><![CDATA[socks]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[tsocks]]></category>
+		<category><![CDATA[túnel]]></category>
+		<category><![CDATA[tunneling]]></category>
+		<category><![CDATA[web]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1468</guid>
+		<description><![CDATA[Este post é um complemento de Tunneling: Passe por bloqueios de proxy ou de firewall com Socks Porque usar Tsocks e não somente o socks ? O Tsocks pode ser usado &#8220;por baixo&#8221; de qualquer programa e você não precisa ficar editando as configurações para informar o endereço de conexão socks. Permite também que você &#8230; <a href="https://rafaelbiriba.com/2009/11/28/tunneling-com-tsocks.html" class="more-link">Continue lendo <span class="screen-reader-text">Tunneling com Tsocks</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="size-full wp-image-1491 alignleft" title="network" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/network.jpeg" alt="network" width="270" height="373" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/10/network.jpeg 270w, https://rafaelbiriba.com/wp-content/uploads/2009/10/network-217x300.jpg 217w" sizes="(max-width: 270px) 100vw, 270px" /></p>
+<p style="text-align: justify;">Este post é um complemento de <a title="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" target="_blank">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></p>
+<p style="text-align: justify;"><strong>Porque usar <a title="http://tsocks.sourceforge.net/" href="http://tsocks.sourceforge.net/" target="_blank">Tsocks</a> e não somente o socks ? </strong></p>
+<p style="text-align: justify;">O Tsocks pode ser usado &#8220;por baixo&#8221; de qualquer programa e você não precisa ficar editando as configurações para informar o endereço de conexão socks. Permite também que você passe pelos bloqueios da rede, e assista videos do youtube por exemplo, coisa que não dá pra ser feito pelo tunneling convencional, devido conexão entre o player e o navegador cliente.</p>
+<p style="text-align: justify;">Tsocks redireciona todas as portas de comunicação para a sua conexão socks. Sendo assim, com ele você pode executar programas como mensageiros, navegadores e até jogos.</p>
+<p style="text-align: justify;">Lembrando que para utiliza-lo você precisa estabelecer uma conexão socks. <a title="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" target="_blank">Veja mais detalhes aqui</a>.</p>
+<h3 style="text-align: justify;">Instalando o <a title="http://tsocks.sourceforge.net/" href="http://tsocks.sourceforge.net/" target="_blank">Tsocks</a>:</h3>
+<p style="text-align: justify;">(<span style="color: #ff0000;">No ubuntu</span>): <strong>sudo aptitude install tsocks<br /></strong>Ou pelo site <a title="http://tsocks.sourceforge.net/download.php" href="http://tsocks.sourceforge.net/download.php" target="_blank">http://tsocks.sourceforge.net/download.php</a></p>
+<h3 style="text-align: justify;">Configurando:</h3>
+<p style="text-align: justify;">Apague todo conteudo do arquivo /etc/tsocks.conf e insira somente as seguintes linhas:<strong><span style="color: #ff0000;"><em><br /> server = 127.0.0.1<br /> server_type = 5<br /> server_port = 8989</em></span></strong></p>
+<p style="text-align: justify;">Onde <strong>server</strong> será sempre 127.0.0.1, máquina que roda o tsocks. <strong>Server_type</strong> refere-se a versão do socks, neste caso, usamos a versão 5. <strong>Server_port</strong> é o parâmetro mais importante. Ao estabelecer a conexão SSH, a porta informada deve ser a mesma que server_port. <br />(No exemplo:  <strong>ssh <span style="color: #ff0000;">-D 8989</span> user@server.com</strong>)</p>
+<h3 style="text-align: justify;">Rodando:</h3>
+<p style="text-align: justify;">Primeiro, certifique-se que o socks está estabelecido (<a title="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" target="_blank">Mais informações aqui</a>). Feito isso, basta executar o comando no terminal:</p>
+<p style="text-align: justify;"><strong>tsocks firefox</strong></p>
+<p style="text-align: justify;"><strong>OBS:</strong> Antes de executar o tsocks certifique-se que não há outro processo do firefox aberto. (Ou do programa que você pretende executar)</p>
+<p style="text-align: justify;">Faça uns teste em sites do tipo: <a title="http://meuip.com.br " href="http://meuip.com.br " target="_blank">meuip.com.br</a> para verificar se está funcionando.Você pode executar o tsocks com qualquer programa.</p>
+<h3 style="text-align: justify;">Encerrando:</h3>
+<p style="text-align: justify;">Basta fechar o programa que roda com o tsocks e fechar a conexão SSH (socks).</p>
+<p style="text-align: justify;">&#8212;-</p>
+<p style="text-align: justify;">Bom proveito ! <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><em><br /></em></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1106" data-post-type="none" ><small class="wp_rp_publish_date">02/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" class="wp_rp_title">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></li><li data-position="1" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="2" data-poid="in-1034" data-post-type="none" ><small class="wp_rp_publish_date">22/06/2009</small> <a href="https://rafaelbiriba.com/2009/06/22/pidgin-255-problemas-para-conectar-no-yahoo-messenger.html" class="wp_rp_title">Pidgin 2.5.5: Problemas para conectar no Yahoo Messenger  </a></li><li data-position="3" data-poid="in-2972" data-post-type="none" ><small class="wp_rp_publish_date">07/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html" class="wp_rp_title">GitHub alerta sobre vulnerabilidade no gerenciamento das chaves SSHs</a></li><li data-position="4" data-poid="in-1460" data-post-type="none" ><small class="wp_rp_publish_date">26/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/26/problemas-com-o-youtube-publique-no-vimeo-com.html" class="wp_rp_title">Problemas com o youtube ? Publique no Vimeo.com</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F11%2F28%2Ftunneling-com-tsocks.html&amp;linkname=Tunneling%20com%20Tsocks" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F11%2F28%2Ftunneling-com-tsocks.html&amp;linkname=Tunneling%20com%20Tsocks" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F11%2F28%2Ftunneling-com-tsocks.html&amp;title=Tunneling%20com%20Tsocks" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/11/28/tunneling-com-tsocks.html/feed</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+		<item>
+		<title>Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</title>
+		<link>https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html</link>
+		<comments>https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html#comments</comments>
+		<pubDate>Fri, 02 Oct 2009 04:03:42 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Redes]]></category>
+		<category><![CDATA[bloqueio]]></category>
+		<category><![CDATA[limitação]]></category>
+		<category><![CDATA[porta]]></category>
+		<category><![CDATA[proxy]]></category>
+		<category><![CDATA[rede]]></category>
+		<category><![CDATA[restrinção]]></category>
+		<category><![CDATA[server]]></category>
+		<category><![CDATA[socks]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[tsocks]]></category>
+		<category><![CDATA[túnel]]></category>
+		<category><![CDATA[tunneling]]></category>
+		<category><![CDATA[web]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1106</guid>
+		<description><![CDATA[Há várias formas de passar por bloqueios de proxy, encontrados em faculdades e empresas. Vou explicar uma das formas usando socks. Geralmente em lugares onde é comum apenas a navegação web, o administrador de rede bloqueia as portas de saída, liberando apenas a porta 80 (HTTP) e a porta 443 (HTTPS). Com isso, alguns serviços &#8230; <a href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" class="more-link">Continue lendo <span class="screen-reader-text">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="size-full wp-image-1114 alignleft" title="internet" src="https://rafaelbiriba.com/wp-content/uploads/2009/07/internet.jpg" alt="internet" width="200" height="217" />Há várias formas de passar por bloqueios de proxy, encontrados em faculdades e empresas. Vou explicar uma das formas usando socks.</p>
+<p style="text-align: justify;">Geralmente em lugares onde é comum apenas a navegação web, o administrador de rede bloqueia as portas de saída, liberando apenas a porta 80 (HTTP) e a porta 443 (HTTPS). Com isso, alguns serviços como FTP ou POP3 ficam indisponíveis e alguns sites são bloqueados.</p>
+<p style="text-align: justify;">Como o SSH utiliza a porta 443, que difícilmente é bloqueada, podemos utilizar do recursos &#8220;Túnel&#8221; aplicando o Socks.</p>
+<p style="text-align: justify;">Socks é um protocolo de internet que permite que aplicações redirecionem suas requisições para um servidor externo, passando assim desapercebido pelo servidor proxy ou firewall local.</p>
+<p style="text-align: justify;">Em outras palavras, ao acessar um site, a requisição é criptografada e enviada ao seu servidor externo (via conexão SSH), o servidor manipula a requisição (acessando o site que você solicitou) e devolve o resultado para seu computador, passando desapercebido pelo firewall ou proxy, devido a criptografia dos dados que circulam na porta 443.</p>
+<p style="text-align: justify;">Já aproveito para alertar, que isso é ilegal caso os dados transmitidos por este meio esteja fora das normas da instituição.</p>
+<p style="text-align: justify;">Então vamos lá:<br /><br />Para utilizar o socks, você  precisa de um servidor externo, com qualquer sistema operacional apto à estabelecer uma conexão SSH (O servidor pode ser adquirido com alguma empresa de hospedagem brasileira ou estrangeira)</p>
+<p style="text-align: justify;">OBS: Os procedimentos abaixo não foram testados em windows. Se alguém quiser testar, compartilhe seu resultado aqui. Nos exemplo abaixo, utilizo linux ubuntu 9.04</p>
+<p style="text-align: justify;"><em>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</em><br /><strong>Configurando o SOCKS:</strong></p>
+<p style="text-align: justify;">Abra o terminal e digite:</p>
+<p style="text-align: justify;"><strong>ssh -D 8989<span style="color: #ff0000;"> &lt;username_do_servidor&gt;</span>@<span style="color: #ff0000;">&lt;ip_do_servidor&gt;<br /></span></strong> Exemplo: ssh -D 1234 usuario@10.0.0.1</p>
+<p style="text-align: justify;">* A opção <strong>-D</strong> refere-se a porta que será utilizada pelo Socks</p>
+<p style="text-align: justify;">Mantenha terminal sempre aberto para não interromper a conexão com o seu servidor.</p>
+<p style="text-align: justify;">Agora, basta alterar a configuração do seu navegador para redirecionar o trafego para a porta 8989.</p>
+<p style="text-align: justify;">Pelo firefox, a configuração fica em: <br /><strong>Editar &gt; Preferências &gt; Avançado &gt; Rede &gt; Conexão &gt; Configurar</strong></p>
+<p style="text-align: justify;">Escolha a opção Configuração manual de proxy, e preencha apenas o campo SOCKS da seguinte forma:<br /><strong>SOCKS</strong> <strong><span style="color: #ff0000;">127.0.0.1</span></strong> <strong>Porta</strong> <strong><span style="color: #ff0000;">8989<br /></span></strong>Aperte OK para salvar as configurações, e já pode utilizar o seu navegador com acesso livre a internet.</p>
+<p style="text-align: justify;">Para encerrar a operação, feche a conexão ssh e altere a configuração do navegador de volta para o padrão/automático.</p>
+<p style="text-align: justify;"><em>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</em></p>
+<p style="text-align: justify;">Para testar todo o procedimento, você pode fazer o seguinte:<br />Antes de alterar a configuração do seu navegador, acesse o site: <a title="http://meuip.datahouse.com.br/" href="http://meuip.datahouse.com.br/" target="_blank">http://meuip.datahouse.com.br/</a> e anote o seu ip. Feito isso, habilite o socks e entre no site novamente. Você verá que o procedimento funcionou, se o ip registrado for o ip do seu servidor remoto e não o seu.</p>
+<p style="text-align: justify;">Isso significa, que quando você tentar acessar um site, ou seja, ao fazer uma requisição à um site, não é o seu ip que chegan o site, mas o ip do seu servidor. Isso caracteriza o tunneling.</p>
+<p style="text-align: justify;">Façam bom proveito da dica, qualquer dúvida é só perguntar. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1468" data-post-type="none" ><small class="wp_rp_publish_date">28/11/2009</small> <a href="https://rafaelbiriba.com/2009/11/28/tunneling-com-tsocks.html" class="wp_rp_title">Tunneling com Tsocks</a></li><li data-position="1" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="2" data-poid="in-1034" data-post-type="none" ><small class="wp_rp_publish_date">22/06/2009</small> <a href="https://rafaelbiriba.com/2009/06/22/pidgin-255-problemas-para-conectar-no-yahoo-messenger.html" class="wp_rp_title">Pidgin 2.5.5: Problemas para conectar no Yahoo Messenger  </a></li><li data-position="3" data-poid="in-2972" data-post-type="none" ><small class="wp_rp_publish_date">07/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html" class="wp_rp_title">GitHub alerta sobre vulnerabilidade no gerenciamento das chaves SSHs</a></li><li data-position="4" data-poid="in-1426" data-post-type="none" ><small class="wp_rp_publish_date">27/09/2009</small> <a href="https://rafaelbiriba.com/2009/09/27/evite-surpresas-com-enderecos-curtos-usando-o-longurl.html" class="wp_rp_title">Evite surpresas com endereços curtos usando o LongURL</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F02%2Ftunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html&amp;linkname=Tunneling%3A%20Passe%20por%20bloqueios%20de%20proxy%20ou%20de%20firewall%20com%20Socks" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F02%2Ftunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html&amp;linkname=Tunneling%3A%20Passe%20por%20bloqueios%20de%20proxy%20ou%20de%20firewall%20com%20Socks" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F02%2Ftunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html&amp;title=Tunneling%3A%20Passe%20por%20bloqueios%20de%20proxy%20ou%20de%20firewall%20com%20Socks" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html/feed</wfw:commentRss>
+		<slash:comments>11</slash:comments>
+		</item>
+		<item>
+		<title>Vulnerabilidade do site da VIVO: Seu windows pode ter sido afetado e já não ser mais seguro</title>
+		<link>https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html</link>
+		<comments>https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html#comments</comments>
+		<pubDate>Sun, 13 Sep 2009 03:15:45 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Redes]]></category>
+		<category><![CDATA[Serviços Online]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[bankline]]></category>
+		<category><![CDATA[fraude]]></category>
+		<category><![CDATA[golpe]]></category>
+		<category><![CDATA[hacker]]></category>
+		<category><![CDATA[hosts]]></category>
+		<category><![CDATA[internet]]></category>
+		<category><![CDATA[internet bank]]></category>
+		<category><![CDATA[internet banking]]></category>
+		<category><![CDATA[malware]]></category>
+		<category><![CDATA[phishing]]></category>
+		<category><![CDATA[vulnerabilidade]]></category>
+		<category><![CDATA[vulnerável]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1375</guid>
+		<description><![CDATA[De acordo com o wiki, malware é um software destinado a se infiltrar em um sistema de computador de forma ilícita, com o intuito de causar danos e roubar informção. E foi exatamente isso que aconteceu com todos os visitantes do site da vivo, no dia 08/09/2009. Ao visitar o site da VIVO, foi requisitado &#8230; <a href="https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html" class="more-link">Continue lendo <span class="screen-reader-text">Vulnerabilidade do site da VIVO: Seu windows pode ter sido afetado e já não ser mais seguro</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;">De acordo com o <a title="http://pt.wikipedia.org/wiki/Malware" href="http://pt.wikipedia.org/wiki/Malware" target="_blank">wiki</a>, malware é um software destinado a se infiltrar em um sistema de computador de forma ilícita, com o intuito de causar danos e roubar informção. E foi exatamente isso que aconteceu com <strong>todos os visitantes do site da vivo, no dia <span style="color: #ff0000;">08/09/2009</span></strong>.</p>
+<p style="text-align: justify;">Ao visitar o site da VIVO, foi requisitado a instalação de um applet, que provavelmente foi aprovado por todos, pois o arquivo malicioso era um suposto arquivo de imagem. Isso mesmo, um simples arquivo <strong>.jpeg</strong>, aparentemente inofensivo, que ocultava arquivos compactados java (JAR).</p>
+<p style="text-align: justify;">O que ele fazia ? Nada demais&#8230; Apenas alterava o arquivo HOSTS do windows. Para quem não sabe, nesse arquivo é possível mapear uma nova rota (IP) à um site que você visita. Isso significa, que se você adicionar neste arquivo um site de um banco, por exemplo www.itau.com.br, e um IP que te leve para um outro lugar, ao acessar seu navegador e digitar o endereço do itaú conforme o exemplo, você é redirecionado para um site falso.</p>
+<p style="text-align: justify;">Todos que foram &#8220;prejudicados&#8221; pelo malware, o arquivo HOSTS foi alterado, e as seguintes linhas foram adicionadas:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;">69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>180 santander<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>180 www<span style="color: #339933;">.</span>santander<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 itau<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 www<span style="color: #339933;">.</span>itau<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 www<span style="color: #339933;">.</span>itau<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 itau<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 itaupersonnalite<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 www<span style="color: #339933;">.</span>itaupersonnalite<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradesco<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradesco<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradesco<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradesco<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradescoempresa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradescoempresa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradescoprime<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradescoprime<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradescocartoes<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradescocartoes<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>179 www<span style="color: #339933;">.</span>nossacaixa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>179 nossacaixa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Se você roda linux, teste a difereça pelos ips abaixo! Se você roda windows, não acho seguro acessar o ip falso, então verifique a diferença nas imagens que coloquei no fim do post .<br />IP do site do banco itau <span style="color: #008000;"><strong>VERDADEIRO</strong></span>: <span style="color: #008000;">200.196.152.40</span><br />IP do site do banco itau <strong><span style="color: #ff0000;">FALSO</span></strong>: <span style="color: #ff0000;">69.162.114.181</span></p>
+<p style="text-align: justify;">Como saber se você foi infectado ? Se você roda linux, certamente você NÃO foi infectado! (Gostei de dizer essa frase! <strong>Viva o Linux !</strong> <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /> ), agora se você roda com windows, abra o bloco de notas e abra arquivo digitando o caminho completo: <strong>C:\WINDOWS\system32\drivers\etc\<span style="color: #ff0000;">hosts</span></strong></p>
+<p style="text-align: justify;">Se no arquivo não tiver os ips e os endereços acima, você não foi infectado. Mas se tiver, basta remover todas as linhas e salvar o arquivo. Por padrão a única linha que deve ter no arquivo é (127.0.0.1 localhost), lembrando que tudo que tem &#8220;#&#8221; antes não é levado em consideração (São apenas comentários no arquivo).</p>
+<p style="text-align: justify;">Agora vem a parte triste. <strong>Eu posso jurar que NÃO entrei no site da vivo</strong> no dia 08/09, então tomem cuidado, <strong><span style="color: #ff0000;">existe outro site, ou outras formas de se obter o malware</span></strong>. Em uma próxima ocasião, darei algumas dicar para evitar esses tipos de problemas.</p>
+<p style="text-align: justify;">Meu pai me fez uma pergunta interessante, que vale ser respondida aqui:<br />&#8220;<span style="color: #ff0000;">Como você conseguiu descobrir isso ?</span>&#8220;<br />Infezlimente eu caí parcialmente no golpe. Hoje precisei pagar um boleto, então entrei no site do itaú, digitei minha agência e conta, e logo depois a senha eletrônica, foi então que eu entrei numa tela (como mostra uma das figura a baixo) solicitando que eu digita-se <strong>TODAS</strong> as posições numéricas do meu cartão de segurança para recadastramento!</p>
+<p style="text-align: justify;">Eu ja sabia disso, mas no próprio cartão, está escrito: &#8220;O itaú nunca solicita o recadastramento deste cartão&#8221;, foi quando me dei conta do golpe e ao procurar mais detalhes no google, rapidamente descobri que esse golpe está associado a um malware e que muitas pessoas já cairam nele, e o pior, a maioria está com esses &#8220;IPs Maliciosos&#8221; no seu computador , alguns também já está com sua conta bancária comprometida e essas pessoas nem sabem sobre o golpe!</p>
+<p style="text-align: justify;">Então é isso aí! Divulguem para seus amigos e familiares, peçam para verificar o arquivos de hosts do windows. Muito em breve postarei algumas soluções e dicas para evitar esse tipo de problema.</p>
+<p style="text-align: justify;">O ato de enganar o usuário para obter informação desta maneira se chama Phishing. Aproveito para esclarecer, que o malware foi introduzido no site da VIVO por hackers, então não pense que foi a VIVO que fez essa &#8220;maldade&#8221;. Foi apenas uma falha de segurança. Quanto aos bancos, não acho que eles tenham alguma coisa a ver com isso também.<br /> <br /> Agora os peritos tem que analisar o IP, e descobrir o dono do servidor que mantém esses sites fraudulentos. Numa pequena pesquisa que fiz, descobri que esse IP (69.162.114.181) vem de um servidor localizado na cidade de DALLAS &#8211; United States. A empresa responsável é a Limestone Networks (<a title="http://www.limestonenetworks.com/" href="http://www.limestonenetworks.com/" target="_blank">www.limestonenetworks.com</a>). Agora só resta que essa empresa forneça os dados cadastrais, forma de pagamento, numero do cartão de crédito, e etc&#8230;, da pessoa que alugou o servidor, e estaremos bem perto dos culpados. Mas, como a empresa é estrangeira e os dados só podem ser obtido por processo jurídicos, isso vai demorar muito !</p>
+<p style="text-align: justify;">Logo abaixo vocês pode conferir algumas imagens que extraí do site falso do itaú. (Clique nas imagens para visualizar em formato maior )</p>
+<p><a title="Abrir em formato maior" href="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-verdadeiro.jpg" target="_blank"><img class="alignnone size-medium wp-image-1384" title="itau-verdadeiro-small" src="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-verdadeiro-small.jpg" alt="itau-verdadeiro-small" width="300" height="182" /></a>Site Verdadeiro do Itaú</p>
+<p><a title="Abrir em formato maior" href="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso.jpg" target="_blank"><img class="alignnone size-full wp-image-1386" title="itau-falso-small" src="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso-small.jpg" alt="itau-falso-small" width="300" height="175" /></a>Site Falso do Itaú</p>
+<p><a title="Abrir em formato maior" href="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso-cadastro-cartao.jpg" target="_blank"><img class="alignnone size-full wp-image-1393" title="itau-falso-cadastro-cartao-small" src="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso-cadastro-cartao-small.jpg" alt="itau-falso-cadastro-cartao-small" width="300" height="142" /></a>Tela falsa solicitando os códigos de segurança</p>
+<p style="text-align: justify;"><br />Só para reforçar, não esqueça de informar seus amigos e parentes&#8230; Eles já podem ter sido enganados pelo sistema falso, e precisam entrar em contato com o banco imediatamente para mudar as senhas e códigos&#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2972" data-post-type="none" ><small class="wp_rp_publish_date">07/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html" class="wp_rp_title">GitHub alerta sobre vulnerabilidade no gerenciamento das chaves SSHs</a></li><li data-position="1" data-poid="in-2494" data-post-type="none" ><small class="wp_rp_publish_date">30/12/2010</small> <a href="https://rafaelbiriba.com/2010/12/30/nao-deixe-de-atualizar-seu-wordpress-versao-3-0-4-corrige-um-problema-critico-de-seguranca.html" class="wp_rp_title">Não deixe de atualizar seu wordpress: versão 3.0.4 corrige falha de segurança</a></li><li data-position="2" data-poid="in-1789" data-post-type="none" ><small class="wp_rp_publish_date">16/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/16/pesquisa-cientifica-seguranca-digital.html" class="wp_rp_title">Pesquisa científica: Segurança Digital</a></li><li data-position="3" data-poid="in-1617" data-post-type="none" ><small class="wp_rp_publish_date">25/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html" class="wp_rp_title">Palestra: Vídeos para Internet (XIII Semana Tecnológica do IST-Rio)</a></li><li data-position="4" data-poid="in-3049" data-post-type="none" ><small class="wp_rp_publish_date">27/07/2012</small> <a href="https://rafaelbiriba.com/2012/07/27/globo-com-vagas-para-desenvolvedores-venha-trabalhar-com-a-gente.html" class="wp_rp_title">Globo.com: Vagas para desenvolvedores &#8211; Venha trabalhar com a gente</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F09%2F13%2Fvulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html&amp;linkname=Vulnerabilidade%20do%20site%20da%20VIVO%3A%20Seu%20windows%20pode%20ter%20sido%20afetado%20e%20j%C3%A1%20n%C3%A3o%20ser%20mais%20seguro" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F09%2F13%2Fvulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html&amp;linkname=Vulnerabilidade%20do%20site%20da%20VIVO%3A%20Seu%20windows%20pode%20ter%20sido%20afetado%20e%20j%C3%A1%20n%C3%A3o%20ser%20mais%20seguro" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F09%2F13%2Fvulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html&amp;title=Vulnerabilidade%20do%20site%20da%20VIVO%3A%20Seu%20windows%20pode%20ter%20sido%20afetado%20e%20j%C3%A1%20n%C3%A3o%20ser%20mais%20seguro" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html/feed</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Mencoder &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/audio-e-video/mplayer/mencoder/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>Mencoder: Adicionando legenda em um vídeo</title>
+		<link>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html</link>
+		<comments>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html#comments</comments>
+		<pubDate>Fri, 15 Jan 2010 12:29:21 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mencoder]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[encoder]]></category>
+		<category><![CDATA[legenda]]></category>
+		<category><![CDATA[player]]></category>
+		<category><![CDATA[srt]]></category>
+		<category><![CDATA[subtitle]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1753</guid>
+		<description><![CDATA[Uma legenda no formato .srt, pode ser inserida em um vídeo com diversos programas/ferramentas. Vou mostrar que mencoder é uma das opções mais simples e rápida para isso. O mencoder é instalado junto com o pacote do Mplayer. Mais detalhes de como instalar, visite: Mplayer: Projeto baseado no FFmpeg Antes de adicionar a legenda ao &#8230; <a href="https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html" class="more-link">Continue lendo <span class="screen-reader-text">Mencoder: Adicionando legenda em um vídeo</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p style="text-align: justify;">Uma legenda no formato <strong>.srt</strong>, pode ser inserida em um vídeo com diversos programas/ferramentas. Vou mostrar que mencoder é uma das opções mais simples e rápida para isso.</p>
+<p style="text-align: justify;">O mencoder é instalado junto com o pacote do Mplayer. Mais detalhes de como instalar, visite: <a title="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" target="_blank">Mplayer: Projeto baseado no FFmpeg</a></p>
+<p style="text-align: justify;">Antes de adicionar a legenda ao vídeo, verifique se existe o arquivo <strong>subfont.ttf</strong> na pasta do mplayer. Sem esse arquivo de fonte, o mencoder não consegue &#8220;escrever&#8221; no vídeo.</p>
+<h3 style="text-align: justify;">Criando o subfont.ttf <strong><br /></strong></h3>
+<p style="text-align: justify;">No windows, basta copiar uma font <strong>.ttf</strong>, colar na pasta do Mplayer e renomear para <strong>subfont.ttf</strong></p>
+<p style="text-align: justify;">No linux, procure pelas fontes <strong>.ttf</strong> com o comando:<span style="color: #ff0000;"><strong> locate ttf | grep ttf\$<br /></strong><span style="color: #000000;">Depois copie a fonte para o diretório local do mplayer. No meu caso:  (Utilizei a fonte VERA)<br /><span style="color: #ff0000;"><strong>cp /usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf ~/.mplayer/subfont.ttf</strong></span><br /></span></span></p>
+<h3 style="text-align: justify;">Testando a legenda:<br /></h3>
+<p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;">Antes de inserir a legenda, podemos e devemos testa-la. Para isso rode o comando:<br /><strong>mplayer -sub legenda.srt video_original.avi<br /></strong></span></span><span style="color: #ff0000;"><span style="color: #000000;"> Assim, você pode ver mais ou menos como a legenda vai ficar</span></span>, em relação a fonte escolhida.<span style="color: #ff0000;"><span style="color: #000000;"><br /></span></span></p>
+<h3 style="text-align: justify;">Inserindo a legenda:</h3>
+<p style="text-align: justify;">Comando:<br /><strong>mencoder video_original.avi -sub legenda.srt -subpos 95 -subfont-text-scale 3 -subcp enca:gr:iso-8859-1 -vf expand=640:384 -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=800:vhq -oac copy -o video_com_legenda.avi</strong></p>
+<p style="text-align: justify;">Onde:<br /><span style="color: #ff0000;"><strong>video_original.avi</strong></span>= Vídeo de entrada<br /><span style="color: #ff0000;"><strong>legenda.srt</strong></span>=  Legenda a ser inserida<br /><span style="color: #ff0000;"><strong>video_com_legenda.avi</strong></span>= Vídeo de Saída<strong><br /></strong></p>
+<p style="text-align: justify;">Parâmetros:<br /><strong>-subpos</strong>= Especifica em que % da tela a legenda irá aparecer (A partir do topo)<br /><strong>-subfont-text-scale</strong>= Especifica o tamanho da legenda no vídeo<br /><strong>-subcp</strong>= Especifica a codificação do arquivo de legenda<br /><strong>-vf</strong>= Especifica o tamanho do vídeo. Neste caso, o vídeo original era 640 x 272, adicionei mais 112px na altura (384px) utilizando <span style="color: #ff0000;">expand</span>,ou seja, o vídeo vai ficar com uma tarja preta de 56px em cima e em baixo.<br /><strong>-ovc</strong>= Especifica o codec de vídeo. Neste caso lavc.<br /><strong> -lavcopts </strong>= Opções do lavc. Especifica o nome do codec, bitrate,&#8230;, do vídeo.<br /><strong>-oac</strong>= Especifica o áudio. O valor copy, copia o áudio exatamente como o original.<br /><strong>-o</strong>= Especifica o arquivo de saída.</p>
+<p style="text-align: justify;">OBS: O comando do mencoder foi testado e executado no Linux. Para rodar o comando em windows, <a title="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">veja aqui.</a></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-125" data-post-type="none" ><small class="wp_rp_publish_date">19/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" class="wp_rp_title">Mplayer: Rotacionando um Vídeo</a></li><li data-position="1" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="2" data-poid="in-83" data-post-type="none" ><small class="wp_rp_publish_date">15/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="wp_rp_title">Mplayer: Projeto baseado no FFmpeg</a></li><li data-position="3" data-poid="in-143" data-post-type="none" ><small class="wp_rp_publish_date">20/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="wp_rp_title">Mplayer: Extraindo o áudio de um vídeo</a></li><li data-position="4" data-poid="in-114" data-post-type="none" ><small class="wp_rp_publish_date">16/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html" class="wp_rp_title">FFmpeg / Mplayer: Reproduzindo Vídeos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;linkname=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;linkname=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;title=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html/feed</wfw:commentRss>
+		<slash:comments>12</slash:comments>
+		</item>
+		<item>
+		<title>Mplayer: Rotacionando um Vídeo</title>
+		<link>https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html#comments</comments>
+		<pubDate>Thu, 19 Feb 2009 13:22:24 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mencoder]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[girar]]></category>
+		<category><![CDATA[gravar]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[rotacionar]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=125</guid>
+		<description><![CDATA[Rotacionar um vídeo talvez seja um dos grandes problemas em filmar com uma camera digital, por exemplo. Todos ja devem ter tido alguma experiência em filmar alguma coisa, com a camera deitada, e só depoi perceber ue no computador o vídeo também fica na horizontal ! Abaixo segue o passo a passo para converter o &#8230; <a href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" class="more-link">Continue lendo <span class="screen-reader-text">Mplayer: Rotacionando um Vídeo</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p style="text-align: justify;">Rotacionar um vídeo talvez seja um dos grandes problemas em filmar com uma camera digital, por exemplo. Todos ja devem ter tido alguma experiência em filmar alguma coisa, com a camera deitada, e só depoi perceber ue no computador o vídeo também fica na horizontal !<br />
+Abaixo segue o passo a passo para converter o video e deixa-lo na posição correta, utilizando uma ferramenta disponível no pacote Mplayer, o Mencoder.</p>
+<p style="text-align: justify;">A linha de comando é:<br />
+<strong>mencoder video_original.mpg -vf rotate=1:pp=ci -oac pcm -ovc lavc -o video_rotacionado.mpg</strong></p>
+<p style="text-align: justify;">Onde:</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">video_original.mpg</span> = O video a ser convertido. Poder ser em outros formatos como .avi ou .mov por exemplo.</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-vf rotate</span> = comando para rotacionar o video. Veja a tabela abaixo:<br />
+<strong>-vf rotate=0     (Rotaciona 90 graus sentido horário e inverte a imagem)<br />
+</strong><strong>-vf </strong><strong>rotate=1     (Rotaciona 90 graus somente)<br />
+</strong><strong>-vf</strong><strong> rotate=2     (Rotaciona 90 graus sentido anti-horário somente)<br />
+</strong><strong>-vf</strong><strong> rotate=3     (Rotaciona 90 graus sentido anti-horário e inverte a imagem) </strong></p>
+<p style="text-align: justify;"><span style="color: #ff0000;">pp=ci</span> = Ativa o filtro para desentrelaçar o video: &#8220;Cubic  interpolating  deinterlacing&#8221;</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-oac</span> = codec de audio.<br />
+<strong>-oac pcm               (uncompressed PCM audio)<br />
+</strong><strong>-oac </strong><strong>copy              (copia o audio, sem codificar)<br />
+</strong><strong>-oac </strong><strong>mp3lame   (mp3 codec</strong>)</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-ovc</span> = codec de video<br />
+<strong>-ovc lavc (libavcodec: mpeg1video, mpeg2video, flv, mpeg4, dvvideo, dentre outros )<br />
+-ovc xvid ( Xvid, MPEG-4 codec)<br />
+-ovc copy (copia o video, sem codificar)</strong></p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-o video_rotacionado.mpg <span style="color: #000000;">= Video de saida.</span></span> Pode ser em outros formatos como .avi ou .mov por exemplo.<br />
+*Não é necessário que esteja com a mesma extensão que o arquivo de entrada.</p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p style="text-align: justify;"><strong>Instalação do pacote Mplayer ( Mencoder incluído )</strong></p>
+<p style="text-align: justify;">Visite o POST: <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" target="_blank">Mplayer: Projeto baseado no FFmpeg</a></p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<strong><br />
+</strong></p>
+<h3 style="text-align: justify;"><strong>Procedimento de Uso:</strong></h3>
+<p style="text-align: justify;"><strong> </strong></p>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-30" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" />Usuários Linux tem sempre mais facilidade, nesse tipo de procedimento.</p>
+<p style="text-align: justify;">Basta abrir o Terminal e digitar:<br />
+<strong>mencoder video_original.mpg -vf rotate=1:</strong><strong>pp=ci</strong><strong> -oac pcm -ovc lavc -o video_rotacionado.mpg</strong></p>
+<p style="text-align: justify;">Onde meu arquivo se chama video_original.mpg e se encontra na área de trabalho.<br />
+( Levando em consideração que ao abrir o terminal você vai estar dentro da pasta home do usuário local )</p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-29" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" />Usuários Windows levam mais tempo para poder executar o comando.<br />
+Entre em INICIAR &gt; EXECUTAR e digite <strong>cmd</strong> &gt; OK ( Para abrir o Terminal do Windows )<br />
+Acesse a pasta digitando:<br />
+<strong>cd Desktop/pasta_do_mplayer/<br />
+</strong>em seguida:<br />
+<strong>mencoder &#8220;../video_original.mpg&#8221; -vf rotate=1:</strong><strong>pp=ci</strong><strong> -oac pcm -ovc lavc -o &#8220;../video_rotacionado.mpg</strong>&#8220;<br />
+Onde meu arquivo se chama video_original.mpg e se encontra na área de trabalho.<br />
+( Utilizamos <strong><span style="color: #ff0000;">../</span></strong> para sair da pasta do mplayer e acessar o video_original.mpg e gravar o video_rotacionado.mpg na área de trabalho. )<br />
+Para maiores informações visite o POST: <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">Windows XP vs FFmpeg e Mplayer</a></p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p>Em caso de dúvidas, entre em contato &#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-143" data-post-type="none" ><small class="wp_rp_publish_date">20/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="wp_rp_title">Mplayer: Extraindo o áudio de um vídeo</a></li><li data-position="1" data-poid="in-1753" data-post-type="none" ><small class="wp_rp_publish_date">15/01/2010</small> <a href="https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html" class="wp_rp_title">Mencoder: Adicionando legenda em um vídeo</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-53" data-post-type="none" ><small class="wp_rp_publish_date">11/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></li><li data-position="4" data-poid="in-83" data-post-type="none" ><small class="wp_rp_publish_date">15/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="wp_rp_title">Mplayer: Projeto baseado no FFmpeg</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F19%2Fmplayer-rotacionando-um-video.html&amp;linkname=Mplayer%3A%20Rotacionando%20um%20V%C3%ADdeo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F19%2Fmplayer-rotacionando-um-video.html&amp;linkname=Mplayer%3A%20Rotacionando%20um%20V%C3%ADdeo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F19%2Fmplayer-rotacionando-um-video.html&amp;title=Mplayer%3A%20Rotacionando%20um%20V%C3%ADdeo" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>

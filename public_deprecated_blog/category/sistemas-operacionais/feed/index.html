@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Sistemas Operacionais &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/sistemas-operacionais/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</title>
+		<link>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html</link>
+		<comments>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html#comments</comments>
+		<pubDate>Fri, 03 Feb 2012 21:41:13 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[bundler]]></category>
+		<category><![CDATA[gem]]></category>
+		<category><![CDATA[github]]></category>
+		<category><![CDATA[instalação]]></category>
+		<category><![CDATA[nginx]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[rubygems]]></category>
+		<category><![CDATA[rubyonrails]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vps]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2908</guid>
+		<description><![CDATA[Andei procurando na internet por algum script para fazer uma instalação mais &#8220;automatizada&#8221; de um ambiente Ruby on Rails numa máquina virtual (VPS) rodando Ubuntu 11.10 Depois de pesquisar muito, só encontrei referências detalhadas  para ubuntu 10.* ou então alguns blogs sugerindo algumas linhas de comando apenas. Como eu já estava terminando um projeto de &#8230; <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><a href="https://rafaelbiriba.com/wp-content/uploads/2012/02/install_ror_on_ubuntu.png"><img class="alignright size-full wp-image-2910" title="install_ror_on_ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2012/02/install_ror_on_ubuntu.png" alt="" width="258" height="159" /></a></p>
+<p style="text-align: justify;">Andei procurando na internet por algum script para fazer uma instalação mais &#8220;automatizada&#8221; de um ambiente Ruby on Rails numa máquina virtual (VPS) rodando Ubuntu 11.10</p>
+<p style="text-align: justify;">Depois de pesquisar muito, só encontrei referências detalhadas  para ubuntu 10.* ou então alguns blogs sugerindo algumas linhas de comando apenas.</p>
+<p style="text-align: justify;">Como eu já estava terminando um projeto de um site e precisava de um ambiente de produção, resolvi fazer um script (em bash), onde eu tivesse o controle de tudo que iria acontecer de forma segura e eficaz.</p>
+<p style="text-align: justify;">O script está disponível no meu github, use como quiser =)</p>
+<p style="text-align: justify;">Lembrando que só testei no Ubuntu 11.10, a instalação instala e configura o seguinte:<br />&#8211; Ruby 1.9.2-p290<br />&#8211;  Nginx Upload Module 2.2.0<br />&#8211; Nginx 1.1.12 <br />&#8211; iptables para as portas principais de ssh(22), http(80), https(443), dns(53)<br />&#8211; Mysql (versão estável do apt-get do ubuntu)<br />&#8211; Postfix (versão estável do apt-get do ubuntu)<br />&#8211; Gem Bundler (última versão pelo rubygems)</p>
+<p style="text-align: justify;">Com isso, basta configurar o domínio da sua aplicação corretamente na configuração do nginx, fazer o deploy e ser feliz! =)</p>
+<p style="text-align: justify;">Link do projeto: <a title="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" href="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" target="_blank">https://github.com/rafaelbiriba/Ubuntu-VPS-Builder </a></p>
+<p style="text-align: justify;">Abaixo segue uma cópia do código que eu coloquei no git assim você pode tirar suas dúvidas pelos comentários&#8230; Caso decida usar o script, baixe ele pelo <a title="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" href="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" target="_blank">link do github</a>. Não use o código abaixo pois o mesmo pode já estar desatualizado!</p>
+<p style="text-align: justify;">Modo de usar no servidor:<br /><strong><span style="color: #ff0000;">$</span> chmod +x vps_builder.sh</strong><br /><strong><span style="color: #ff0000;">$</span> ./vps_builder.sh seudominio.com </strong></p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+</pre></td><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">#!/bin/bash</span>
+<span style="color: #666666; font-style: italic;"># &quot;Automated VPS Setup for Ubuntu 11.10 - Rails with Nginx&quot;</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># Created by: Rafael Biriba - www.rafaelbiriba.com - biribarj@gmail.com</span>
+<span style="color: #666666; font-style: italic;"># https://github.com/rafaelbiriba/Ubuntu-VPS-Builder/</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># USAGE:</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># $ chmod +x vps_builder.sh</span>
+<span style="color: #666666; font-style: italic;"># $ ./vps_builder.sh yourdomain.com&quot;</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Updating before all&quot;</span>
+<span style="color: #c20cb9; font-weight: bold;">apt-get update</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">apt-get upgrade</span> <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Set Hostname&quot;</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$1</span> <span style="color: #000000; font-weight: bold;">&gt;</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span><span style="color: #c20cb9; font-weight: bold;">hostname</span>
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;127.0.0.1 $1&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;&gt;</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>hosts
+<span style="color: #c20cb9; font-weight: bold;">hostname</span> <span style="color: #660033;">-F</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span><span style="color: #c20cb9; font-weight: bold;">hostname</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Set Timezone&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">ln</span> <span style="color: #660033;">-sf</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>zoneinfo<span style="color: #000000; font-weight: bold;">/</span>America<span style="color: #000000; font-weight: bold;">/</span>Sao_Paulo <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>localtime
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Essencials&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> build-essential zlib1g-dev libreadline6-dev libssl-dev <span style="color: #c20cb9; font-weight: bold;">wget</span> git-core <span style="color: #c20cb9; font-weight: bold;">sudo</span> <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Ruby 1.9.2&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>ftp.ruby-lang.org<span style="color: #000000; font-weight: bold;">/</span>pub<span style="color: #000000; font-weight: bold;">/</span>ruby<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">1.9</span><span style="color: #000000; font-weight: bold;">/</span>ruby-1.9.2-p290.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf ruby-1.9.2-p290.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> ruby-1.9.2-p290
+.<span style="color: #000000; font-weight: bold;">/</span>configure
+<span style="color: #c20cb9; font-weight: bold;">make</span>
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-rf</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Passenger and Nginx&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+<span style="color: #c20cb9; font-weight: bold;">wget</span> ftp:<span style="color: #000000; font-weight: bold;">//</span>ftp.csx.cam.ac.uk<span style="color: #000000; font-weight: bold;">/</span>pub<span style="color: #000000; font-weight: bold;">/</span>software<span style="color: #000000; font-weight: bold;">/</span>programming<span style="color: #000000; font-weight: bold;">/</span>pcre<span style="color: #000000; font-weight: bold;">/</span>pcre-<span style="color: #000000;">8.21</span>.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf pcre-<span style="color: #000000;">8.21</span>.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> pcre-<span style="color: #000000;">8.21</span>
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>nginx.org<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>nginx-1.1.12.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>www.grid.net.ru<span style="color: #000000; font-weight: bold;">/</span>nginx<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>nginx_upload_module-2.2.0.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf nginx-1.1.12.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf nginx_upload_module-2.2.0.tar.gz
+&nbsp;
+gem <span style="color: #c20cb9; font-weight: bold;">install</span> passenger
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> libcurl4-openssl-dev <span style="color: #660033;">-y</span>
+passenger-install-nginx-module <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>nginx <span style="color: #660033;">--nginx-source-dir</span>=<span style="color: #000000; font-weight: bold;">/</span>root<span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>nginx-1.1.12 <span style="color: #660033;">--extra-configure-flags</span>=--add-module=<span style="color: #ff0000;">'/root/tmp/nginx_upload_module-2.2.0'</span>
+<span style="color: #666666; font-style: italic;">#passenger-install-nginx-module --auto --auto-download</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-rf</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">wget</span> https:<span style="color: #000000; font-weight: bold;">//</span>raw.github.com<span style="color: #000000; font-weight: bold;">/</span>rafaelbiriba<span style="color: #000000; font-weight: bold;">/</span>Ubuntu-VPS-Builder<span style="color: #000000; font-weight: bold;">/</span>master<span style="color: #000000; font-weight: bold;">/</span>ubuntu_11-<span style="color: #000000;">10</span>_desktop<span style="color: #000000; font-weight: bold;">/</span>nginx-init.sh
+<span style="color: #c20cb9; font-weight: bold;">cp</span> nginx-init.sh <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nginx-init.sh
+<span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx
+<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>sbin<span style="color: #000000; font-weight: bold;">/</span>update-rc.d <span style="color: #660033;">-f</span> nginx defaults
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Configure iptables&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> iptables
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">tee</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall <span style="color: #cc0000; font-style: italic;">&lt;&lt;ENDOFFILE
+#!/bin/bash
+&nbsp;
+start(){
+# Accepting all connections made on the special lo - loopback - 127.0.0.1 - interface
+iptables -A INPUT -p tcp -i lo -j ACCEPT
+&nbsp;
+# Rule which allows established tcp connections to stay up
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+&nbsp;
+# SSH:
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+&nbsp;
+# DNS:
+iptables -A INPUT -p tcp --dport 53 -j ACCEPT
+iptables -A INPUT -p udp --dport 53 -j ACCEPT
+&nbsp;
+# HTTP e HTTPS:
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+&nbsp;
+# Block others ports
+iptables -A INPUT -p tcp --syn -j DROP
+iptables -A INPUT -p udp --dport 0:1023 -j DROP
+&nbsp;
+}
+stop(){
+iptables -F
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+}
+&nbsp;
+case &quot;\$1&quot; in
+&quot;start&quot;) start ;;
+&quot;stop&quot;) stop ;;
+&quot;restart&quot;) stop; start ;;
+*) echo &quot;start or stop params&quot;
+esac
+ENDOFFILE</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall
+update-rc.d firewall defaults <span style="color: #000000;">99</span>
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install MySQL&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> mysql-server mysql-client libmysqlclient-dev <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install postfix&quot;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;"># Install type: Internet Site</span>
+<span style="color: #666666; font-style: italic;"># Default email domain name: example.com</span>
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> postfix mailutils telnet <span style="color: #660033;">-y</span>
+<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>sbin<span style="color: #000000; font-weight: bold;">/</span>update-rc.d postfix defaults
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>postfix start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install gem bundler&quot;</span>
+&nbsp;
+gem <span style="color: #c20cb9; font-weight: bold;">install</span> bundler
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;VPS Setup Complete&quot;</span></pre></td></tr></table></div>
+
+
+
+<p><span style="font-size: medium;"><strong>Qualquer dúvida, estamos aí para trocar ideias <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></strong></span></p>
+<p>___________________________________________________</p>
+<p><strong>Atualização 1 &#8211; 07/fev/2012:</strong></p>
+<p style="text-align: justify;">Agradeço ao leitor Laércio pelo contato via email, reportando um problema, onde se o ubuntu estiver muito desatualizado, o script não roda direito. Com isso adicionei lá no github e no exemplo acima os comandos apt-get update e apt-get upgrade para atualizar o ubuntu antes de fazer qualquer coisa. Obrigado mais uma vez Laércio !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-3075" data-post-type="none" ><small class="wp_rp_publish_date">21/09/2012</small> <a href="https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html" class="wp_rp_title">Você sabia que dá para usar versões diferentes de ruby na mesma máquina ?</a></li><li data-position="1" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li><li data-position="2" data-poid="in-489" data-post-type="none" ><small class="wp_rp_publish_date">29/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/29/ruby-require-rubygems-alternativas.html" class="wp_rp_title">Ruby: Alternativas para require &#8216;rubygems&#8217;</a></li><li data-position="3" data-poid="in-1190" data-post-type="none" ><small class="wp_rp_publish_date">09/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="wp_rp_title">Ubuntu: Instalação do vmware-server-console</a></li><li data-position="4" data-poid="in-1900" data-post-type="none" ><small class="wp_rp_publish_date">08/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/08/cloud-crowd-a-primeira-action.html" class="wp_rp_title">Cloud Crowd: A primeira action</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;linkname=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;linkname=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;title=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html/feed</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		</item>
+		<item>
+		<title>VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</title>
+		<link>https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html</link>
+		<comments>https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html#comments</comments>
+		<pubDate>Sun, 03 Apr 2011 18:07:50 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[disco]]></category>
+		<category><![CDATA[disk]]></category>
+		<category><![CDATA[modifyhd]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[vboxmanage]]></category>
+		<category><![CDATA[vdi]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2787</guid>
+		<description><![CDATA[Para facilitar a vida de quem precisa redimensionar o disco virtual de uma VM, foi lançado o serviço &#8220;modifyhd&#8221; que pode ser acessado pelo VBoxManage. Infelizmente esse serviço está disponível apenas na versão 4. Se a versão do seu virtualbox for mais antiga, sugiro que faça essa atualização. Nessa nova versão, foram corrigidos vários bugs &#8230; <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="alignright size-full wp-image-1877" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" /></p>
+<p style="text-align: justify;">Para facilitar a vida de quem precisa redimensionar o disco virtual de uma VM, foi lançado o serviço &#8220;modifyhd&#8221; que pode ser acessado pelo VBoxManage.</p>
+<p style="text-align: justify;"><strong>Infelizmente esse serviço está disponível apenas na versão 4</strong>. Se a versão do seu virtualbox for mais antiga, sugiro que faça essa atualização. Nessa nova versão, foram corrigidos vários bugs (são tantos que não dá para listar aqui. Veja a lista completa em: <a title="http://www.virtualbox.org/wiki/Changelog" href="http://www.virtualbox.org/wiki/Changelog" target="_blank">http://www.virtualbox.org/wiki/Changelog</a>). Você pode fazer o download da versão nova versão em: <a title="http://www.virtualbox.org/wiki/Downloads" href="http://www.virtualbox.org/wiki/Downloads" target="_blank">http://www.virtualbox.org/wiki/Downloads</a></p>
+<p style="text-align: justify;">Mas se você ainda usa uma versão antiga do virtualbox, veja esse tutorial: <a title="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" target="_blank">VirtualBox 3: Aumentanto o tamanho do disco virtual da vm</a></p>
+<p style="text-align: justify;">Bom, para redimensionar o disco, você deve executar na linha de comando, em um terminal/console o seguinte comando:</p>
+<p style="text-align: justify;"><strong>VBoxManage modifyhd &lt;<span style="color: #ff0000;">caminho completo para o vdi</span>&gt; &#8211;resize &lt;<span style="color: #ff0000;">tamanho em mb</span>&gt;</strong></p>
+<p style="text-align: justify;">Tentei fazer um teste. Então escolhi peguei o disco do meu WindowsXP de 20GB e rodei o comando:</p>
+<p style="text-align: justify;">VBoxManage modifyhd /Users/rafaelbiriba/Library/VirtualBox/HardDisks/WindowsXP.vdi &#8211;resize 15000</p>
+<p style="text-align: justify;">Resultado:</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">Progress state: VBOX_E_NOT_SUPPORTED VBoxManage: error: Resize hard disk operation for this format is not implemented yet!</span></p>
+<p style="text-align: justify;">Para minha surpresa, o <strong>modifyhd</strong> só funciona para aumentar o disco. Ainda não foi implementado a funcionalidade para diminuir o disco.</p>
+<p style="text-align: justify;">Então depois de um novo teste:</p>
+<p style="text-align: justify;">VBoxManage modifyhd /Users/rafaelbiriba/Library/VirtualBox/HardDisks/WindowsXP.vdi &#8211;resize 22000</p>
+<p style="text-align: justify;">O resultado foi exatamente o esperado (22000 MB = 21.48 GB):<br /><img class="aligncenter size-full wp-image-2796" title="virtualbox-windowsxp-22GB" src="https://rafaelbiriba.com/wp-content/uploads/2011/04/virtualbox-windowsxp-22GB.png" alt="" width="580" height="31" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/04/virtualbox-windowsxp-22GB.png 580w, https://rafaelbiriba.com/wp-content/uploads/2011/04/virtualbox-windowsxp-22GB-300x16.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p style="text-align: justify;">Ao invés de usar o &#8211;resize passando o valor em MB, você também pode usar o &#8211;resizebyte e passar o valor em bytes.</p>
+<p style="text-align: justify;">Depois de redimencionar o disco, você precisa aumentar o tamanho da partição, para ocupar também o novo espaço disponibilizado. Para isso, você pode baixar o live cd do Gparted (<a title="http://gparted.sourceforge.net/download.php" href="http://gparted.sourceforge.net/download.php" target="_blank">http://gparted.sourceforge.net/download.php</a>) e alterar o tamanho da partição.</p>
+<p style="text-align: justify;">Você também pode acessar o guia em: <a title="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" target="_blank">https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html</a> e no 8º passo eu mostro como fazer para redimensionar a partição usando o GParted.</p>
+<p style="text-align: justify;">Então é isso&#8230; Qualquer dúvida, crítica, elogio ou sugestão, podem me deixar um comentário abaixo <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="1" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="2" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="3" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="4" data-poid="in-3038" data-post-type="none" ><small class="wp_rp_publish_date">10/07/2012</small> <a href="https://rafaelbiriba.com/2012/07/10/dropbox-aumentara-o-espaco-em-disco-dos-seus-planos.html" class="wp_rp_title">Dropbox aumentará o espaço em disco dos seus planos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F04%2F03%2Fvirtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html&amp;linkname=VirtualBox%204.0.4%3A%20Nova%20funcionalidade%20permite%20expandir%20o%20tamanho%20do%20disco%20vdi" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F04%2F03%2Fvirtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html&amp;linkname=VirtualBox%204.0.4%3A%20Nova%20funcionalidade%20permite%20expandir%20o%20tamanho%20do%20disco%20vdi" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F04%2F03%2Fvirtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html&amp;title=VirtualBox%204.0.4%3A%20Nova%20funcionalidade%20permite%20expandir%20o%20tamanho%20do%20disco%20vdi" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html/feed</wfw:commentRss>
+		<slash:comments>24</slash:comments>
+		</item>
+		<item>
+		<title>VirtualBox 3: Aumentando o tamanho do disco virtual da VM</title>
+		<link>https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html</link>
+		<comments>https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html#comments</comments>
+		<pubDate>Wed, 16 Mar 2011 17:00:05 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[disco]]></category>
+		<category><![CDATA[disk]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[vdi]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2656</guid>
+		<description><![CDATA[Sempre que preciso criar uma nova vm no virtualbox, eu perco algum tempo na tela de criação de disco. São sempre as mesmas perguntas: &#8220;Quanto de espaço vou precisar nessa vm ?&#8221; &#8220;O que vai rodar nela ?&#8221; &#8220;E se eu não criar um disco com espaço suficiente ?&#8221; Depois de perder alguns minutos e &#8230; <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox 3: Aumentando o tamanho do disco virtual da VM</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><a href="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png"><img class="alignright size-full wp-image-1877" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" /></a>Sempre que preciso criar uma nova vm no virtualbox, eu perco algum tempo na tela de criação de disco.</p>
+<p style="text-align: justify;">São sempre as mesmas perguntas:</p>
+<ul style="text-align: justify;">
+	<li>&#8220;Quanto de espaço vou precisar nessa vm ?&#8221;</li>
+	<li>&#8220;O que vai rodar nela ?&#8221;</li>
+	<li>&#8220;E se eu não criar um disco com espaço suficiente ?&#8221;</li>
+</ul>
+<p style="text-align: justify;">Depois de perder alguns minutos e finalmente decidir o tamanho do disco, eu prossigo com a criação e instalação da nova VM.</p>
+<p style="text-align: justify;">É bem comum se criar VM Windows por exemplo com apenas 10GB de disco. E se você precisar instalar alguns programas pesados ? Será mesmo um problema quando sua máquina virtual fica sem espaço em disco ? Bom, com esse tutorial a resposta é <strong>não</strong>.</p>
+<p style="text-align: justify;">Nos passos abaixo, explicarei com detalhes como aumentar o tamanho do seu disco virtual <strong>(.vdi)</strong>:</p>
+<p style="text-align: justify;"><strong>[Post escrito e testado baseado no VirtualBox 3.2.6]</strong></p>
+<h3 style="text-align: justify;">1º passo: Criar um novo disco com um espaço maior.</h3>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2664" title="virtual-media-manager-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.32.30-PM.png" alt="" width="500" height="313" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.32.30-PM.png 500w, https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.32.30-PM-300x187.png 300w" sizes="(max-width: 500px) 100vw, 500px" />Para isso, abra o gerenciador de disco virtual ou o virtual disk manager e crie um novo disco.</p>
+<p style="text-align: justify;">Para os exemplos a seguir, eu criei o disco <strong>novoDisco30GB.vdi</strong></p>
+<h3 style="text-align: justify;">2º passo: Escolher a máquina virtual com o disco a ser modificado</h3>
+<p style="text-align: justify;">Ao decidir qual vm terá seu disco alterado, certifique-se que ela está desligada e entre nas configurações da VM. Vá até a categoria storage ou armazenamento:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2675" title="two-disks-vm-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.09.47-PM.png" alt="" width="300" height="60" /></p>
+<p style="text-align: justify;">O objetivo é fazer com que a vm fique com 2 discos. No meu exemplo utilizei a controladora SATA. Mas funciona da mesma forma para que utiliza controladora IDE. Basta colocar o segundo disco como IDE Primary Slave.</p>
+<h3 style="text-align: justify;">3º passo: Fazer o download da imagem .iso do Gparted live cd</h3>
+<p style="text-align: justify;">Acesse a url: <a title="http://sourceforge.net/projects/gparted/" href="http://sourceforge.net/projects/gparted/" target="_blank">http://sourceforge.net/projects/gparted/</a> e baixe a ultima versão da imagem .iso</p>
+<p style="text-align: justify;">O Gparted é um editor de partição gratuito, que vamos usar para redimensionar as partições conforme desejarmos.</p>
+<h3 style="text-align: justify;">4º passo: Adicionar o liveCD Gparted na maquina virtual</h3>
+<p style="text-align: justify;">Adicione o .iso na sua vm de forma que fique assim:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2678" title="added-iso-vm-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.10.13-PM1.png" alt="" width="300" height="60" /></p>
+<p style="text-align: justify;">Para quem usa controlador IDE, basta adicionar na posição IDE Secondary Master.</p>
+<p style="text-align: justify;">Certifique-se também que a ordem de boot da sua VM está com o CD-Rom antes do HD:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2672" title="cdrom-boot-order-vm-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.59.00-PM.png" alt="" width="300" height="67" /></p>
+<h3 style="text-align: justify;">5º passo: Iniciar a VM pelo LiveCD do GParted</h3>
+<p style="text-align: justify;">Ligue a VM e inicie escolhendo a opção do GParted:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2679" title="gparted-boot" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.04.36-PM.png" alt="" width="300" height="67" />Ele irá oferecer alguma opções de formato do teclado e linguagem. Você pode ir pelas configuraões padrões apertando &#8220;ENTER&#8221; em todas as opções oferecidas até chegar na tela do sistema:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2681" title="gparted-livecd-after-boot" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.17.45-PM.png" alt="" width="300" height="150" /></p>
+<h3 style="text-align: justify;">6º passo: Verificar os nomes dos discos</h3>
+<p style="text-align: justify;">Assim que o GParted iniciar, o programa já deve vir aberto. Se não estiver em execução, você pode inicar o GParted pelo icone na área de trabalho.</p>
+<p style="text-align: justify;">Depois disso, você precisa anotar os nomes dos discos:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2682" title="disks-names-gparted-window" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.20.36-PM.png" alt="" width="218" height="84" />Então, no próximo passo nós iremos copiar todo o conteúdo do disco /dev/sda (20 GB) para o /dev/sdb (30 GB).</p>
+<h3 style="text-align: justify;">7º passo: Transferindo os dados de um disco para o outro</h3>
+<p style="text-align: justify;">Antes de fazer a cópia, certifique-se de ter fechado o programa do GParted. Agora abra o terminal, clicando no icone na área de trabalho.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2683" title="gparted-terminal" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.23.37-PM.png" alt="" width="300" height="122" />Agora, basta rodar o comando:<br /><strong><span style="font-family: Verdana; font-size: xx-small;"><span style="font-size: x-small;">sudo dd if=/dev/sda of=/dev/sdb</span></span></strong></p>
+<p style="text-align: justify;"><strong>Atenção</strong>: Tenha certeza que está fazendo a cópia certa. <strong>if</strong> é o caminho do disco de origem, neste caso o sda que é o de 20GB. E <strong>of</strong> é o caminho do disco de destino, neste caso o sdb que é o de 30GB.</p>
+<p style="text-align: justify;">Dependendo do tamanho do disco, esse processo pode demorar um pouco. Para testar o meu exemplo, levou cerca de 22 minutos para transferir todo o hd de 20GB para o de 30GB.</p>
+<h3 style="text-align: justify;">8º passo: Redimensionar a partição do novo disco</h3>
+<p style="text-align: justify;">Feito o passo anterior, feche o terminal e reinicie a vm, abrindo pelo liveCD do GParted novamente. Essa reinicialização não é obrigatória, mas serve para evitar problemas no novo disco, já que por algum motivo o GParted fica reclamando de que nao consegue ler os dados da nova partição.</p>
+<p style="text-align: justify;">Bom, depois de reiniciar, vamos redimensionar o novo HD.</p>
+<p style="text-align: justify;">Se for uma <strong>VM windows</strong>, basta clicar com o botão direito sobre o /dev/sdb1 e clicar em redimensionar / resize e arrastar a partição até preencher todo o espaço disponível:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2685" title="resize-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.41.45-PM.png" alt="" width="288" height="114" /></p>
+<p style="text-align: justify;">Depois disso basta apertar em aplicar e pular para o próximo passo&#8230;</p>
+<p style="text-align: justify;">No meu caso, estou redimensionando em um HD <strong>com linux</strong>, então entre a partição do sistema e o espaço disponível tem a partição do swap.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2687" title="gparted-show-linux-partition" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.48.55-PM.png" alt="" width="300" height="87" /></p>
+<p style="text-align: justify;">Para poder redimensionar o disco, você precisa remover o &#8220;swap&#8221; que está em nosso caminho.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2688" title="gparted-swap-deleted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.49.16-PM.png" alt="" width="300" height="64" /></p>
+<p style="text-align: justify;">Depois de deletar o swap, clique com o botão direito e depois em redimensionar / resize para chegar na tela abaixo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2689" title="gparted-resizing-partition-linux" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.49.29-PM.png" alt="" width="300" height="154" /></p>
+<p style="text-align: justify;">Arraste o tamanho do disco até o limite desejado. Lembre-se de deixar um pouco de espaço para recriar o swap novamente. Geralmente o swap é criado com o dobro do tamanho da memória da máquina.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2690" title="gparted-partition-resized-linux" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.50.01-PM.png" alt="" width="300" height="64" /></p>
+<p style="text-align: justify;">Depois de aumentar a partição primária, crie no espaço que sobrou uma partição estendida, onde iremos definir o novo swap.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2691" title="creating-new-partition-gparted-linux" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.50.25-PM.png" alt="" width="300" height="146" /></p>
+<p style="text-align: justify;">Criado a partição estendida, crie dentro dela uma partição lógica com o file-system &#8220;linux swap&#8221;</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2692" title="gparted-show-partition-table" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.50.45-PM.png" alt="" width="300" height="72" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2693" title="creating-swap-partition-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.51.00-PM.png" alt="" width="300" height="147" /></p>
+<p style="text-align: justify;">Pronto. Terminamos de redimensionar o disco.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2694" title="show-partition-table-complete-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.51.14-PM.png" alt="" width="300" height="75" /></p>
+<p style="text-align: justify;">Agora basta aplicar as modificações e esperar um pouco.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2695" title="apply-modification-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.51.26-PM.png" alt="" width="300" height="122" />Feito isso, já podemos desligar a vm.</p>
+<h3 style="text-align: justify;">9º passo: Ligar a VM com o novo disco</h3>
+<p style="text-align: justify;">Remova o disco antigo da vm, remova o cd de boot e depois ligue a vm com o novo disco !</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2696" title="virtualbox-only-one-bootable-image" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.53.37-PM.png" alt="" width="300" height="53" /></p>
+<h3 style="text-align: justify;">10º passo: Agora, basta aproveitar a sua VM com um disco maior</h3>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2697" title="login-ubuntu-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.55.15-PM.png" alt="" width="300" height="238" /></p>
+<h3 style="text-align: justify;">11º passo (Passo necessário no Ubuntu): Trocando o uuid do disco do swap.</h3>
+<p style="text-align: justify;">Em alguns linux, com o ubuntu, ele grava em um arquivo o uuid (id do disco) que o sistema usa.</p>
+<p style="text-align: justify;">Como fizemos algumas modificaçoes nas partições, esses ids mudaram. Então precisamos editar o arquivo que fica em <strong>/etc/fstab</strong> como mostra a figura abaixo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2698" title="editing-fstab-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-3.51.58-PM.png" alt="" width="500" height="252" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-3.51.58-PM.png 500w, https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-3.51.58-PM-300x151.png 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p style="text-align: justify;">Com o comando: <strong>ls -la /dev/disk/by-uuid/</strong> você pode listar os novos ids e a onde eles estão montados.</p>
+<p style="text-align: justify;">No caso da imagem acima, basta atualizar o arquivo fstab com o uuid do disco em sda1 e depois em sda5.</p>
+<p style="text-align: justify;">Reinicie a VM e estará tudo funcionando corretamente <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;"><strong>==========================================</strong></p>
+<p style="text-align: justify;"><span style="color: #ff0000;"><strong>IMPORTANTE</strong></span>: Em 22/12/2010 foi lançado a versão 4 do virtualbox. Umas das principais modificações foi o suporte ao redimensionamento do disco. Em breve escreverei um novo post falando sobre essa funcionalidade.<br />Eu só publiquei essa matéria pois estava como rascunho a muito, muito tempo. E além do mais, nem todo mundo atualiza a versão do virtualbox, então pode ser útil para alguém&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br /><strong>==========================================<br /></strong><strong>[Post escrito e testado baseado no VirtualBox 3.2.6]</strong></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="1" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="2" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="3" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="4" data-poid="in-3038" data-post-type="none" ><small class="wp_rp_publish_date">10/07/2012</small> <a href="https://rafaelbiriba.com/2012/07/10/dropbox-aumentara-o-espaco-em-disco-dos-seus-planos.html" class="wp_rp_title">Dropbox aumentará o espaço em disco dos seus planos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F03%2F16%2Fvirtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html&amp;linkname=VirtualBox%203%3A%20Aumentando%20o%20tamanho%20do%20disco%20virtual%20da%20VM" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F03%2F16%2Fvirtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html&amp;linkname=VirtualBox%203%3A%20Aumentando%20o%20tamanho%20do%20disco%20virtual%20da%20VM" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F03%2F16%2Fvirtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html&amp;title=VirtualBox%203%3A%20Aumentando%20o%20tamanho%20do%20disco%20virtual%20da%20VM" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html/feed</wfw:commentRss>
+		<slash:comments>39</slash:comments>
+		</item>
+		<item>
+		<title>Crontab: rodando um script a cada 15 segundos</title>
+		<link>https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html</link>
+		<comments>https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html#comments</comments>
+		<pubDate>Sun, 01 Aug 2010 18:31:04 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Diversos]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[crontab]]></category>
+		<category><![CDATA[every]]></category>
+		<category><![CDATA[run]]></category>
+		<category><![CDATA[scheduler]]></category>
+		<category><![CDATA[script]]></category>
+		<category><![CDATA[unix]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2174</guid>
+		<description><![CDATA[Criei esse POST com 2 objetivos: Para compartilhar a minha idéia e quem sabe também obter novas maneiras de resolver um pequeno problema. Problema: Digamos que você tenha que acessar uma URL qualquer (exemplo: http://localhost:3000/coletar ) a cada 15 segundos. Isso rodará um script que irá colher uma série de dados e armazena-los em banco. &#8230; <a href="https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html" class="more-link">Continue lendo <span class="screen-reader-text">Crontab: rodando um script a cada 15 segundos</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="size-full wp-image-2175 alignleft" title="crontab" src="https://rafaelbiriba.com/wp-content/uploads/2010/07/crontab.png" alt="crontab" width="180" height="185" /><br />Criei esse POST com 2 objetivos: Para compartilhar a minha idéia e quem sabe também obter novas maneiras de resolver um pequeno problema.</p>
+<p style="text-align: justify;"><strong>Problema:</strong> Digamos que você tenha que acessar uma URL qualquer (exemplo: <strong>http://localhost:3000/coletar</strong> ) a cada 15 segundos. Isso rodará um script que irá colher uma série de dados e armazena-los em banco.</p>
+<p style="text-align: justify;">Então, se você rodar um comando como este: <strong>&#8220;curl http://localhost:3000/coletar&#8221;</strong> a cada 15 segundos, resolveria meu problema. Agora, como fazer isso usando crontab ?</p>
+<p style="text-align: justify;">Se você procurar a solução na internet, encontrará algumas boas idéias como fazer um script e com alguns sleeps e um loop interno você não precisa nem de cron:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">#!/bin/sh</span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #7a0874; font-weight: bold;">&#91;</span> <span style="color: #000000;">1</span> <span style="color: #7a0874; font-weight: bold;">&#93;</span>; <span style="color: #000000; font-weight: bold;">do</span>
+    curl <span style="color: #ff0000;">&quot;http://localhost:3000/coletar&quot;</span>
+    <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">15</span>
+<span style="color: #000000; font-weight: bold;">done</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Basta rodar esse script, que com um loop eterno, vai rodar o comando de 15 em 15 segundos&#8230; Agora você deve estar pensando: &#8220;Problema resolvido!&#8221; &#8230;</p>
+<p style="text-align: justify;">Na verdade, não. Os dados precisam ser coletados necessariamente a cada 15 segundos. Isso significa que se por acaso, quando for feito um request, se o servidor demorar pra responder aquela solicitação, isso pode atrasar a próxima coleta, e depois de algum tempo, o atraso só tende a piorar.</p>
+<p style="text-align: justify;"><strong>Então qual a melhor solução para este problema ?</strong><br />Como eu preciso coletar a cada 15 segundos sem que uma coleta atrapalhe a outra, acho que a melhor forma de fazer isso foi adicionar no crontab do usuário:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span>
+<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">15</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span>
+<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">30</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span>
+<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">45</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Com isso, os comandos serão executados independentemente a cada 15 segundos&#8230;</p>
+<p style="text-align: justify;">Então é isso&#8230;</p>
+<p style="text-align: justify;"><strong>Se você conhece alguma forma mais eficiente para fazer isso&#8230; </strong>Não deixe de  compartilhar a sua idéia comigo <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="1" data-poid="in-2030" data-post-type="none" ><small class="wp_rp_publish_date">19/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html" class="wp_rp_title">FFmpeg: Batch para conversão de vídeos para iPhone [Windows]</a></li><li data-position="2" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="3" data-poid="in-1449" data-post-type="none" ><small class="wp_rp_publish_date">18/01/2011</small> <a href="https://rafaelbiriba.com/2011/01/18/blogs-poluidos-o-problema-de-utilizar-anuncios.html" class="wp_rp_title">Blogs poluídos: O problema de utilizar anúncios</a></li><li data-position="4" data-poid="in-2752" data-post-type="none" ><small class="wp_rp_publish_date">31/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/31/o-blog-esta-cara-nova-em-comemoracao-ao-centesimo-post.html" class="wp_rp_title">O blog está cara nova em comemoração ao centésimo post</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F08%2F01%2Fcrontab-rodando-um-script-a-cada-15-segundos.html&amp;linkname=Crontab%3A%20rodando%20um%20script%20a%20cada%2015%20segundos" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F08%2F01%2Fcrontab-rodando-um-script-a-cada-15-segundos.html&amp;linkname=Crontab%3A%20rodando%20um%20script%20a%20cada%2015%20segundos" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F08%2F01%2Fcrontab-rodando-um-script-a-cada-15-segundos.html&amp;title=Crontab%3A%20rodando%20um%20script%20a%20cada%2015%20segundos" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html/feed</wfw:commentRss>
+		<slash:comments>20</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu 9.10: Disponível para Download ou Atualização</title>
+		<link>https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html</link>
+		<comments>https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html#comments</comments>
+		<pubDate>Fri, 30 Oct 2009 02:43:11 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[9.10]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[lançamento]]></category>
+		<category><![CDATA[nova versão]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[sistema operacional]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1680</guid>
+		<description><![CDATA[O Ubuntu 9.10 está finalmente disponível para download. (http://www.ubuntu.com/getubuntu/download) Disponível em 32 ou 64 bits, e para laptops, netbooks, desktops, servers e etc.. Mais características da versão podem ser obtidas aqui. Atualizando seu ubuntu para 9.10:* Entre no terminal e digite: update-manager -d Como a versão já foi lançada oficialmente, atualize pelo seu gerenciador de &#8230; <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu 9.10: Disponível para Download ou Atualização</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_1681" style="width: 468px" class="wp-caption aligncenter"><img class="size-full wp-image-1681" title="ubuntu-910" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910.png" alt="www.ubuntu.com" width="468" height="76" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910.png 468w, https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-300x48.png 300w" sizes="(max-width: 468px) 100vw, 468px" /><figcaption class="wp-caption-text">www.ubuntu.com</figcaption></figure>
+<p style="text-align: justify;">O Ubuntu 9.10 está finalmente disponível para download. (<a title="http://www.ubuntu.com/getubuntu/download" href="http://www.ubuntu.com/getubuntu/download" target="_blank">http://www.ubuntu.com/getubuntu/download</a>)</p>
+<p style="text-align: justify;">Disponível em 32 ou 64 bits, e para laptops, netbooks, desktops, servers e etc.. Mais características da versão podem ser <a title="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" target="_blank">obtidas aqui</a>.</p>
+<h3 style="text-align: justify;">Atualizando seu ubuntu para 9.10:*</h3>
+<p style="text-align: justify;">Entre no terminal e digite: <br /><span style="color: #ff0000;"><strong>update-manager -d</strong></span></p>
+<p style="text-align: justify;">Como a versão já foi lançada oficialmente, atualize pelo seu gerenciador de atualizações como mostra a figura abaixo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-1685" title="ubuntu-910-software" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-software.jpeg" alt="ubuntu-910-software" width="504" height="204" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-software.jpeg 504w, https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-software-300x121.jpg 300w" sizes="(max-width: 504px) 100vw, 504px" /></p>
+<p style="text-align: justify;"></p>
+<h3 style="text-align: justify;">Vale a pena atulizar de 9.04 para 9.10 ?</h3>
+<p style="text-align: justify;">Fiz a atualização por cima do 9.04, e levou uma eternidade, baixando os pacotes a menos que 30 kb/s, isso porque todo mundo está atualizando o seu ubuntu hoje <img src="https://s.w.org/images/core/emoji/72x72/1f600.png" alt="😀" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Aproximadamente 1200 arquivos foram baixados para atualizar a versão&#8230; Quanto ao desempenho, confesso que achei que ao migrar do 9.04 para o 9.10 iria sentir alguma perda de desempenho&#8230; Pelo menos, para que migrou do 8.10 para o 9.04, percebeu que o sistema ficou visivelmente mais lento, havendo até necessidade de reinstalar a versão do zero. Felizmente isso não aconteceu&#8230; É possível até notar que a versão nova é melhor&#8230;</p>
+<p style="text-align: justify;">Então, para quem usa seu ubuntu para fins domésticos, eu recomendo atualizar direto pelo <strong>update manager</strong>. Agora, para computadores de trabalho, onde rodam ambientes mais controlados, sugiro que haja com cautela, fazendo backups e talvez pensar em um possível rollback, caso o sistema novo se comporte de maneira indesejada.</p>
+<p>Se possível for, compartilhe aqui como foi seu processo de atualização&#8230; Boa sorte a todos&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1496" data-post-type="none" ><small class="wp_rp_publish_date">09/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="wp_rp_title">Ubuntu 9.10: Já podemos aproveitar e testar</a></li><li data-position="1" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="2" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li><li data-position="3" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="4" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F29%2Fubuntu-910-disponivel-para-download-e-atualizacao.html&amp;linkname=Ubuntu%209.10%3A%20Dispon%C3%ADvel%20para%20Download%20ou%20Atualiza%C3%A7%C3%A3o" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F29%2Fubuntu-910-disponivel-para-download-e-atualizacao.html&amp;linkname=Ubuntu%209.10%3A%20Dispon%C3%ADvel%20para%20Download%20ou%20Atualiza%C3%A7%C3%A3o" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F29%2Fubuntu-910-disponivel-para-download-e-atualizacao.html&amp;title=Ubuntu%209.10%3A%20Dispon%C3%ADvel%20para%20Download%20ou%20Atualiza%C3%A7%C3%A3o" id="wpa2a_10"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu 9.10: Já podemos aproveitar e testar</title>
+		<link>https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html</link>
+		<comments>https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html#comments</comments>
+		<pubDate>Fri, 09 Oct 2009 19:31:34 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[9.10]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[lançamento]]></category>
+		<category><![CDATA[nova versão]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[sistema operacional]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1496</guid>
+		<description><![CDATA[Com o lançamento oficial para dia 29 de outubro/2009, a versão 9.10 já pode ser testado em sua versão beta. Dentre as novas funcionalidades podemos destacar: O famoso Pidgin deixa de ser o mensageiro padrão, e em seu lugar entra o Empathy Sincronização de arquivos com o Ubuntu One como padrão ext4 será o filesystem &#8230; <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu 9.10: Já podemos aproveitar e testar</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_1498" style="width: 562px" class="wp-caption aligncenter"><img class="size-full wp-image-1498" title="ubuntu-910-coming-soon" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-coming-soon.jpg" alt="http://www.ubuntu.com/" width="562" height="67" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-coming-soon.jpg 562w, https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-coming-soon-299x35.jpg 299w" sizes="(max-width: 562px) 100vw, 562px" /><figcaption class="wp-caption-text">http://www.ubuntu.com/</figcaption></figure>
+<p style="text-align: justify;">Com o lançamento oficial para dia <strong>29 de outubro/2009</strong>, a versão 9.10 já pode ser testado em sua versão beta.</p>
+<p style="text-align: justify;">Dentre as <strong>novas funcionalidades</strong> podemos destacar:</p>
+<ul style="text-align: justify;">
+	<li>O famoso Pidgin deixa de ser o mensageiro padrão, e em seu lugar entra o <a title="http://live.gnome.org/Empathy" href="http://live.gnome.org/Empathy" target="_blank">Empathy</a></li>
+	<li>Sincronização de arquivos com o <a title="https://ubuntuone.com/" href="https://ubuntuone.com/" target="_blank">Ubuntu One</a> como padrão</li>
+	<li>ext4 será o filesystem padrão. ( o ext4 é mais performatico para arquivos grandes ) &#8211; outros filesystems podem ser utilizados usando a partição manual durante a instalação</li>
+	<li>Grub 2 como padrão de boot</li>
+	<li><a title="https://wiki.ubuntu.com/UbuntuFirewal" href="https://wiki.ubuntu.com/UbuntuFirewal" target="_blank">Firewall descomplicado</a></li>
+	<li>Lista completa das outras funcionalidades em: <a title="http://www.ubuntu.com/testing/karmic/beta" href="http://www.ubuntu.com/testing/karmic/beta" target="_blank">http://www.ubuntu.com/testing/karmic/beta</a></li>
+</ul>
+<p>&nbsp;</p>
+<h3 style="text-align: justify;"><img class="size-full wp-image-1521 alignleft" title="boot-ubuntu-910" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/boot-ubuntu-910.jpeg" alt="boot-ubuntu-910" width="176" height="273" />Teste rápido de desempenho do 9.04 e 9.10 em máquinas virtuais:</h3>
+<p style="text-align: justify;"><strong>Especificação:</strong> Disco de 10GB e memória de 256MB.<br />Detalhes: As imagens <strong>.iso</strong> utilizadas foram baixadas no mesmo dia</p>
+<p style="text-align: justify;"><strong>Vamos aos resultados:</strong></p>
+<ul style="text-align: justify;">
+	<li><span style="color: #ff0000;">Boot da instalação:</span> na versão 9.10 carregou 8 segundos mais rápido.</li>
+	<li><span style="color: #ff0000;">Instalação: </span>9.04 levou cerca de 12 min. contra 14 min. da versão 9.10</li>
+	<li><span style="color: #ff0000;">Boot:</span> 9.04 levou cerca de 39 segundos contra incríveis 28 segundos da versão 9.10</li>
+</ul>
+<p style="text-align: justify;"><strong>Observações encontradas:</strong></p>
+<ul style="text-align: justify;">
+	<li>A tela de boot está com cores mais agradáveis ( conforme mostra a imagem ao lado )</li>
+	<li>Durante a instalação do 9.10, você pode ver algumas caracteristicas do ubuntu ( semelhante a instalação do windows xp, onde aparece as funcionalidades do sistema, enquanto o sistema está processando a instalação )</li>
+</ul>
+<p style="text-align: justify;">Como eu usei máquinas virtuais, o uso de minha cpu pode ter influênciado no teste (meio dificil, pois ela não chegou nem a 40% durante os testes ).. Porém, os valores acima, não podem servir como bases comparativas&#8230; Apenas para uma demonstração rápida&#8230;</p>
+<h3 style="text-align: justify;">Está ansioso, deseja testar ?</h3>
+<p><img class="size-full wp-image-1503 alignleft" title="ubuntu-910-comingsoon-banner" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-comingsoon-banner.png" alt="ubuntu-910-comingsoon-banner" width="180" height="150" /></p>
+<h3>Atualizando seu ubuntu para 9.10:*</h3>
+<p>Entre no terminal e digite: <br /><span style="color: #ff0000;"><strong>update-manager -d</strong></span></p>
+<h3>Download do 9.10:*</h3>
+<p>http://mirror.globo.com/ubuntu/releases/9.10/</p>
+<p style="text-align: justify;">* Lembrando que ainda está na versão beta até o dia do seu lançamento final (29/10/09)</p>
+<p style="text-align: justify;">Caso você resolva testar, não esqueça de reportar os bugs para ajudar a comunidade. Mais detalhes em <a title="https://help.ubuntu.com/community/ReportingBugs" href="https://help.ubuntu.com/community/ReportingBugs" target="_blank">https://help.ubuntu.com/community/ReportingBugs</a></p>
+<p style="text-align: justify;">Se você testou e/ou tiver mais alguma informação, compartilhe conosco através dos comentários abaixo. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="1" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="2" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li><li data-position="3" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="4" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F09%2Fubuntu-910-ja-podemos-aproveitar-e-testar.html&amp;linkname=Ubuntu%209.10%3A%20J%C3%A1%20podemos%20aproveitar%20e%20testar" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F09%2Fubuntu-910-ja-podemos-aproveitar-e-testar.html&amp;linkname=Ubuntu%209.10%3A%20J%C3%A1%20podemos%20aproveitar%20e%20testar" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F09%2Fubuntu-910-ja-podemos-aproveitar-e-testar.html&amp;title=Ubuntu%209.10%3A%20J%C3%A1%20podemos%20aproveitar%20e%20testar" id="wpa2a_12"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Vulnerabilidade do site da VIVO: Seu windows pode ter sido afetado e já não ser mais seguro</title>
+		<link>https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html</link>
+		<comments>https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html#comments</comments>
+		<pubDate>Sun, 13 Sep 2009 03:15:45 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Redes]]></category>
+		<category><![CDATA[Serviços Online]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[bankline]]></category>
+		<category><![CDATA[fraude]]></category>
+		<category><![CDATA[golpe]]></category>
+		<category><![CDATA[hacker]]></category>
+		<category><![CDATA[hosts]]></category>
+		<category><![CDATA[internet]]></category>
+		<category><![CDATA[internet bank]]></category>
+		<category><![CDATA[internet banking]]></category>
+		<category><![CDATA[malware]]></category>
+		<category><![CDATA[phishing]]></category>
+		<category><![CDATA[vulnerabilidade]]></category>
+		<category><![CDATA[vulnerável]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1375</guid>
+		<description><![CDATA[De acordo com o wiki, malware é um software destinado a se infiltrar em um sistema de computador de forma ilícita, com o intuito de causar danos e roubar informção. E foi exatamente isso que aconteceu com todos os visitantes do site da vivo, no dia 08/09/2009. Ao visitar o site da VIVO, foi requisitado &#8230; <a href="https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html" class="more-link">Continue lendo <span class="screen-reader-text">Vulnerabilidade do site da VIVO: Seu windows pode ter sido afetado e já não ser mais seguro</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;">De acordo com o <a title="http://pt.wikipedia.org/wiki/Malware" href="http://pt.wikipedia.org/wiki/Malware" target="_blank">wiki</a>, malware é um software destinado a se infiltrar em um sistema de computador de forma ilícita, com o intuito de causar danos e roubar informção. E foi exatamente isso que aconteceu com <strong>todos os visitantes do site da vivo, no dia <span style="color: #ff0000;">08/09/2009</span></strong>.</p>
+<p style="text-align: justify;">Ao visitar o site da VIVO, foi requisitado a instalação de um applet, que provavelmente foi aprovado por todos, pois o arquivo malicioso era um suposto arquivo de imagem. Isso mesmo, um simples arquivo <strong>.jpeg</strong>, aparentemente inofensivo, que ocultava arquivos compactados java (JAR).</p>
+<p style="text-align: justify;">O que ele fazia ? Nada demais&#8230; Apenas alterava o arquivo HOSTS do windows. Para quem não sabe, nesse arquivo é possível mapear uma nova rota (IP) à um site que você visita. Isso significa, que se você adicionar neste arquivo um site de um banco, por exemplo www.itau.com.br, e um IP que te leve para um outro lugar, ao acessar seu navegador e digitar o endereço do itaú conforme o exemplo, você é redirecionado para um site falso.</p>
+<p style="text-align: justify;">Todos que foram &#8220;prejudicados&#8221; pelo malware, o arquivo HOSTS foi alterado, e as seguintes linhas foram adicionadas:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;">69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>180 santander<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>180 www<span style="color: #339933;">.</span>santander<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 itau<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 www<span style="color: #339933;">.</span>itau<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 www<span style="color: #339933;">.</span>itau<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 itau<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 itaupersonnalite<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>181 www<span style="color: #339933;">.</span>itaupersonnalite<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradesco<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradesco<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradesco<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradesco<span style="color: #339933;">.</span>com
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradescoempresa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradescoempresa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradescoprime<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradescoprime<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 bradescocartoes<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>182 www<span style="color: #339933;">.</span>bradescocartoes<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>179 www<span style="color: #339933;">.</span>nossacaixa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br
+69<span style="color: #339933;">.</span>162<span style="color: #339933;">.</span>114<span style="color: #339933;">.</span>179 nossacaixa<span style="color: #339933;">.</span>com<span style="color: #339933;">.</span>br</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Se você roda linux, teste a difereça pelos ips abaixo! Se você roda windows, não acho seguro acessar o ip falso, então verifique a diferença nas imagens que coloquei no fim do post .<br />IP do site do banco itau <span style="color: #008000;"><strong>VERDADEIRO</strong></span>: <span style="color: #008000;">200.196.152.40</span><br />IP do site do banco itau <strong><span style="color: #ff0000;">FALSO</span></strong>: <span style="color: #ff0000;">69.162.114.181</span></p>
+<p style="text-align: justify;">Como saber se você foi infectado ? Se você roda linux, certamente você NÃO foi infectado! (Gostei de dizer essa frase! <strong>Viva o Linux !</strong> <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /> ), agora se você roda com windows, abra o bloco de notas e abra arquivo digitando o caminho completo: <strong>C:\WINDOWS\system32\drivers\etc\<span style="color: #ff0000;">hosts</span></strong></p>
+<p style="text-align: justify;">Se no arquivo não tiver os ips e os endereços acima, você não foi infectado. Mas se tiver, basta remover todas as linhas e salvar o arquivo. Por padrão a única linha que deve ter no arquivo é (127.0.0.1 localhost), lembrando que tudo que tem &#8220;#&#8221; antes não é levado em consideração (São apenas comentários no arquivo).</p>
+<p style="text-align: justify;">Agora vem a parte triste. <strong>Eu posso jurar que NÃO entrei no site da vivo</strong> no dia 08/09, então tomem cuidado, <strong><span style="color: #ff0000;">existe outro site, ou outras formas de se obter o malware</span></strong>. Em uma próxima ocasião, darei algumas dicar para evitar esses tipos de problemas.</p>
+<p style="text-align: justify;">Meu pai me fez uma pergunta interessante, que vale ser respondida aqui:<br />&#8220;<span style="color: #ff0000;">Como você conseguiu descobrir isso ?</span>&#8220;<br />Infezlimente eu caí parcialmente no golpe. Hoje precisei pagar um boleto, então entrei no site do itaú, digitei minha agência e conta, e logo depois a senha eletrônica, foi então que eu entrei numa tela (como mostra uma das figura a baixo) solicitando que eu digita-se <strong>TODAS</strong> as posições numéricas do meu cartão de segurança para recadastramento!</p>
+<p style="text-align: justify;">Eu ja sabia disso, mas no próprio cartão, está escrito: &#8220;O itaú nunca solicita o recadastramento deste cartão&#8221;, foi quando me dei conta do golpe e ao procurar mais detalhes no google, rapidamente descobri que esse golpe está associado a um malware e que muitas pessoas já cairam nele, e o pior, a maioria está com esses &#8220;IPs Maliciosos&#8221; no seu computador , alguns também já está com sua conta bancária comprometida e essas pessoas nem sabem sobre o golpe!</p>
+<p style="text-align: justify;">Então é isso aí! Divulguem para seus amigos e familiares, peçam para verificar o arquivos de hosts do windows. Muito em breve postarei algumas soluções e dicas para evitar esse tipo de problema.</p>
+<p style="text-align: justify;">O ato de enganar o usuário para obter informação desta maneira se chama Phishing. Aproveito para esclarecer, que o malware foi introduzido no site da VIVO por hackers, então não pense que foi a VIVO que fez essa &#8220;maldade&#8221;. Foi apenas uma falha de segurança. Quanto aos bancos, não acho que eles tenham alguma coisa a ver com isso também.<br /> <br /> Agora os peritos tem que analisar o IP, e descobrir o dono do servidor que mantém esses sites fraudulentos. Numa pequena pesquisa que fiz, descobri que esse IP (69.162.114.181) vem de um servidor localizado na cidade de DALLAS &#8211; United States. A empresa responsável é a Limestone Networks (<a title="http://www.limestonenetworks.com/" href="http://www.limestonenetworks.com/" target="_blank">www.limestonenetworks.com</a>). Agora só resta que essa empresa forneça os dados cadastrais, forma de pagamento, numero do cartão de crédito, e etc&#8230;, da pessoa que alugou o servidor, e estaremos bem perto dos culpados. Mas, como a empresa é estrangeira e os dados só podem ser obtido por processo jurídicos, isso vai demorar muito !</p>
+<p style="text-align: justify;">Logo abaixo vocês pode conferir algumas imagens que extraí do site falso do itaú. (Clique nas imagens para visualizar em formato maior )</p>
+<p><a title="Abrir em formato maior" href="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-verdadeiro.jpg" target="_blank"><img class="alignnone size-medium wp-image-1384" title="itau-verdadeiro-small" src="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-verdadeiro-small.jpg" alt="itau-verdadeiro-small" width="300" height="182" /></a>Site Verdadeiro do Itaú</p>
+<p><a title="Abrir em formato maior" href="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso.jpg" target="_blank"><img class="alignnone size-full wp-image-1386" title="itau-falso-small" src="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso-small.jpg" alt="itau-falso-small" width="300" height="175" /></a>Site Falso do Itaú</p>
+<p><a title="Abrir em formato maior" href="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso-cadastro-cartao.jpg" target="_blank"><img class="alignnone size-full wp-image-1393" title="itau-falso-cadastro-cartao-small" src="https://rafaelbiriba.com/wp-content/uploads/2009/09/itau-falso-cadastro-cartao-small.jpg" alt="itau-falso-cadastro-cartao-small" width="300" height="142" /></a>Tela falsa solicitando os códigos de segurança</p>
+<p style="text-align: justify;"><br />Só para reforçar, não esqueça de informar seus amigos e parentes&#8230; Eles já podem ter sido enganados pelo sistema falso, e precisam entrar em contato com o banco imediatamente para mudar as senhas e códigos&#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2972" data-post-type="none" ><small class="wp_rp_publish_date">07/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html" class="wp_rp_title">GitHub alerta sobre vulnerabilidade no gerenciamento das chaves SSHs</a></li><li data-position="1" data-poid="in-2494" data-post-type="none" ><small class="wp_rp_publish_date">30/12/2010</small> <a href="https://rafaelbiriba.com/2010/12/30/nao-deixe-de-atualizar-seu-wordpress-versao-3-0-4-corrige-um-problema-critico-de-seguranca.html" class="wp_rp_title">Não deixe de atualizar seu wordpress: versão 3.0.4 corrige falha de segurança</a></li><li data-position="2" data-poid="in-1789" data-post-type="none" ><small class="wp_rp_publish_date">16/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/16/pesquisa-cientifica-seguranca-digital.html" class="wp_rp_title">Pesquisa científica: Segurança Digital</a></li><li data-position="3" data-poid="in-1617" data-post-type="none" ><small class="wp_rp_publish_date">25/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html" class="wp_rp_title">Palestra: Vídeos para Internet (XIII Semana Tecnológica do IST-Rio)</a></li><li data-position="4" data-poid="in-3049" data-post-type="none" ><small class="wp_rp_publish_date">27/07/2012</small> <a href="https://rafaelbiriba.com/2012/07/27/globo-com-vagas-para-desenvolvedores-venha-trabalhar-com-a-gente.html" class="wp_rp_title">Globo.com: Vagas para desenvolvedores &#8211; Venha trabalhar com a gente</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F09%2F13%2Fvulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html&amp;linkname=Vulnerabilidade%20do%20site%20da%20VIVO%3A%20Seu%20windows%20pode%20ter%20sido%20afetado%20e%20j%C3%A1%20n%C3%A3o%20ser%20mais%20seguro" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F09%2F13%2Fvulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html&amp;linkname=Vulnerabilidade%20do%20site%20da%20VIVO%3A%20Seu%20windows%20pode%20ter%20sido%20afetado%20e%20j%C3%A1%20n%C3%A3o%20ser%20mais%20seguro" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F09%2F13%2Fvulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html&amp;title=Vulnerabilidade%20do%20site%20da%20VIVO%3A%20Seu%20windows%20pode%20ter%20sido%20afetado%20e%20j%C3%A1%20n%C3%A3o%20ser%20mais%20seguro" id="wpa2a_14"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html/feed</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Configurando teclado ABNT2 no vmware-server-console</title>
+		<link>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html</link>
+		<comments>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html#comments</comments>
+		<pubDate>Sat, 22 Aug 2009 19:19:24 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[abnt2]]></category>
+		<category><![CDATA[configurar]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[teclado]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vmware]]></category>
+		<category><![CDATA[vmware-server-console]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1178</guid>
+		<description><![CDATA[&#160; Um dos problemas que eu acho extremamente chato, é não poder usar as setas, o ctrl, a barra e outras teclas não habilitadas no vmware-server-console. Você pode ler sobre a instalação do console no ubuntu, clicando aqui. Se você der uma pesquisada no google, rapidamente vai encontrar formas de resolver o problema. Uma delas &#8230; <a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure>
+
+<p>&nbsp;</p>
+<p style="text-align: justify;">Um dos problemas que eu acho extremamente chato, é não poder usar as setas, o ctrl, a barra e outras teclas não habilitadas no vmware-server-console. Você pode ler sobre a instalação do console no ubuntu, <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">clicando aqui</a>.</p>
+<p style="text-align: justify;">Se você der uma pesquisada no google, rapidamente vai encontrar formas de resolver o problema. Uma delas é fazer o mapeamento das teclas que devem ser inseridas na configuração do vmware.</p>
+<p style="text-align: justify;">A questão é onde está o arquivo de configuração. Isso depende de como você <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">instalou</a> o vmware.<br />No meu caso está em <span style="color: #ff0000;">/etc/vmware-server-console/config</span>.</p>
+<p style="text-align: justify;">Adicionem as seguintes linhas no final do arquivo de configuração: <br />(<strong>OBS</strong>: Tem que ser root para fazer a alteração e certifique-se que o vmware não está aberto)</p>
+<p style="text-align: justify;"><strong>xkeymap.keycode.108 = 0x138 # Alt_R<br />xkeymap.keycode.106 = 0x135 # KP_Divide<br />xkeymap.keycode.104 = 0x11c # KP_Enter<br />xkeymap.keycode.111 = 0x148 # Up<br />xkeymap.keycode.116 = 0x150 # Down<br />xkeymap.keycode.113 = 0x14b # Left<br />xkeymap.keycode.114 = 0x14d # Right<br />xkeymap.keycode.105 = 0x11d # Control_R<br />xkeymap.keycode.118 = 0x152 # Insert<br />xkeymap.keycode.119 = 0x153 # Delete<br />xkeymap.keycode.110 = 0x147 # Home<br />xkeymap.keycode.115 = 0x14f # End<br />xkeymap.keycode.112 = 0x149 # Prior<br />xkeymap.keycode.117 = 0x151 # Next<br />xkeymap.keycode.78 = 0x46 # Scroll_Lock<br />xkeymap.keycode.127 = 0x100 # Pause<br />xkeymap.keycode.133 = 0x15b # Meta_L<br />xkeymap.keycode.134 = 0x15c # Meta_R<br />xkeymap.keycode.135 = 0x15d # Menu<br />xkeymap.keycode.97 = 0x073 # Slash </strong></p>
+<p style="text-align: justify;">Se você não achou o arquivo de configuração, veja algumas outras possibilidades: <span style="color: #808080;"><br /><span style="color: #0000ff;">.vmware/config</span></span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">~/vmware/preferences</span></span>,<br /><span style="color: #0000ff;">/etc/vmware/config</span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">/usr/lib/vmware/config</span></span></p>
+<p style="text-align: justify;">Espero ter ajudado&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1190" data-post-type="none" ><small class="wp_rp_publish_date">09/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="wp_rp_title">Ubuntu: Instalação do vmware-server-console</a></li><li data-position="1" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li><li data-position="2" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="3" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="4" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;title=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" id="wpa2a_16"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html/feed</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Instalação do vmware-server-console</title>
+		<link>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html</link>
+		<comments>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html#comments</comments>
+		<pubDate>Mon, 10 Aug 2009 01:51:10 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[instalação]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vmware]]></category>
+		<category><![CDATA[vmware-server-console]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1190</guid>
+		<description><![CDATA[Sempre que preciso, eu perco algum tempo em procurar e instalar vmware-server-console. Então resolvi postar para facilitar. 🙂 Primeiro, faça o download pelo site do vmware (http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip), onde você deve extrair o pacote (23mb) para obter o VMware-server-console-1.0.9-156507.tar.gz Ou então, baixe o pacote direto pelo link do meu blog: (apenas 9 mb 😉) https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz Ou &#8230; <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Instalação do vmware-server-console</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<h2>
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure></h2>
+<p style="text-align: justify;">Sempre que preciso, eu perco algum tempo em procurar e instalar vmware-server-console. <br />Então resolvi postar para facilitar. <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Primeiro, faça o download pelo site do vmware (<a title="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" href="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" target="_blank">http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip</a>), onde você deve extrair o pacote (23mb) para obter o VMware-server-console-1.0.9-156507.tar.gz</p>
+<p style="text-align: justify;">Ou então, <strong>baixe o pacote direto pelo link do meu blog</strong>: (<span style="color: #ff0000;">apenas 9 mb <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></span>) <a title="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" href="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" target="_blank"><br />https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz</a></p>
+<p style="text-align: justify;">Ou apenas siga os <strong>comandos abaixo</strong> pelo terminal:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>www.rafaelbiriba.com<span style="color: #000000; font-weight: bold;">/</span>VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> vmware-server-console-distrib<span style="color: #000000; font-weight: bold;">/</span>
+<span style="color: #c20cb9; font-weight: bold;">sudo</span> .<span style="color: #000000; font-weight: bold;">/</span>vmware-install.pl</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Caso tenha alguma dúvida/problema na instalação, verifique o link: <a title="http://help.ubuntu.com/community/VMware/Server" href="http://help.ubuntu.com/community/VMware/Server" target="_blank">http://help.ubuntu.com/community/VMware/Server</a> na seção <strong>VMware Server Console Installation </strong>ou pergunte por aqui mesmo. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1178" data-post-type="none" ><small class="wp_rp_publish_date">22/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" class="wp_rp_title">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</a></li><li data-position="1" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="2" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li><li data-position="3" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="4" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;title=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" id="wpa2a_18"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</title>
+		<link>https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html</link>
+		<comments>https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html#comments</comments>
+		<pubDate>Sun, 26 Apr 2009 23:49:35 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[8.10]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[aptitude]]></category>
+		<category><![CDATA[archive]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[download]]></category>
+		<category><![CDATA[repositório]]></category>
+		<category><![CDATA[servidor]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[update]]></category>
+		<category><![CDATA[upgrade]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=635</guid>
+		<description><![CDATA[Bom, hoje a tarde instalei o Ubuntu 9.04 no computador de casa. Como de costume, fui rodar os comandos do aptitude no terminal ( aptitude update e aptitude upgrade ), porém ainda no update, recebi vários erros. Alguns deles seguem logo abaixo: ( Foram mais de 10 ) Err http://br.archive.ubuntu.com jaunty Release.gpg Não foi possível &#8230; <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="alignleft size-thumbnail wp-image-32" title="ubuntu-splash-brown" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu-splash-brown-150x150.png" alt="ubuntu-splash-brown" width="150" height="150" />Bom, hoje a tarde instalei o Ubuntu 9.04 no computador de casa. Como de costume, fui rodar os comandos do aptitude no terminal ( <strong>aptitude update</strong> e <strong>aptitude upgrade</strong> ), porém ainda no update, recebi vários erros. Alguns deles seguem logo abaixo: ( Foram mais de 10 )</p>
+<p style="text-align: justify;">Err http://br.archive.ubuntu.com jaunty Release.gpg<br /> Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;<br />Err http://br.archive.ubuntu.com jaunty/main Translation-pt_BR<br /> Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;<br />Err http://br.archive.ubuntu.com jaunty/restricted Translation-pt_BR</p>
+<p style="text-align: justify;">Foi então que eu resolvi tentar descobrir o que estava acontecendo.<br />Bom, pesquisei em vários forums a tarde toda, testei algumas das soluções e por fim consegui chegar a alguma conclusão.</p>
+<p style="text-align: justify;">Uma das recomendações foi alterar o repositório para o principal, no lugar do brasileiro.<br />Para fazer isto, basta entrar em <strong>SISTEMA &gt; ADMINISTRAÇÃO &gt; CANAIS DE SOFTWARE</strong><br />Altere a opção <strong>BAIXAR DE: </strong><span style="color: #ff0000;">Servidor no Brasil</span> para <span style="color: #ff0000;">Servidor Principal<br /></span>Em seguida, execute o <strong>aptitude update</strong> novamente.</p>
+<p style="text-align: justify;">Na verdade, pelo que pude analisar, isso não foi uma solução e sim uma camuflagem. Diferentemente da opção Servidor no Brasil, que retornou diversos erros ao tentar baixar os pacotes, com a opção Servidor Principal, os mesmo pacotes que davam erros, agora apenas são ignorados.</p>
+<p style="text-align: justify;">Agora vem a parte que ninguém esperava&#8230; Algumas horas depois, alterei o repositório para <span style="color: #ff0000;">Servidor no Brasil</span>, e ao rodar o <strong>update</strong> novamente, os pacotes que antes davam erro, foram baixados corretamente&#8230;<br /><br />O porque disso ? Será que o fato de ter trocado o repositório tem alguma coisa haver ?<br />Bom, na verdade não. Fiquei com tanta curiosidade, que tive que instalar Ubuntu novamente, desde do zero. E para surpresa de todos, sem alterar qualquer configuração, os pacotes foram baixados normalmente sem nenhum erro.<br /><br />Agora fica a pergunta no ar: O que realmente aconteceu ?<br />Minha opnião: Simples, a unica explicação lógica para isso foi: os pacotes que deram erro estavam em manutenção, ou sendo atualizados nos repositórios. Isso explica porque o mesmo pacote não foi baixado nos dois repositórios que tentei inicialmente, pois todos eles estavam indisponíveis temporariamente para download.</p>
+<p style="text-align: justify;">Portanto, se você passar pelo mesmo problema, fique calmo e espere algum tempo e logo conseguirá conectar ao repositório !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="1" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li><li data-position="2" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="3" data-poid="in-1496" data-post-type="none" ><small class="wp_rp_publish_date">09/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="wp_rp_title">Ubuntu 9.10: Já podemos aproveitar e testar</a></li><li data-position="4" data-poid="in-3120" data-post-type="none" ><small class="wp_rp_publish_date">31/07/2013</small> <a href="https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html" class="wp_rp_title">OpenCart: Com o aumento do dolar, veja como atualizar o preço de todos os seus produtos via SQL</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F26%2Fubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html&amp;linkname=Ubuntu%3A%20N%C3%A3o%20foi%20poss%C3%ADvel%20resolver%20%E2%80%98br.archive.ubuntu.com%E2%80%99" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F26%2Fubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html&amp;linkname=Ubuntu%3A%20N%C3%A3o%20foi%20poss%C3%ADvel%20resolver%20%E2%80%98br.archive.ubuntu.com%E2%80%99" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F26%2Fubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html&amp;title=Ubuntu%3A%20N%C3%A3o%20foi%20poss%C3%ADvel%20resolver%20%E2%80%98br.archive.ubuntu.com%E2%80%99" id="wpa2a_20"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html/feed</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+	</channel>
+</rss>

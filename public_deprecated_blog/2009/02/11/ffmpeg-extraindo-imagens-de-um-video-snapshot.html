@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<!--<![endif]-->
+<head>
+<base href="https://rafaelbiriba.com/blogwp.html" />
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) | Rafael Biriba Blog</title>
+	
+	
+	<!--[if lt IE 9]>
+	<script src="https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	
+
+
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.rafaelbiriba.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wgs-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/wgs.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/style.css?ver=4.5.3' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='github-profile-octicons-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/octicons/octicons.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='github-profile-widget-styles-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/widget.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='A2A_SHARE_SAVE-css'  href='https://rafaelbiriba.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.12' type='text/css' media='all' />
+<link rel='stylesheet' id='fbSEOStylesheet-css'  href='https://rafaelbiriba.com/wp-content/plugins/seo-facebook-comments/assets/fbseo-style.css?ver=4.5.3' type='text/css' media='all' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.2 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-7346716-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/content-slide/js/coin-slider.js?ver=4.5.3'></script>
+<link rel='https://api.w.org/' href='https://rafaelbiriba.com/wp-json/' />
+
+ 
+
+<link rel='next' title='FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II' href='https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html' />
+
+<link rel='shortlink' href='https://rafaelbiriba.com/?p=53' />
+
+
+
+<script type="text/javascript"><!--
+var a2a_config=a2a_config||{},wpa2a={done:false,html_done:false,script_ready:false,script_load:function(){var a=document.createElement('script'),s=document.getElementsByTagName('script')[0];a.type='text/javascript';a.async=true;a.src='https://static.addtoany.com/menu/page.js';s.parentNode.insertBefore(a,s);wpa2a.script_load=function(){};},script_onready:function(){wpa2a.script_ready=true;if(wpa2a.html_done)wpa2a.init();},init:function(){for(var i=0,el,target,targets=wpa2a.targets,length=targets.length;i<length;i++){el=document.getElementById('wpa2a_'+(i+1));target=targets[i];a2a_config.linkname=target.title;a2a_config.linkurl=target.url;a2a_config.linkmedia=target.media;if(el){a2a.init('page',{target:el});el.id='';}wpa2a.done=true;}wpa2a.targets=[];}};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.callbacks.push({ready:wpa2a.script_onready});a2a_config.templates=a2a_config.templates||{};a2a_localize = {
+	Share: "Compartilhar",
+	Save: "Salvar",
+	Subscribe: "Inscrever",
+	Email: "Email",
+	Bookmark: "Favoritos",
+	ShowAll: "Mostrar tudo",
+	ShowLess: "Mostrar menos",
+	FindServices: "Procurar serviço(s)",
+	FindAnyServiceToAddTo: "Encontrar rapidamente qualquer serviço para",
+	PoweredBy: "Serviço fornecido por",
+	ShareViaEmail: "Share via email",
+	SubscribeViaEmail: "Subscribe via email",
+	BookmarkInYourBrowser: "Adicionar aos favoritos",
+	BookmarkInstructions: "Press Ctrl+D or \u2318+D to bookmark this page",
+	AddToYourFavorites: "Adicionar a favoritos",
+	SendFromWebOrProgram: "Send from any email address or email program",
+	EmailProgram: "Email program",
+	More: "More&#8230;"
+};
+
+//--></script>
+<script type="text/javascript">
+	var $jquery = jQuery.noConflict(); 
+	$jquery(document).ready(function() 
+	{
+		$jquery('#wpcontent_slider').coinslider(
+	{ 
+	width: 980, 
+	height: 370, 
+	spw: 7, 
+	sph: 5, 
+	delay: 3000, 
+	sDelay: 30, 
+	opacity: 0.7, 
+	titleSpeed: 500, 
+	effect: 'random', 
+	navigation: true, 
+	links : true, 
+	hoverPause: true });
+		});
+	</script>
+<style type="text/css" media="screen">
+		
+#wpcontent_slider_container
+{
+	overflow: hidden; position: relative; padding:0px;margin:0px; text-align:center; width:980px !important;
+	height:370px !important;
+}
+#wpcontent_slider 
+{ overflow: hidden; position: relative; font-family:\'Trebuchet MS\', Helvetica, sans-serif;border:0px solid #ffffff; text-align:left;}
+#wpcontent_slider a,#wpcontent_slider a img { border: none; text-decoration: none; outline: none; }
+#wpcontent_slider h4,#wpcontent_slider h4 a 
+{margin: 0px;padding: 0px; font-family: 'Trebuchet MS', Helvetica, sans-serif;
+text-decoration:none;font-size: 18px; color:#ffffff;}
+#wpcontent_slider .cs-title {width: 100%;padding: 10px; background: #ffffff; color: #000000; font-family: 'Trebuchet MS', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal;line-height: normal;}
+#wpcontent_slider_container .cs-prev,#wpcontent_slider_container .cs-next {font-weight: bold;background: #000000;
+font-size: 28px; font-family: "Courier New", Courier, monospace; color: #ffffff !important;
+padding: 0px 10px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;}
+#wpcontent_slider_container .cs-buttons { font-size: 0px; padding: 10px 0px 10px 0px;
+margin:0px auto; float:left;clear:left;
+}
+#wpcontent_slider_container .cs-buttons a { outline:none; margin-left: 5px; height: 10px; width: 10px; float: left; border: 1px solid #000000; color: #000000; text-indent: -1000px; 
+}
+#wpcontent_slider_container .cs-active { background-color: #000000; color: #FFFFFF; }
+#wpcs_link_love,#wpcs_link_love a{display:none;}
+</style>
+<!-- End Content Slider Settings -->
+
+
+		<style type="text/css">
+			.cbd {
+				position: fixed;
+				left: 5px;
+				bottom: 5px;
+			}
+			.cbd a img {
+				border: 0;
+			}
+		</style>
+	<meta property='fb:admins' content='1644160548' /><meta property='og:title' content='FFmpeg: Extraindo imagens de um vídeo ( Snapshot )' /><meta property='og:site_name' content='Rafael Biriba Blog' /><meta property='og:url' content='https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html' /><meta property='og:type' content='article' /><meta property='fb:app_id' content='589867447707428'>
+	<link rel="stylesheet" href="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded/shutter-reloaded.css?ver=2.4" type="text/css" media="screen" />
+	<style type='text/css'>
+div#shNavBar a {color: #000000;}
+div#shNavBar {background-color:#ffff00;}
+div#shNavBar {color:#000000;}
+div#shDisplay div#shTitle {color:#ffff00;}
+</style>
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "https://rafaelbiriba.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6';
+	window._wp_rp_post_id = '53';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = 'FFmpeg%3A+Extraindo+imagens+de+um+v%C3%ADdeo+%28+Snapshot+%29';
+	window._wp_rp_post_tags = ['audio', 'imagem', 'codec', 'jpeg', 'converter', 'multimedia', 'crop', 'snapshot', 'ffmpeg', 'stream', 'frame', 'video', 'gravar', '%C3%81udio+e+v%C3%ADdeo', 'ffmpeg', 'uma', 'segundo', 'op', 'ser', 'na', 'quanto', 'caption', 'ou', 'de', 'frame', 'da', 'ffmpeg', 'snapshot', 'gt', 'em'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.6" async></script>
+</head>
+
+<body class="single single-post postid-53 single-format-standard masthead-fixed singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="https://rafaelbiriba.com/blogwp.html" rel="home">Rafael Biriba Blog</a></h1>
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">Pesquisar</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">Menu principal</button>
+				<a class="screen-reader-text skip-link" href="#content">Pular para o conteúdo</a>
+				<div id="primary-menu" class="nav-menu"><ul><li class="page_item page-item-3171"><a href="https://rafaelbiriba.com/search_gcse">Busca</a></li><li class="page_item page-item-101"><a href="https://rafaelbiriba.com/contatos">Contatos</a></li><li class="page_item page-item-1251"><a href="https://rafaelbiriba.com/twitter">Twitter</a></li></ul></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get"
+    class="search-form" action="https://rafaelbiriba.com//search_gcse">
+    <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input type="text" value="" name="q" id="q" />
+        <input type="submit" id="searchsubmit"
+            value="Pesquisar" />
+    </div>
+</form>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 798x80 images only -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="6793331087"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+			
+<article id="post-53" class="post-53 post type-post status-publish format-standard hentry category-audio-e-video category-ffmpeg tag-audio tag-codec tag-converter tag-crop tag-ffmpeg tag-frame tag-gravar tag-imagem tag-jpeg tag-multimedia tag-snapshot tag-stream tag-video">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/audio-e-video" rel="category tag">Áudio e Vídeo</a>, <a href="https://rafaelbiriba.com/category/audio-e-video/ffmpeg" rel="category tag">FFmpeg</a></span>
+		</div>
+		<h1 class="entry-title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" rel="bookmark"><time class="entry-date" datetime="2009-02-11T16:24:58+00:00">11/02/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html#comments"><span class="dsq-postid" data-dsqidentifier="53 https://rafaelbiriba.com/?p=53">31 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<figure id="attachment_28" style="width: 568px" class="wp-caption aligncenter"><img class="size-full wp-image-28" title="ffmpeg-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png" alt="FFmpeg: http://www.ffmpeg.org/" width="568" height="140" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png 568w, https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo-300x73.png 300w" sizes="(max-width: 568px) 100vw, 568px" /><figcaption class="wp-caption-text">FFmpeg: http://www.ffmpeg.org/</figcaption></figure>
+<p>Utilizando o seguinte comando:</p>
+<p><strong><span style="color: #000000;">ffmpeg -i <span style="color: #ff0000;">foo.avi</span> -r <span style="color: #ff0000;">1</span> -s <span style="color: #ff0000;">800&#215;600</span> -f image2 <span style="color: #ff0000;">snapshot</span>&#8211;<span style="color: #ff0000;">%03d</span>.jpeg</span></strong></p>
+<p><span style="color: #000000;">Onde:</span></p>
+<p><span style="color: #000000;"><strong>foo.avi</strong> &gt; Vídeo de entrada, podendo ser .avi, .mpeg, .mov, ou qualquer outra extensão suportada pelo FFmpeg.<br />
+<strong>-r 1</strong> &gt; frame rate ( 1 frame por segundo )<br />
+<strong>&#8211; s 800&#215;600</strong> &gt; Dimensão desejada da imagem final. Caso o valor seja maior que o vídeo de entrada, será acrescentado bordas pretas na imagem.<br />
+<strong>-f image2</strong> &gt; Força o formato de imagem de saída para imagem. Deve ser seguido pelo nome do arquivo desejado.jpeg<br />
+<strong>snapshot</strong>&#8211;<strong>03%d</strong>.jpeg &gt; Snapshot- é o nome do arquivo desejado. 03%d é a numeração de 3 digitos iniciando em zero. Sendo assim 04%d para 4 digitos e assim por diante, seguido pela extenção .jpeg , ou .png, .bmp ou até mesmo .tiff</span><strong></strong></p>
+<p><strong><br />
+Opções Adicionais:<br />
+</strong><br />
+• Sabendo que as snapshots são extraídas por segundo, então ajustando o parametro <strong>-r</strong> é possível definir de quantos em quantos frames deve-se extrair uma imagem.</p>
+<p>• Acrescentando o parametro: <strong>-itsoffset -4</strong> as imagens começam a ser extraídas 4 segundos depois do inicio do vídeo. Exemplo utilizando um delay de 10 segundos:<br />
+<span style="color: #000000;"><strong>ffmpeg </strong><strong>-itsoffset -10 </strong><strong>-i foo.avi -r 1 -s 800&#215;600 -f image2 snapshot-%03d.jpeg</strong></span></p>
+<p>• Parametro <strong>-s</strong> ( tamanho do frame ):<br />
+Ao invés de especificar o tamanho, é possível utilizar uma das abreviações a seguir:<br />
+sqcif = 128&#215;96<br />
+qcif = 176&#215;144<br />
+cif = 352&#215;288<br />
+4cif = 704&#215;576<br />
+qqvga = 160&#215;120<br />
+qvga = 320&#215;240<br />
+vga = 640&#215;480<br />
+svga = 800&#215;600<br />
+xga = 1024&#215;768<br />
+uxga = 1600&#215;1200<br />
+qxga = 2048&#215;1536<br />
+sxga = 1280&#215;1024<br />
+qsxga = 2560&#215;2048<br />
+hsxga  = 5120&#215;4096<br />
+wvga = 852&#215;480<br />
+wxga = 1366&#215;768<br />
+wsxga = 1600&#215;1024<br />
+wuxga = 1920&#215;1200<br />
+woxga = 2560&#215;1600<br />
+wqsxga = 3200&#215;2048<br />
+wquxga = 3840&#215;2400<br />
+whsxga = 6400&#215;4096<br />
+whuxga = 7680&#215;4800<br />
+cga = 320&#215;200<br />
+ega = 640&#215;350<br />
+hd480 = 852&#215;480<br />
+hd720 = 1280&#215;720<br />
+hd1080 = 1920&#215;1080</p>
+<p>Exemplo:<br />
+<strong><span style="color: #000000;">ffmpeg -i foo.avi -r 1 -s hd1080 -f image2 snapshot-%03d.jpeg</span></strong></p>
+<p>• Parametros para CROP ( corte de imagem )<br />
+Para &#8220;cropar&#8221; um vídeo, o parametro de crop deve estar localizado antes do parametro -s ( tamanho do frame )<br />
+-croptop 100 = Define o corte no topo em 100 pixels<br />
+-cropbottom 250 = Define o corte no rodapé de 250 pixels<br />
+-cropleft 30 = Define o corte da lateral esquerda de 30 pixels<br />
+-cropright 25 = Define o corte da lateral direita de 25 pixels<br />
+* Valores em pixels ilustrativos, devendo ser usados conforme sua necessidade. Não é necessário utilizar todos os parametros para fazer um crop.<br />
+Exemplo:<br />
+<strong><span style="color: #000000;">ffmpeg -i foo.avi </span>-croptop 250 -cropright 25 </strong><strong><span style="color: #000000;">-r 1 -s hd1080 -f image2 snapshot-%03d.jpeg<br />
+</span></strong><span style="color: #000000;">Onde é feito o crop do topo e da lateral direita.</span><strong></strong></p>
+<p><strong></strong><span style="color: #000000;">Espero ter ajudado a todos&#8230; =)</span></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li><li data-position="1" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="4" data-poid="in-1784" data-post-type="none" ><small class="wp_rp_publish_date">01/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" class="wp_rp_title">FFmpeg: converta vídeos para iPhone</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_1"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" data-text="FFmpeg: Extraindo imagens de um vídeo ( Snapshot )"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F11%2Fffmpeg-extraindo-imagens-de-um-video-snapshot.html&amp;linkname=FFmpeg%3A%20Extraindo%20imagens%20de%20um%20v%C3%ADdeo%20%28%20Snapshot%20%29" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F11%2Fffmpeg-extraindo-imagens-de-um-video-snapshot.html&amp;linkname=FFmpeg%3A%20Extraindo%20imagens%20de%20um%20v%C3%ADdeo%20%28%20Snapshot%20%29" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a>
+<script type="text/javascript"><!--
+if(wpa2a)wpa2a.script_load();
+//--></script>
+</div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/audio" rel="tag">audio</a><a href="https://rafaelbiriba.com/tag/codec" rel="tag">codec</a><a href="https://rafaelbiriba.com/tag/converter" rel="tag">converter</a><a href="https://rafaelbiriba.com/tag/crop" rel="tag">crop</a><a href="https://rafaelbiriba.com/tag/ffmpeg" rel="tag">FFmpeg</a><a href="https://rafaelbiriba.com/tag/frame" rel="tag">frame</a><a href="https://rafaelbiriba.com/tag/gravar" rel="tag">gravar</a><a href="https://rafaelbiriba.com/tag/imagem" rel="tag">imagem</a><a href="https://rafaelbiriba.com/tag/jpeg" rel="tag">jpeg</a><a href="https://rafaelbiriba.com/tag/multimedia" rel="tag">multimedia</a><a href="https://rafaelbiriba.com/tag/snapshot" rel="tag">snapshot</a><a href="https://rafaelbiriba.com/tag/stream" rel="tag">stream</a><a href="https://rafaelbiriba.com/tag/video" rel="tag">video</a></span></footer></article><!-- #post-## -->
+	<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Navegação de posts</h1>
+		<div class="nav-links">
+			<a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" rel="prev"><span class="meta-nav">Post anterior</span>FFmpeg: Formatos de CODECs disponíveis</a><a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" rel="next"><span class="meta-nav">Próximo post</span>FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	<div id="fbSEOComments">	<fb:comments
+                                id='seoFacebookCommentsPlugin'
+								href='https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html'
+								num_posts='10'
+								colorscheme='light'
+								order_by=''></fb:comments></div><div id='fb-root'></div>
+                    <script>
+                            window.fbAsyncInit = function() {
+                                FB.init({
+                                  appId      : '589867447707428', // App ID
+                                  status     : true, // check login status
+                                  cookie     : true, // enable cookies to allow the server to access the session
+                                  xfbml      : true  // parse XFBML
+                                });
+                                // Additional initialization code here
+                              };
+                                //  Load the SDK Asynchronously
+                              (function(d){
+                                 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                                 if (d.getElementById(id)) {return;}
+                                 js = d.createElement('script'); js.id = id; js.async = true;
+                                 js.src = "//connect.facebook.net/pt_BR/all.js";
+                                 ref.parentNode.insertBefore(js, ref);
+                           }(document))
+                    </script>
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="post pingback">
+        <p>Pingback: <a href='https://rafaelbiriba.com/?p=70' rel='external nofollow' class='url'>FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) - Parte II | Rafael Biriba Blog's</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos/' rel='external nofollow' class='url'>FFmpeg / Mplayer: Reproduzindo Vídeos | Rafael Biriba Blog's</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html' rel='external nofollow' class='url'>Retrospectiva 2009: Os posts mais visitados do blog | Rafael Biriba Blog</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='http://planeta-globo.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog/' rel='external nofollow' class='url'>Retrospectiva 2009: Os posts mais visitados do blog | Planeta Globo.com</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4584">
+        <div id="dsq-comment-header-4584" class="dsq-comment-header">
+            <cite id="dsq-cite-4584">
+                <span id="dsq-author-user-4584">Alvaro Hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4584" class="dsq-comment-body">
+            <div id="dsq-comment-message-4584" class="dsq-comment-message"><p>Boa noite Rafael,<br />
+Seus comentários a respeito do uso do FFMPEG são ótimos. Hoje tive um problema ao aplicar a seguinte linha de código:<br />
+ffmpeg -i entrada.avi -r 1 -s 320&#215;240 -f image2 snapshot-%03d.jpeg</p>
+<p>Quando mandeie rodar no &#8220;Command Prompt&#8221; obtive o seguinte erro:<br />
+&#8230;&#8230;&#8230;<br />
+ built on Jan 13 2009 02:57:09, gcc: 4.2.4<br />
+Input #0, flv, from &#8216;C:/entrada.avi&#8217;:<br />
+ Duration: 00:00:29.73, start: 0.000000, bitrate: N/A<br />
+   Stream #0.0: Video: h264, yuv420p, 480&#215;360 [PAR 1:1 DAR 4:3], 29.97 tb(r)<br />
+   Stream #0.1: Audio: aac, 22050 Hz, stereo, s16<br />
+Output #0, image2, to &#8216;snapshot-processar.bat3d.jpeg&#8217;:<br />
+   Stream #0.0: Video: mjpeg, yuvj420p, 320&#215;240 [PAR 1:1 DAR 4:3], q=2-31, 200<br />
+kb/s,  1.00 tb(c)<br />
+Stream mapping:<br />
+ Stream #0.0 -&gt; #0.0<br />
+Press [q] to stop encoding<br />
+av_interleaved_write_frame(): I/O error occurred<br />
+Usually that means that input file is truncated and/or corrupted.</p>
+<p>Eu so consigo extrair imagem quando insiro o parâmetro &#8220;-vframes 1&#8221;. Caso seja maior que 1, o erro é o mesmo exibido acima. Você sabe me dizer porque isso ocorre.</p>
+<p>Muito Obrigado e me desculpe por lhe encomodar.<br />
+Álvaro Hernandes</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-4598">
+        <div id="dsq-comment-header-4598" class="dsq-comment-header">
+            <cite id="dsq-cite-4598">
+                <a id="dsq-author-user-4598" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4598" class="dsq-comment-body">
+            <div id="dsq-comment-message-4598" class="dsq-comment-message"><p>Olá Alvaro,<br />
+Não é um incomodo não,&#8230; É um prazer ajudar&#8230;<br />
+Vamos lá:</p>
+<p>Esse erro que você está recebendo, talvez seja porque você está tentando extrair imagens de um vídeo entrelaçado, ou então o video está corrompido.</p>
+<p>Se tiver entrelaçado, você pode tentar rodar o comando:<br />
+<strong>ffmpeg -i entrada.avi -r 1 -s 320×240 -deinterlace -f image2 snapshot-%03d.jpeg</strong></p>
+<p>Ainda sim não tenho certeza se vai funcionar. Acho que você vai ter que rodar o ffmpeg no vídeo todo para desentrelaçar e depois extrair as imagens.<br />
+Então, se o comando acima não funcionar, tente o seguinte:</p>
+<p><strong>ffmpeg -i entrada.avi -deinterlace -sameq entrada2.avi</strong><br />
+Isso vai desentrelaçar o video todo, depois tente rodar o comando novamente, só que com o novo video:<br />
+ffmpeg -i <strong>entrada2.avi</strong> -r 1 -s 320×240 -f image2 snapshot-%03d.jpeg</p>
+<p>Se ainda sim, não resolver, provavelmente o video está mesmo corrompido,&#8230; Então não há o que fazer, apenas conseguir o video em um melhor estado.</p>
+<p>Tenta aí, depois volta aqui para contar&#8230; 😉</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4604">
+        <div id="dsq-comment-header-4604" class="dsq-comment-header">
+            <cite id="dsq-cite-4604">
+                <span id="dsq-author-user-4604">Alvaro Hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4604" class="dsq-comment-body">
+            <div id="dsq-comment-message-4604" class="dsq-comment-message"><p>Boa tarde Rafael,</p>
+<p>Hoje de madrugada estudei mais profundamente os códigos FFMPEG e acabei testando o parâmetro &#8220;-deinterlace&#8221; coforme você havia reportado em seu &#8220;blog&#8221;. Eu só no não havia aplicado primeiramente a linha de código:<br />
+ ffmpeg -i entrada.avi -deinterlace -sameq entrada2.avi</p>
+<p>Após rodado a linha de código acima, apliquei a linha abaixo conforme você me orientou:<br />
+ffmpeg -i entrada2.avi -r 1 -s 320×240 -f image2 snapshot-%03d.jpeg</p>
+<p>O problema ainda persiste. Experimente em alguns vídeos baixados do &#8220;youtube&#8221;, &#8220;UOL&#8221; e &#8220;Seicho-No-Ie&#8221;. Só funcionou nos vídeos baixados do site &#8220;www.sni.org.br&#8221; (Sicho-No-Ie).</p>
+<p>Como meu sistema operacional é &#8220;Windows Service Pack 3&#8221;, será que existe alguma limitação? Acredito que não, pois funcionou com o site da &#8220;Seicho-No-Ie&#8221;. Só não instalo Linux na minha máquina porque acabei de adquirir um novo Notebook e ainda está em garantia.<br />
+Como eu sou teimoso nos problemas quase que insolúveis, eu não descanço enquanto não resolver o caso. Estarei analisando daqui e se você descobrir o porquê, aguardo seu &#8220;Post&#8221;.<br />
+Lhe informarei a solução do problema caso eu consiga resolver.<br />
+Mais uma vez lhe agradeço a atenção.</p>
+<p>Abraços</p>
+<p>Álvaro Hernandes</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-4605">
+        <div id="dsq-comment-header-4605" class="dsq-comment-header">
+            <cite id="dsq-cite-4605">
+                <a id="dsq-author-user-4605" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4605" class="dsq-comment-body">
+            <div id="dsq-comment-message-4605" class="dsq-comment-message"><p>Olá Alvaro,</p>
+<p>Você está baixando os videos do youtube, ou da UOL como ?<br />
+Parece que os vídeos estão chegando com problemas&#8230;<br />
+Ao rodar o comando:<br />
+ffmpeg -i entrada.avi -deinterlace -sameq entrada2.avi<br />
+O ffmpeg retorna algum erro ? Ou processa o arquivo todo ?</p>
+<p>E faz mais esse teste:<br />
+Roda o comando abaixo, e cola a saida dele aqui, para eu analisar o video&#8230;<br />
+<strong>ffmpeg -i entrada.avi</strong></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4606">
+        <div id="dsq-comment-header-4606" class="dsq-comment-header">
+            <cite id="dsq-cite-4606">
+                <span id="dsq-author-user-4606">Alvaro Hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4606" class="dsq-comment-body">
+            <div id="dsq-comment-message-4606" class="dsq-comment-message"><p>Não retorna. O processo ocorre perfeito. Veja abaixo:</p>
+<p>C:\&gt;ffmpeg -i entrada.avi -deinterlace -sameq entrada2.avi<br />
+FFmpeg version SVN-r16573, Copyright (c) 2000-2009 Fabrice Bellard, et al.<br />
+  configuration: &#8211;extra-cflags=-fno-common &#8211;enable-memalign-hack &#8211;enable-pthr<br />
+eads &#8211;enable-libmp3lame &#8211;enable-libxvid &#8211;enable-libvorbis &#8211;enable-libtheora<br />
+&#8211;enable-libspeex &#8211;enable-libfaac &#8211;enable-libgsm &#8211;enable-libx264 &#8211;enable-lib<br />
+schroedinger &#8211;enable-avisynth &#8211;enable-swscale &#8211;enable-gpl<br />
+  libavutil     49.12. 0 / 49.12. 0<br />
+  libavcodec    52.10. 0 / 52.10. 0<br />
+  libavformat   52.23. 1 / 52.23. 1<br />
+  libavdevice   52. 1. 0 / 52. 1. 0<br />
+  libswscale     0. 6. 1 /  0. 6. 1<br />
+  built on Jan 13 2009 02:57:09, gcc: 4.2.4<br />
+Input #0, flv, from &#8216;entrada.avi&#8217;:<br />
+  Duration: 00:01:00.00, start: 0.000000, bitrate: N/A<br />
+    Stream #0.0: Video: h264, yuv420p, 640&#215;360 [PAR 1:1 DAR 16:9], 25.00 tb(r)<br />
+    Stream #0.1: Audio: aac, 44100 Hz, stereo, s16<br />
+Output #0, avi, to &#8216;entrada2.avi&#8217;:<br />
+    Stream #0.0: Video: mpeg4, yuv420p, 640&#215;360 [PAR 1:1 DAR 16:9], q=2-31, 200<br />
+kb/s, 25.00 tb(c)<br />
+    Stream #0.1: Audio: mp2, 44100 Hz, stereo, s16, 64 kb/s<br />
+Stream mapping:<br />
+  Stream #0.0 -&gt; #0.0<br />
+  Stream #0.1 -&gt; #0.1<br />
+Press [q] to stop encoding<br />
+frame= 1501 fps=127 q=0.0 Lsize=   25507kB time=60.04 bitrate=3480.2kbits/s<br />
+video:24932kB audio:473kB global headers:0kB muxing overhead 0.402258%<br />
+C:\&gt;</p>
+<p>Depois eum apliquei as seguinte linha de código abaixo:</p>
+<p>C:\&gt;ffmpeg -i entrada2.avi -r 1 -s 320Î240 -f image2 snapshot-processar.bat3d.jp<br />
+eg<br />
+FFmpeg version SVN-r16573, Copyright (c) 2000-2009 Fabrice Bellard, et al.<br />
+  configuration: &#8211;extra-cflags=-fno-common &#8211;enable-memalign-hack &#8211;enable-pthr<br />
+eads &#8211;enable-libmp3lame &#8211;enable-libxvid &#8211;enable-libvorbis &#8211;enable-libtheora<br />
+&#8211;enable-libspeex &#8211;enable-libfaac &#8211;enable-libgsm &#8211;enable-libx264 &#8211;enable-lib<br />
+schroedinger &#8211;enable-avisynth &#8211;enable-swscale &#8211;enable-gpl<br />
+  libavutil     49.12. 0 / 49.12. 0<br />
+  libavcodec    52.10. 0 / 52.10. 0<br />
+  libavformat   52.23. 1 / 52.23. 1<br />
+  libavdevice   52. 1. 0 / 52. 1. 0<br />
+  libswscale     0. 6. 1 /  0. 6. 1<br />
+  built on Jan 13 2009 02:57:09, gcc: 4.2.4<br />
+Input #0, avi, from &#8216;entrada2.avi&#8217;:<br />
+  Duration: 00:01:00.52, start: 0.000000, bitrate: 3452 kb/s<br />
+    Stream #0.0: Video: mpeg4, yuv420p, 640&#215;360 [PAR 1:1 DAR 16:9], 25.00 tb(r)<br />
+    Stream #0.1: Audio: mp2, 44100 Hz, stereo, s16, 64 kb/s<br />
+Output #0, image2, to &#8216;snapshot-processar.bat3d.jpeg&#8217;:<br />
+    Stream #0.0: Video: mjpeg, yuvj420p, 320&#215;240 [PAR 4:3 DAR 16:9], q=2-31, 200<br />
+ kb/s,  1.00 tb(c)<br />
+Stream mapping:<br />
+  Stream #0.0 -&gt; #0.0<br />
+Press [q] to stop encoding<br />
+av_interleaved_write_frame(): I/O error occurred<br />
+Usually that means that input file is truncated and/or corrupted.</p>
+<p>C:\&gt;</p>
+<p>Retirei o parâmetro &#8220;-deinterlace&#8221; e substituí o formato &#8220;image2&#8221; pelo &#8220;mjpeg&#8221;. Veja abaixo:<br />
+ffmpeg -i entrada.avi -r 1 -s 320×240 -f mjpeg snapshot-%03d.jpeg</p>
+<p>Não gerou qualquer erro, mas só coletou apenas uma imagem. Gostaria de coletar imagens sucessivas. Estou analisando outros formatos também.</p>
+<p>Abraços</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-4608">
+        <div id="dsq-comment-header-4608" class="dsq-comment-header">
+            <cite id="dsq-cite-4608">
+                <a id="dsq-author-user-4608" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4608" class="dsq-comment-body">
+            <div id="dsq-comment-message-4608" class="dsq-comment-message"><p>Pelo que vi acima:<br />
+Input #0, flv, from ‘entrada.avi’:<br />
+Duration: 00:01:00.00, start: 0.000000, bitrate: N/A<br />
+Stream #0.0: Video: h264, yuv420p, 640×360 [PAR 1:1 DAR 16:9], 25.00 tb(r)<br />
+Stream #0.1: Audio: aac, 44100 Hz, stereo, s16<br />
+Ele nem reconheceu o bitrate do video, acho que esse entrada.avi, está realmente corrompido !</p>
+<p>Faz mais esse teste simples:<br />
+Roda o comando abaixo, e cola a saida dele aqui, para eu analisar o video…<br />
+<strong>ffmpeg -i entrada.avi</strong></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4609">
+        <div id="dsq-comment-header-4609" class="dsq-comment-header">
+            <cite id="dsq-cite-4609">
+                <span id="dsq-author-user-4609">Alvaro Hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4609" class="dsq-comment-body">
+            <div id="dsq-comment-message-4609" class="dsq-comment-message"><p><a href="#comment-4604" rel="nofollow">@Alvaro Hernandes  </a><br />
+Desculpe, eu não respondi a primeira pergunta. Eu coleto o arquivo temporário do diretório &#8220;C:\Documents and Settings\Administrator\Local Settings\Temp&#8221; algo como &#8220;flaAlgumNumero.tmp&#8221;, ou &#8220;flaLetraeAlgumNumero.tmp&#8221;. Depois eu dou um clique com o lado direto do mouse no mesmo e no &#8220;context menu&#8221; eu seleciono &#8220;Unlocker&#8221;, o qual é um programa de desbloqueio que baixei da internet. Na janela deste programa eu seleciono &#8220;copy&#8221; para salvar onde eu quiser este arquivo temporário, o qual passo a charmar de &#8220;entrada.avi&#8221;.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4610">
+        <div id="dsq-comment-header-4610" class="dsq-comment-header">
+            <cite id="dsq-cite-4610">
+                <span id="dsq-author-user-4610">Alvaro Hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4610" class="dsq-comment-body">
+            <div id="dsq-comment-message-4610" class="dsq-comment-message"><p>Eis os dados do arquivo de entrada:</p>
+<p>C:\&gt;ffmpeg -i entrada.avi<br />
+FFmpeg version SVN-r16573, Copyright (c) 2000-2009 Fabrice Bellard, et al.<br />
+  configuration: &#8211;extra-cflags=-fno-common &#8211;enable-memalign-hack &#8211;enable-pthr<br />
+eads &#8211;enable-libmp3lame &#8211;enable-libxvid &#8211;enable-libvorbis &#8211;enable-libtheora<br />
+&#8211;enable-libspeex &#8211;enable-libfaac &#8211;enable-libgsm &#8211;enable-libx264 &#8211;enable-lib<br />
+schroedinger &#8211;enable-avisynth &#8211;enable-swscale &#8211;enable-gpl<br />
+  libavutil     49.12. 0 / 49.12. 0<br />
+  libavcodec    52.10. 0 / 52.10. 0<br />
+  libavformat   52.23. 1 / 52.23. 1<br />
+  libavdevice   52. 1. 0 / 52. 1. 0<br />
+  libswscale     0. 6. 1 /  0. 6. 1<br />
+  built on Jan 13 2009 02:57:09, gcc: 4.2.4<br />
+Input #0, flv, from &#8216;entrada.avi&#8217;:<br />
+  Duration: 00:01:00.00, start: 0.000000, bitrate: N/A<br />
+    Stream #0.0: Video: h264, yuv420p, 640&#215;360 [PAR 1:1 DAR 16:9], 25.00 tb(r)<br />
+    Stream #0.1: Audio: aac, 44100 Hz, stereo, s16<br />
+At least one output file must be specified</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-4611">
+        <div id="dsq-comment-header-4611" class="dsq-comment-header">
+            <cite id="dsq-cite-4611">
+                <a id="dsq-author-user-4611" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4611" class="dsq-comment-body">
+            <div id="dsq-comment-message-4611" class="dsq-comment-message"><p>Com certeza seu video está corrompido, ou pelo menos com o cabeçalho quebrado&#8230;<br />
+Compare com a saida de um vídeo válido, que eu tenho aqui:<br />
+Input #0, avi, from &#8216;widescreen.avi&#8217;:<br />
+Duration: 00:00:34.30, start: 0.000000, <strong>bitrate: 3001 kb/s</strong></p>
+<p>A forma como você captura o video do youtube pode estar introduzindo perdas no arquivo.</p>
+<p>Como você usa windows, já tentou baixar esse video do youtube, com algum programa próprio para isso? Tem vários que podem fazer isso. Acho que essa solução de pegar pela pasta temp não é a melhor delas.</p>
+<p>Qualquer coisa, volta aí !<br />
+Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4612">
+        <div id="dsq-comment-header-4612" class="dsq-comment-header">
+            <cite id="dsq-cite-4612">
+                <span id="dsq-author-user-4612">Alvaro Hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4612" class="dsq-comment-body">
+            <div id="dsq-comment-message-4612" class="dsq-comment-message"><p>Quando eu baixo arquivos, costumo usar &#8220;vDownloader&#8221; e &#8220;aTube Catcher&#8221;. O problema é que existem sites que não permite baixar determinados arquivos de vídeo e não há programa que o faça. Qual seria a solução para tal ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-4613">
+        <div id="dsq-comment-header-4613" class="dsq-comment-header">
+            <cite id="dsq-cite-4613">
+                <a id="dsq-author-user-4613" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4613" class="dsq-comment-body">
+            <div id="dsq-comment-message-4613" class="dsq-comment-message"><p>Utilizando algumas dessas soluções para o youtube, você consegue extrair as imagens do vídeo ??</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4614">
+        <div id="dsq-comment-header-4614" class="dsq-comment-header">
+            <cite id="dsq-cite-4614">
+                <span id="dsq-author-user-4614">Alvaro Hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4614" class="dsq-comment-body">
+            <div id="dsq-comment-message-4614" class="dsq-comment-message"><p>Para o youtube não. O programa &#8220;aTubeCatcher&#8221; solicita &#8220;Username&#8221; e &#8220;Password&#8221; a qual não é a mesma da conta criada para O &#8220;Google/YouTube&#8221;. Com o &#8220;aTubeCatcher&#8221; eu consigo baixar vídeos &#8220;free&#8221; de alguns sites.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-4616">
+        <div id="dsq-comment-header-4616" class="dsq-comment-header">
+            <cite id="dsq-cite-4616">
+                <a id="dsq-author-user-4616" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4616" class="dsq-comment-body">
+            <div id="dsq-comment-message-4616" class="dsq-comment-message"><p>Entendi&#8230; Bom, boa sorte aí em suas pesquisas para obter os vídeos nos sites 😉</p>
+<p>Quanto a extração das imagens do vídeo, conseguiu resolver o problema ? Obtendo um vídeo não corrompido resolveu ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4637">
+        <div id="dsq-comment-header-4637" class="dsq-comment-header">
+            <cite id="dsq-cite-4637">
+                <span id="dsq-author-user-4637">Alvaro hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4637" class="dsq-comment-body">
+            <div id="dsq-comment-message-4637" class="dsq-comment-message"><p>Sanado o problema. Eu havia executado a linha de código abaixo (compilando em ambiente Windows) para extrair imagens de um vídeo. Vide abaixo:<br />
+<b>ffmpeg -i c:/entrada.avi -r 1 -s 638×360 -f image2 snapshot-%03d.jpeg</b></p>
+<p>O seguinte erro foi gerado:<br />
+<b>av_interleaved_write_frame(): I/O error occurred<br />
+Usually that means that input file is truncated and/or corrupted.</b></p>
+<p>No caso aqui é que a formatação de imagem &#8220;image2&#8221; o Windows não suporta. Foi constatado que quando se extrai mais de uma imagem, causa erro. Um dos formatos que se adaptou muito bem foi o &#8220;image2pipe&#8221;. Então a linha de código é a seguinte:<br />
+<b>ffmpeg -i c:/entrada.avi -r 1 -s 638×360 -f image2pipe snapshot-%03d.jpeg</b></p>
+<p>As imagens extraídas estarão no mesmo diretório do arquivo de entrada (C:/). No ambiente Windows, o arquivo de imagens se apresenta da seguinte forma: C:/snapshot-%03d.jpeg<br />
+Dentro do arquivo &#8220;snapshot-%3d.jpeg&#8221; contém as várias imagens extraídas (snapshot-001.jpeg, snapshot-002.jpeg, snapshot-003.jpeg e etc.).<br />
+Explicando melhor o que a linha de código acima fez foi: A cada segundo será extraído 1 frame do arquivo &#8220;entrada.avi&#8221; e cada qual será salvo no arquivo de saída como saída-001.jpeg, saída-002.jpeg, saída-003.jpeg e etc. Se o parâmetro &#8220;-r&#8221; fosse igual a 4, nesse caso a cada segundo seria extraído 4 frames do arquivo &#8220;entrada.avi&#8221; e cada grupo de 4 frames seria salvo no arquivo de saída como saída-001.jpeg, saída-002.jpeg, saída-003.jpeg e etc.</p>
+<p>Agora vamos utilizar estas imagens extraídas para criação de um vídeo. Digite a seguinte linha de código:<br />
+<b>ffmpeg -f image2pipe -i c:/snapshot-%03d.jpeg -s 638&#215;360 -vcodec msmpeg4v2 c:/myvideo.avi</b></p>
+<p>Para o sistema operacional Windows caso você não atribua o parâmetro &#8220;–vcodec&#8221;, o padrão de formatação de vídeo adotado será &#8220;mpeg4&#8221;. Como esse padrão não é suportado pelo o Windows, logo as imagens não serão reproduzidas. Um dos padrões de formatação de vídeo que se adaptou bem foi o &#8220;msmpeg4v2&#8221;.</p>
+<p>Portanto Rafael, esta foi uma solução encontra para que se pudesse extrair imagens de um vídeo e depois remontá-la em outro vídeo. Testei com mais outros &#8220;codecs&#8221; de vídeo e funcionou perfeitamente.<br />
+Agradeço seus esclarecimentos e que sirva de base para outros colegas.</p>
+<p>Abraços.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-4638">
+        <div id="dsq-comment-header-4638" class="dsq-comment-header">
+            <cite id="dsq-cite-4638">
+                <a id="dsq-author-user-4638" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4638" class="dsq-comment-body">
+            <div id="dsq-comment-message-4638" class="dsq-comment-message"><p>Sensacional sua explicação!</p>
+<p>O estranho, é que na época que escrevi esse post, eu havia testado o image2 no windows&#8230; Provavelmente pode ser a sua compilação de ffmpeg.</p>
+<p>Pode fazer um testezinho, e tentar rodar a minha compilação, só para sanar essa dúvida, se é ou não problema do ffmpeg ?<br />
+<a href="https://rafaelbiriba.com/ffmpeg-r16537-gpl-static-win32.zip" rel="nofollow">https://rafaelbiriba.com/ffmpeg-r16537-gpl-static-win32.zip</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4640">
+        <div id="dsq-comment-header-4640" class="dsq-comment-header">
+            <cite id="dsq-cite-4640">
+                <span id="dsq-author-user-4640">Alvaro hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4640" class="dsq-comment-body">
+            <div id="dsq-comment-message-4640" class="dsq-comment-message"><p>Perfeito. Me aguarde que lhe retorno.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4641">
+        <div id="dsq-comment-header-4641" class="dsq-comment-header">
+            <cite id="dsq-cite-4641">
+                <span id="dsq-author-user-4641">Alvaro hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4641" class="dsq-comment-body">
+            <div id="dsq-comment-message-4641" class="dsq-comment-message"><p>Sua plataforma FFMPEG acontece a mesma coisa. Usar o formato <b>-f image2</b> causa o mesmo erro. Se usar os formatos &lt;b-f image2pipe e <b>-f mpjpeg</b>, a extração é perfeita.<br />
+Realizaei até um teste retirando aquela biblioteca DLL (<b>pthreadGC2.dl</b>) do diretório <b>C:\WINDOWS\system32</b>.<br />
+O <b>DLL</b> se torna irrelavante.</p>
+<p>Abraços.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-4642">
+        <div id="dsq-comment-header-4642" class="dsq-comment-header">
+            <cite id="dsq-cite-4642">
+                <a id="dsq-author-user-4642" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4642" class="dsq-comment-body">
+            <div id="dsq-comment-message-4642" class="dsq-comment-message"><p>Entendi&#8230; Obrigado pelo teste&#8230;</p>
+<p>Quando tiver um tempo vago, vou testar no windows com mais calma&#8230;<br />
+Acho mais fácil fazer isso tudo no linux&#8230; Devia tentar =)</p>
+<p>Vi que você converteu as fotos de novo para vídeo&#8230; Qual seria o objetivo disso ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4643">
+        <div id="dsq-comment-header-4643" class="dsq-comment-header">
+            <cite id="dsq-cite-4643">
+                <span id="dsq-author-user-4643">Alvaro hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4643" class="dsq-comment-body">
+            <div id="dsq-comment-message-4643" class="dsq-comment-message"><p>MENSAGEM CORRETIVA:<br />
+Desculpe por eu ter assassinado a correção ortográfica da mensagem anterior..<br />
+Sua plataforma FFMPEG acontece a mesma coisa. Usar o formato <b>-f image2</b> causa o mesmo erro. Se usar os formatos <b>-f image2pipe</b> e <b>-f mpjpeg</b>, a extração é perfeita.<br />
+Realizei até um teste retirando aquela biblioteca DLL (<b>pthreadGC2.dll</b>) do diretório <b>C:\WINDOWS\system32\</b>.<br />
+O DLL se torna irrelavante.</p>
+<p>Abraços.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4644">
+        <div id="dsq-comment-header-4644" class="dsq-comment-header">
+            <cite id="dsq-cite-4644">
+                <span id="dsq-author-user-4644">Alvaro hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4644" class="dsq-comment-body">
+            <div id="dsq-comment-message-4644" class="dsq-comment-message"><p>O objetivo é apresentar cada imagem por um determinado tempo e causar um &#8220;fading&#8221; onde a primeira imagem vai desaparecendo lentamente e a segunda vai sendo exibida de forma suave. Na realidade é um controle de contraste. É como se fosse um apresentação de &#8220;slides&#8221;. Isto foi sugerido por um amigo meu.</p>
+<p>Abraços.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-4645">
+        <div id="dsq-comment-header-4645" class="dsq-comment-header">
+            <cite id="dsq-cite-4645">
+                <a id="dsq-author-user-4645" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4645" class="dsq-comment-body">
+            <div id="dsq-comment-message-4645" class="dsq-comment-message"><p>Entendi.<br />
+Acho que você consegue obter um efeito melhor utilizando um programa próprio para edição de vídeo como o Windows Movie Maker (Já que usa windows.)</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4646">
+        <div id="dsq-comment-header-4646" class="dsq-comment-header">
+            <cite id="dsq-cite-4646">
+                <span id="dsq-author-user-4646">Alvaro hernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4646" class="dsq-comment-body">
+            <div id="dsq-comment-message-4646" class="dsq-comment-message"><p>Perfeitamente. Eu sou programador de &#8220;Flex&#8221; (atual Flash Builder 4.0) da Adobe. A plataforma &#8220;Flex&#8221; nada mais é do que um &#8220;WEB 2.0&#8221;. Dá um pouco de trabalha, mas funciona. Quanto ao &#8220;Windows Movie Maker&#8221; não posso dizer muito, pois não tive intimidade com este programa.</p>
+<p>Abraços.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-20575">
+        <div id="dsq-comment-header-20575" class="dsq-comment-header">
+            <cite id="dsq-cite-20575">
+                <a id="dsq-author-user-20575" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20575" class="dsq-comment-body">
+            <div id="dsq-comment-message-20575" class="dsq-comment-message"><p>É bem simples de mexer&#8230; Tente e você terá o efeito desejado&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-20385">
+        <div id="dsq-comment-header-20385" class="dsq-comment-header">
+            <cite id="dsq-cite-20385">
+                <span id="dsq-author-user-20385">Jorge</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20385" class="dsq-comment-body">
+            <div id="dsq-comment-message-20385" class="dsq-comment-message"><p>Ola Rafael, gostaria de saber se voce tem algum tutorial que explique a conversao de videos apos upload? Se nao, como posso faze-lo? Abracos Rafael e parabens&#8230;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-20576">
+        <div id="dsq-comment-header-20576" class="dsq-comment-header">
+            <cite id="dsq-cite-20576">
+                <a id="dsq-author-user-20576" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20576" class="dsq-comment-body">
+            <div id="dsq-comment-message-20576" class="dsq-comment-message"><p>O que você precisa fazer (de forma simples), é no código onde você recebe o arquivo por upload, fazer um &#8220;system call&#8221; e chamar a linha do ffmpeg para ele codificar o video.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-28231">
+        <div id="dsq-comment-header-28231" class="dsq-comment-header">
+            <cite id="dsq-cite-28231">
+                <span id="dsq-author-user-28231">João Silva Costa</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-28231" class="dsq-comment-body">
+            <div id="dsq-comment-message-28231" class="dsq-comment-message"><p>Rafael, estou tentando extrair imagens de um video (gravado em MiniDV), mas dá erro:</p>
+<p>$ ffmpeg -i video1.original.avi -deinterlace -sameq videoteste.avi</p>
+<p>ffmpeg: Symbol `av_pix_fmt_descriptors&#8217; has different size in shared object, consider re-linking<br />
+FFmpeg version SVN-r25838, Copyright (c) 2000-2010 the FFmpeg developers<br />
+  built on Sep 20 2011 16:58:16 with gcc 4.4.5<br />
+  configuration: &#8211;enable-libdc1394 &#8211;prefix=/usr &#8211;extra-cflags=&#8217;-Wall -g &#8216; &#8211;cc=&#8217;ccache cc&#8217; &#8211;enable-shared &#8211;enable-libmp3lame &#8211;enable-gpl &#8211;enable-libvorbis &#8211;enable-pthreads &#8211;enable-libfaac &#8211;enable-libxvid &#8211;enable-postproc &#8211;enable-x11grab &#8211;enable-libgsm &#8211;enable-libtheora &#8211;enable-libopencore-amrnb &#8211;enable-libopencore-amrwb &#8211;enable-libx264 &#8211;enable-libspeex &#8211;enable-nonfree &#8211;disable-stripping &#8211;enable-avfilter &#8211;enable-libdirac &#8211;disable-decoder=libdirac &#8211;enable-libschroedinger &#8211;disable-encoder=libschroedinger &#8211;enable-version3 &#8211;enable-libopenjpeg &#8211;enable-libvpx &#8211;enable-librtmp &#8211;extra-libs=-lgcrypt &#8211;disable-altivec &#8211;disable-armv5te &#8211;disable-armv6 &#8211;disable-vis<br />
+  libavutil     50.33. 0 / 50.43. 0<br />
+  libavcore      0.14. 0 /  0.14. 0<br />
+  libavcodec    52.97. 2 / 52.123. 0<br />
+  libavformat   52.87. 1 / 52.111. 0<br />
+  libavdevice   52. 2. 2 / 52. 2. 2<br />
+  libavfilter    1.65. 0 /  1.65. 0<br />
+  libswscale     0.12. 0 /  0.14. 1<br />
+  libpostproc   51. 2. 0 / 51. 2. 0<br />
+Input #0, avi, from &#8216;video1.original.avi&#8217;:<br />
+  Duration: 01:02:08.89, start: 0.000000, bitrate: 30448 kb/s<br />
+    Stream #0.0: Video: dvvideo, yuv411p, 720&#215;480 [PAR 8:9 DAR 4:3], 29.97 fps, 29.97 tbr, 29.97 tbn, 29.97 tbc<br />
+    Stream #0.1: Audio: pcm_s16le, 48000 Hz, 2 channels, s16, 1536 kb/s<br />
+[buffer @ 0x8778800] w:720 h:480 pixfmt:yuv411p<br />
+[ffsink @ 0x8779e80] auto-inserting filter &#8216;auto-inserted scaler 0&#8217; between the filter &#8216;src&#8217; and the filter &#8216;out&#8217;<br />
+[scale @ 0x87751c0] w:720 h:480 fmt:yuv411p -&gt; w:720 h:480 fmt:yuv420p flags:0x4<br />
+Output #0, avi, to &#8216;videoteste.avi&#8217;:<br />
+  Metadata:<br />
+    ISFT            : Lavf52.111.0<br />
+    Stream #0.0: Video: mpeg4, yuv420p, 720&#215;480 [PAR 8:9 DAR 4:3], q=2-31, 200 kb/s, 29.97 tbn, 29.97 tbc<br />
+    Stream #0.1: Audio: mp2, 48000 Hz, 2 channels, s16, 64 kb/s<br />
+Stream mapping:<br />
+  Stream #0.0 -&gt; #0.0<br />
+  Stream #0.1 -&gt; #0.1<br />
+Press [q] to stop encoding<br />
+Falha de segmentação</p>
+<p>o que podemos fazer para resolver o problema?</p>
+<p>$ ffmpeg -i video1.original.avi </p>
+<p>ffmpeg: Symbol `av_pix_fmt_descriptors&#8217; has different size in shared object, consider re-linking<br />
+FFmpeg version SVN-r25838, Copyright (c) 2000-2010 the FFmpeg developers<br />
+  built on Sep 20 2011 16:58:16 with gcc 4.4.5<br />
+  configuration: &#8211;enable-libdc1394 &#8211;prefix=/usr &#8211;extra-cflags=&#8217;-Wall -g &#8216; &#8211;cc=&#8217;ccache cc&#8217; &#8211;enable-shared &#8211;enable-libmp3lame &#8211;enable-gpl &#8211;enable-libvorbis &#8211;enable-pthreads &#8211;enable-libfaac &#8211;enable-libxvid &#8211;enable-postproc &#8211;enable-x11grab &#8211;enable-libgsm &#8211;enable-libtheora &#8211;enable-libopencore-amrnb &#8211;enable-libopencore-amrwb &#8211;enable-libx264 &#8211;enable-libspeex &#8211;enable-nonfree &#8211;disable-stripping &#8211;enable-avfilter &#8211;enable-libdirac &#8211;disable-decoder=libdirac &#8211;enable-libschroedinger &#8211;disable-encoder=libschroedinger &#8211;enable-version3 &#8211;enable-libopenjpeg &#8211;enable-libvpx &#8211;enable-librtmp &#8211;extra-libs=-lgcrypt &#8211;disable-altivec &#8211;disable-armv5te &#8211;disable-armv6 &#8211;disable-vis<br />
+  libavutil     50.33. 0 / 50.43. 0<br />
+  libavcore      0.14. 0 /  0.14. 0<br />
+  libavcodec    52.97. 2 / 52.123. 0<br />
+  libavformat   52.87. 1 / 52.111. 0<br />
+  libavdevice   52. 2. 2 / 52. 2. 2<br />
+  libavfilter    1.65. 0 /  1.65. 0<br />
+  libswscale     0.12. 0 /  0.14. 1<br />
+  libpostproc   51. 2. 0 / 51. 2. 0<br />
+Input #0, avi, from &#8216;video1.original.avi&#8217;:<br />
+  Duration: 01:02:08.89, start: 0.000000, bitrate: 30448 kb/s<br />
+    Stream #0.0: Video: dvvideo, yuv411p, 720&#215;480 [PAR 8:9 DAR 4:3], 29.97 fps, 29.97 tbr, 29.97 tbn, 29.97 tbc<br />
+    Stream #0.1: Audio: pcm_s16le, 48000 Hz, 2 channels, s16, 1536 kb/s<br />
+At least one output file must be specified</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-28238">
+        <div id="dsq-comment-header-28238" class="dsq-comment-header">
+            <cite id="dsq-cite-28238">
+                <a id="dsq-author-user-28238" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-28238" class="dsq-comment-body">
+            <div id="dsq-comment-message-28238" class="dsq-comment-message"><p>Parece que o binário do seu ffmpeg está com problemas, dado que toda vez que ele é executado, um erro aparece logo nas primeiras linhas&#8230;</p>
+<p>Tente reinstalar / recompilar ele para ver se resolve&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+	<aside id="text-569858663" class="widget widget_text">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- vertical blog -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="7274679989"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside></div><!-- #content-sidebar -->
+<div id="secondary">
+		<h2 class="site-description">Tecnologia e informação no lugar certo !</h2>
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="text-569858664" class="widget widget_text"><h1 class="widget-title">Blog Desatualizado</h1>			<div class="textwidget">Depois de muitos anos, está na hora de mudar!
+Em breve um novo blog, muito melhor e com mais conteúdo!
+Se você está lendo isso, tente acessar <a href="https://rafaelbiriba.com/blog" target="_blank">https://rafaelbiriba.com/blog</a> para ver se o novo blog já está disponível!! :)
+Previsão de ir online: Agosto/2016</div>
+		</aside><aside id="text-347930551" class="widget widget_text"><h1 class="widget-title">Sobre o Autor</h1>			<div class="textwidget"><img alt="" src="https://1.gravatar.com/avatar/908bb0e461d553752af1df7c5849df52?s=80&amp;d=&amp;r=G" class="avatar avatar-42 photo" height="80" width="80">
+<div style="text-align: justify;"><strong>Rafael Biriba</strong>: Full Stack Web Developer since 2008 with experience in the development field using technologies like Ruby on Rails, PHP, HTML5, Javascript (Jquery / Backbone.js), Video encoding and delivery (Flash Media Server, Wowza, ffmpeg tools), Database SQL and NoSQL (Mysql, MongoDB, Redis), Virtualization and automation using virtualbox. With knowledge of development techniques and practices such as TDD, Domain Driven Design and Object Oriented Design.</div></div>
+		</aside><aside id="github-profile-2" class="widget widget_github-profile"><aside><h1 class="widget-title">Github</h1><div class="github-widget" id="github-profile-2"><header class="github-widget-header"><img class="github-widget-company-logo" title="GitHub" src="https://assets-cdn.github.com/favicon.ico"/><div class="github-widget-header-text"><a class="github-widget-header-link" target="_blank" href="https://github.com/rafaelbiriba" title="View profile">rafaelbiriba (Rafael Biriba)</a></div></header><div class="github-widget-content"><a target="_blank" href="https://github.com/rafaelbiriba" title="View profile"><img class="github-profile-pic" src="https://avatars.githubusercontent.com/u/324743?v=3" style="border-radius: 5px"> <span class="github-names"> <p class="github-name">Rafael Biriba</p> <span class="github-username">rafaelbiriba</span> </span></a><div class="github-block github-vcard-stats"><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/followers"><strong class="github-vcard-stat-count">30</strong><span class="text-muted">Followers</span></a><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/following"><strong class="github-vcard-stat-count">9</strong><span class="text-muted">Following</span></a><div style="clear: both;"></div></div> </div></div></aside></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h1 class="widget-title">Nuvem de Tags</h1><div class="tagcloud"><a href='https://rafaelbiriba.com/tag/904' class='tag-link-127 tag-link-position-1' title='5 tópicos' style='font-size: 8pt;'>9.04</a>
+<a href='https://rafaelbiriba.com/tag/armazenamento' class='tag-link-76 tag-link-position-2' title='7 tópicos' style='font-size: 11.36pt;'>armazenamento</a>
+<a href='https://rafaelbiriba.com/tag/atualizando' class='tag-link-132 tag-link-position-3' title='5 tópicos' style='font-size: 8pt;'>atualizando</a>
+<a href='https://rafaelbiriba.com/tag/atualizar' class='tag-link-130 tag-link-position-4' title='10 tópicos' style='font-size: 15.28pt;'>atualizar</a>
+<a href='https://rafaelbiriba.com/tag/audio' class='tag-link-22 tag-link-position-5' title='10 tópicos' style='font-size: 15.28pt;'>audio</a>
+<a href='https://rafaelbiriba.com/tag/blog' class='tag-link-188 tag-link-position-6' title='15 tópicos' style='font-size: 19.76pt;'>blog</a>
+<a href='https://rafaelbiriba.com/tag/codec' class='tag-link-26 tag-link-position-7' title='12 tópicos' style='font-size: 17.24pt;'>codec</a>
+<a href='https://rafaelbiriba.com/tag/codigo' class='tag-link-46 tag-link-position-8' title='9 tópicos' style='font-size: 14.16pt;'>codigo</a>
+<a href='https://rafaelbiriba.com/tag/converter' class='tag-link-23 tag-link-position-9' title='12 tópicos' style='font-size: 17.24pt;'>converter</a>
+<a href='https://rafaelbiriba.com/tag/decifrar' class='tag-link-79 tag-link-position-10' title='5 tópicos' style='font-size: 8pt;'>decifrar</a>
+<a href='https://rafaelbiriba.com/tag/desenvolvimento' class='tag-link-487 tag-link-position-11' title='13 tópicos' style='font-size: 18.36pt;'>Desenvolvimento</a>
+<a href='https://rafaelbiriba.com/tag/disco' class='tag-link-16 tag-link-position-12' title='6 tópicos' style='font-size: 9.96pt;'>disco</a>
+<a href='https://rafaelbiriba.com/tag/estag' class='tag-link-173 tag-link-position-13' title='9 tópicos' style='font-size: 14.16pt;'>estag</a>
+<a href='https://rafaelbiriba.com/tag/estagio' class='tag-link-168 tag-link-position-14' title='12 tópicos' style='font-size: 17.24pt;'>estágio</a>
+<a href='https://rafaelbiriba.com/tag/faetec' class='tag-link-192 tag-link-position-15' title='8 tópicos' style='font-size: 12.76pt;'>faetec</a>
+<a href='https://rafaelbiriba.com/tag/ffmpeg' class='tag-link-484 tag-link-position-16' title='12 tópicos' style='font-size: 17.24pt;'>FFmpeg</a>
+<a href='https://rafaelbiriba.com/tag/game' class='tag-link-53 tag-link-position-17' title='5 tópicos' style='font-size: 8pt;'>game</a>
+<a href='https://rafaelbiriba.com/tag/globocom' class='tag-link-171 tag-link-position-18' title='10 tópicos' style='font-size: 15.28pt;'>globo.com</a>
+<a href='https://rafaelbiriba.com/tag/google' class='tag-link-40 tag-link-position-19' title='7 tópicos' style='font-size: 11.36pt;'>google</a>
+<a href='https://rafaelbiriba.com/tag/gravar' class='tag-link-24 tag-link-position-20' title='9 tópicos' style='font-size: 14.16pt;'>gravar</a>
+<a href='https://rafaelbiriba.com/tag/imagem' class='tag-link-29 tag-link-position-21' title='6 tópicos' style='font-size: 9.96pt;'>imagem</a>
+<a href='https://rafaelbiriba.com/tag/inscricao' class='tag-link-170 tag-link-position-22' title='14 tópicos' style='font-size: 19.2pt;'>inscrição</a>
+<a href='https://rafaelbiriba.com/tag/ist-rio' class='tag-link-191 tag-link-position-23' title='8 tópicos' style='font-size: 12.76pt;'>ist-rio</a>
+<a href='https://rafaelbiriba.com/tag/leitura' class='tag-link-80 tag-link-position-24' title='7 tópicos' style='font-size: 11.36pt;'>leitura</a>
+<a href='https://rafaelbiriba.com/tag/medieval' class='tag-link-55 tag-link-position-25' title='5 tópicos' style='font-size: 8pt;'>medieval</a>
+<a href='https://rafaelbiriba.com/tag/multimedia' class='tag-link-27 tag-link-position-26' title='13 tópicos' style='font-size: 18.36pt;'>multimedia</a>
+<a href='https://rafaelbiriba.com/tag/online' class='tag-link-51 tag-link-position-27' title='15 tópicos' style='font-size: 19.76pt;'>online</a>
+<a href='https://rafaelbiriba.com/tag/oportunidade' class='tag-link-169 tag-link-position-28' title='10 tópicos' style='font-size: 15.28pt;'>oportunidade</a>
+<a href='https://rafaelbiriba.com/tag/player' class='tag-link-34 tag-link-position-29' title='7 tópicos' style='font-size: 11.36pt;'>player</a>
+<a href='https://rafaelbiriba.com/tag/processo-seletivo' class='tag-link-172 tag-link-position-30' title='14 tópicos' style='font-size: 19.2pt;'>processo seletivo</a>
+<a href='https://rafaelbiriba.com/tag/ruby' class='tag-link-492 tag-link-position-31' title='10 tópicos' style='font-size: 15.28pt;'>Ruby</a>
+<a href='https://rafaelbiriba.com/tag/rubygems' class='tag-link-103 tag-link-position-32' title='8 tópicos' style='font-size: 12.76pt;'>rubygems</a>
+<a href='https://rafaelbiriba.com/tag/rubyonrails' class='tag-link-105 tag-link-position-33' title='5 tópicos' style='font-size: 8pt;'>rubyonrails</a>
+<a href='https://rafaelbiriba.com/tag/sistema' class='tag-link-133 tag-link-position-34' title='5 tópicos' style='font-size: 8pt;'>sistema</a>
+<a href='https://rafaelbiriba.com/tag/sistema-operacional' class='tag-link-12 tag-link-position-35' title='5 tópicos' style='font-size: 8pt;'>sistema operacional</a>
+<a href='https://rafaelbiriba.com/tag/stream' class='tag-link-25 tag-link-position-36' title='8 tópicos' style='font-size: 12.76pt;'>stream</a>
+<a href='https://rafaelbiriba.com/tag/tecnologia' class='tag-link-490 tag-link-position-37' title='17 tópicos' style='font-size: 21.44pt;'>Tecnologia</a>
+<a href='https://rafaelbiriba.com/tag/travian' class='tag-link-49 tag-link-position-38' title='6 tópicos' style='font-size: 9.96pt;'>travian</a>
+<a href='https://rafaelbiriba.com/tag/ubuntu' class='tag-link-11 tag-link-position-39' title='9 tópicos' style='font-size: 14.16pt;'>ubuntu</a>
+<a href='https://rafaelbiriba.com/tag/versao' class='tag-link-129 tag-link-position-40' title='8 tópicos' style='font-size: 12.76pt;'>versão</a>
+<a href='https://rafaelbiriba.com/tag/video' class='tag-link-21 tag-link-position-41' title='18 tópicos' style='font-size: 22pt;'>video</a>
+<a href='https://rafaelbiriba.com/tag/virtual' class='tag-link-17 tag-link-position-42' title='6 tópicos' style='font-size: 9.96pt;'>virtual</a>
+<a href='https://rafaelbiriba.com/tag/web' class='tag-link-15 tag-link-position-43' title='16 tópicos' style='font-size: 20.6pt;'>web</a>
+<a href='https://rafaelbiriba.com/tag/web-browser' class='tag-link-56 tag-link-position-44' title='6 tópicos' style='font-size: 9.96pt;'>web browser</a>
+<a href='https://rafaelbiriba.com/tag/wordpress' class='tag-link-494 tag-link-position-45' title='13 tópicos' style='font-size: 18.36pt;'>Wordpress</a></div>
+</aside><aside id="wp_related_posts_widget" class="widget widget_wp_related_posts">
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h1 class="widget-title">Leia também:</h1><ul class="related_post wp_rp"><li data-position="0" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li><li data-position="1" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="4" data-poid="in-1784" data-post-type="none" ><small class="wp_rp_publish_date">01/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" class="wp_rp_title">FFmpeg: converta vídeos para iPhone</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		<div class="cbd"></div>
+		<script src="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded//shutter-reloaded.js?ver=2.5" type="text/javascript"></script>
+	<script type="text/javascript">
+	var shutterSettings = {"imgDir":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/shutter-reloaded\/\/menu\/","imageCount":true,"FS":false,"textBtns":true,"oneSet":true};
+	try{}catch(e){}	</script>
+	
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+								<a href="https://br.wordpress.org/">Orgulhosamente mantido com WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	
+<script type="text/javascript"><!--
+wpa2a.targets=[
+{title:"FFmpeg: Extraindo imagens de um v\u00eddeo ( Snapshot )",url:"https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html"}];
+wpa2a.html_done=true;if(wpa2a.script_ready&&!wpa2a.done)wpa2a.init();wpa2a.script_load();
+//--></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var scriptParams = {"google_search_engine_id":"partner-pub-1303939561252359:5952361189"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/assets/js/google_cse_v2.js?ver=1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Enviando ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.2'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/comment-reply.min.js?ver=4.5.3'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/wp-embed.min.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.5.3","language":""},"disqusIdentifier":"53 http:\/\/www.rafaelbiriba.com\/?p=53","disqusShortname":"rafaelbiriba","disqusTitle":"FFmpeg: Extraindo imagens de um v\u00eddeo ( Snapshot )","disqusUrl":"http:\/\/www.rafaelbiriba.com\/2009\/02\/11\/ffmpeg-extraindo-imagens-de-um-video-snapshot.html","options":{"manualSync":false},"postId":"53"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/disqus.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"rafaelbiriba"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/count.js?ver=4.5.3'></script>
+</body>
+</html>

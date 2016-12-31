@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Ubuntu &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/sistemas-operacionais/ubuntu-sistemas-operacionais/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</title>
+		<link>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html</link>
+		<comments>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html#comments</comments>
+		<pubDate>Fri, 03 Feb 2012 21:41:13 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[bundler]]></category>
+		<category><![CDATA[gem]]></category>
+		<category><![CDATA[github]]></category>
+		<category><![CDATA[instalação]]></category>
+		<category><![CDATA[nginx]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[rubygems]]></category>
+		<category><![CDATA[rubyonrails]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vps]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2908</guid>
+		<description><![CDATA[Andei procurando na internet por algum script para fazer uma instalação mais &#8220;automatizada&#8221; de um ambiente Ruby on Rails numa máquina virtual (VPS) rodando Ubuntu 11.10 Depois de pesquisar muito, só encontrei referências detalhadas  para ubuntu 10.* ou então alguns blogs sugerindo algumas linhas de comando apenas. Como eu já estava terminando um projeto de &#8230; <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><a href="https://rafaelbiriba.com/wp-content/uploads/2012/02/install_ror_on_ubuntu.png"><img class="alignright size-full wp-image-2910" title="install_ror_on_ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2012/02/install_ror_on_ubuntu.png" alt="" width="258" height="159" /></a></p>
+<p style="text-align: justify;">Andei procurando na internet por algum script para fazer uma instalação mais &#8220;automatizada&#8221; de um ambiente Ruby on Rails numa máquina virtual (VPS) rodando Ubuntu 11.10</p>
+<p style="text-align: justify;">Depois de pesquisar muito, só encontrei referências detalhadas  para ubuntu 10.* ou então alguns blogs sugerindo algumas linhas de comando apenas.</p>
+<p style="text-align: justify;">Como eu já estava terminando um projeto de um site e precisava de um ambiente de produção, resolvi fazer um script (em bash), onde eu tivesse o controle de tudo que iria acontecer de forma segura e eficaz.</p>
+<p style="text-align: justify;">O script está disponível no meu github, use como quiser =)</p>
+<p style="text-align: justify;">Lembrando que só testei no Ubuntu 11.10, a instalação instala e configura o seguinte:<br />&#8211; Ruby 1.9.2-p290<br />&#8211;  Nginx Upload Module 2.2.0<br />&#8211; Nginx 1.1.12 <br />&#8211; iptables para as portas principais de ssh(22), http(80), https(443), dns(53)<br />&#8211; Mysql (versão estável do apt-get do ubuntu)<br />&#8211; Postfix (versão estável do apt-get do ubuntu)<br />&#8211; Gem Bundler (última versão pelo rubygems)</p>
+<p style="text-align: justify;">Com isso, basta configurar o domínio da sua aplicação corretamente na configuração do nginx, fazer o deploy e ser feliz! =)</p>
+<p style="text-align: justify;">Link do projeto: <a title="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" href="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" target="_blank">https://github.com/rafaelbiriba/Ubuntu-VPS-Builder </a></p>
+<p style="text-align: justify;">Abaixo segue uma cópia do código que eu coloquei no git assim você pode tirar suas dúvidas pelos comentários&#8230; Caso decida usar o script, baixe ele pelo <a title="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" href="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" target="_blank">link do github</a>. Não use o código abaixo pois o mesmo pode já estar desatualizado!</p>
+<p style="text-align: justify;">Modo de usar no servidor:<br /><strong><span style="color: #ff0000;">$</span> chmod +x vps_builder.sh</strong><br /><strong><span style="color: #ff0000;">$</span> ./vps_builder.sh seudominio.com </strong></p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+</pre></td><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">#!/bin/bash</span>
+<span style="color: #666666; font-style: italic;"># &quot;Automated VPS Setup for Ubuntu 11.10 - Rails with Nginx&quot;</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># Created by: Rafael Biriba - www.rafaelbiriba.com - biribarj@gmail.com</span>
+<span style="color: #666666; font-style: italic;"># https://github.com/rafaelbiriba/Ubuntu-VPS-Builder/</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># USAGE:</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># $ chmod +x vps_builder.sh</span>
+<span style="color: #666666; font-style: italic;"># $ ./vps_builder.sh yourdomain.com&quot;</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Updating before all&quot;</span>
+<span style="color: #c20cb9; font-weight: bold;">apt-get update</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">apt-get upgrade</span> <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Set Hostname&quot;</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$1</span> <span style="color: #000000; font-weight: bold;">&gt;</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span><span style="color: #c20cb9; font-weight: bold;">hostname</span>
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;127.0.0.1 $1&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;&gt;</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>hosts
+<span style="color: #c20cb9; font-weight: bold;">hostname</span> <span style="color: #660033;">-F</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span><span style="color: #c20cb9; font-weight: bold;">hostname</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Set Timezone&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">ln</span> <span style="color: #660033;">-sf</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>zoneinfo<span style="color: #000000; font-weight: bold;">/</span>America<span style="color: #000000; font-weight: bold;">/</span>Sao_Paulo <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>localtime
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Essencials&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> build-essential zlib1g-dev libreadline6-dev libssl-dev <span style="color: #c20cb9; font-weight: bold;">wget</span> git-core <span style="color: #c20cb9; font-weight: bold;">sudo</span> <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Ruby 1.9.2&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>ftp.ruby-lang.org<span style="color: #000000; font-weight: bold;">/</span>pub<span style="color: #000000; font-weight: bold;">/</span>ruby<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">1.9</span><span style="color: #000000; font-weight: bold;">/</span>ruby-1.9.2-p290.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf ruby-1.9.2-p290.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> ruby-1.9.2-p290
+.<span style="color: #000000; font-weight: bold;">/</span>configure
+<span style="color: #c20cb9; font-weight: bold;">make</span>
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-rf</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Passenger and Nginx&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+<span style="color: #c20cb9; font-weight: bold;">wget</span> ftp:<span style="color: #000000; font-weight: bold;">//</span>ftp.csx.cam.ac.uk<span style="color: #000000; font-weight: bold;">/</span>pub<span style="color: #000000; font-weight: bold;">/</span>software<span style="color: #000000; font-weight: bold;">/</span>programming<span style="color: #000000; font-weight: bold;">/</span>pcre<span style="color: #000000; font-weight: bold;">/</span>pcre-<span style="color: #000000;">8.21</span>.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf pcre-<span style="color: #000000;">8.21</span>.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> pcre-<span style="color: #000000;">8.21</span>
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>nginx.org<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>nginx-1.1.12.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>www.grid.net.ru<span style="color: #000000; font-weight: bold;">/</span>nginx<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>nginx_upload_module-2.2.0.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf nginx-1.1.12.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf nginx_upload_module-2.2.0.tar.gz
+&nbsp;
+gem <span style="color: #c20cb9; font-weight: bold;">install</span> passenger
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> libcurl4-openssl-dev <span style="color: #660033;">-y</span>
+passenger-install-nginx-module <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>nginx <span style="color: #660033;">--nginx-source-dir</span>=<span style="color: #000000; font-weight: bold;">/</span>root<span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>nginx-1.1.12 <span style="color: #660033;">--extra-configure-flags</span>=--add-module=<span style="color: #ff0000;">'/root/tmp/nginx_upload_module-2.2.0'</span>
+<span style="color: #666666; font-style: italic;">#passenger-install-nginx-module --auto --auto-download</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-rf</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">wget</span> https:<span style="color: #000000; font-weight: bold;">//</span>raw.github.com<span style="color: #000000; font-weight: bold;">/</span>rafaelbiriba<span style="color: #000000; font-weight: bold;">/</span>Ubuntu-VPS-Builder<span style="color: #000000; font-weight: bold;">/</span>master<span style="color: #000000; font-weight: bold;">/</span>ubuntu_11-<span style="color: #000000;">10</span>_desktop<span style="color: #000000; font-weight: bold;">/</span>nginx-init.sh
+<span style="color: #c20cb9; font-weight: bold;">cp</span> nginx-init.sh <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nginx-init.sh
+<span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx
+<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>sbin<span style="color: #000000; font-weight: bold;">/</span>update-rc.d <span style="color: #660033;">-f</span> nginx defaults
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Configure iptables&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> iptables
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">tee</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall <span style="color: #cc0000; font-style: italic;">&lt;&lt;ENDOFFILE
+#!/bin/bash
+&nbsp;
+start(){
+# Accepting all connections made on the special lo - loopback - 127.0.0.1 - interface
+iptables -A INPUT -p tcp -i lo -j ACCEPT
+&nbsp;
+# Rule which allows established tcp connections to stay up
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+&nbsp;
+# SSH:
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+&nbsp;
+# DNS:
+iptables -A INPUT -p tcp --dport 53 -j ACCEPT
+iptables -A INPUT -p udp --dport 53 -j ACCEPT
+&nbsp;
+# HTTP e HTTPS:
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+&nbsp;
+# Block others ports
+iptables -A INPUT -p tcp --syn -j DROP
+iptables -A INPUT -p udp --dport 0:1023 -j DROP
+&nbsp;
+}
+stop(){
+iptables -F
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+}
+&nbsp;
+case &quot;\$1&quot; in
+&quot;start&quot;) start ;;
+&quot;stop&quot;) stop ;;
+&quot;restart&quot;) stop; start ;;
+*) echo &quot;start or stop params&quot;
+esac
+ENDOFFILE</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall
+update-rc.d firewall defaults <span style="color: #000000;">99</span>
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install MySQL&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> mysql-server mysql-client libmysqlclient-dev <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install postfix&quot;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;"># Install type: Internet Site</span>
+<span style="color: #666666; font-style: italic;"># Default email domain name: example.com</span>
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> postfix mailutils telnet <span style="color: #660033;">-y</span>
+<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>sbin<span style="color: #000000; font-weight: bold;">/</span>update-rc.d postfix defaults
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>postfix start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install gem bundler&quot;</span>
+&nbsp;
+gem <span style="color: #c20cb9; font-weight: bold;">install</span> bundler
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;VPS Setup Complete&quot;</span></pre></td></tr></table></div>
+
+
+
+<p><span style="font-size: medium;"><strong>Qualquer dúvida, estamos aí para trocar ideias <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></strong></span></p>
+<p>___________________________________________________</p>
+<p><strong>Atualização 1 &#8211; 07/fev/2012:</strong></p>
+<p style="text-align: justify;">Agradeço ao leitor Laércio pelo contato via email, reportando um problema, onde se o ubuntu estiver muito desatualizado, o script não roda direito. Com isso adicionei lá no github e no exemplo acima os comandos apt-get update e apt-get upgrade para atualizar o ubuntu antes de fazer qualquer coisa. Obrigado mais uma vez Laércio !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-3075" data-post-type="none" ><small class="wp_rp_publish_date">21/09/2012</small> <a href="https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html" class="wp_rp_title">Você sabia que dá para usar versões diferentes de ruby na mesma máquina ?</a></li><li data-position="1" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li><li data-position="2" data-poid="in-489" data-post-type="none" ><small class="wp_rp_publish_date">29/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/29/ruby-require-rubygems-alternativas.html" class="wp_rp_title">Ruby: Alternativas para require &#8216;rubygems&#8217;</a></li><li data-position="3" data-poid="in-1190" data-post-type="none" ><small class="wp_rp_publish_date">09/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="wp_rp_title">Ubuntu: Instalação do vmware-server-console</a></li><li data-position="4" data-poid="in-1900" data-post-type="none" ><small class="wp_rp_publish_date">08/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/08/cloud-crowd-a-primeira-action.html" class="wp_rp_title">Cloud Crowd: A primeira action</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;linkname=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;linkname=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;title=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html/feed</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu 9.10: Disponível para Download ou Atualização</title>
+		<link>https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html</link>
+		<comments>https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html#comments</comments>
+		<pubDate>Fri, 30 Oct 2009 02:43:11 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[9.10]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[lançamento]]></category>
+		<category><![CDATA[nova versão]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[sistema operacional]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1680</guid>
+		<description><![CDATA[O Ubuntu 9.10 está finalmente disponível para download. (http://www.ubuntu.com/getubuntu/download) Disponível em 32 ou 64 bits, e para laptops, netbooks, desktops, servers e etc.. Mais características da versão podem ser obtidas aqui. Atualizando seu ubuntu para 9.10:* Entre no terminal e digite: update-manager -d Como a versão já foi lançada oficialmente, atualize pelo seu gerenciador de &#8230; <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu 9.10: Disponível para Download ou Atualização</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_1681" style="width: 468px" class="wp-caption aligncenter"><img class="size-full wp-image-1681" title="ubuntu-910" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910.png" alt="www.ubuntu.com" width="468" height="76" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910.png 468w, https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-300x48.png 300w" sizes="(max-width: 468px) 100vw, 468px" /><figcaption class="wp-caption-text">www.ubuntu.com</figcaption></figure>
+<p style="text-align: justify;">O Ubuntu 9.10 está finalmente disponível para download. (<a title="http://www.ubuntu.com/getubuntu/download" href="http://www.ubuntu.com/getubuntu/download" target="_blank">http://www.ubuntu.com/getubuntu/download</a>)</p>
+<p style="text-align: justify;">Disponível em 32 ou 64 bits, e para laptops, netbooks, desktops, servers e etc.. Mais características da versão podem ser <a title="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" target="_blank">obtidas aqui</a>.</p>
+<h3 style="text-align: justify;">Atualizando seu ubuntu para 9.10:*</h3>
+<p style="text-align: justify;">Entre no terminal e digite: <br /><span style="color: #ff0000;"><strong>update-manager -d</strong></span></p>
+<p style="text-align: justify;">Como a versão já foi lançada oficialmente, atualize pelo seu gerenciador de atualizações como mostra a figura abaixo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-1685" title="ubuntu-910-software" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-software.jpeg" alt="ubuntu-910-software" width="504" height="204" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-software.jpeg 504w, https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-software-300x121.jpg 300w" sizes="(max-width: 504px) 100vw, 504px" /></p>
+<p style="text-align: justify;"></p>
+<h3 style="text-align: justify;">Vale a pena atulizar de 9.04 para 9.10 ?</h3>
+<p style="text-align: justify;">Fiz a atualização por cima do 9.04, e levou uma eternidade, baixando os pacotes a menos que 30 kb/s, isso porque todo mundo está atualizando o seu ubuntu hoje <img src="https://s.w.org/images/core/emoji/72x72/1f600.png" alt="😀" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Aproximadamente 1200 arquivos foram baixados para atualizar a versão&#8230; Quanto ao desempenho, confesso que achei que ao migrar do 9.04 para o 9.10 iria sentir alguma perda de desempenho&#8230; Pelo menos, para que migrou do 8.10 para o 9.04, percebeu que o sistema ficou visivelmente mais lento, havendo até necessidade de reinstalar a versão do zero. Felizmente isso não aconteceu&#8230; É possível até notar que a versão nova é melhor&#8230;</p>
+<p style="text-align: justify;">Então, para quem usa seu ubuntu para fins domésticos, eu recomendo atualizar direto pelo <strong>update manager</strong>. Agora, para computadores de trabalho, onde rodam ambientes mais controlados, sugiro que haja com cautela, fazendo backups e talvez pensar em um possível rollback, caso o sistema novo se comporte de maneira indesejada.</p>
+<p>Se possível for, compartilhe aqui como foi seu processo de atualização&#8230; Boa sorte a todos&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1496" data-post-type="none" ><small class="wp_rp_publish_date">09/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="wp_rp_title">Ubuntu 9.10: Já podemos aproveitar e testar</a></li><li data-position="1" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="2" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li><li data-position="3" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="4" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F29%2Fubuntu-910-disponivel-para-download-e-atualizacao.html&amp;linkname=Ubuntu%209.10%3A%20Dispon%C3%ADvel%20para%20Download%20ou%20Atualiza%C3%A7%C3%A3o" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F29%2Fubuntu-910-disponivel-para-download-e-atualizacao.html&amp;linkname=Ubuntu%209.10%3A%20Dispon%C3%ADvel%20para%20Download%20ou%20Atualiza%C3%A7%C3%A3o" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F29%2Fubuntu-910-disponivel-para-download-e-atualizacao.html&amp;title=Ubuntu%209.10%3A%20Dispon%C3%ADvel%20para%20Download%20ou%20Atualiza%C3%A7%C3%A3o" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu 9.10: Já podemos aproveitar e testar</title>
+		<link>https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html</link>
+		<comments>https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html#comments</comments>
+		<pubDate>Fri, 09 Oct 2009 19:31:34 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[9.10]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[lançamento]]></category>
+		<category><![CDATA[nova versão]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[sistema operacional]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1496</guid>
+		<description><![CDATA[Com o lançamento oficial para dia 29 de outubro/2009, a versão 9.10 já pode ser testado em sua versão beta. Dentre as novas funcionalidades podemos destacar: O famoso Pidgin deixa de ser o mensageiro padrão, e em seu lugar entra o Empathy Sincronização de arquivos com o Ubuntu One como padrão ext4 será o filesystem &#8230; <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu 9.10: Já podemos aproveitar e testar</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_1498" style="width: 562px" class="wp-caption aligncenter"><img class="size-full wp-image-1498" title="ubuntu-910-coming-soon" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-coming-soon.jpg" alt="http://www.ubuntu.com/" width="562" height="67" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-coming-soon.jpg 562w, https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-coming-soon-299x35.jpg 299w" sizes="(max-width: 562px) 100vw, 562px" /><figcaption class="wp-caption-text">http://www.ubuntu.com/</figcaption></figure>
+<p style="text-align: justify;">Com o lançamento oficial para dia <strong>29 de outubro/2009</strong>, a versão 9.10 já pode ser testado em sua versão beta.</p>
+<p style="text-align: justify;">Dentre as <strong>novas funcionalidades</strong> podemos destacar:</p>
+<ul style="text-align: justify;">
+	<li>O famoso Pidgin deixa de ser o mensageiro padrão, e em seu lugar entra o <a title="http://live.gnome.org/Empathy" href="http://live.gnome.org/Empathy" target="_blank">Empathy</a></li>
+	<li>Sincronização de arquivos com o <a title="https://ubuntuone.com/" href="https://ubuntuone.com/" target="_blank">Ubuntu One</a> como padrão</li>
+	<li>ext4 será o filesystem padrão. ( o ext4 é mais performatico para arquivos grandes ) &#8211; outros filesystems podem ser utilizados usando a partição manual durante a instalação</li>
+	<li>Grub 2 como padrão de boot</li>
+	<li><a title="https://wiki.ubuntu.com/UbuntuFirewal" href="https://wiki.ubuntu.com/UbuntuFirewal" target="_blank">Firewall descomplicado</a></li>
+	<li>Lista completa das outras funcionalidades em: <a title="http://www.ubuntu.com/testing/karmic/beta" href="http://www.ubuntu.com/testing/karmic/beta" target="_blank">http://www.ubuntu.com/testing/karmic/beta</a></li>
+</ul>
+<p>&nbsp;</p>
+<h3 style="text-align: justify;"><img class="size-full wp-image-1521 alignleft" title="boot-ubuntu-910" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/boot-ubuntu-910.jpeg" alt="boot-ubuntu-910" width="176" height="273" />Teste rápido de desempenho do 9.04 e 9.10 em máquinas virtuais:</h3>
+<p style="text-align: justify;"><strong>Especificação:</strong> Disco de 10GB e memória de 256MB.<br />Detalhes: As imagens <strong>.iso</strong> utilizadas foram baixadas no mesmo dia</p>
+<p style="text-align: justify;"><strong>Vamos aos resultados:</strong></p>
+<ul style="text-align: justify;">
+	<li><span style="color: #ff0000;">Boot da instalação:</span> na versão 9.10 carregou 8 segundos mais rápido.</li>
+	<li><span style="color: #ff0000;">Instalação: </span>9.04 levou cerca de 12 min. contra 14 min. da versão 9.10</li>
+	<li><span style="color: #ff0000;">Boot:</span> 9.04 levou cerca de 39 segundos contra incríveis 28 segundos da versão 9.10</li>
+</ul>
+<p style="text-align: justify;"><strong>Observações encontradas:</strong></p>
+<ul style="text-align: justify;">
+	<li>A tela de boot está com cores mais agradáveis ( conforme mostra a imagem ao lado )</li>
+	<li>Durante a instalação do 9.10, você pode ver algumas caracteristicas do ubuntu ( semelhante a instalação do windows xp, onde aparece as funcionalidades do sistema, enquanto o sistema está processando a instalação )</li>
+</ul>
+<p style="text-align: justify;">Como eu usei máquinas virtuais, o uso de minha cpu pode ter influênciado no teste (meio dificil, pois ela não chegou nem a 40% durante os testes ).. Porém, os valores acima, não podem servir como bases comparativas&#8230; Apenas para uma demonstração rápida&#8230;</p>
+<h3 style="text-align: justify;">Está ansioso, deseja testar ?</h3>
+<p><img class="size-full wp-image-1503 alignleft" title="ubuntu-910-comingsoon-banner" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/ubuntu-910-comingsoon-banner.png" alt="ubuntu-910-comingsoon-banner" width="180" height="150" /></p>
+<h3>Atualizando seu ubuntu para 9.10:*</h3>
+<p>Entre no terminal e digite: <br /><span style="color: #ff0000;"><strong>update-manager -d</strong></span></p>
+<h3>Download do 9.10:*</h3>
+<p>http://mirror.globo.com/ubuntu/releases/9.10/</p>
+<p style="text-align: justify;">* Lembrando que ainda está na versão beta até o dia do seu lançamento final (29/10/09)</p>
+<p style="text-align: justify;">Caso você resolva testar, não esqueça de reportar os bugs para ajudar a comunidade. Mais detalhes em <a title="https://help.ubuntu.com/community/ReportingBugs" href="https://help.ubuntu.com/community/ReportingBugs" target="_blank">https://help.ubuntu.com/community/ReportingBugs</a></p>
+<p style="text-align: justify;">Se você testou e/ou tiver mais alguma informação, compartilhe conosco através dos comentários abaixo. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="1" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="2" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li><li data-position="3" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="4" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F09%2Fubuntu-910-ja-podemos-aproveitar-e-testar.html&amp;linkname=Ubuntu%209.10%3A%20J%C3%A1%20podemos%20aproveitar%20e%20testar" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F09%2Fubuntu-910-ja-podemos-aproveitar-e-testar.html&amp;linkname=Ubuntu%209.10%3A%20J%C3%A1%20podemos%20aproveitar%20e%20testar" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F09%2Fubuntu-910-ja-podemos-aproveitar-e-testar.html&amp;title=Ubuntu%209.10%3A%20J%C3%A1%20podemos%20aproveitar%20e%20testar" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Configurando teclado ABNT2 no vmware-server-console</title>
+		<link>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html</link>
+		<comments>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html#comments</comments>
+		<pubDate>Sat, 22 Aug 2009 19:19:24 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[abnt2]]></category>
+		<category><![CDATA[configurar]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[teclado]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vmware]]></category>
+		<category><![CDATA[vmware-server-console]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1178</guid>
+		<description><![CDATA[&#160; Um dos problemas que eu acho extremamente chato, é não poder usar as setas, o ctrl, a barra e outras teclas não habilitadas no vmware-server-console. Você pode ler sobre a instalação do console no ubuntu, clicando aqui. Se você der uma pesquisada no google, rapidamente vai encontrar formas de resolver o problema. Uma delas &#8230; <a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure>
+
+<p>&nbsp;</p>
+<p style="text-align: justify;">Um dos problemas que eu acho extremamente chato, é não poder usar as setas, o ctrl, a barra e outras teclas não habilitadas no vmware-server-console. Você pode ler sobre a instalação do console no ubuntu, <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">clicando aqui</a>.</p>
+<p style="text-align: justify;">Se você der uma pesquisada no google, rapidamente vai encontrar formas de resolver o problema. Uma delas é fazer o mapeamento das teclas que devem ser inseridas na configuração do vmware.</p>
+<p style="text-align: justify;">A questão é onde está o arquivo de configuração. Isso depende de como você <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">instalou</a> o vmware.<br />No meu caso está em <span style="color: #ff0000;">/etc/vmware-server-console/config</span>.</p>
+<p style="text-align: justify;">Adicionem as seguintes linhas no final do arquivo de configuração: <br />(<strong>OBS</strong>: Tem que ser root para fazer a alteração e certifique-se que o vmware não está aberto)</p>
+<p style="text-align: justify;"><strong>xkeymap.keycode.108 = 0x138 # Alt_R<br />xkeymap.keycode.106 = 0x135 # KP_Divide<br />xkeymap.keycode.104 = 0x11c # KP_Enter<br />xkeymap.keycode.111 = 0x148 # Up<br />xkeymap.keycode.116 = 0x150 # Down<br />xkeymap.keycode.113 = 0x14b # Left<br />xkeymap.keycode.114 = 0x14d # Right<br />xkeymap.keycode.105 = 0x11d # Control_R<br />xkeymap.keycode.118 = 0x152 # Insert<br />xkeymap.keycode.119 = 0x153 # Delete<br />xkeymap.keycode.110 = 0x147 # Home<br />xkeymap.keycode.115 = 0x14f # End<br />xkeymap.keycode.112 = 0x149 # Prior<br />xkeymap.keycode.117 = 0x151 # Next<br />xkeymap.keycode.78 = 0x46 # Scroll_Lock<br />xkeymap.keycode.127 = 0x100 # Pause<br />xkeymap.keycode.133 = 0x15b # Meta_L<br />xkeymap.keycode.134 = 0x15c # Meta_R<br />xkeymap.keycode.135 = 0x15d # Menu<br />xkeymap.keycode.97 = 0x073 # Slash </strong></p>
+<p style="text-align: justify;">Se você não achou o arquivo de configuração, veja algumas outras possibilidades: <span style="color: #808080;"><br /><span style="color: #0000ff;">.vmware/config</span></span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">~/vmware/preferences</span></span>,<br /><span style="color: #0000ff;">/etc/vmware/config</span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">/usr/lib/vmware/config</span></span></p>
+<p style="text-align: justify;">Espero ter ajudado&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1190" data-post-type="none" ><small class="wp_rp_publish_date">09/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="wp_rp_title">Ubuntu: Instalação do vmware-server-console</a></li><li data-position="1" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li><li data-position="2" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="3" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="4" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;title=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html/feed</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Instalação do vmware-server-console</title>
+		<link>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html</link>
+		<comments>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html#comments</comments>
+		<pubDate>Mon, 10 Aug 2009 01:51:10 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[instalação]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vmware]]></category>
+		<category><![CDATA[vmware-server-console]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1190</guid>
+		<description><![CDATA[Sempre que preciso, eu perco algum tempo em procurar e instalar vmware-server-console. Então resolvi postar para facilitar. 🙂 Primeiro, faça o download pelo site do vmware (http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip), onde você deve extrair o pacote (23mb) para obter o VMware-server-console-1.0.9-156507.tar.gz Ou então, baixe o pacote direto pelo link do meu blog: (apenas 9 mb 😉) https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz Ou &#8230; <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Instalação do vmware-server-console</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<h2>
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure></h2>
+<p style="text-align: justify;">Sempre que preciso, eu perco algum tempo em procurar e instalar vmware-server-console. <br />Então resolvi postar para facilitar. <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Primeiro, faça o download pelo site do vmware (<a title="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" href="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" target="_blank">http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip</a>), onde você deve extrair o pacote (23mb) para obter o VMware-server-console-1.0.9-156507.tar.gz</p>
+<p style="text-align: justify;">Ou então, <strong>baixe o pacote direto pelo link do meu blog</strong>: (<span style="color: #ff0000;">apenas 9 mb <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></span>) <a title="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" href="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" target="_blank"><br />https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz</a></p>
+<p style="text-align: justify;">Ou apenas siga os <strong>comandos abaixo</strong> pelo terminal:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>www.rafaelbiriba.com<span style="color: #000000; font-weight: bold;">/</span>VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> vmware-server-console-distrib<span style="color: #000000; font-weight: bold;">/</span>
+<span style="color: #c20cb9; font-weight: bold;">sudo</span> .<span style="color: #000000; font-weight: bold;">/</span>vmware-install.pl</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Caso tenha alguma dúvida/problema na instalação, verifique o link: <a title="http://help.ubuntu.com/community/VMware/Server" href="http://help.ubuntu.com/community/VMware/Server" target="_blank">http://help.ubuntu.com/community/VMware/Server</a> na seção <strong>VMware Server Console Installation </strong>ou pergunte por aqui mesmo. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1178" data-post-type="none" ><small class="wp_rp_publish_date">22/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" class="wp_rp_title">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</a></li><li data-position="1" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="2" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li><li data-position="3" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="4" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;title=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" id="wpa2a_10"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</title>
+		<link>https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html</link>
+		<comments>https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html#comments</comments>
+		<pubDate>Sun, 26 Apr 2009 23:49:35 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[8.10]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[aptitude]]></category>
+		<category><![CDATA[archive]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[download]]></category>
+		<category><![CDATA[repositório]]></category>
+		<category><![CDATA[servidor]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[update]]></category>
+		<category><![CDATA[upgrade]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=635</guid>
+		<description><![CDATA[Bom, hoje a tarde instalei o Ubuntu 9.04 no computador de casa. Como de costume, fui rodar os comandos do aptitude no terminal ( aptitude update e aptitude upgrade ), porém ainda no update, recebi vários erros. Alguns deles seguem logo abaixo: ( Foram mais de 10 ) Err http://br.archive.ubuntu.com jaunty Release.gpg Não foi possível &#8230; <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="alignleft size-thumbnail wp-image-32" title="ubuntu-splash-brown" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu-splash-brown-150x150.png" alt="ubuntu-splash-brown" width="150" height="150" />Bom, hoje a tarde instalei o Ubuntu 9.04 no computador de casa. Como de costume, fui rodar os comandos do aptitude no terminal ( <strong>aptitude update</strong> e <strong>aptitude upgrade</strong> ), porém ainda no update, recebi vários erros. Alguns deles seguem logo abaixo: ( Foram mais de 10 )</p>
+<p style="text-align: justify;">Err http://br.archive.ubuntu.com jaunty Release.gpg<br /> Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;<br />Err http://br.archive.ubuntu.com jaunty/main Translation-pt_BR<br /> Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;<br />Err http://br.archive.ubuntu.com jaunty/restricted Translation-pt_BR</p>
+<p style="text-align: justify;">Foi então que eu resolvi tentar descobrir o que estava acontecendo.<br />Bom, pesquisei em vários forums a tarde toda, testei algumas das soluções e por fim consegui chegar a alguma conclusão.</p>
+<p style="text-align: justify;">Uma das recomendações foi alterar o repositório para o principal, no lugar do brasileiro.<br />Para fazer isto, basta entrar em <strong>SISTEMA &gt; ADMINISTRAÇÃO &gt; CANAIS DE SOFTWARE</strong><br />Altere a opção <strong>BAIXAR DE: </strong><span style="color: #ff0000;">Servidor no Brasil</span> para <span style="color: #ff0000;">Servidor Principal<br /></span>Em seguida, execute o <strong>aptitude update</strong> novamente.</p>
+<p style="text-align: justify;">Na verdade, pelo que pude analisar, isso não foi uma solução e sim uma camuflagem. Diferentemente da opção Servidor no Brasil, que retornou diversos erros ao tentar baixar os pacotes, com a opção Servidor Principal, os mesmo pacotes que davam erros, agora apenas são ignorados.</p>
+<p style="text-align: justify;">Agora vem a parte que ninguém esperava&#8230; Algumas horas depois, alterei o repositório para <span style="color: #ff0000;">Servidor no Brasil</span>, e ao rodar o <strong>update</strong> novamente, os pacotes que antes davam erro, foram baixados corretamente&#8230;<br /><br />O porque disso ? Será que o fato de ter trocado o repositório tem alguma coisa haver ?<br />Bom, na verdade não. Fiquei com tanta curiosidade, que tive que instalar Ubuntu novamente, desde do zero. E para surpresa de todos, sem alterar qualquer configuração, os pacotes foram baixados normalmente sem nenhum erro.<br /><br />Agora fica a pergunta no ar: O que realmente aconteceu ?<br />Minha opnião: Simples, a unica explicação lógica para isso foi: os pacotes que deram erro estavam em manutenção, ou sendo atualizados nos repositórios. Isso explica porque o mesmo pacote não foi baixado nos dois repositórios que tentei inicialmente, pois todos eles estavam indisponíveis temporariamente para download.</p>
+<p style="text-align: justify;">Portanto, se você passar pelo mesmo problema, fique calmo e espere algum tempo e logo conseguirá conectar ao repositório !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="1" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li><li data-position="2" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="3" data-poid="in-1496" data-post-type="none" ><small class="wp_rp_publish_date">09/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="wp_rp_title">Ubuntu 9.10: Já podemos aproveitar e testar</a></li><li data-position="4" data-poid="in-3120" data-post-type="none" ><small class="wp_rp_publish_date">31/07/2013</small> <a href="https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html" class="wp_rp_title">OpenCart: Com o aumento do dolar, veja como atualizar o preço de todos os seus produtos via SQL</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F26%2Fubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html&amp;linkname=Ubuntu%3A%20N%C3%A3o%20foi%20poss%C3%ADvel%20resolver%20%E2%80%98br.archive.ubuntu.com%E2%80%99" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F26%2Fubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html&amp;linkname=Ubuntu%3A%20N%C3%A3o%20foi%20poss%C3%ADvel%20resolver%20%E2%80%98br.archive.ubuntu.com%E2%80%99" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F26%2Fubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html&amp;title=Ubuntu%3A%20N%C3%A3o%20foi%20poss%C3%ADvel%20resolver%20%E2%80%98br.archive.ubuntu.com%E2%80%99" id="wpa2a_12"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html/feed</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: 9.04 disponível para download !</title>
+		<link>https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html</link>
+		<comments>https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html#comments</comments>
+		<pubDate>Thu, 23 Apr 2009 14:28:07 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[8.10]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[lançamento]]></category>
+		<category><![CDATA[nova versão]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[sistema operacional]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=620</guid>
+		<description><![CDATA[Um dos diferenciais encontrados nessa versão,  é o Ubuntu 9.04 Netbook Remix. Desenvolvido para Notebooks de tela pequena e com pouco desempenho, este pacote pode solucionar o problema de muita gente. Veja os requisitos mínimos: A 1GB USB flash drive (aka thumb drive) An Intel Atom processor At least 384MB of RAM Como podem ver, &#8230; <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: 9.04 disponível para download !</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_622" style="width: 542px" class="wp-caption aligncenter"><img class="size-full wp-image-622" title="ubuntubanner" src="https://rafaelbiriba.com/wp-content/uploads/2009/04/ubuntubanner.jpg" alt="http://www.ubuntu.com/" width="542" height="81" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/04/ubuntubanner.jpg 542w, https://rafaelbiriba.com/wp-content/uploads/2009/04/ubuntubanner-300x44.jpg 300w" sizes="(max-width: 542px) 100vw, 542px" /><figcaption class="wp-caption-text">http://www.ubuntu.com/</figcaption></figure>
+<p style="text-align: justify;">Um dos diferenciais encontrados nessa versão,  é o <strong>Ubuntu 9.04 Netbook Remix</strong>. Desenvolvido para Notebooks de tela pequena e com pouco desempenho, este pacote pode solucionar o problema de muita gente. Veja os requisitos mínimos:</p>
+<ul style="text-align: justify;">
+	<li>A 1GB USB flash drive (aka thumb drive)</li>
+	<li>An Intel Atom processor</li>
+	<li>At least 384MB of RAM</li>
+</ul>
+<p style="text-align: justify;">Como podem ver, é necessário pouco espaço e um memória mínima para rodar esta versão !<br />Disponível em: <a title="http://www.ubuntu.com/getubuntu/download-netbook" href="http://www.ubuntu.com/getubuntu/download-netbook" target="_blank">http://www.ubuntu.com/getubuntu/download-netbook</a></p>
+<p style="text-align: justify;">Características da nova versão ( em inglês ): <a title="http://www.ubuntu.com/products/whatisubuntu/904features/" href="http://www.ubuntu.com/products/whatisubuntu/904features/" target="_blank">http://www.ubuntu.com/products/whatisubuntu/904features</a></p>
+<p style="text-align: justify;">Download para desktop, server ou notebook: <a title="http://www.ubuntu.com/getubuntu/download" href="http://www.ubuntu.com/getubuntu/download" target="_blank">http://www.ubuntu.com/getubuntu/download</a></p>
+<p style="text-align: justify;">Bom, eu já postei isso anteriormente, mas resolvi publicar novamente para dar ênfase ! Não é necessário baixar o CD do 9.04 para atualizar seu Ubuntu. Você pode fazê-lo seguindo o procedimento abaixo, sem a necessidade de reinstalar seu sistema operacional.<br /><br />Recomendo que você faça o Backup de todos os seus dados antes de fazer a atualização, para evitar qualquer tipo de problema. Mas eu atualizei, e ocorreu tudo certo, o sistema novo é excelente e não houve nenhum erro durante o processo.</p>
+<h3>Atualizando seu Ubuntu de 8.10 para 9.04</h3>
+<p>Acessando o terminal ( geralment ALT+F2 ), digite:</p>
+<p><span style="color: #ff0000;"><strong>update-manager -d</strong></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">Isso fará com que o Gerenciador de Atualizações abra, exibindo a seguinte informação: <span style="color: #ff0000;">Nova versão da distribuição &#8216;9.04&#8217; está disponível<br /></span></span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;"><span style="color: #ff0000;"><span style="color: #000000;">Basta apertar atualizar e iniciar o processo de atualização. Abaixo segue uma figura de exemplo:</span></span></span></span></p>
+<p style="text-align: left;"><span style="color: #ff0000;"><span style="color: #000000;"><span style="color: #ff0000;"><span style="color: #000000;"><img class="size-full wp-image-607 aligncenter" title="atualizacao904ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/04/atualizacao904ubuntu.jpg" alt="atualizacao904ubuntu" width="596" height="217" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/04/atualizacao904ubuntu.jpg 596w, https://rafaelbiriba.com/wp-content/uploads/2009/04/atualizacao904ubuntu-300x109.jpg 300w" sizes="(max-width: 596px) 100vw, 596px" /> </span></span></span></span></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="1" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="2" data-poid="in-1496" data-post-type="none" ><small class="wp_rp_publish_date">09/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="wp_rp_title">Ubuntu 9.10: Já podemos aproveitar e testar</a></li><li data-position="3" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="4" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F23%2Fubuntu-904-disponivel-para-download.html&amp;linkname=Ubuntu%3A%209.04%20dispon%C3%ADvel%20para%20download%20%21" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F23%2Fubuntu-904-disponivel-para-download.html&amp;linkname=Ubuntu%3A%209.04%20dispon%C3%ADvel%20para%20download%20%21" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F23%2Fubuntu-904-disponivel-para-download.html&amp;title=Ubuntu%3A%209.04%20dispon%C3%ADvel%20para%20download%20%21" id="wpa2a_14"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Vem por aí a versão 9.04</title>
+		<link>https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html</link>
+		<comments>https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html#comments</comments>
+		<pubDate>Wed, 22 Apr 2009 14:58:09 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[8.10]]></category>
+		<category><![CDATA[9.04]]></category>
+		<category><![CDATA[atualizando]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[lançamento]]></category>
+		<category><![CDATA[nova versão]]></category>
+		<category><![CDATA[sistema]]></category>
+		<category><![CDATA[sistema operacional]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=598</guid>
+		<description><![CDATA[Para quem ainda não foi informado sobre o assunto, vem por aí a versão 9.04 do Ubuntu !De acordo com o site oficial, o lançamento será no dia 23/04/2009 !Já existem diversas versões de teste, há algum tempo, mas como o lançamento já está bem próximo, melhor aguardar a versão final ! Algumas alterações na &#8230; <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Vem por aí a versão 9.04</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="size-full wp-image-597 alignleft" title="masthead-cds" src="https://rafaelbiriba.com/wp-content/uploads/2009/04/masthead-cds.jpg" alt="masthead-cds" width="204" height="95" /> Para quem ainda não foi informado sobre o assunto, vem por aí a versão 9.04 do Ubuntu !<br /><br />De acordo com o site oficial, o lançamento será no dia <strong>23/04/2009</strong> !<br /><br />Já existem diversas versões de teste, há algum tempo, mas como o lançamento já está bem próximo, melhor aguardar a versão final !</p>
+<p>Algumas alterações na nova versão:</p>
+<ul>
+	<li><a title="http://projects.gnome.org/brasero/" href="http://projects.gnome.org/brasero/" target="_blank">Brasero</a>: Programa para gravar CDs e DVDs agora é padrão do Nautilus</li>
+	<li>Aprimorado o painel de configuração para múltiplo monitores.</li>
+	<li>O mais esperado por todos: Performance melhorada na inicialização do sistema ( Boot mais rápido )</li>
+	<li>X.Org server 1.6: Suporte a mais placas de vídeo com performance melhorada</li>
+	<li>Atualização no kernel</li>
+</ul>
+<p>Mais informações: <a title="http://www.ubuntu.com/getubuntu/releasenotes/904overview" href="http://www.ubuntu.com/getubuntu/releasenotes/904overview" target="_blank">http://www.ubuntu.com/getubuntu/releasenotes/904overview</a></p>
+<h3><img class="alignleft size-full wp-image-605" title="ubuntu904commingsoon" src="https://rafaelbiriba.com/wp-content/uploads/2009/04/ubuntu904commingsoon.png" alt="ubuntu904commingsoon" width="180" height="150" />Atualizando seu Ubuntu de 8.10 para 9.04</h3>
+<p>Acessando o terminal ( geralmente ALT+F2 ), digite:</p>
+<p><span style="color: #ff0000;"><strong>update-manager -d</strong></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">Isso fará com que o Gerenciador de Atualizações abra, exibindo a seguinte informação: <span style="color: #ff0000;">Nova versão da distribuição &#8216;9.04&#8217; está disponível<br /></span></span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;"><span style="color: #ff0000;"><span style="color: #000000;">Basta apertar atualizar e iniciar o processo de atualização. Abaixo segue uma figura de exemplo:</span></span></span></span></p>
+<p style="text-align: left;"><span style="color: #ff0000;"><span style="color: #000000;"><span style="color: #ff0000;"><span style="color: #000000;"><img class="size-full wp-image-607 aligncenter" title="atualizacao904ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/04/atualizacao904ubuntu.jpg" alt="atualizacao904ubuntu" width="596" height="217" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/04/atualizacao904ubuntu.jpg 596w, https://rafaelbiriba.com/wp-content/uploads/2009/04/atualizacao904ubuntu-300x109.jpg 300w" sizes="(max-width: 596px) 100vw, 596px" />Bom, mesmo ainda não finalizada, vou estar atualizando para 9.04 ainda hoje, então, depois eu posto alguma coisa mais específico sobre a nova versão !</span></span></span></span></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li><li data-position="1" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="2" data-poid="in-1496" data-post-type="none" ><small class="wp_rp_publish_date">09/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/09/ubuntu-910-ja-podemos-aproveitar-e-testar.html" class="wp_rp_title">Ubuntu 9.10: Já podemos aproveitar e testar</a></li><li data-position="3" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="4" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F22%2Fubuntu-vem-por-ai-a-versao-904.html&amp;linkname=Ubuntu%3A%20Vem%20por%20a%C3%AD%20a%20vers%C3%A3o%209.04" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F22%2Fubuntu-vem-por-ai-a-versao-904.html&amp;linkname=Ubuntu%3A%20Vem%20por%20a%C3%AD%20a%20vers%C3%A3o%209.04" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F04%2F22%2Fubuntu-vem-por-ai-a-versao-904.html&amp;title=Ubuntu%3A%20Vem%20por%20a%C3%AD%20a%20vers%C3%A3o%209.04" id="wpa2a_16"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Mplayer &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/audio-e-video/mplayer/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>Mencoder: Adicionando legenda em um vídeo</title>
+		<link>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html</link>
+		<comments>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html#comments</comments>
+		<pubDate>Fri, 15 Jan 2010 12:29:21 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mencoder]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[encoder]]></category>
+		<category><![CDATA[legenda]]></category>
+		<category><![CDATA[player]]></category>
+		<category><![CDATA[srt]]></category>
+		<category><![CDATA[subtitle]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1753</guid>
+		<description><![CDATA[Uma legenda no formato .srt, pode ser inserida em um vídeo com diversos programas/ferramentas. Vou mostrar que mencoder é uma das opções mais simples e rápida para isso. O mencoder é instalado junto com o pacote do Mplayer. Mais detalhes de como instalar, visite: Mplayer: Projeto baseado no FFmpeg Antes de adicionar a legenda ao &#8230; <a href="https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html" class="more-link">Continue lendo <span class="screen-reader-text">Mencoder: Adicionando legenda em um vídeo</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p style="text-align: justify;">Uma legenda no formato <strong>.srt</strong>, pode ser inserida em um vídeo com diversos programas/ferramentas. Vou mostrar que mencoder é uma das opções mais simples e rápida para isso.</p>
+<p style="text-align: justify;">O mencoder é instalado junto com o pacote do Mplayer. Mais detalhes de como instalar, visite: <a title="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" target="_blank">Mplayer: Projeto baseado no FFmpeg</a></p>
+<p style="text-align: justify;">Antes de adicionar a legenda ao vídeo, verifique se existe o arquivo <strong>subfont.ttf</strong> na pasta do mplayer. Sem esse arquivo de fonte, o mencoder não consegue &#8220;escrever&#8221; no vídeo.</p>
+<h3 style="text-align: justify;">Criando o subfont.ttf <strong><br /></strong></h3>
+<p style="text-align: justify;">No windows, basta copiar uma font <strong>.ttf</strong>, colar na pasta do Mplayer e renomear para <strong>subfont.ttf</strong></p>
+<p style="text-align: justify;">No linux, procure pelas fontes <strong>.ttf</strong> com o comando:<span style="color: #ff0000;"><strong> locate ttf | grep ttf\$<br /></strong><span style="color: #000000;">Depois copie a fonte para o diretório local do mplayer. No meu caso:  (Utilizei a fonte VERA)<br /><span style="color: #ff0000;"><strong>cp /usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf ~/.mplayer/subfont.ttf</strong></span><br /></span></span></p>
+<h3 style="text-align: justify;">Testando a legenda:<br /></h3>
+<p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;">Antes de inserir a legenda, podemos e devemos testa-la. Para isso rode o comando:<br /><strong>mplayer -sub legenda.srt video_original.avi<br /></strong></span></span><span style="color: #ff0000;"><span style="color: #000000;"> Assim, você pode ver mais ou menos como a legenda vai ficar</span></span>, em relação a fonte escolhida.<span style="color: #ff0000;"><span style="color: #000000;"><br /></span></span></p>
+<h3 style="text-align: justify;">Inserindo a legenda:</h3>
+<p style="text-align: justify;">Comando:<br /><strong>mencoder video_original.avi -sub legenda.srt -subpos 95 -subfont-text-scale 3 -subcp enca:gr:iso-8859-1 -vf expand=640:384 -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=800:vhq -oac copy -o video_com_legenda.avi</strong></p>
+<p style="text-align: justify;">Onde:<br /><span style="color: #ff0000;"><strong>video_original.avi</strong></span>= Vídeo de entrada<br /><span style="color: #ff0000;"><strong>legenda.srt</strong></span>=  Legenda a ser inserida<br /><span style="color: #ff0000;"><strong>video_com_legenda.avi</strong></span>= Vídeo de Saída<strong><br /></strong></p>
+<p style="text-align: justify;">Parâmetros:<br /><strong>-subpos</strong>= Especifica em que % da tela a legenda irá aparecer (A partir do topo)<br /><strong>-subfont-text-scale</strong>= Especifica o tamanho da legenda no vídeo<br /><strong>-subcp</strong>= Especifica a codificação do arquivo de legenda<br /><strong>-vf</strong>= Especifica o tamanho do vídeo. Neste caso, o vídeo original era 640 x 272, adicionei mais 112px na altura (384px) utilizando <span style="color: #ff0000;">expand</span>,ou seja, o vídeo vai ficar com uma tarja preta de 56px em cima e em baixo.<br /><strong>-ovc</strong>= Especifica o codec de vídeo. Neste caso lavc.<br /><strong> -lavcopts </strong>= Opções do lavc. Especifica o nome do codec, bitrate,&#8230;, do vídeo.<br /><strong>-oac</strong>= Especifica o áudio. O valor copy, copia o áudio exatamente como o original.<br /><strong>-o</strong>= Especifica o arquivo de saída.</p>
+<p style="text-align: justify;">OBS: O comando do mencoder foi testado e executado no Linux. Para rodar o comando em windows, <a title="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">veja aqui.</a></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-125" data-post-type="none" ><small class="wp_rp_publish_date">19/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" class="wp_rp_title">Mplayer: Rotacionando um Vídeo</a></li><li data-position="1" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="2" data-poid="in-83" data-post-type="none" ><small class="wp_rp_publish_date">15/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="wp_rp_title">Mplayer: Projeto baseado no FFmpeg</a></li><li data-position="3" data-poid="in-143" data-post-type="none" ><small class="wp_rp_publish_date">20/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="wp_rp_title">Mplayer: Extraindo o áudio de um vídeo</a></li><li data-position="4" data-poid="in-114" data-post-type="none" ><small class="wp_rp_publish_date">16/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html" class="wp_rp_title">FFmpeg / Mplayer: Reproduzindo Vídeos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;linkname=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;linkname=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;title=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html/feed</wfw:commentRss>
+		<slash:comments>12</slash:comments>
+		</item>
+		<item>
+		<title>Mplayer: Extraindo o áudio de um vídeo</title>
+		<link>https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html#respond</comments>
+		<pubDate>Fri, 20 Feb 2009 17:44:18 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[audio]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[extrair]]></category>
+		<category><![CDATA[gravar]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[separar]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=143</guid>
+		<description><![CDATA[Para separar o arquivo de áudio num vídeo, podemos utilizar o Mplayer. Este procedimento pode ser bastante utilizado para quem quer extrair o áudio de um clip por exemplo. Linha de comando: mplayer video_qualquer.avi -ao pcm:file=saida_audio.wav -vc dummy -aid 1 -vo null Onde, video_qualquer.avi = O video a ser convertido. Poder ser em outros formatos &#8230; <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="more-link">Continue lendo <span class="screen-reader-text">Mplayer: Extraindo o áudio de um vídeo</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p>Para separar o arquivo de áudio num vídeo, podemos utilizar o Mplayer.<br />
+Este procedimento pode ser bastante utilizado para quem quer extrair o áudio de um clip por exemplo.<br />
+Linha de comando:</p>
+<p><strong>mplayer video_qualquer.avi -ao pcm:file=saida_audio.wav -vc dummy -aid 1 -vo null</strong></p>
+<p>Onde,</p>
+<p><span style="color: #ff0000;">video_qualquer.avi</span> = O video a ser convertido. Poder ser em outros formatos como .mpg ou .mov por exemplo.</p>
+<p><span style="color: #ff0000;">-ao</span> = codec de audio. Neste caso utilizamos o PCM</p>
+<p><span style="color: #ff0000;">pcm:file</span> = Utilizamos o PCM como codec pois o mesmo aceita um parametro &#8220;file&#8221; onde podemos especificar o arquivo de saida.</p>
+<p><span style="color: #ff0000;">saida_audio.wav</span> = Arquivo de áudio de saída. Extensão wav, devido ao codec selecionado &#8220;pcm&#8221;.</p>
+<p><span style="color: #ff0000;">-vc dummy</span> = Codec de vídeo. No caso selecionamos <strong>dummy</strong> para que o vídeo seja desconsiderado.</p>
+<p><span style="color: #ff0000;">-aid 1</span> = Seleciona o canal de áudio. No caso, primeiro canal. Se o arquivo for um .VOB ( DVD ) pode ter diversos canais de áudio, devido as dublagens e etc..</p>
+<p><span style="color: #ff0000;">-vo null</span> = Atribui um valor nulo para saída de vídeo. Isso significa que ao fazer o procedimento, o vídeo não será exibido pelo player.</p>
+<p style="text-align: justify;">——————————————————</p>
+<p style="text-align: justify;"><strong>Instalação do pacote Mplayer ( Mencoder incluído )</strong></p>
+<p style="text-align: justify;">Visite o POST: <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" target="_blank">Mplayer: Projeto baseado no FFmpeg</a></p>
+<p style="text-align: justify;">——————————————————<strong><br />
+</strong></p>
+<h3 style="text-align: justify;"><strong>Procedimento de Uso:</strong></h3>
+<p><strong><img class="noalign size-full wp-image-30" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" /></strong>Usuários Linux tem sempre mais facilidade, nesse tipo de procedimento.</p>
+<p style="text-align: justify;">Basta abrir o Terminal e digitar:<br />
+<strong>mplayer video_qualquer.avi -ao pcm:file=saida_audio.wav -vc dummy -aid 1 -vo null</strong><strong></strong></p>
+<p style="text-align: justify;">Onde meu arquivo se chama video_qualquer.avi e se encontra na área de trabalho.<br />
+( Levando em consideração que ao abrir o terminal você vai estar dentro da pasta home do usuário local )</p>
+<p style="text-align: justify;">——————————————————</p>
+<p><strong><img class="noalign size-full wp-image-29" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" /></strong>Usuários Windows levam mais tempo para poder executar o comando.<br />
+Entre em INICIAR &gt; EXECUTAR e digite <strong>cmd</strong> &gt; OK ( Para abrir o Terminal do Windows )<br />
+Acesse a pasta digitando:<br />
+<strong>cd Desktop/pasta_do_mplayer/<br />
+</strong>em seguida:<br />
+<strong>mplayer &#8220;../video_qualquer.avi&#8221; -ao pcm:file=&#8221;../saida_audio.wav&#8221; -vc dummy -aid 1 -vo null</strong><br />
+Onde meu arquivo se chama video_qualquer.avi<strong> </strong>e se encontra na área de trabalho.<br />
+( Utilizamos <strong><span style="color: #ff0000;">../</span></strong> para sair da pasta do mplayer e acessar o video_qualquer.avi e gravar o saida_audio.wav na área de trabalho. )<br />
+Para maiores informações visite o POST: <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">Windows XP vs FFmpeg e Mplayer</a></p>
+<p style="text-align: justify;">——————————————————</p>
+<p>Em caso de dúvidas, entre em contato …</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-125" data-post-type="none" ><small class="wp_rp_publish_date">19/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" class="wp_rp_title">Mplayer: Rotacionando um Vídeo</a></li><li data-position="1" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-83" data-post-type="none" ><small class="wp_rp_publish_date">15/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="wp_rp_title">Mplayer: Projeto baseado no FFmpeg</a></li><li data-position="4" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F20%2Fmplayer-extraindo-o-audio-de-um-video.html&amp;linkname=Mplayer%3A%20Extraindo%20o%20%C3%A1udio%20de%20um%20v%C3%ADdeo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F20%2Fmplayer-extraindo-o-audio-de-um-video.html&amp;linkname=Mplayer%3A%20Extraindo%20o%20%C3%A1udio%20de%20um%20v%C3%ADdeo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F20%2Fmplayer-extraindo-o-audio-de-um-video.html&amp;title=Mplayer%3A%20Extraindo%20o%20%C3%A1udio%20de%20um%20v%C3%ADdeo" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Mplayer: Rotacionando um Vídeo</title>
+		<link>https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html#comments</comments>
+		<pubDate>Thu, 19 Feb 2009 13:22:24 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mencoder]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[girar]]></category>
+		<category><![CDATA[gravar]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[rotacionar]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=125</guid>
+		<description><![CDATA[Rotacionar um vídeo talvez seja um dos grandes problemas em filmar com uma camera digital, por exemplo. Todos ja devem ter tido alguma experiência em filmar alguma coisa, com a camera deitada, e só depoi perceber ue no computador o vídeo também fica na horizontal ! Abaixo segue o passo a passo para converter o &#8230; <a href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" class="more-link">Continue lendo <span class="screen-reader-text">Mplayer: Rotacionando um Vídeo</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p style="text-align: justify;">Rotacionar um vídeo talvez seja um dos grandes problemas em filmar com uma camera digital, por exemplo. Todos ja devem ter tido alguma experiência em filmar alguma coisa, com a camera deitada, e só depoi perceber ue no computador o vídeo também fica na horizontal !<br />
+Abaixo segue o passo a passo para converter o video e deixa-lo na posição correta, utilizando uma ferramenta disponível no pacote Mplayer, o Mencoder.</p>
+<p style="text-align: justify;">A linha de comando é:<br />
+<strong>mencoder video_original.mpg -vf rotate=1:pp=ci -oac pcm -ovc lavc -o video_rotacionado.mpg</strong></p>
+<p style="text-align: justify;">Onde:</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">video_original.mpg</span> = O video a ser convertido. Poder ser em outros formatos como .avi ou .mov por exemplo.</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-vf rotate</span> = comando para rotacionar o video. Veja a tabela abaixo:<br />
+<strong>-vf rotate=0     (Rotaciona 90 graus sentido horário e inverte a imagem)<br />
+</strong><strong>-vf </strong><strong>rotate=1     (Rotaciona 90 graus somente)<br />
+</strong><strong>-vf</strong><strong> rotate=2     (Rotaciona 90 graus sentido anti-horário somente)<br />
+</strong><strong>-vf</strong><strong> rotate=3     (Rotaciona 90 graus sentido anti-horário e inverte a imagem) </strong></p>
+<p style="text-align: justify;"><span style="color: #ff0000;">pp=ci</span> = Ativa o filtro para desentrelaçar o video: &#8220;Cubic  interpolating  deinterlacing&#8221;</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-oac</span> = codec de audio.<br />
+<strong>-oac pcm               (uncompressed PCM audio)<br />
+</strong><strong>-oac </strong><strong>copy              (copia o audio, sem codificar)<br />
+</strong><strong>-oac </strong><strong>mp3lame   (mp3 codec</strong>)</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-ovc</span> = codec de video<br />
+<strong>-ovc lavc (libavcodec: mpeg1video, mpeg2video, flv, mpeg4, dvvideo, dentre outros )<br />
+-ovc xvid ( Xvid, MPEG-4 codec)<br />
+-ovc copy (copia o video, sem codificar)</strong></p>
+<p style="text-align: justify;"><span style="color: #ff0000;">-o video_rotacionado.mpg <span style="color: #000000;">= Video de saida.</span></span> Pode ser em outros formatos como .avi ou .mov por exemplo.<br />
+*Não é necessário que esteja com a mesma extensão que o arquivo de entrada.</p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p style="text-align: justify;"><strong>Instalação do pacote Mplayer ( Mencoder incluído )</strong></p>
+<p style="text-align: justify;">Visite o POST: <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" target="_blank">Mplayer: Projeto baseado no FFmpeg</a></p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<strong><br />
+</strong></p>
+<h3 style="text-align: justify;"><strong>Procedimento de Uso:</strong></h3>
+<p style="text-align: justify;"><strong> </strong></p>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-30" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" />Usuários Linux tem sempre mais facilidade, nesse tipo de procedimento.</p>
+<p style="text-align: justify;">Basta abrir o Terminal e digitar:<br />
+<strong>mencoder video_original.mpg -vf rotate=1:</strong><strong>pp=ci</strong><strong> -oac pcm -ovc lavc -o video_rotacionado.mpg</strong></p>
+<p style="text-align: justify;">Onde meu arquivo se chama video_original.mpg e se encontra na área de trabalho.<br />
+( Levando em consideração que ao abrir o terminal você vai estar dentro da pasta home do usuário local )</p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-29" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" />Usuários Windows levam mais tempo para poder executar o comando.<br />
+Entre em INICIAR &gt; EXECUTAR e digite <strong>cmd</strong> &gt; OK ( Para abrir o Terminal do Windows )<br />
+Acesse a pasta digitando:<br />
+<strong>cd Desktop/pasta_do_mplayer/<br />
+</strong>em seguida:<br />
+<strong>mencoder &#8220;../video_original.mpg&#8221; -vf rotate=1:</strong><strong>pp=ci</strong><strong> -oac pcm -ovc lavc -o &#8220;../video_rotacionado.mpg</strong>&#8220;<br />
+Onde meu arquivo se chama video_original.mpg e se encontra na área de trabalho.<br />
+( Utilizamos <strong><span style="color: #ff0000;">../</span></strong> para sair da pasta do mplayer e acessar o video_original.mpg e gravar o video_rotacionado.mpg na área de trabalho. )<br />
+Para maiores informações visite o POST: <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">Windows XP vs FFmpeg e Mplayer</a></p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p>Em caso de dúvidas, entre em contato &#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-143" data-post-type="none" ><small class="wp_rp_publish_date">20/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="wp_rp_title">Mplayer: Extraindo o áudio de um vídeo</a></li><li data-position="1" data-poid="in-1753" data-post-type="none" ><small class="wp_rp_publish_date">15/01/2010</small> <a href="https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html" class="wp_rp_title">Mencoder: Adicionando legenda em um vídeo</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-53" data-post-type="none" ><small class="wp_rp_publish_date">11/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></li><li data-position="4" data-poid="in-83" data-post-type="none" ><small class="wp_rp_publish_date">15/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="wp_rp_title">Mplayer: Projeto baseado no FFmpeg</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F19%2Fmplayer-rotacionando-um-video.html&amp;linkname=Mplayer%3A%20Rotacionando%20um%20V%C3%ADdeo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F19%2Fmplayer-rotacionando-um-video.html&amp;linkname=Mplayer%3A%20Rotacionando%20um%20V%C3%ADdeo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F19%2Fmplayer-rotacionando-um-video.html&amp;title=Mplayer%3A%20Rotacionando%20um%20V%C3%ADdeo" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>FFmpeg / Mplayer: Reproduzindo Vídeos</title>
+		<link>https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html#respond</comments>
+		<pubDate>Mon, 16 Feb 2009 18:42:50 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[audio]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[player]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=114</guid>
+		<description><![CDATA[Alguns dias atrás eu apresentei o FFmpeg e também como extrair imagens de um vídeo, mas somente agora me alertaram, que não demonstrei como reproduzir vídeos utilizando a ferramenta. Então vou exemplificar a reprodução utilizando tanto o FFmpeg como o Mplayer. Para quem é usuário Linux, já deve conhecer o Mplayer (  Mplayer Movie Player &#8230; <a href="https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html" class="more-link">Continue lendo <span class="screen-reader-text">FFmpeg / Mplayer: Reproduzindo Vídeos</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p style="text-align: justify;">Alguns dias atrás eu apresentei o <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video/" target="_blank">FFmpeg</a> e também como <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot/" target="_blank">extrair imagens de um vídeo</a>, mas somente agora me alertaram, que não demonstrei como reproduzir vídeos utilizando a ferramenta. Então vou exemplificar a reprodução utilizando tanto o FFmpeg como o Mplayer.</p>
+<p style="text-align: justify;">Para quem é usuário Linux, já deve conhecer o Mplayer (  Mplayer Movie Player ) um dos melhores reprodutores para linux, muito usado em sua versão com interface gráfica.<br />
+Para quem é usuário Windows, deve conhecer um Pacote de codec chamado K-Lite Mega Codec Pack, onde vem o Media Player Classic, famoso por reproduzir todos os tipos de vídeo. O pacote FFmpeg funciona também de maneira bem similar, só que com opções mais avançadas como a conversão de vídeos, por exemplo, utilizando codecs variados.</p>
+<h2 style="text-align: justify;">Utilizando o FFmpeg:</h2>
+<p style="text-align: justify;">Para assistir seus vídeos com o FFmpeg, utilizamos o componente FFplay.</p>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-30" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" />Usuários Linux tem sempre mais facilidade, nesse tipo de procedimento.</p>
+<p style="text-align: justify;">Basta abrir o Terminal e digitar:<br />
+<strong><span style="color: #888888;">ffplay &#8220;Desktop/filme.avi&#8221;</span></strong></p>
+<p style="text-align: justify;">Onde meu arquivo se chama filme.avi e se encontra na área de trabalho.<br />
+( Levando em consideração que ao abrir o terminal você vai estar dentro da pasta home do usuário local )</p>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-29" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" />Usuários Windows levam mais tempo para poder executar o comando.<br />
+Entre em INICIAR &gt; EXECUTAR e digite <strong>cmd</strong> &gt; OK ( Para abrir o Terminal do Windows )<br />
+Acesse a pasta digitando:<br />
+<strong>cd Desktop/pasta_do_ffmpeg/<br />
+</strong>em seguida:<br />
+<strong>ffplay.exe &#8220;../filme.avi&#8221;</strong></p>
+<p style="text-align: justify;">Onde meu arquivo se chama filme.avi e se encontra na área de trabalho.<br />
+( Utilizamos ../ para sair da pasta do ffmpeg e acessar o filme.avi a partir da área de trabalho. )<br />
+Para maiores informações visite o POST: <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer/" target="_blank">Windows XP vs FFmpeg e Mplayer<br />
+</a></p>
+<h2 style="text-align: justify;">Utilizando o Mplayer:</h2>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-30" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" />Basta abrir o Terminal e digitar:<br />
+<span style="color: #888888;"><strong>mplayer</strong></span> <strong><span style="color: #888888;">&#8220;Desktop/filme.avi&#8221;</span></strong></p>
+<p style="text-align: justify;">Onde meu arquivo se chama filme.avi e se encontra na área de trabalho.<br />
+( Levando em consideração que ao abrir o terminal você vai estar dentro da pasta home do usuário local )</p>
+<p style="text-align: justify;"><img class="alignnone size-full wp-image-29" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" />Entre em INICIAR &gt; EXECUTAR e digite <strong>cmd</strong> &gt; OK ( Para abrir o Terminal do Windows )<br />
+Acesse a pasta digitando:<br />
+<strong>cd Desktop/pasta_do_mplayer/<br />
+</strong>em seguida:<br />
+<strong>mplayer.exe &#8220;../filme.avi&#8221;</strong><br />
+Onde meu arquivo se chama filme.avi e se encontra na área de trabalho.</p>
+<p style="text-align: justify;">( Utilizamos ../ para sair da pasta do mplayer e acessar o filme.avi a partir da área de trabalho. )<br />
+Para maiores informações visite o POST: <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer/" target="_blank">Windows XP vs FFmpeg e Mplayer</a></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="1" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li><li data-position="2" data-poid="in-1784" data-post-type="none" ><small class="wp_rp_publish_date">01/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" class="wp_rp_title">FFmpeg: converta vídeos para iPhone</a></li><li data-position="3" data-poid="in-350" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" class="wp_rp_title">FFmpeg: Conversão de mp4 para wmv</a></li><li data-position="4" data-poid="in-53" data-post-type="none" ><small class="wp_rp_publish_date">11/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F16%2Fffmpeg-mplayer-reproduzindo-videos.html&amp;linkname=FFmpeg%20%2F%20Mplayer%3A%20Reproduzindo%20V%C3%ADdeos" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F16%2Fffmpeg-mplayer-reproduzindo-videos.html&amp;linkname=FFmpeg%20%2F%20Mplayer%3A%20Reproduzindo%20V%C3%ADdeos" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F16%2Fffmpeg-mplayer-reproduzindo-videos.html&amp;title=FFmpeg%20%2F%20Mplayer%3A%20Reproduzindo%20V%C3%ADdeos" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Mplayer: Projeto baseado no FFmpeg</title>
+		<link>https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html#comments</comments>
+		<pubDate>Sun, 15 Feb 2009 18:23:00 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[audio]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=83</guid>
+		<description><![CDATA[Mplayer é um player de vídeo código aberto, derivado do ffmpeg,  que roda em vários sistemas operacionais. Suporta diversos codecs como MPEG/VOB, AVI, ASF/WMA/WMV, QT/MOV/MP4 entre outros. Com ele você pode assitir DVDs, SVCD, DivX, WMV e vídeos H.264. O suporte para placas de vídeos é bem amplo. Funciona com a maioria dos drivers hoje &#8230; <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="more-link">Continue lendo <span class="screen-reader-text">Mplayer: Projeto baseado no FFmpeg</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p style="text-align: justify;">Mplayer é um player de vídeo código aberto, derivado do ffmpeg,  que roda em vários sistemas operacionais. Suporta diversos codecs como MPEG/VOB, AVI, ASF/WMA/WMV, QT/MOV/MP4 entre outros. Com ele você pode assitir DVDs, SVCD, DivX, WMV e vídeos H.264.</p>
+<p style="text-align: justify;">O suporte para placas de vídeos é bem amplo. Funciona com a maioria dos drivers hoje disponíveis. Existem também um suporte a legendas e uma ferramente bastante útil, que veremos depois chamada <strong>Mencoder, </strong>que funciona de maneira similar ao FFmpeg.</p>
+<p style="text-align: justify;">Abaixo segue a lista de <strong>formatos de entrada compatíveis</strong>:</p>
+<p style="text-align: justify;">(S)VCD (Super Video CD)<br />
+DVD, incluindo DVD protegido<br />
+MPEG-1/2 (ES/PS/PES/VOB)<br />
+RIFF AVI file format<br />
+ASF/WMV/WMA format<br />
+QT/MOV/MP4 format<br />
+RealAudio/RealVideo format<br />
+Ogg/OGM files<br />
+Matroska<br />
+NUT<br />
+NSV (Nullsoft Streaming Video)<br />
+VIVO format<br />
+FLI format<br />
+NuppelVideo format<br />
+yuv4mpeg format<br />
+FILM (.cpk) format<br />
+RoQ format<br />
+PVA format<br />
+streaming via HTTP/FTP, RTP/RTSP, MMS/MMST, MPST, SDP<br />
+Captura de TV</p>
+<p style="text-align: justify;"><strong>Codecs de vídeo suportados:</strong></p>
+<p style="text-align: justify;">MPEG-1 (VCD) and MPEG-2 (SVCD/DVD/DVB) video<br />
+MPEG-4 ASP incluindo todas as variantes do DivX<br />
+MPEG-4 AVC H.264<br />
+Windows Media Video 7/8 (WMV1/2)<br />
+Windows Media Video 9 (WMV3)<br />
+RealVideo 1.0, 2.0 (G2)<br />
+RealVideo 3.0 (RP8), 4.0 (RP9)<br />
+Sorenson v1/v3 (SVQ1/SVQ3), Cinepak, RPZA and other QuickTime codecs<br />
+DV video<br />
+3ivx<br />
+Intel Indeo3 (3.1, 3.2)<br />
+Intel Indeo 4.1 and 5.0 (using x86 DLL or XAnim codecs)<br />
+VIVO 1.0, 2.0, I263 and other H.263(+) variants (using x86 DLL)<br />
+MJPEG, AVID, VCR2, ASV2 and other hardware formats<br />
+FLI/FLC<br />
+HuffYUV</p>
+<p style="text-align: justify;"><strong>Codecs de áudio suportados:</strong></p>
+<p style="text-align: justify;">MPEG layer 1, 2, and 3 (MP3) audio<br />
+AC3/A52 (Dolby Digital)<br />
+AAC (MPEG-4 audio)<br />
+WMA (DivX Audio) v1, v2<br />
+WMA 9 (WMAv3), Voxware audio<br />
+RealAudio: COOK, SIPRO, ATRAC3 (using Real libraries)<br />
+RealAudio: DNET and older codecs<br />
+QuickTime: Qclp, Q-Design QDMC/QDM2, MACE 3/6 (using QT libraries), ALAC<br />
+Ogg Vorbis audio<br />
+alaw/ulaw, (ms)gsm, pcm, *adpcm e outros formatos simples de audio</p>
+<p style="text-align: justify;">Confira a lista atualizada de Codecs suportados pelo Mplayer em:<br />
+<a href="http://www.mplayerhq.hu/DOCS/codecs-status.html" target="_blank">http://www.mplayerhq.hu/DOCS/codecs-status.html</a></p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p style="text-align: justify;"><img class="size-full wp-image-30 alignleft" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" /></p>
+<p style="text-align: justify;">Instalando em Linux ( No exemplo, Ubuntu )</p>
+<p style="text-align: justify;"><span style="color: #333333;">sudo aptitude install mplayer</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Depois disso basta utilizar o mplayer com os parametros desejados.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span></p>
+<p style="text-align: justify;"><span style="color: #000000;"><img class="size-full wp-image-29 alignleft" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" />Instalando em Windows XP</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Página de Download:<br />
+<a href="http://www.mplayerhq.hu/design7/dload.html" target="_blank">http://www.mplayerhq.hu/design7/dload.html</a></span></p>
+<p style="text-align: justify;">Link direto: MPlayer 1.0rc2 Windows<br />
+<a href="http://www.mplayerhq.hu/MPlayer/releases/win32/MPlayer-mingw32-1.0rc2.zip" target="_blank">http://www.mplayerhq.hu/MPlayer/releases/win32/MPlayer-mingw32-1.0rc2.zip</a></p>
+<p style="text-align: justify;"><span style="color: #000000;">Baixe também os codecs:<br />
+<a href="http://www.mplayerhq.hu/MPlayer/releases/codecs/windows-essential-20071007.zip" target="_blank">http://www.mplayerhq.hu/MPlayer/releases/codecs/windows-essential-20071007.zip</a></span></p>
+<p style="text-align: justify;"><span style="color: #000000;"><strong>Instalação:<br />
+</strong>Extraia o Mplayer na área de trabalho ( mais acessível ), em seguida, todo os codecs baixados devem estar extraidos dentro da pasta <strong>codecs </strong>do Mplayer, que você acabou de extrair.<br />
+Certifique-se que todos os codecs estarão corretamente copiados dentro da pasta, ou seja, sem nenhuma subpasta.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Após isso basta utilizar o mplayer com os parametros desejados.<br />
+Para mais informações de como passar os paramentros do mplayer, veja o tópico anterior:<br />
+<a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer/" target="_self">Windows XP vs FFmpeg e Mplayer</a></span></p>
+<p style="text-align: justify;"><span style="color: #000000;"><span style="color: #000000;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span></span></p>
+<p style="text-align: justify;"><span style="color: #000000;"><span style="color: #000000;">Nosso próximo assunto será como utilizar o mplayer ou ffplay para reproduzir vídeos.</span></span></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-143" data-post-type="none" ><small class="wp_rp_publish_date">20/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="wp_rp_title">Mplayer: Extraindo o áudio de um vídeo</a></li><li data-position="1" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-350" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" class="wp_rp_title">FFmpeg: Conversão de mp4 para wmv</a></li><li data-position="4" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F15%2Fmplayer-projeto-baseado-no-ffmpeg.html&amp;linkname=Mplayer%3A%20Projeto%20baseado%20no%20FFmpeg" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F15%2Fmplayer-projeto-baseado-no-ffmpeg.html&amp;linkname=Mplayer%3A%20Projeto%20baseado%20no%20FFmpeg" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F15%2Fmplayer-projeto-baseado-no-ffmpeg.html&amp;title=Mplayer%3A%20Projeto%20baseado%20no%20FFmpeg" id="wpa2a_10"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>Windows XP vs FFmpeg e Mplayer</title>
+		<link>https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html#comments</comments>
+		<pubDate>Fri, 13 Feb 2009 22:30:22 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[audio]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[gravar]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[player]]></category>
+		<category><![CDATA[stream]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=89</guid>
+		<description><![CDATA[Vamos lá&#8230; Mais uma vez ajudando nossos amigos usuários Windows ! Para aqueles que não leram a máteria sobre  Windows XP vs Linux Ubuntu podem acessar clicando aqui. Mas ainda há aqueles que preferem o windows, não sei porque se tudo nele é mais complicado, mas vamos lá ! Existe uma certa dificuldade de usar &#8230; <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="more-link">Continue lendo <span class="screen-reader-text">Windows XP vs FFmpeg e Mplayer</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="size-full wp-image-29 aligncenter" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" align="center" /></p>
+<p style="text-align: justify;">Vamos lá&#8230; Mais uma vez ajudando nossos amigos usuários Windows !<br /> Para aqueles que não leram a máteria sobre  Windows XP vs Linux Ubuntu podem acessar <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu/" target="_blank">clicando aqui</a>.</p>
+<p style="text-align: justify;">Mas ainda há aqueles que preferem o windows, não sei porque se tudo nele é mais complicado, mas vamos lá !</p>
+<p style="text-align: justify;">Existe uma certa dificuldade de usar o FFmpeg em ambiente Windows. No linux, basta digitar na linha de comando <strong>ffmpeg &#8220;mais os parametros&#8221;</strong> ou até <strong>mplayer &#8220;mais os parametros</strong>&#8220;, infelizmente Windows é tão bom, que vai nos  dar um pouco mais de trabalho ! O motivo disso ? Simples&#8230; Porque o FFmpeg e o Mplayer ( derivado do ffmpeg ) forão desenvolvidos dentro do Linux. Como o código é aberto, é possível achar algumas versões compiladas para Windows.</p>
+<p style="text-align: justify;">Vamos agora por a mão na massa !</p>
+<p style="text-align: justify;">Para quem não leu a matéria <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video/" target="_blank">FFmpeg: Solução ideal para Áudio e Vídeo</a>, o FFmpeg pode ser obtido pelo link: <a href="https://rafaelbiriba.com/ffmpeg-r16537-gpl-static-win32.zip" target="_blank">https://rafaelbiriba.com/ffmpeg-r16537-gpl-static-win32.zip</a></p>
+<p style="text-align: justify;">Para ficar mais acessível, extraia o arquivo .zip na área de trabalho, depois abra o bloco de notas ( Iniciar &gt; Executar &gt; Digite cmd &gt; OK )</p>
+<p style="text-align: justify;">Com o terminal aberto, devemos agora entrar no diretório do ffmpeg.</p>
+<p style="text-align: justify;">Acesse a pasta digitando:<br /> <strong>cd Desktop/pasta_do_ffmpeg/</strong></p>
+<p style="text-align: justify;">Agora com o diretório do FFmpeg aberto pasta digitar:<br /> <strong>ffmpeg.exe mais os parametros desejados</strong></p>
+<p style="text-align: justify;">Com o Mplayer será bem parecido, basta extrair na área de trabalho ( mais acessível ), entrar na pasta do Mplayer no terminal e digitar mplayer.exe mais os paramentros.</p>
+<p style="text-align: justify;">Só gostaria de ressaltar, e reafirmar a facilidade desta operação quando realizada em Linux. Já vou adiantando que nem todos os Codecs tanto de vídeo como áudio, não estão disponíveis para a maioria das compilações Windows. Hoje mesmo, tive um super-problema para rodar o codec de vídeo <strong>libdv</strong> no Mplayer numa máquina Windows, e a unica solução que eu consegui achar foi: não usar o codec <strong>libdv</strong>. Logicamente arrumei uma outra saida com outro codec utilizando ffmpeg e o codec dvvideo. Porém existe muitos outros que não estão disponíveis.</p>
+<p style="text-align: justify;">Meu conselho: Eu já dei.. use Linux&#8230; Para quem se recusa de qualquer forma, também já disse que é possível utilizar rodando de um CD, também é possível instala-lo num pendrive e até mesmo rodar junto com o Windows ( Dual Boot ). Opções é que não faltam&#8230; Agora cabe a você avaliar qual vai ser mais útil para você trabalhar e usar&#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li><li data-position="1" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li><li data-position="2" data-poid="in-53" data-post-type="none" ><small class="wp_rp_publish_date">11/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></li><li data-position="3" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="4" data-poid="in-1784" data-post-type="none" ><small class="wp_rp_publish_date">01/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" class="wp_rp_title">FFmpeg: converta vídeos para iPhone</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F13%2Fwindows-xp-vs-ffmpeg-e-mplayer.html&amp;linkname=Windows%20XP%20vs%20FFmpeg%20e%20Mplayer" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F13%2Fwindows-xp-vs-ffmpeg-e-mplayer.html&amp;linkname=Windows%20XP%20vs%20FFmpeg%20e%20Mplayer" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F13%2Fwindows-xp-vs-ffmpeg-e-mplayer.html&amp;title=Windows%20XP%20vs%20FFmpeg%20e%20Mplayer" id="wpa2a_12"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html/feed</wfw:commentRss>
+		<slash:comments>10</slash:comments>
+		</item>
+	</channel>
+</rss>

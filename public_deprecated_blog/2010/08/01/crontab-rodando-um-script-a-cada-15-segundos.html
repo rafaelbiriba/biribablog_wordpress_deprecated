@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<!--<![endif]-->
+<head>
+<base href="https://rafaelbiriba.com/blogwp.html" />
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Crontab: rodando um script a cada 15 segundos | Rafael Biriba Blog</title>
+	
+	
+	<!--[if lt IE 9]>
+	<script src="https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	
+
+
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.rafaelbiriba.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wgs-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/wgs.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/style.css?ver=4.5.3' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='github-profile-octicons-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/octicons/octicons.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='github-profile-widget-styles-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/widget.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='A2A_SHARE_SAVE-css'  href='https://rafaelbiriba.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.12' type='text/css' media='all' />
+<link rel='stylesheet' id='fbSEOStylesheet-css'  href='https://rafaelbiriba.com/wp-content/plugins/seo-facebook-comments/assets/fbseo-style.css?ver=4.5.3' type='text/css' media='all' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.2 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-7346716-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/content-slide/js/coin-slider.js?ver=4.5.3'></script>
+<link rel='https://api.w.org/' href='https://rafaelbiriba.com/wp-json/' />
+
+ 
+
+<link rel='next' title='Globo.com: Inscrições para estágio vão até 15 de outubro/2010' href='https://rafaelbiriba.com/2010/08/26/globocom-inscricoes-para-estagio-vao-ate-15-de-outubro2010.html' />
+
+<link rel='shortlink' href='https://rafaelbiriba.com/?p=2174' />
+
+
+
+<script type="text/javascript"><!--
+var a2a_config=a2a_config||{},wpa2a={done:false,html_done:false,script_ready:false,script_load:function(){var a=document.createElement('script'),s=document.getElementsByTagName('script')[0];a.type='text/javascript';a.async=true;a.src='https://static.addtoany.com/menu/page.js';s.parentNode.insertBefore(a,s);wpa2a.script_load=function(){};},script_onready:function(){wpa2a.script_ready=true;if(wpa2a.html_done)wpa2a.init();},init:function(){for(var i=0,el,target,targets=wpa2a.targets,length=targets.length;i<length;i++){el=document.getElementById('wpa2a_'+(i+1));target=targets[i];a2a_config.linkname=target.title;a2a_config.linkurl=target.url;a2a_config.linkmedia=target.media;if(el){a2a.init('page',{target:el});el.id='';}wpa2a.done=true;}wpa2a.targets=[];}};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.callbacks.push({ready:wpa2a.script_onready});a2a_config.templates=a2a_config.templates||{};a2a_localize = {
+	Share: "Compartilhar",
+	Save: "Salvar",
+	Subscribe: "Inscrever",
+	Email: "Email",
+	Bookmark: "Favoritos",
+	ShowAll: "Mostrar tudo",
+	ShowLess: "Mostrar menos",
+	FindServices: "Procurar serviço(s)",
+	FindAnyServiceToAddTo: "Encontrar rapidamente qualquer serviço para",
+	PoweredBy: "Serviço fornecido por",
+	ShareViaEmail: "Share via email",
+	SubscribeViaEmail: "Subscribe via email",
+	BookmarkInYourBrowser: "Adicionar aos favoritos",
+	BookmarkInstructions: "Press Ctrl+D or \u2318+D to bookmark this page",
+	AddToYourFavorites: "Adicionar a favoritos",
+	SendFromWebOrProgram: "Send from any email address or email program",
+	EmailProgram: "Email program",
+	More: "More&#8230;"
+};
+
+//--></script>
+<script type="text/javascript">
+	var $jquery = jQuery.noConflict(); 
+	$jquery(document).ready(function() 
+	{
+		$jquery('#wpcontent_slider').coinslider(
+	{ 
+	width: 980, 
+	height: 370, 
+	spw: 7, 
+	sph: 5, 
+	delay: 3000, 
+	sDelay: 30, 
+	opacity: 0.7, 
+	titleSpeed: 500, 
+	effect: 'random', 
+	navigation: true, 
+	links : true, 
+	hoverPause: true });
+		});
+	</script>
+<style type="text/css" media="screen">
+		
+#wpcontent_slider_container
+{
+	overflow: hidden; position: relative; padding:0px;margin:0px; text-align:center; width:980px !important;
+	height:370px !important;
+}
+#wpcontent_slider 
+{ overflow: hidden; position: relative; font-family:\'Trebuchet MS\', Helvetica, sans-serif;border:0px solid #ffffff; text-align:left;}
+#wpcontent_slider a,#wpcontent_slider a img { border: none; text-decoration: none; outline: none; }
+#wpcontent_slider h4,#wpcontent_slider h4 a 
+{margin: 0px;padding: 0px; font-family: 'Trebuchet MS', Helvetica, sans-serif;
+text-decoration:none;font-size: 18px; color:#ffffff;}
+#wpcontent_slider .cs-title {width: 100%;padding: 10px; background: #ffffff; color: #000000; font-family: 'Trebuchet MS', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal;line-height: normal;}
+#wpcontent_slider_container .cs-prev,#wpcontent_slider_container .cs-next {font-weight: bold;background: #000000;
+font-size: 28px; font-family: "Courier New", Courier, monospace; color: #ffffff !important;
+padding: 0px 10px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;}
+#wpcontent_slider_container .cs-buttons { font-size: 0px; padding: 10px 0px 10px 0px;
+margin:0px auto; float:left;clear:left;
+}
+#wpcontent_slider_container .cs-buttons a { outline:none; margin-left: 5px; height: 10px; width: 10px; float: left; border: 1px solid #000000; color: #000000; text-indent: -1000px; 
+}
+#wpcontent_slider_container .cs-active { background-color: #000000; color: #FFFFFF; }
+#wpcs_link_love,#wpcs_link_love a{display:none;}
+</style>
+<!-- End Content Slider Settings -->
+
+
+		<style type="text/css">
+			.cbd {
+				position: fixed;
+				left: 5px;
+				bottom: 5px;
+			}
+			.cbd a img {
+				border: 0;
+			}
+		</style>
+	<meta property='fb:admins' content='1644160548' /><meta property='og:title' content='Crontab: rodando um script a cada 15 segundos' /><meta property='og:site_name' content='Rafael Biriba Blog' /><meta property='og:url' content='https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html' /><meta property='og:type' content='article' /><meta property='fb:app_id' content='589867447707428'>
+	<link rel="stylesheet" href="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded/shutter-reloaded.css?ver=2.4" type="text/css" media="screen" />
+	<style type='text/css'>
+div#shNavBar a {color: #000000;}
+div#shNavBar {background-color:#ffff00;}
+div#shNavBar {color:#000000;}
+div#shDisplay div#shTitle {color:#ffff00;}
+</style>
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "https://rafaelbiriba.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6';
+	window._wp_rp_post_id = '2174';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = 'Crontab%3A+rodando+um+script+a+cada+15+segundos';
+	window._wp_rp_post_tags = ['crontab', 'every', 'run', 'scheduler', 'script', 'unix', 'sistemas+operacionais', 'diversos', 'sleep', 'como', 'os', 'internet', 'nem', 'segundo', 'ess', 'de', 'ir', 'nova', 'uma', 'vai', 'dado', 'na', 'voc'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.6" async></script>
+</head>
+
+<body class="single single-post postid-2174 single-format-standard masthead-fixed singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="https://rafaelbiriba.com/blogwp.html" rel="home">Rafael Biriba Blog</a></h1>
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">Pesquisar</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">Menu principal</button>
+				<a class="screen-reader-text skip-link" href="#content">Pular para o conteúdo</a>
+				<div id="primary-menu" class="nav-menu"><ul><li class="page_item page-item-3171"><a href="https://rafaelbiriba.com/search_gcse">Busca</a></li><li class="page_item page-item-101"><a href="https://rafaelbiriba.com/contatos">Contatos</a></li><li class="page_item page-item-1251"><a href="https://rafaelbiriba.com/twitter">Twitter</a></li></ul></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get"
+    class="search-form" action="https://rafaelbiriba.com//search_gcse">
+    <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input type="text" value="" name="q" id="q" />
+        <input type="submit" id="searchsubmit"
+            value="Pesquisar" />
+    </div>
+</form>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 798x80 images only -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="6793331087"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+			
+<article id="post-2174" class="post-2174 post type-post status-publish format-standard hentry category-diversos category-sistemas-operacionais tag-crontab tag-every tag-run tag-scheduler tag-script tag-unix">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/diversos" rel="category tag">Diversos</a>, <a href="https://rafaelbiriba.com/category/sistemas-operacionais" rel="category tag">Sistemas Operacionais</a></span>
+		</div>
+		<h1 class="entry-title">Crontab: rodando um script a cada 15 segundos</h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html" rel="bookmark"><time class="entry-date" datetime="2010-08-01T15:31:04+00:00">01/08/2010</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html#comments"><span class="dsq-postid" data-dsqidentifier="2174 https://rafaelbiriba.com/?p=2174">20 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+<p style="text-align: justify;"><img class="size-full wp-image-2175 alignleft" title="crontab" src="https://rafaelbiriba.com/wp-content/uploads/2010/07/crontab.png" alt="crontab" width="180" height="185" /><br />Criei esse POST com 2 objetivos: Para compartilhar a minha idéia e quem sabe também obter novas maneiras de resolver um pequeno problema.</p>
+<p style="text-align: justify;"><strong>Problema:</strong> Digamos que você tenha que acessar uma URL qualquer (exemplo: <strong>http://localhost:3000/coletar</strong> ) a cada 15 segundos. Isso rodará um script que irá colher uma série de dados e armazena-los em banco.</p>
+<p style="text-align: justify;">Então, se você rodar um comando como este: <strong>&#8220;curl http://localhost:3000/coletar&#8221;</strong> a cada 15 segundos, resolveria meu problema. Agora, como fazer isso usando crontab ?</p>
+<p style="text-align: justify;">Se você procurar a solução na internet, encontrará algumas boas idéias como fazer um script e com alguns sleeps e um loop interno você não precisa nem de cron:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">#!/bin/sh</span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #7a0874; font-weight: bold;">&#91;</span> <span style="color: #000000;">1</span> <span style="color: #7a0874; font-weight: bold;">&#93;</span>; <span style="color: #000000; font-weight: bold;">do</span>
+    curl <span style="color: #ff0000;">&quot;http://localhost:3000/coletar&quot;</span>
+    <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">15</span>
+<span style="color: #000000; font-weight: bold;">done</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Basta rodar esse script, que com um loop eterno, vai rodar o comando de 15 em 15 segundos&#8230; Agora você deve estar pensando: &#8220;Problema resolvido!&#8221; &#8230;</p>
+<p style="text-align: justify;">Na verdade, não. Os dados precisam ser coletados necessariamente a cada 15 segundos. Isso significa que se por acaso, quando for feito um request, se o servidor demorar pra responder aquela solicitação, isso pode atrasar a próxima coleta, e depois de algum tempo, o atraso só tende a piorar.</p>
+<p style="text-align: justify;"><strong>Então qual a melhor solução para este problema ?</strong><br />Como eu preciso coletar a cada 15 segundos sem que uma coleta atrapalhe a outra, acho que a melhor forma de fazer isso foi adicionar no crontab do usuário:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span>
+<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">15</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span>
+<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">30</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span>
+<span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #000000; font-weight: bold;">*</span> <span style="color: #c20cb9; font-weight: bold;">sleep</span> <span style="color: #000000;">45</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> curl <span style="color: #ff0000;">'http://localhost:3000/coletar'</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Com isso, os comandos serão executados independentemente a cada 15 segundos&#8230;</p>
+<p style="text-align: justify;">Então é isso&#8230;</p>
+<p style="text-align: justify;"><strong>Se você conhece alguma forma mais eficiente para fazer isso&#8230; </strong>Não deixe de  compartilhar a sua idéia comigo 😉</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="1" data-poid="in-2030" data-post-type="none" ><small class="wp_rp_publish_date">19/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html" class="wp_rp_title">FFmpeg: Batch para conversão de vídeos para iPhone [Windows]</a></li><li data-position="2" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="3" data-poid="in-1449" data-post-type="none" ><small class="wp_rp_publish_date">18/01/2011</small> <a href="https://rafaelbiriba.com/2011/01/18/blogs-poluidos-o-problema-de-utilizar-anuncios.html" class="wp_rp_title">Blogs poluídos: O problema de utilizar anúncios</a></li><li data-position="4" data-poid="in-2752" data-post-type="none" ><small class="wp_rp_publish_date">31/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/31/o-blog-esta-cara-nova-em-comemoracao-ao-centesimo-post.html" class="wp_rp_title">O blog está cara nova em comemoração ao centésimo post</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_1"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html" data-text="Crontab: rodando um script a cada 15 segundos"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F08%2F01%2Fcrontab-rodando-um-script-a-cada-15-segundos.html&amp;linkname=Crontab%3A%20rodando%20um%20script%20a%20cada%2015%20segundos" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F08%2F01%2Fcrontab-rodando-um-script-a-cada-15-segundos.html&amp;linkname=Crontab%3A%20rodando%20um%20script%20a%20cada%2015%20segundos" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a>
+<script type="text/javascript"><!--
+if(wpa2a)wpa2a.script_load();
+//--></script>
+</div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/crontab" rel="tag">crontab</a><a href="https://rafaelbiriba.com/tag/every" rel="tag">every</a><a href="https://rafaelbiriba.com/tag/run" rel="tag">run</a><a href="https://rafaelbiriba.com/tag/scheduler" rel="tag">scheduler</a><a href="https://rafaelbiriba.com/tag/script" rel="tag">script</a><a href="https://rafaelbiriba.com/tag/unix" rel="tag">unix</a></span></footer></article><!-- #post-## -->
+	<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Navegação de posts</h1>
+		<div class="nav-links">
+			<a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" rel="prev"><span class="meta-nav">Post anterior</span>VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a><a href="https://rafaelbiriba.com/2010/08/26/globocom-inscricoes-para-estagio-vao-ate-15-de-outubro2010.html" rel="next"><span class="meta-nav">Próximo post</span>Globo.com: Inscrições para estágio vão até 15 de outubro/2010</a>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	<div id="fbSEOComments">	<fb:comments
+                                id='seoFacebookCommentsPlugin'
+								href='https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html'
+								num_posts='10'
+								colorscheme='light'
+								order_by=''></fb:comments></div><div id='fb-root'></div>
+                    <script>
+                            window.fbAsyncInit = function() {
+                                FB.init({
+                                  appId      : '589867447707428', // App ID
+                                  status     : true, // check login status
+                                  cookie     : true, // enable cookies to allow the server to access the session
+                                  xfbml      : true  // parse XFBML
+                                });
+                                // Additional initialization code here
+                              };
+                                //  Load the SDK Asynchronously
+                              (function(d){
+                                 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                                 if (d.getElementById(id)) {return;}
+                                 js = d.createElement('script'); js.id = id; js.async = true;
+                                 js.src = "//connect.facebook.net/pt_BR/all.js";
+                                 ref.parentNode.insertBefore(js, ref);
+                           }(document))
+                    </script>
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-3613">
+        <div id="dsq-comment-header-3613" class="dsq-comment-header">
+            <cite id="dsq-cite-3613">
+                <a id="dsq-author-user-3613" href="http://www.akitaonrails.com" target="_blank" rel="nofollow">AkitaOnRails</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3613" class="dsq-comment-body">
+            <div id="dsq-comment-message-3613" class="dsq-comment-message"><p>Oi, 3 coisas. Por que não &#8220;*/15&#8221; para dizer &#8220;a cada 15 segundos&#8221;? Precisa ser chamada com curl? É um site externo? Se for na mesma maquina talvez um task de Rake fosse mais eficiente. Cuidado porque se por acaso uma chamada levar mais de 15 segundos elas vão encavalar, dai ou o processo é independente e isolado e aí talvez não tenha problema ou talvez o processo precise checar se não tem outra ainda em andamento (se for um task rake, usando um arquivo de pid, por exempo).</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3614">
+        <div id="dsq-comment-header-3614" class="dsq-comment-header">
+            <cite id="dsq-cite-3614">
+                <a id="dsq-author-user-3614" href="http://www.akitaonrails.com" target="_blank" rel="nofollow">AkitaOnRails</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3614" class="dsq-comment-body">
+            <div id="dsq-comment-message-3614" class="dsq-comment-message"><p>Oops falei besteira, a granularidade do cron é minuto então o que voce fez esta certo.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-3616">
+        <div id="dsq-comment-header-3616" class="dsq-comment-header">
+            <cite id="dsq-cite-3616">
+                <a id="dsq-author-user-3616" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3616" class="dsq-comment-body">
+            <div id="dsq-comment-message-3616" class="dsq-comment-message"><p>Sim, o meu problema foi exatamente que o cron roda minuto a minuto ! =P</p>
+<p>É um GET que coleta informações em alguns servidores, que apesar da rede interna, pode ter certa lentidão no tempo de resposta,&#8230;</p>
+<p>Por isso rodei comandos curl separados para que um não prenda o outro!</p>
+<p>Não acho a solução a mais eficiente, mas serviu perfeitamente para a minha necessidade, na época&#8230;</p>
+<p>A idéia de criar um rake até que não é ruim =)</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3642">
+        <div id="dsq-comment-header-3642" class="dsq-comment-header">
+            <cite id="dsq-cite-3642">
+                <span id="dsq-author-user-3642">Henrique</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3642" class="dsq-comment-body">
+            <div id="dsq-comment-message-3642" class="dsq-comment-message"><p>Não resolveria mandar o curl para background? Assim o retorno do comando é imediato e será esperado somente 15 segundos até a próxima iteração.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-3643">
+        <div id="dsq-comment-header-3643" class="dsq-comment-header">
+            <cite id="dsq-cite-3643">
+                <a id="dsq-author-user-3643" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3643" class="dsq-comment-body">
+            <div id="dsq-comment-message-3643" class="dsq-comment-message"><p>Olá Henrique,</p>
+<p>As tarefas do cron são executadas em background&#8230;</p>
+<p>Não entendi bem o que você quiz dizer&#8230;  Poderia explicar de outra maneira? </p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3644">
+        <div id="dsq-comment-header-3644" class="dsq-comment-header">
+            <cite id="dsq-cite-3644">
+                <span id="dsq-author-user-3644">Henrique</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3644" class="dsq-comment-body">
+            <div id="dsq-comment-message-3644" class="dsq-comment-message"><p><a href="#comment-3643" rel="nofollow">@ Rafael Biriba</a> </p>
+<p>Me referia a solução do script com &#8220;loop eterno&#8221;.</p>
+<p>Pelo que entendi, o problema é que o curl não retorna enquanto o servidor não terminar de processar o request, logo, você acaba esperando 15 segundos + tempo de retorno do servidor a cada iteração&#8230; mandando o curl para background, o tempo de retorno é praticamente 0, o que resolveria o problema, ou não? 🙂</p>
+<p>[]s</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-3645">
+        <div id="dsq-comment-header-3645" class="dsq-comment-header">
+            <cite id="dsq-cite-3645">
+                <a id="dsq-author-user-3645" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3645" class="dsq-comment-body">
+            <div id="dsq-comment-message-3645" class="dsq-comment-message"><p>Correto Henrique,</p>
+<p>No caso do cron, funcionaria tranquilamente&#8230;</p>
+<p>No caso do script de loop eterno, essa sua solução serviria também&#8230; Colocando o Curl para rodar em background, usando o (<strong>&#038;</strong>) por exemplo, ele chamaria o sleep 15 segundos, e logo em seguida chamaria o curl de novo, e assim em diante&#8230;<br />
+Funcionaria perfeitamente também&#8230;.</p>
+<p>Valeu pela idéia&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3926">
+        <div id="dsq-comment-header-3926" class="dsq-comment-header">
+            <cite id="dsq-cite-3926">
+                <a id="dsq-author-user-3926" href="http://meusgastos.com.br" target="_blank" rel="nofollow">Luciano Camilo</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3926" class="dsq-comment-body">
+            <div id="dsq-comment-message-3926" class="dsq-comment-message"><p>Só uma observação quanto ao loop eterno. Em teoria ele funciona, mas se der pau no processo você perderia os próximos request até perceba o problema. Colocando no cron cada 1 min, se der pau você so perde aquele pedido. </p>
+<p>Acho que sua solução sem loop eterno mais confiavel.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4633">
+        <div id="dsq-comment-header-4633" class="dsq-comment-header">
+            <cite id="dsq-cite-4633">
+                <span id="dsq-author-user-4633">Ayslan</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4633" class="dsq-comment-body">
+            <div id="dsq-comment-message-4633" class="dsq-comment-message"><p>Pessoal, sou programador, porém leigo nessa situação que nova para mim. Estou desenvolvendo um site onde há a necessidade de um script ser rodado em uma predeterminada hora do dia. A minha questão é: Não sou dono do site de hospedagem, posso utilizar o cron? Se sim, como?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-4639">
+        <div id="dsq-comment-header-4639" class="dsq-comment-header">
+            <cite id="dsq-cite-4639">
+                <a id="dsq-author-user-4639" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4639" class="dsq-comment-body">
+            <div id="dsq-comment-message-4639" class="dsq-comment-message"><p>Olá Ayslan,<br />
+A empresa que hospeda o seu site não libera nenhum painel de controle ?</p>
+<p>Geralmente nos paineis de controle de hospedagem (como o Cpanel, por exemplo), você tem acesso a colocar script para rodar no cron.</p>
+<p>Agora sem isso, não tem como.<br />
+Você pode tentar uma gambiarra:</p>
+<p>Coloca o script disponivel publicamente ( exemplo.com/script.php ) e tenta conseguir algum computador, na sua casa, ou na casa de algum amigo que fique ligado 24h, e coloque uma chamada no cron para chamar o seu script.</p>
+<p>Mas se sua hospedagem não te libera o cron, talvez esteja na hora de tentar mudar&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4654">
+        <div id="dsq-comment-header-4654" class="dsq-comment-header">
+            <cite id="dsq-cite-4654">
+                <span id="dsq-author-user-4654">Ayslan</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4654" class="dsq-comment-body">
+            <div id="dsq-comment-message-4654" class="dsq-comment-message"><p><a href="#comment-4639" rel="nofollow">@Rafael Biriba </a> </p>
+<p>Olá, Rafael. Realmente eu deveria ter verificado o CPanel antes de fazer a pergunta&#8230; =]</p>
+<p>Está lá sim.</p>
+<p>Valeu!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-4674">
+        <div id="dsq-comment-header-4674" class="dsq-comment-header">
+            <cite id="dsq-cite-4674">
+                <a id="dsq-author-user-4674" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4674" class="dsq-comment-body">
+            <div id="dsq-comment-message-4674" class="dsq-comment-message"><p>Olá Ayslan,</p>
+<p>É normal ter esse tipo de duvida, até porque o Cpanel tem muitas funções.</p>
+<p>Obrigado pela visita e volte sempre&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-5562">
+        <div id="dsq-comment-header-5562" class="dsq-comment-header">
+            <cite id="dsq-cite-5562">
+                <span id="dsq-author-user-5562">Carlos Horoshi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5562" class="dsq-comment-body">
+            <div id="dsq-comment-message-5562" class="dsq-comment-message"><p>Bom eu não tenho esse problema pois eu utilizo o DotNetPanel na <a href="http://inter.net.br/" rel="nofollow">http://inter.net.br/</a> não tenho muita dificuldade para configurar o cron. Tirando que já existe varias tarefas pré definidas&#8230; então é só selecionar e mandar executar em tal tempo..</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-5567">
+        <div id="dsq-comment-header-5567" class="dsq-comment-header">
+            <cite id="dsq-cite-5567">
+                <a id="dsq-author-user-5567" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5567" class="dsq-comment-body">
+            <div id="dsq-comment-message-5567" class="dsq-comment-message"><p>Entendi&#8230; Fazendo prograpanda de hospedagem aqui&#8230;</p>
+<p>Dúvido que eles tenham pré-definição para agendamento de 15 em 15 segundos&#8230; haha</p>
+<p>Boa sorte aí&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-5653">
+        <div id="dsq-comment-header-5653" class="dsq-comment-header">
+            <cite id="dsq-cite-5653">
+                <span id="dsq-author-user-5653">Carlos Horoshi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5653" class="dsq-comment-body">
+            <div id="dsq-comment-message-5653" class="dsq-comment-message"><p>Boa Tarde&#8230; </p>
+<p>Não vim fazer propaganda só que no hosting que eu utilizo dá pra fazer agendamento de tarefas de 15 em 15 segundos.</p>
+<p>Segue ai prova ai :<br />
+<a href="http://img225.imageshack.us/img225/8913/cron15em15.png" rel="nofollow">http://img225.imageshack.us/img225/8913/cron15em15.png</a></p>
+<p>Abraço. 🙂</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html' rel='external nofollow' class='url'>Net-sftp: Solução para timeout durante o upload | Rafael Biriba Blog</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-33260">
+        <div id="dsq-comment-header-33260" class="dsq-comment-header">
+            <cite id="dsq-cite-33260">
+                <a id="dsq-author-user-33260" href="http://matraca" target="_blank" rel="nofollow">Delfim</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33260" class="dsq-comment-body">
+            <div id="dsq-comment-message-33260" class="dsq-comment-message"><p>Estou com um tema Zenko Magazine  1.6 o mesmo que vc utiliza.<br />
+mas o servidor e windows e nao da para o comando 755.</p>
+<p>&#8212;&#8212;&#8212;&#8212;-<br />
+ae as imagens nao aparece que devo fazer</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-33580">
+        <div id="dsq-comment-header-33580" class="dsq-comment-header">
+            <cite id="dsq-cite-33580">
+                <a id="dsq-author-user-33580" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33580" class="dsq-comment-body">
+            <div id="dsq-comment-message-33580" class="dsq-comment-message"><p>As imagens que vocês pergunta, seriam os thumbs ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-76683">
+        <div id="dsq-comment-header-76683" class="dsq-comment-header">
+            <cite id="dsq-cite-76683">
+                <a id="dsq-author-user-76683" href="http://---" target="_blank" rel="nofollow">Dinho Pereira</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-76683" class="dsq-comment-body">
+            <div id="dsq-comment-message-76683" class="dsq-comment-message"><p>Estou com um problema.<br />
+Tenho um .sh que executa um zenity, ex:</p>
+<p>#!bin/bash<br />
+zenity &#8211;info &#8211;text=&#8217;Bem vindo&#8217;</p>
+<p>Gostaria de colocar este script para rodar a cada minuto, fiz o exemplo citado acima e não funciona:</p>
+<p>* * * * * /home/dinho/script.sh</p>
+<p>O mesmo já está com permissão para executar e tudo mais, tanto que é executado no início da sessão</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+	<aside id="text-569858663" class="widget widget_text">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- vertical blog -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="7274679989"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside></div><!-- #content-sidebar -->
+<div id="secondary">
+		<h2 class="site-description">Tecnologia e informação no lugar certo !</h2>
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="text-569858664" class="widget widget_text"><h1 class="widget-title">Blog Desatualizado</h1>			<div class="textwidget">Depois de muitos anos, está na hora de mudar!
+Em breve um novo blog, muito melhor e com mais conteúdo!
+Se você está lendo isso, tente acessar <a href="https://rafaelbiriba.com/blog" target="_blank">https://rafaelbiriba.com/blog</a> para ver se o novo blog já está disponível!! :)
+Previsão de ir online: Agosto/2016</div>
+		</aside><aside id="text-347930551" class="widget widget_text"><h1 class="widget-title">Sobre o Autor</h1>			<div class="textwidget"><img alt="" src="https://1.gravatar.com/avatar/908bb0e461d553752af1df7c5849df52?s=80&amp;d=&amp;r=G" class="avatar avatar-42 photo" height="80" width="80">
+<div style="text-align: justify;"><strong>Rafael Biriba</strong>: Full Stack Web Developer since 2008 with experience in the development field using technologies like Ruby on Rails, PHP, HTML5, Javascript (Jquery / Backbone.js), Video encoding and delivery (Flash Media Server, Wowza, ffmpeg tools), Database SQL and NoSQL (Mysql, MongoDB, Redis), Virtualization and automation using virtualbox. With knowledge of development techniques and practices such as TDD, Domain Driven Design and Object Oriented Design.</div></div>
+		</aside><aside id="github-profile-2" class="widget widget_github-profile"><aside><h1 class="widget-title">Github</h1><div class="github-widget" id="github-profile-2"><header class="github-widget-header"><img class="github-widget-company-logo" title="GitHub" src="https://assets-cdn.github.com/favicon.ico"/><div class="github-widget-header-text"><a class="github-widget-header-link" target="_blank" href="https://github.com/rafaelbiriba" title="View profile">rafaelbiriba (Rafael Biriba)</a></div></header><div class="github-widget-content"><a target="_blank" href="https://github.com/rafaelbiriba" title="View profile"><img class="github-profile-pic" src="https://avatars.githubusercontent.com/u/324743?v=3" style="border-radius: 5px"> <span class="github-names"> <p class="github-name">Rafael Biriba</p> <span class="github-username">rafaelbiriba</span> </span></a><div class="github-block github-vcard-stats"><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/followers"><strong class="github-vcard-stat-count">30</strong><span class="text-muted">Followers</span></a><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/following"><strong class="github-vcard-stat-count">9</strong><span class="text-muted">Following</span></a><div style="clear: both;"></div></div> </div></div></aside></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h1 class="widget-title">Nuvem de Tags</h1><div class="tagcloud"><a href='https://rafaelbiriba.com/tag/904' class='tag-link-127 tag-link-position-1' title='5 tópicos' style='font-size: 8pt;'>9.04</a>
+<a href='https://rafaelbiriba.com/tag/armazenamento' class='tag-link-76 tag-link-position-2' title='7 tópicos' style='font-size: 11.36pt;'>armazenamento</a>
+<a href='https://rafaelbiriba.com/tag/atualizando' class='tag-link-132 tag-link-position-3' title='5 tópicos' style='font-size: 8pt;'>atualizando</a>
+<a href='https://rafaelbiriba.com/tag/atualizar' class='tag-link-130 tag-link-position-4' title='10 tópicos' style='font-size: 15.28pt;'>atualizar</a>
+<a href='https://rafaelbiriba.com/tag/audio' class='tag-link-22 tag-link-position-5' title='10 tópicos' style='font-size: 15.28pt;'>audio</a>
+<a href='https://rafaelbiriba.com/tag/blog' class='tag-link-188 tag-link-position-6' title='15 tópicos' style='font-size: 19.76pt;'>blog</a>
+<a href='https://rafaelbiriba.com/tag/codec' class='tag-link-26 tag-link-position-7' title='12 tópicos' style='font-size: 17.24pt;'>codec</a>
+<a href='https://rafaelbiriba.com/tag/codigo' class='tag-link-46 tag-link-position-8' title='9 tópicos' style='font-size: 14.16pt;'>codigo</a>
+<a href='https://rafaelbiriba.com/tag/converter' class='tag-link-23 tag-link-position-9' title='12 tópicos' style='font-size: 17.24pt;'>converter</a>
+<a href='https://rafaelbiriba.com/tag/decifrar' class='tag-link-79 tag-link-position-10' title='5 tópicos' style='font-size: 8pt;'>decifrar</a>
+<a href='https://rafaelbiriba.com/tag/desenvolvimento' class='tag-link-487 tag-link-position-11' title='13 tópicos' style='font-size: 18.36pt;'>Desenvolvimento</a>
+<a href='https://rafaelbiriba.com/tag/disco' class='tag-link-16 tag-link-position-12' title='6 tópicos' style='font-size: 9.96pt;'>disco</a>
+<a href='https://rafaelbiriba.com/tag/estag' class='tag-link-173 tag-link-position-13' title='9 tópicos' style='font-size: 14.16pt;'>estag</a>
+<a href='https://rafaelbiriba.com/tag/estagio' class='tag-link-168 tag-link-position-14' title='12 tópicos' style='font-size: 17.24pt;'>estágio</a>
+<a href='https://rafaelbiriba.com/tag/faetec' class='tag-link-192 tag-link-position-15' title='8 tópicos' style='font-size: 12.76pt;'>faetec</a>
+<a href='https://rafaelbiriba.com/tag/ffmpeg' class='tag-link-484 tag-link-position-16' title='12 tópicos' style='font-size: 17.24pt;'>FFmpeg</a>
+<a href='https://rafaelbiriba.com/tag/game' class='tag-link-53 tag-link-position-17' title='5 tópicos' style='font-size: 8pt;'>game</a>
+<a href='https://rafaelbiriba.com/tag/globocom' class='tag-link-171 tag-link-position-18' title='10 tópicos' style='font-size: 15.28pt;'>globo.com</a>
+<a href='https://rafaelbiriba.com/tag/google' class='tag-link-40 tag-link-position-19' title='7 tópicos' style='font-size: 11.36pt;'>google</a>
+<a href='https://rafaelbiriba.com/tag/gravar' class='tag-link-24 tag-link-position-20' title='9 tópicos' style='font-size: 14.16pt;'>gravar</a>
+<a href='https://rafaelbiriba.com/tag/imagem' class='tag-link-29 tag-link-position-21' title='6 tópicos' style='font-size: 9.96pt;'>imagem</a>
+<a href='https://rafaelbiriba.com/tag/inscricao' class='tag-link-170 tag-link-position-22' title='14 tópicos' style='font-size: 19.2pt;'>inscrição</a>
+<a href='https://rafaelbiriba.com/tag/ist-rio' class='tag-link-191 tag-link-position-23' title='8 tópicos' style='font-size: 12.76pt;'>ist-rio</a>
+<a href='https://rafaelbiriba.com/tag/leitura' class='tag-link-80 tag-link-position-24' title='7 tópicos' style='font-size: 11.36pt;'>leitura</a>
+<a href='https://rafaelbiriba.com/tag/medieval' class='tag-link-55 tag-link-position-25' title='5 tópicos' style='font-size: 8pt;'>medieval</a>
+<a href='https://rafaelbiriba.com/tag/multimedia' class='tag-link-27 tag-link-position-26' title='13 tópicos' style='font-size: 18.36pt;'>multimedia</a>
+<a href='https://rafaelbiriba.com/tag/online' class='tag-link-51 tag-link-position-27' title='15 tópicos' style='font-size: 19.76pt;'>online</a>
+<a href='https://rafaelbiriba.com/tag/oportunidade' class='tag-link-169 tag-link-position-28' title='10 tópicos' style='font-size: 15.28pt;'>oportunidade</a>
+<a href='https://rafaelbiriba.com/tag/player' class='tag-link-34 tag-link-position-29' title='7 tópicos' style='font-size: 11.36pt;'>player</a>
+<a href='https://rafaelbiriba.com/tag/processo-seletivo' class='tag-link-172 tag-link-position-30' title='14 tópicos' style='font-size: 19.2pt;'>processo seletivo</a>
+<a href='https://rafaelbiriba.com/tag/ruby' class='tag-link-492 tag-link-position-31' title='10 tópicos' style='font-size: 15.28pt;'>Ruby</a>
+<a href='https://rafaelbiriba.com/tag/rubygems' class='tag-link-103 tag-link-position-32' title='8 tópicos' style='font-size: 12.76pt;'>rubygems</a>
+<a href='https://rafaelbiriba.com/tag/rubyonrails' class='tag-link-105 tag-link-position-33' title='5 tópicos' style='font-size: 8pt;'>rubyonrails</a>
+<a href='https://rafaelbiriba.com/tag/sistema' class='tag-link-133 tag-link-position-34' title='5 tópicos' style='font-size: 8pt;'>sistema</a>
+<a href='https://rafaelbiriba.com/tag/sistema-operacional' class='tag-link-12 tag-link-position-35' title='5 tópicos' style='font-size: 8pt;'>sistema operacional</a>
+<a href='https://rafaelbiriba.com/tag/stream' class='tag-link-25 tag-link-position-36' title='8 tópicos' style='font-size: 12.76pt;'>stream</a>
+<a href='https://rafaelbiriba.com/tag/tecnologia' class='tag-link-490 tag-link-position-37' title='17 tópicos' style='font-size: 21.44pt;'>Tecnologia</a>
+<a href='https://rafaelbiriba.com/tag/travian' class='tag-link-49 tag-link-position-38' title='6 tópicos' style='font-size: 9.96pt;'>travian</a>
+<a href='https://rafaelbiriba.com/tag/ubuntu' class='tag-link-11 tag-link-position-39' title='9 tópicos' style='font-size: 14.16pt;'>ubuntu</a>
+<a href='https://rafaelbiriba.com/tag/versao' class='tag-link-129 tag-link-position-40' title='8 tópicos' style='font-size: 12.76pt;'>versão</a>
+<a href='https://rafaelbiriba.com/tag/video' class='tag-link-21 tag-link-position-41' title='18 tópicos' style='font-size: 22pt;'>video</a>
+<a href='https://rafaelbiriba.com/tag/virtual' class='tag-link-17 tag-link-position-42' title='6 tópicos' style='font-size: 9.96pt;'>virtual</a>
+<a href='https://rafaelbiriba.com/tag/web' class='tag-link-15 tag-link-position-43' title='16 tópicos' style='font-size: 20.6pt;'>web</a>
+<a href='https://rafaelbiriba.com/tag/web-browser' class='tag-link-56 tag-link-position-44' title='6 tópicos' style='font-size: 9.96pt;'>web browser</a>
+<a href='https://rafaelbiriba.com/tag/wordpress' class='tag-link-494 tag-link-position-45' title='13 tópicos' style='font-size: 18.36pt;'>Wordpress</a></div>
+</aside><aside id="wp_related_posts_widget" class="widget widget_wp_related_posts">
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h1 class="widget-title">Leia também:</h1><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="1" data-poid="in-2030" data-post-type="none" ><small class="wp_rp_publish_date">19/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html" class="wp_rp_title">FFmpeg: Batch para conversão de vídeos para iPhone [Windows]</a></li><li data-position="2" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="3" data-poid="in-1449" data-post-type="none" ><small class="wp_rp_publish_date">18/01/2011</small> <a href="https://rafaelbiriba.com/2011/01/18/blogs-poluidos-o-problema-de-utilizar-anuncios.html" class="wp_rp_title">Blogs poluídos: O problema de utilizar anúncios</a></li><li data-position="4" data-poid="in-2752" data-post-type="none" ><small class="wp_rp_publish_date">31/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/31/o-blog-esta-cara-nova-em-comemoracao-ao-centesimo-post.html" class="wp_rp_title">O blog está cara nova em comemoração ao centésimo post</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		<div class="cbd"></div>
+		<script src="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded//shutter-reloaded.js?ver=2.5" type="text/javascript"></script>
+	<script type="text/javascript">
+	var shutterSettings = {"imgDir":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/shutter-reloaded\/\/menu\/","imageCount":true,"FS":false,"textBtns":true,"oneSet":true};
+	try{}catch(e){}	</script>
+	
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+								<a href="https://br.wordpress.org/">Orgulhosamente mantido com WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	
+<script type="text/javascript"><!--
+wpa2a.targets=[
+{title:"Crontab: rodando um script a cada 15 segundos",url:"https://rafaelbiriba.com/2010/08/01/crontab-rodando-um-script-a-cada-15-segundos.html"}];
+wpa2a.html_done=true;if(wpa2a.script_ready&&!wpa2a.done)wpa2a.init();wpa2a.script_load();
+//--></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var scriptParams = {"google_search_engine_id":"partner-pub-1303939561252359:5952361189"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/assets/js/google_cse_v2.js?ver=1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Enviando ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.2'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/comment-reply.min.js?ver=4.5.3'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/wp-embed.min.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.5.3","language":""},"disqusIdentifier":"2174 http:\/\/www.rafaelbiriba.com\/?p=2174","disqusShortname":"rafaelbiriba","disqusTitle":"Crontab: rodando um script a cada 15 segundos","disqusUrl":"http:\/\/www.rafaelbiriba.com\/2010\/08\/01\/crontab-rodando-um-script-a-cada-15-segundos.html","options":{"manualSync":false},"postId":"2174"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/disqus.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"rafaelbiriba"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/count.js?ver=4.5.3'></script>
+</body>
+</html>

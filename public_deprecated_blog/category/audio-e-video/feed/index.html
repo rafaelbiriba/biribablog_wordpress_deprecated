@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Áudio e Vídeo &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/audio-e-video/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>Timelapse: Acelerando seus vídeos usando o FFmpeg</title>
+		<link>https://rafaelbiriba.com/2012/07/01/timelapse-acelerando-seus-videos-usando-o-ffmpeg.html</link>
+		<comments>https://rafaelbiriba.com/2012/07/01/timelapse-acelerando-seus-videos-usando-o-ffmpeg.html#comments</comments>
+		<pubDate>Sun, 01 Jul 2012 03:19:27 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[acelerado]]></category>
+		<category><![CDATA[filter]]></category>
+		<category><![CDATA[setpts]]></category>
+		<category><![CDATA[timelapse]]></category>
+		<category><![CDATA[vf]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3020</guid>
+		<description><![CDATA[Para quem tem um vídeo de 9 horas de duração e gostaria de fazer um vídeo acelerado resumindo o video original, segue a solução usando ffmpeg: ffmpeg -i video-grande.mp4 -vf setpts=0.05*PTS -an video-rapido.mp4 Agora, entenda a linha: -vf é a opção para habilitar o &#8220;Video Filter&#8221;. Para o parametro setpts você deve passar a taxa &#8230; <a href="https://rafaelbiriba.com/2012/07/01/timelapse-acelerando-seus-videos-usando-o-ffmpeg.html" class="more-link">Continue lendo <span class="screen-reader-text">Timelapse: Acelerando seus vídeos usando o FFmpeg</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_28" style="width: 568px" class="wp-caption aligncenter"><a href="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png"><img class="size-full wp-image-28" title="ffmpeg-logo" alt="" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png" width="568" height="140" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png 568w, https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo-300x73.png 300w" sizes="(max-width: 568px) 100vw, 568px" /></a><figcaption class="wp-caption-text">FFmpeg: http://www.ffmpeg.org/</figcaption></figure>
+
+<p>Para quem tem um vídeo de 9 horas de duração e gostaria de fazer um vídeo acelerado resumindo o video original, segue a solução usando ffmpeg:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">ffmpeg</span> <span style="color: #660033;">-i</span> video-grande.mp4 <span style="color: #660033;">-vf</span> <span style="color: #007800;">setpts</span>=<span style="color: #000000;">0.05</span><span style="color: #000000; font-weight: bold;">*</span>PTS <span style="color: #660033;">-an</span> video-rapido.mp4</pre></td></tr></table></div>
+
+
+
+<p>Agora, entenda a linha:</p>
+<p>-vf é a opção para habilitar o &#8220;Video Filter&#8221;. Para o parametro setpts você deve passar a taxa de aceleração. Para fazer o &#8220;timelapse&#8221;, o ffmpeg irá descartar uma série de frames, e com isso é possível gerar um vídeo &#8220;acelerado&#8221;.</p>
+<p>No exemplo que usei acima, um video de 20 minutos é acelerado para um de apenas 1 minuto. Portanto o calculo: <strong>1/20=0.05</strong></p>
+<p>Para acelerar um vídeo de 9 horas para 3 minutos você teria que calcular da seguinte forma:<br />3/(9*60)=<strong>0.00555</strong>, então o parametro ficaria: &#8220;-vf setpts=0.00555*PTS&#8221;</p>
+<p><strong>Editado em 04/dez/2013:</strong><br />Tive que adicionar o parametro &#8220;-an&#8221; para remover o audio do arquivo, pois depois do timelapse o video fica curtinho, mas o audio fica normal. Então você tem um video timelapse de 1 minuto e um audio de 40 minutos, então o parametro -an remove o audio do video final <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Espero ter ajudado com essa pequena dica <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-53" data-post-type="none" ><small class="wp_rp_publish_date">11/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></li><li data-position="1" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li><li data-position="2" data-poid="in-2193" data-post-type="none" ><small class="wp_rp_publish_date">17/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/17/ffmpeg-convertendo-um-video-em-um-gif-animado.html" class="wp_rp_title">FFmpeg: Convertendo um video em um gif animado</a></li><li data-position="3" data-poid="in-350" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" class="wp_rp_title">FFmpeg: Conversão de mp4 para wmv</a></li><li data-position="4" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F07%2F01%2Ftimelapse-acelerando-seus-videos-usando-o-ffmpeg.html&amp;linkname=Timelapse%3A%20Acelerando%20seus%20v%C3%ADdeos%20usando%20o%20FFmpeg" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F07%2F01%2Ftimelapse-acelerando-seus-videos-usando-o-ffmpeg.html&amp;linkname=Timelapse%3A%20Acelerando%20seus%20v%C3%ADdeos%20usando%20o%20FFmpeg" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F07%2F01%2Ftimelapse-acelerando-seus-videos-usando-o-ffmpeg.html&amp;title=Timelapse%3A%20Acelerando%20seus%20v%C3%ADdeos%20usando%20o%20FFmpeg" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/07/01/timelapse-acelerando-seus-videos-usando-o-ffmpeg.html/feed</wfw:commentRss>
+		<slash:comments>8</slash:comments>
+		</item>
+		<item>
+		<title>Problemas com o youtube ? Publique no Vimeo.com</title>
+		<link>https://rafaelbiriba.com/2012/02/26/problemas-com-o-youtube-publique-no-vimeo-com.html</link>
+		<comments>https://rafaelbiriba.com/2012/02/26/problemas-com-o-youtube-publique-no-vimeo-com.html#respond</comments>
+		<pubDate>Sun, 26 Feb 2012 20:23:14 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Serviços Online]]></category>
+		<category><![CDATA[Youtube]]></category>
+		<category><![CDATA[compartilhar]]></category>
+		<category><![CDATA[flash]]></category>
+		<category><![CDATA[online]]></category>
+		<category><![CDATA[player]]></category>
+		<category><![CDATA[qualidade]]></category>
+		<category><![CDATA[video]]></category>
+		<category><![CDATA[vimeo]]></category>
+		<category><![CDATA[web]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1460</guid>
+		<description><![CDATA[Similar ao youtube, o vimeo é uma ferramenta de publicação de vídeos, lançado em 2004. Recentemente o youtube vem liberando todas as contas para publicar vídeos com mais de 15 minutos&#8230; Porém ainda há contas com limitações e ainda vejo pessoas criando vários videos (parte 1, 2, 3, 4, 5, 6&#8230;) O vimeo vem prestando &#8230; <a href="https://rafaelbiriba.com/2012/02/26/problemas-com-o-youtube-publique-no-vimeo-com.html" class="more-link">Continue lendo <span class="screen-reader-text">Problemas com o youtube ? Publique no Vimeo.com</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_2255" style="width: 375px" class="wp-caption aligncenter"><img class="size-full wp-image-2255" title="http://vimeo.com/" src="https://rafaelbiriba.com/wp-content/uploads/2010/09/vimeo-logo.jpg" alt="http://vimeo.com/" width="375" height="125" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/09/vimeo-logo.jpg 375w, https://rafaelbiriba.com/wp-content/uploads/2010/09/vimeo-logo-300x100.jpg 300w" sizes="(max-width: 375px) 100vw, 375px" /><figcaption class="wp-caption-text">http://vimeo.com/</figcaption></figure>
+<p style="text-align: justify;">Similar ao youtube, o <a title="http://vimeo.com/" href="http://vimeo.com/" target="_blank">vimeo</a> é uma ferramenta de publicação de vídeos, lançado em 2004.</p>
+<p style="text-align: justify;">Recentemente o youtube vem liberando todas as contas para publicar vídeos com mais de 15 minutos&#8230; Porém ainda há contas com limitações e ainda vejo pessoas criando vários videos (parte 1, 2, 3, 4, 5, 6&#8230;)</p>
+<p style="text-align: justify;">O vimeo vem prestando um serviço muito bom e tem se mostrado um excelente competidor ao youtube.</p>
+<p style="text-align: justify;">Mas e agora ? Qual dos dois usar ?</p>
+<p style="text-align: justify;">Na minha opnião: Quando alguém fala de vídeo online, eu penso logo em youtube. Quando quero buscar algum vídeo, eu penso logo em youtube&#8230;</p>
+<p style="text-align: justify;">O que salva o vimeo, são algunas funções que não estão disponíveis no youtube, como customização do player, permitindo você colocar sua própria logo, possui um relatório de visitas ao video mais superior, não limita o tamanho do vídeo e há quem diga que a qualidade do vídeo no vimeo fica melhor&#8230;</p>
+<p style="text-align: justify;">Quando pesquisava sobre esse assunto, achei até uma frase legal, que vale compartilhar: &#8220;O Vimeo tem mais qualidade mas o Youtube tem mais quantidade&#8221;.</p>
+<p style="text-align: justify;">Agora cabe a você avaliar qual seria a melhor opção para o seu problema <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Eu faço assim com meus vídeos&#8230; O youtube recusou um video meu ? Vimeo nele =)</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2072" data-post-type="none" ><small class="wp_rp_publish_date">01/04/2010</small> <a href="https://rafaelbiriba.com/2010/04/01/youtube-caracteres-que-substituem-imagens-textp.html" class="wp_rp_title">Youtube: Caracteres que substituem imagens &#8211; TEXTp</a></li><li data-position="1" data-poid="in-657" data-post-type="none" ><small class="wp_rp_publish_date">06/05/2009</small> <a href="https://rafaelbiriba.com/2009/05/06/youtube-ao-avesso.html" class="wp_rp_title">Youtube ao avesso</a></li><li data-position="2" data-poid="in-1753" data-post-type="none" ><small class="wp_rp_publish_date">15/01/2010</small> <a href="https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html" class="wp_rp_title">Mencoder: Adicionando legenda em um vídeo</a></li><li data-position="3" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="4" data-poid="in-114" data-post-type="none" ><small class="wp_rp_publish_date">16/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html" class="wp_rp_title">FFmpeg / Mplayer: Reproduzindo Vídeos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F26%2Fproblemas-com-o-youtube-publique-no-vimeo-com.html&amp;linkname=Problemas%20com%20o%20youtube%20%3F%20Publique%20no%20Vimeo.com" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F26%2Fproblemas-com-o-youtube-publique-no-vimeo-com.html&amp;linkname=Problemas%20com%20o%20youtube%20%3F%20Publique%20no%20Vimeo.com" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F26%2Fproblemas-com-o-youtube-publique-no-vimeo-com.html&amp;title=Problemas%20com%20o%20youtube%20%3F%20Publique%20no%20Vimeo.com" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/02/26/problemas-com-o-youtube-publique-no-vimeo-com.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>FFmpeg: Convertendo um video em um gif animado</title>
+		<link>https://rafaelbiriba.com/2010/09/17/ffmpeg-convertendo-um-video-em-um-gif-animado.html</link>
+		<comments>https://rafaelbiriba.com/2010/09/17/ffmpeg-convertendo-um-video-em-um-gif-animado.html#comments</comments>
+		<pubDate>Fri, 17 Sep 2010 12:55:28 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[animação]]></category>
+		<category><![CDATA[animado]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[gif]]></category>
+		<category><![CDATA[gravar]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[stream]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2193</guid>
+		<description><![CDATA[Há alguns dias atrás, me perguntaram se tinha como converter trechos de vídeos para um arquivo .gif, para ser usado em lugares que só aceitam imagens, como foruns, msn e etc&#8230; Abaixo segue um exemplo simples que faz isso, usando FFmpeg: ffmpeg -i teste.avi -pix_fmt rgb24 -f gif teste.gif Detalhes: -i = especifica o arquivo &#8230; <a href="https://rafaelbiriba.com/2010/09/17/ffmpeg-convertendo-um-video-em-um-gif-animado.html" class="more-link">Continue lendo <span class="screen-reader-text">FFmpeg: Convertendo um video em um gif animado</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_28" style="width: 568px" class="wp-caption aligncenter"><a href="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png"><img class="size-full wp-image-28" title="ffmpeg-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png" alt="" width="568" height="140" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png 568w, https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo-300x73.png 300w" sizes="(max-width: 568px) 100vw, 568px" /></a><figcaption class="wp-caption-text">FFmpeg: http://www.ffmpeg.org/</figcaption></figure>
+
+<p>Há alguns dias atrás, me perguntaram se tinha como converter trechos de vídeos para um arquivo .gif, para ser usado em lugares que só aceitam imagens, como foruns, msn e etc&#8230;</p>
+<p>Abaixo segue um exemplo simples que faz isso, usando FFmpeg:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">ffmpeg</span> <span style="color: #660033;">-i</span> teste.avi -pix_fmt rgb24 <span style="color: #660033;">-f</span> gif teste.gif</pre></td></tr></table></div>
+
+
+
+<p>Detalhes:</p>
+<ul>
+	<li>-i = especifica o arquivo de entrada (teste.avi)</li>
+	<li>-pix_fmt = especifica o formato dos pixels (rgb24, formato suportado pelo gif  )</li>
+	<li>-f = força a saida para .gif</li>
+	<li>teste.gif é o arquivo de saída do comando</li>
+</ul>
+<p>Se você precisa de uma solução mais específica, abaixo segue alguns outros comandos e as explicações dos parâmetros:</p>
+<p>GIF com tamanho final específico e com loop:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">ffmpeg</span> <span style="color: #660033;">-i</span> teste.avi -pix_fmt rgb24 <span style="color: #660033;">-r</span> <span style="color: #000000;">10.0</span> -loop_output <span style="color: #000000;">0</span> <span style="color: #660033;">-f</span> gif <span style="color: #660033;">-s</span> 120x120 teste.gif</pre></td></tr></table></div>
+
+
+
+<p>Detalhes:</p>
+<ul>
+	<li>-r = especifica o frame rate do gif</li>
+	<li>-loop_output = especifica quantas vezes o gif vai entrar em loop (zero para infinito)</li>
+	<li>-s = especifica o tamanho do gif em pixels</li>
+</ul>
+<p>GIF com inicio definido pelo tempo e final limitado por frames:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">ffmpeg</span> <span style="color: #660033;">-i</span> widescreen.avi -pix_fmt rgb24 <span style="color: #660033;">-r</span> <span style="color: #000000;">10.0</span> -loop_output <span style="color: #000000;">0</span> <span style="color: #660033;">-vframes</span> <span style="color: #000000;">100</span> <span style="color: #660033;">-ss</span> 00:00:02 <span style="color: #660033;">-f</span> gif teste.gif</pre></td></tr></table></div>
+
+
+
+<p>Detalhes:</p>
+<ul>
+	<li>-ss = especifica a posição inicial do video para gravação (formato: hh:mm:ss)</li>
+	<li>-vframes = limita a quantidade de frames que serão gravados a partir do video original</li>
+	<li>No exemplo, o gif será formado apenas pelos 100 primeiros frames depois da posição 2 segundos</li>
+</ul>
+<p>GIF com inicio definido pelo tempo e final limitado pelo tempo:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">ffmpeg</span> <span style="color: #660033;">-i</span> widescreen.avi -pix_fmt rgb24 <span style="color: #660033;">-r</span> <span style="color: #000000;">10.0</span> -loop_output <span style="color: #000000;">0</span> <span style="color: #660033;">-ss</span> 00:00:02 <span style="color: #660033;">-t</span> 00:00:04 <span style="color: #660033;">-f</span> gif teste.gif</pre></td></tr></table></div>
+
+
+
+<p>Detalhes:</p>
+<ul>
+	<li>-ss = especifica a posição inicial do video para gravação (formato: hh:mm:ss)</li>
+	<li>-t = especifica a posição final de gravação do video (formato: hh:mm:ss)</li>
+	<li>No exemplo, o gif será criado a partir do segundo 2 até o segundo 4 do vídeo.</li>
+</ul>
+<p>Você também pode experimente a combinação dos parâmetros, até encontrar o comando que lhe sirva melhor&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li><li data-position="1" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="2" data-poid="in-53" data-post-type="none" ><small class="wp_rp_publish_date">11/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></li><li data-position="3" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li><li data-position="4" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F09%2F17%2Fffmpeg-convertendo-um-video-em-um-gif-animado.html&amp;linkname=FFmpeg%3A%20Convertendo%20um%20video%20em%20um%20gif%20animado" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F09%2F17%2Fffmpeg-convertendo-um-video-em-um-gif-animado.html&amp;linkname=FFmpeg%3A%20Convertendo%20um%20video%20em%20um%20gif%20animado" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F09%2F17%2Fffmpeg-convertendo-um-video-em-um-gif-animado.html&amp;title=FFmpeg%3A%20Convertendo%20um%20video%20em%20um%20gif%20animado" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/09/17/ffmpeg-convertendo-um-video-em-um-gif-animado.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Youtube: Caracteres que substituem imagens &#8211; TEXTp</title>
+		<link>https://rafaelbiriba.com/2010/04/01/youtube-caracteres-que-substituem-imagens-textp.html</link>
+		<comments>https://rafaelbiriba.com/2010/04/01/youtube-caracteres-que-substituem-imagens-textp.html#comments</comments>
+		<pubDate>Thu, 01 Apr 2010 20:22:20 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Serviços Online]]></category>
+		<category><![CDATA[Youtube]]></category>
+		<category><![CDATA[embed]]></category>
+		<category><![CDATA[encode]]></category>
+		<category><![CDATA[encoder]]></category>
+		<category><![CDATA[texto]]></category>
+		<category><![CDATA[textp]]></category>
+		<category><![CDATA[transcodificar]]></category>
+		<category><![CDATA[transcoding]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2072</guid>
+		<description><![CDATA[Para não perder os costume, o youtube continua trazendo novidade para os usuários em 1° de abril. Ano passado, algumas páginas apareciam completamente invertidas, inclusive os vídeos. Esse ano a novidade ainda traz um apelo financeiro: Quem quiser ajudar o youtube a economizar milhões de dolares, basta ativar a função TEXTp e estará salvando um &#8230; <a href="https://rafaelbiriba.com/2010/04/01/youtube-caracteres-que-substituem-imagens-textp.html" class="more-link">Continue lendo <span class="screen-reader-text">Youtube: Caracteres que substituem imagens &#8211; TEXTp</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_2073" style="width: 500px" class="wp-caption aligncenter"><img class="size-full wp-image-2073" title="youtube-text-mode" src="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode.jpg" alt="http://www.youtube.com" width="500" height="159" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode.jpg 500w, https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode-300x95.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /><figcaption class="wp-caption-text">http://www.youtube.com</figcaption></figure>
+<p style="text-align: justify;">Para não perder os costume, o youtube continua trazendo novidade para os usuários em 1° de abril.</p>
+<p style="text-align: justify;">Ano passado, algumas páginas apareciam <a title="https://rafaelbiriba.com/2009/05/06/youtube-ao-avesso.html" href="https://rafaelbiriba.com/2009/05/06/youtube-ao-avesso.html" target="_blank">completamente invertidas, inclusive os vídeos</a>.</p>
+<p style="text-align: justify;">Esse ano a novidade ainda traz um apelo financeiro:</p>
+<p><img class="aligncenter size-full wp-image-2075" title="youtube-text-only-mode-alert" src="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-only-mode-alert.png" alt="youtube-text-only-mode-alert" width="500" height="46" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-only-mode-alert.png 500w, https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-only-mode-alert-300x27.png 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p style="text-align: justify;">Quem quiser ajudar o youtube a economizar milhões de dolares, basta ativar a função TEXTp e estará salvando <strong>um dolar</strong> por segundo de vídeo assistido.</p>
+<p style="text-align: justify;">TEXTp é uma tecnologia implementada pelos engenheiros do youtube, e consiste na transcodificação do vídeo, substituindo as imagens por uma série de letras e números consumindo menos banda e recursos do servidor.</p>
+<p style="text-align: justify;"><img class="alignleft size-full wp-image-2085" title="youtube-text-mode-selection" src="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode-selection.jpg" alt="youtube-text-mode-selection" width="151" height="91" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode-selection.jpg 151w, https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode-selection-150x91.jpg 150w" sizes="(max-width: 151px) 100vw, 151px" /></p>
+<p style="text-align: justify;">O youtube aproveita e ainda brinca em dizer: &#8220;<span style="color: #0000ff;"><span style="font-style: normal; font-weight: normal; text-decoration: none; vertical-align: baseline; white-space: pre-wrap;"><span class="Apple-style-span" style="font-family: inherit;"><span class="Apple-style-span" style="font-size: small;"> Isso sem contar o benefício adicional de que nossa ação promove o hábito da leitura!</span></span></span></span>&#8220;</p>
+<p style="text-align: justify;">Para ativar a função, você deve procurar pelos vídeos que possuem a opção &#8220;TEXTp&#8221; na aba de qualidade do vídeo.</p>
+<p style="text-align: justify;">Abaixo, segue o exemplo de uma página de vídeo com a função ativa: (Vídeo original: <a title="http://www.youtube.com/watch?v=oYgIIRLjXiY" href="http://www.youtube.com/watch?v=oYgIIRLjXiY" target="_blank">http://www.youtube.com/watch?v=oYgIIRLjXiY</a>)</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2083" title="youtube-text-mode-ex" src="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode-ex.jpg" alt="youtube-text-mode-ex" width="500" height="349" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode-ex.jpg 500w, https://rafaelbiriba.com/wp-content/uploads/2010/04/youtube-text-mode-ex-300x209.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<h3 style="text-align: justify;">Passe adiante&#8230; Mostre a um amigo:</h3>
+<p style="text-align: justify;">Quando você achar um vídeo que possua a função TEXTp habilitado, você pode fazer uma surpresa e passar o link para um amigo assistir diretamente em formato texto.</p>
+<p style="text-align: justify;">Para isso, basta acrescentar ao final do link: <strong>&amp;textp=fool</strong></p>
+<p style="text-align: justify;">Então, a url do vídeo acima ficaria assim: <a title="http://www.youtube.com/watch?v=oYgIIRLjXiY&amp;textp=fool" href="http://www.youtube.com/watch?v=oYgIIRLjXiY&amp;textp=fool" target="_blank">http://www.youtube.com/watch?v=oYgIIRLjXiY&amp;textp=fool</a></p>
+<p style="text-align: justify;"></p>
+<h3 style="text-align: justify;">Divirtam-se ajudando o youtube a economizar alguns dolares&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></h3>
+<p style="text-align: justify;"><strong>Minha opnião:</strong> Alguns vídeos até que ficaram engraçados em formato texto. Como na maior parte do tempo estou ouvindo músicas pelo youtube, vou passar a utilizar o formato texto. (já que só aproveito o áudio <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /> ) e com isso estarei economizando por eles&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-657" data-post-type="none" ><small class="wp_rp_publish_date">06/05/2009</small> <a href="https://rafaelbiriba.com/2009/05/06/youtube-ao-avesso.html" class="wp_rp_title">Youtube ao avesso</a></li><li data-position="1" data-poid="in-1460" data-post-type="none" ><small class="wp_rp_publish_date">26/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/26/problemas-com-o-youtube-publique-no-vimeo-com.html" class="wp_rp_title">Problemas com o youtube ? Publique no Vimeo.com</a></li><li data-position="2" data-poid="in-1753" data-post-type="none" ><small class="wp_rp_publish_date">15/01/2010</small> <a href="https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html" class="wp_rp_title">Mencoder: Adicionando legenda em um vídeo</a></li><li data-position="3" data-poid="in-322" data-post-type="none" ><small class="wp_rp_publish_date">24/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/24/google-docs-eficiencia-garantida.html" class="wp_rp_title">Google Docs: Eficiência garantida</a></li><li data-position="4" data-poid="in-53" data-post-type="none" ><small class="wp_rp_publish_date">11/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F04%2F01%2Fyoutube-caracteres-que-substituem-imagens-textp.html&amp;linkname=Youtube%3A%20Caracteres%20que%20substituem%20imagens%20%E2%80%93%20TEXTp" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F04%2F01%2Fyoutube-caracteres-que-substituem-imagens-textp.html&amp;linkname=Youtube%3A%20Caracteres%20que%20substituem%20imagens%20%E2%80%93%20TEXTp" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F04%2F01%2Fyoutube-caracteres-que-substituem-imagens-textp.html&amp;title=Youtube%3A%20Caracteres%20que%20substituem%20imagens%20%E2%80%93%20TEXTp" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/04/01/youtube-caracteres-que-substituem-imagens-textp.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>FFmpeg: Batch para conversão de vídeos para iPhone [Windows]</title>
+		<link>https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html</link>
+		<comments>https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html#comments</comments>
+		<pubDate>Fri, 19 Mar 2010 20:37:43 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[automatizado]]></category>
+		<category><![CDATA[batch]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[libfaac]]></category>
+		<category><![CDATA[libx264]]></category>
+		<category><![CDATA[mov]]></category>
+		<category><![CDATA[mp4]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[script]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2030</guid>
+		<description><![CDATA[Já tem um tempo que estou tentando decidir o que fazer com um computador velho lá de casa. Resolvi instalar Windows nele, e fazer algumas experiências (:D)&#8230; de todo tipo, inclusive instalar servidor de games, VNC, Torrent, e tudo mais&#8230; Configurei meu roteador para deixar esse PC completamente exposto, assim posso brincar também com algumas &#8230; <a href="https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html" class="more-link">Continue lendo <span class="screen-reader-text">FFmpeg: Batch para conversão de vídeos para iPhone [Windows]</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_28" style="width: 568px" class="wp-caption aligncenter"><a href="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png"><img class="size-full wp-image-28" title="ffmpeg-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png" alt="FFmpeg: http://www.ffmpeg.org/" width="568" height="140" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png 568w, https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo-300x73.png 300w" sizes="(max-width: 568px) 100vw, 568px" /></a><figcaption class="wp-caption-text">FFmpeg: http://www.ffmpeg.org/</figcaption></figure>
+
+<p>Já tem um tempo que estou tentando decidir o que fazer com um computador velho lá de casa. Resolvi instalar Windows nele, e fazer algumas experiências (:D)&#8230; de todo tipo, inclusive instalar servidor de games, VNC, Torrent, e tudo mais&#8230; Configurei meu roteador para deixar esse PC completamente exposto, assim posso brincar também com algumas regras de firewall e fazer o que quiser&#8230;</p>
+<p>Como esse meu &#8220;PC cobaia&#8221; está ligado 24h lá em casa, resolvi não desperdiçar seu &#8220;poder de processamento&#8221; e fiz um script em Batch (.bat do windows) para converter vários filmes/vídeos que estou querendo colocar no meu iPhone.</p>
+<p>Segue o &#8220;programa&#8221; de enconding para H264:</p>
+<p><strong>cd C:\Documents and Settings\Rafael\Desktop\ffmpeg-r16537-gpl-static-win32</strong><strong><br />for %%i in (&#8220;H:\videos\*.rmvb&#8221;) do <br />(<br />ffmpeg -i &#8220;%%i&#8221; -vcodec libx264 -acodec libfaac -deinterlace -sameq &#8220;C:\videos-iphone\%%~ni.mov&#8221;</strong><strong><br />)</strong></p>
+<p>Salve todo o código acima num arquivo <strong>.bat</strong> (Pelo bloco de notas mesmo !)<br />Você pode baixar o FFmpeg acessando:  <a title="https://rafaelbiriba.com/ffmpeg-r16537-gpl-static-win32.zip" href="https://rafaelbiriba.com/ffmpeg-r16537-gpl-static-win32.zip" target="_blank">https://rafaelbiriba.com/ffmpeg-r16537-gpl-static-win32.zip</a><br />Leia também: <a title="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html</a></p>
+<p>Bom, continuando&#8230;<br />O Script pega meus videos com extensão <strong>.rmvb</strong> de dentro da pasta <strong>H:\videos</strong> e salva os novos arquivos na pasta <strong>videos-iphone</strong> que fica na unidade <strong>C:\</strong>.<br />Note que o comando <strong>%%~ni</strong> faz com que o arquivo seja salvo com o mesmo nome do original, só que com a extensão <strong>.mov</strong>.</p>
+<p>O profile de encoding para iphone (linha de comando do ffmpeg) que estou utilizando, deixa o video final com a qualidade quase que igual ao vídeo original, o que deixa a codificação bem lenta. Esse script  que tem sido bastante útil pois tenho muitos arquivos de vídeo (muitos mesmo) e quero codifica-los um depois do outro automaticamente (enquanto a máquina não morrer de stress <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /> ).</p>
+<p>Espero que essa informação seja útil para mais alguém&#8230; Provavelmente enquanto estou escrevendo este post, o script está rodando lá em casa <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Abraços a todos <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1784" data-post-type="none" ><small class="wp_rp_publish_date">01/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" class="wp_rp_title">FFmpeg: converta vídeos para iPhone</a></li><li data-position="1" data-poid="in-350" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" class="wp_rp_title">FFmpeg: Conversão de mp4 para wmv</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="4" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F03%2F19%2Fffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html&amp;linkname=FFmpeg%3A%20Batch%20para%20convers%C3%A3o%20de%20v%C3%ADdeos%20para%20iPhone%20%5BWindows%5D" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F03%2F19%2Fffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html&amp;linkname=FFmpeg%3A%20Batch%20para%20convers%C3%A3o%20de%20v%C3%ADdeos%20para%20iPhone%20%5BWindows%5D" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F03%2F19%2Fffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html&amp;title=FFmpeg%3A%20Batch%20para%20convers%C3%A3o%20de%20v%C3%ADdeos%20para%20iPhone%20%5BWindows%5D" id="wpa2a_10"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html/feed</wfw:commentRss>
+		<slash:comments>9</slash:comments>
+		</item>
+		<item>
+		<title>FFmpeg: converta vídeos para iPhone</title>
+		<link>https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html</link>
+		<comments>https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html#comments</comments>
+		<pubDate>Mon, 01 Mar 2010 17:10:58 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[audio]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[libfaac]]></category>
+		<category><![CDATA[libx264]]></category>
+		<category><![CDATA[mov]]></category>
+		<category><![CDATA[mp4]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[stream]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1784</guid>
+		<description><![CDATA[&#160; Eu utilizo essa linha de comando quase sempre, para converter algum filme e colocar no meu iPhone&#8230; Também serve para iPod Touch 🙂 Na hora que eu preciso dela, eu nunca a encontro. Então resolvi publicar aqui, para servir como consulta: ffmpeg -i video.mpg -vcodec libx264 -acodec libfaac -deinterlace -sameq video_saida.mov Alguns outros parâmetros &#8230; <a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" class="more-link">Continue lendo <span class="screen-reader-text">FFmpeg: converta vídeos para iPhone</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_28" style="width: 568px" class="wp-caption aligncenter"><a href="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png"><img class="size-full wp-image-28" title="ffmpeg-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png" alt="FFmpeg: http://www.ffmpeg.org/" width="568" height="140" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png 568w, https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo-300x73.png 300w" sizes="(max-width: 568px) 100vw, 568px" /></a><figcaption class="wp-caption-text">FFmpeg: http://www.ffmpeg.org/</figcaption></figure>
+
+<p>&nbsp;</p>
+<p>Eu utilizo essa linha de comando quase sempre, para converter algum filme e colocar no meu iPhone&#8230; Também serve para iPod Touch <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Na hora que eu preciso dela, eu nunca a encontro. Então resolvi publicar aqui, para servir como consulta:</p>
+<p><strong>ffmpeg -i <span style="color: #ff0000;">video.mpg</span> -vcodec libx264 -acodec libfaac -deinterlace -sameq <span style="color: #ff0000;">video_saida.mov</span></strong></p>
+<p>Alguns outros parâmetros úteis para uma conversão mais específica: <br />* bitrate do vídeo  (<span style="color: #ff0000;">-b 300</span> = Exemplo), <br />* bitrate do áudio (<span style="color: #ff0000;">-ab 32</span> = Exemplo),<br />* dimensão do vídeo (<span style="color: #ff0000;">-s 200&#215;300</span> = Exemplo).</p>
+<p>OBS: Comando testado e executado no Linux. Para rodar o comando em windows, <a title="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">veja aqui.</a></p>
+<p>[&#8230;] Espero ter ajudado. [&#8230;]</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2030" data-post-type="none" ><small class="wp_rp_publish_date">19/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/19/ffmpeg-batch-para-conversao-de-videos-para-iphone-windows.html" class="wp_rp_title">FFmpeg: Batch para conversão de vídeos para iPhone [Windows]</a></li><li data-position="1" data-poid="in-350" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" class="wp_rp_title">FFmpeg: Conversão de mp4 para wmv</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li><li data-position="4" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F03%2F01%2Fffmpeg-converta-videos-para-iphone.html&amp;linkname=FFmpeg%3A%20converta%20v%C3%ADdeos%20para%20iPhone" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F03%2F01%2Fffmpeg-converta-videos-para-iphone.html&amp;linkname=FFmpeg%3A%20converta%20v%C3%ADdeos%20para%20iPhone" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F03%2F01%2Fffmpeg-converta-videos-para-iphone.html&amp;title=FFmpeg%3A%20converta%20v%C3%ADdeos%20para%20iPhone" id="wpa2a_12"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Mencoder: Adicionando legenda em um vídeo</title>
+		<link>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html</link>
+		<comments>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html#comments</comments>
+		<pubDate>Fri, 15 Jan 2010 12:29:21 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mencoder]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[encoder]]></category>
+		<category><![CDATA[legenda]]></category>
+		<category><![CDATA[player]]></category>
+		<category><![CDATA[srt]]></category>
+		<category><![CDATA[subtitle]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1753</guid>
+		<description><![CDATA[Uma legenda no formato .srt, pode ser inserida em um vídeo com diversos programas/ferramentas. Vou mostrar que mencoder é uma das opções mais simples e rápida para isso. O mencoder é instalado junto com o pacote do Mplayer. Mais detalhes de como instalar, visite: Mplayer: Projeto baseado no FFmpeg Antes de adicionar a legenda ao &#8230; <a href="https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html" class="more-link">Continue lendo <span class="screen-reader-text">Mencoder: Adicionando legenda em um vídeo</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p style="text-align: justify;">Uma legenda no formato <strong>.srt</strong>, pode ser inserida em um vídeo com diversos programas/ferramentas. Vou mostrar que mencoder é uma das opções mais simples e rápida para isso.</p>
+<p style="text-align: justify;">O mencoder é instalado junto com o pacote do Mplayer. Mais detalhes de como instalar, visite: <a title="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" target="_blank">Mplayer: Projeto baseado no FFmpeg</a></p>
+<p style="text-align: justify;">Antes de adicionar a legenda ao vídeo, verifique se existe o arquivo <strong>subfont.ttf</strong> na pasta do mplayer. Sem esse arquivo de fonte, o mencoder não consegue &#8220;escrever&#8221; no vídeo.</p>
+<h3 style="text-align: justify;">Criando o subfont.ttf <strong><br /></strong></h3>
+<p style="text-align: justify;">No windows, basta copiar uma font <strong>.ttf</strong>, colar na pasta do Mplayer e renomear para <strong>subfont.ttf</strong></p>
+<p style="text-align: justify;">No linux, procure pelas fontes <strong>.ttf</strong> com o comando:<span style="color: #ff0000;"><strong> locate ttf | grep ttf\$<br /></strong><span style="color: #000000;">Depois copie a fonte para o diretório local do mplayer. No meu caso:  (Utilizei a fonte VERA)<br /><span style="color: #ff0000;"><strong>cp /usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf ~/.mplayer/subfont.ttf</strong></span><br /></span></span></p>
+<h3 style="text-align: justify;">Testando a legenda:<br /></h3>
+<p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;">Antes de inserir a legenda, podemos e devemos testa-la. Para isso rode o comando:<br /><strong>mplayer -sub legenda.srt video_original.avi<br /></strong></span></span><span style="color: #ff0000;"><span style="color: #000000;"> Assim, você pode ver mais ou menos como a legenda vai ficar</span></span>, em relação a fonte escolhida.<span style="color: #ff0000;"><span style="color: #000000;"><br /></span></span></p>
+<h3 style="text-align: justify;">Inserindo a legenda:</h3>
+<p style="text-align: justify;">Comando:<br /><strong>mencoder video_original.avi -sub legenda.srt -subpos 95 -subfont-text-scale 3 -subcp enca:gr:iso-8859-1 -vf expand=640:384 -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=800:vhq -oac copy -o video_com_legenda.avi</strong></p>
+<p style="text-align: justify;">Onde:<br /><span style="color: #ff0000;"><strong>video_original.avi</strong></span>= Vídeo de entrada<br /><span style="color: #ff0000;"><strong>legenda.srt</strong></span>=  Legenda a ser inserida<br /><span style="color: #ff0000;"><strong>video_com_legenda.avi</strong></span>= Vídeo de Saída<strong><br /></strong></p>
+<p style="text-align: justify;">Parâmetros:<br /><strong>-subpos</strong>= Especifica em que % da tela a legenda irá aparecer (A partir do topo)<br /><strong>-subfont-text-scale</strong>= Especifica o tamanho da legenda no vídeo<br /><strong>-subcp</strong>= Especifica a codificação do arquivo de legenda<br /><strong>-vf</strong>= Especifica o tamanho do vídeo. Neste caso, o vídeo original era 640 x 272, adicionei mais 112px na altura (384px) utilizando <span style="color: #ff0000;">expand</span>,ou seja, o vídeo vai ficar com uma tarja preta de 56px em cima e em baixo.<br /><strong>-ovc</strong>= Especifica o codec de vídeo. Neste caso lavc.<br /><strong> -lavcopts </strong>= Opções do lavc. Especifica o nome do codec, bitrate,&#8230;, do vídeo.<br /><strong>-oac</strong>= Especifica o áudio. O valor copy, copia o áudio exatamente como o original.<br /><strong>-o</strong>= Especifica o arquivo de saída.</p>
+<p style="text-align: justify;">OBS: O comando do mencoder foi testado e executado no Linux. Para rodar o comando em windows, <a title="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">veja aqui.</a></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-125" data-post-type="none" ><small class="wp_rp_publish_date">19/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" class="wp_rp_title">Mplayer: Rotacionando um Vídeo</a></li><li data-position="1" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="2" data-poid="in-83" data-post-type="none" ><small class="wp_rp_publish_date">15/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="wp_rp_title">Mplayer: Projeto baseado no FFmpeg</a></li><li data-position="3" data-poid="in-143" data-post-type="none" ><small class="wp_rp_publish_date">20/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="wp_rp_title">Mplayer: Extraindo o áudio de um vídeo</a></li><li data-position="4" data-poid="in-114" data-post-type="none" ><small class="wp_rp_publish_date">16/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/16/ffmpeg-mplayer-reproduzindo-videos.html" class="wp_rp_title">FFmpeg / Mplayer: Reproduzindo Vídeos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;linkname=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;linkname=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F15%2Fmencoder-adicionando-legenda-em-um-video.html&amp;title=Mencoder%3A%20Adicionando%20legenda%20em%20um%20v%C3%ADdeo" id="wpa2a_14"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/01/15/mencoder-adicionando-legenda-em-um-video.html/feed</wfw:commentRss>
+		<slash:comments>12</slash:comments>
+		</item>
+		<item>
+		<title>Palestra: Vídeos para Internet (XIII Semana Tecnológica do IST-Rio)</title>
+		<link>https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html</link>
+		<comments>https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html#comments</comments>
+		<pubDate>Sun, 25 Oct 2009 18:57:44 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Carreira]]></category>
+		<category><![CDATA[Eventos]]></category>
+		<category><![CDATA[Graduação]]></category>
+		<category><![CDATA[cursos]]></category>
+		<category><![CDATA[evento]]></category>
+		<category><![CDATA[faetec]]></category>
+		<category><![CDATA[internet]]></category>
+		<category><![CDATA[ist-rio]]></category>
+		<category><![CDATA[istrio]]></category>
+		<category><![CDATA[palestras]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1617</guid>
+		<description><![CDATA[No dia 22/10 fiz uma palestra no IST-Rio sobre Vídeos para internet. Conforme eu prometi, abaixo segue a minha apresentação. Gravei o áudio da palestra com o meu iPhone, então consegui encaixar os slides e montar um vídeo ( Parece mais um screencast ) A palestra está disponível nos seguintes serviços abaixo: Video com Slides &#8230; <a href="https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html" class="more-link">Continue lendo <span class="screen-reader-text">Palestra: Vídeos para Internet (XIII Semana Tecnológica do IST-Rio)</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="size-full wp-image-1620 alignleft" title="videos-para-internet" src="https://rafaelbiriba.com/wp-content/uploads/2009/10/videos-para-internet.jpg" alt="videos-para-internet" width="201" height="149" /> No dia 22/10 fiz uma palestra no <a title="http://www.faetec.rj.gov.br/ist-rio/" href="http://www.faetec.rj.gov.br/ist-rio/" target="_blank">IST-Rio</a> sobre <strong>Vídeos para internet</strong>. Conforme <a title="https://rafaelbiriba.com/2009/10/13/evento-xiii-semana-tecnologica-e-cultural-do-ist-rio.html" href="https://rafaelbiriba.com/2009/10/13/evento-xiii-semana-tecnologica-e-cultural-do-ist-rio.html" target="_blank">eu prometi</a>, abaixo segue a minha apresentação.</p>
+<p style="text-align: justify;">Gravei o áudio da palestra com o meu iPhone, então consegui encaixar os slides e montar um vídeo ( Parece mais um <a title="http://pt.wikipedia.org/wiki/Screencast" href="http://pt.wikipedia.org/wiki/Screencast" target="_blank">screencast</a> )</p>
+<p style="text-align: justify;">A palestra está disponível nos seguintes serviços abaixo:</p>
+<ul style="text-align: justify;">
+	<li>Video com Slides + Áudio da Palestra = Youtube*/ <a title="http://vimeo.com/7219222" href="http://vimeo.com/7219222" target="_blank">Vimeo</a></li>
+	<li>Slides = <a title="http://www.slideshare.net/rafaelbiriba/palestra-videos-para-internet-rafael-biriba" href="http://www.slideshare.net/rafaelbiriba/palestra-videos-para-internet-rafael-biriba" target="_blank">Slideshare </a></li>
+</ul>
+<p style="text-align: justify;">* Em breve estará disponível no youtube. Porque devido a longa duração (25 min), o video não pode ser liberado. Logo resolvo essa situação&#8230; Por enquanto disponível no <a title="http://vimeo.com/7219222" href="http://vimeo.com/7219222" target="_blank">Vimeo</a></p>
+<p style="text-align: justify;">A palestra abordou assuntos como:</p>
+<ul style="text-align: justify;">
+	<li>Imagem Digital</li>
+	<li>Vídeo Digital (Frame Rate, Interlacing, Display Resolution, Aspect Ratio, Bit Rate, Video Compression)</li>
+	<li>Codec de Vídeo</li>
+	<li>Áudio Digital</li>
+	<li>Distribuição de Vídeos</li>
+</ul>
+<p style="text-align: justify;">Espero que gostem&#8230; Qualquer dúvida sinta-se à vontade para perguntar&#8230;</p>
+<p><a title="http://www.slideshare.net/rafaelbiriba/palestra-videos-para-internet-rafael-biriba" href="http://www.slideshare.net/rafaelbiriba/palestra-videos-para-internet-rafael-biriba" target="_blank">SlideShare: Palestra: Videos para Internet &#8211; Rafael Biriba</a></p>
+<div id="__ss_2324522" style="width: 425px; text-align: left;"><object width="425" height="355" data="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=videos-para-internet-somente-imagens-091022203221-phpapp01&amp;stripped_title=palestra-videos-para-internet-rafael-biriba" type="application/x-shockwave-flash"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="src" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=videos-para-internet-somente-imagens-091022203221-phpapp01&amp;stripped_title=palestra-videos-para-internet-rafael-biriba" /><param name="allowfullscreen" value="true" /></object></div>
+<p>&nbsp;</p>
+<p><a title="http://vimeo.com/7219222" href="http://vimeo.com/7219222" target="_blank">Vimeo: Palestra: Videos para Internet &#8211; Rafael Biriba</a></p>
+<p><object width="400" height="300" data="http://vimeo.com/moogaloop.swf?clip_id=7219222&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://vimeo.com/moogaloop.swf?clip_id=7219222&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /></object></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1550" data-post-type="none" ><small class="wp_rp_publish_date">13/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/13/evento-xiii-semana-tecnologica-e-cultural-do-ist-rio.html" class="wp_rp_title">Evento: XIII Semana Tecnológica e Cultural do IST-Rio</a></li><li data-position="1" data-poid="in-2107" data-post-type="none" ><small class="wp_rp_publish_date">19/05/2010</small> <a href="https://rafaelbiriba.com/2010/05/19/xiv-semana-tecnologica-do-ist-rio-ciencia-e-tecnologia-da-web.html" class="wp_rp_title">XIV Semana Tecnológica do IST-Rio: Ciência e tecnologia da Web</a></li><li data-position="2" data-poid="in-2127" data-post-type="none" ><small class="wp_rp_publish_date">14/06/2010</small> <a href="https://rafaelbiriba.com/2010/06/14/ist-rio-inscricoes-abertas-vestibular-2010-2%c2%ba-semestre.html" class="wp_rp_title">IST-Rio: Inscrições abertas &#8211; Vestibular 2010: 2º semestre</a></li><li data-position="3" data-poid="in-2339" data-post-type="none" ><small class="wp_rp_publish_date">07/10/2010</small> <a href="https://rafaelbiriba.com/2010/10/07/ist-rio-inscricoes-abertas-vestibular-2011-1%c2%ba-semestre.html" class="wp_rp_title">IST-Rio: Inscrições abertas &#8211; Vestibular 2011: 1º semestre</a></li><li data-position="4" data-poid="in-1701" data-post-type="none" ><small class="wp_rp_publish_date">30/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/30/ist-rio-inscricoes-abertas-vestibular-2010-1%c2%ba-semestre.html" class="wp_rp_title">IST-Rio: Inscrições abertas &#8211; Vestibular 2010: 1º semestre</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F25%2Fpalestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html&amp;linkname=Palestra%3A%20V%C3%ADdeos%20para%20Internet%20%28XIII%20Semana%20Tecnol%C3%B3gica%20do%20IST-Rio%29" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F25%2Fpalestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html&amp;linkname=Palestra%3A%20V%C3%ADdeos%20para%20Internet%20%28XIII%20Semana%20Tecnol%C3%B3gica%20do%20IST-Rio%29" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F10%2F25%2Fpalestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html&amp;title=Palestra%3A%20V%C3%ADdeos%20para%20Internet%20%28XIII%20Semana%20Tecnol%C3%B3gica%20do%20IST-Rio%29" id="wpa2a_16"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html/feed</wfw:commentRss>
+		<slash:comments>9</slash:comments>
+		</item>
+		<item>
+		<title>FFmpeg: Conversão de mp4 para wmv</title>
+		<link>https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html</link>
+		<comments>https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html#comments</comments>
+		<pubDate>Mon, 16 Mar 2009 17:54:09 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[FFmpeg]]></category>
+		<category><![CDATA[audio]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[mp4]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[stream]]></category>
+		<category><![CDATA[video]]></category>
+		<category><![CDATA[wmv]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=350</guid>
+		<description><![CDATA[Mês passado, tive que fazer uma conversão deste tipo. Eu possuia um vídeo em mp4 e precisava converter para wmv, para que o mesmo fosse executado no windows utilizando o codec nativo, sem utilizar nenhum codec adicional para isso. O Arquivo .MP4: Stream #0.0(und): Video: h264, yuv420p, 480&#215;360 [PAR 0:1 DAR 0:1], 29.97 tb(r) Stream &#8230; <a href="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" class="more-link">Continue lendo <span class="screen-reader-text">FFmpeg: Conversão de mp4 para wmv</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<figure id="attachment_28" style="width: 300px" class="wp-caption aligncenter"><img class="size-medium wp-image-28" title="ffmpeg-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo-300x73.png" alt="FFmpeg: http://www.ffmpeg.org/" width="300" height="73" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo-300x73.png 300w, https://rafaelbiriba.com/wp-content/uploads/2009/02/ffmpeg-logo.png 568w" sizes="(max-width: 300px) 100vw, 300px" /><figcaption class="wp-caption-text">FFmpeg: http://www.ffmpeg.org/</figcaption></figure>
+<p style="text-align: justify;">Mês passado, tive que fazer uma conversão deste tipo. Eu possuia um vídeo em mp4 e precisava converter para wmv, para que o mesmo fosse executado no windows utilizando o codec nativo, sem utilizar nenhum codec adicional para isso.</p>
+<p style="text-align: justify;">O Arquivo .MP4:<br />
+<strong> Stream #0.0(und): Video: h264, yuv420p, 480&#215;360 [PAR 0:1 DAR 0:1], 29.97 tb(r)<br />
+Stream #0.1(und): Audio: mpeg4aac, 44100 Hz, stereo</strong></p>
+<p style="text-align: justify;">Ao final de alguns testes, consegui converter para o seguinte arquivo .wmv:<br />
+<strong> Stream #0.0: Video: wmv1, yuv420p, 480&#215;360 [PAR 0:1 DAR 0:1], 29.92 tb(r)<br />
+Stream #0.1: Audio: wmav2, 44100 Hz, stereo, 64 kb/s</strong></p>
+<p style="text-align: justify;">Abaixo segue a linha de comando:<br />
+<span style="color: #ff0000;"><strong>ffmpeg -i <span style="color: #000000;">video_entrada.mp4</span> -vcodec wmv1 -acodec wmav2 -deinterlace -sameq <span style="color: #000000;">video_saida.wmv</span></strong></span></p>
+<p style="text-align: justify;">Utilizei o codec de vídeo WMV1 e o codec de áudio WMVA2, seguidos pelo deinterlace ( desentrelaçamento do vídeo ) e o sameq ( mesma qualidade de vídeo do original ).</p>
+<p style="text-align: justify;">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br />
+<strong>Instalação do FFmpeg: </strong><a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" target="_blank"><br />
+FFmpeg: Solução ideal para Áudio e Vídeo</a><br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<h3 style="text-align: justify;">Procedimento de Uso:</h3>
+<p style="text-align: justify;"><img class="size-full wp-image-30 alignleft" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" /></p>
+<p style="text-align: justify;">Usuários Linux tem sempre mais facilidade, nesse tipo de procedimento.</p>
+<p style="text-align: justify;">Basta abrir o Terminal e digitar:</p>
+<p style="text-align: justify;"><span style="color: #808080;"><strong>ffmpeg -i video_entrada.mp4 -vcodec wmv1 -acodec wmav2 -deinterlace -sameq video_saida.wmv</strong></span></p>
+<p style="text-align: justify;">Onde meu arquivo se chama video_entrada.mp4 e se encontra na área de trabalho.<br />
+( Levando em consideração que ao abrir o terminal você vai estar dentro da pasta home do usuário local )</p>
+<p style="text-align: justify;"><strong>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</strong></p>
+<p style="text-align: justify;"><img class="size-full wp-image-29 alignleft" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" />Usuários Windows levam mais tempo para poder executar o comando.<br />
+Entre em INICIAR &gt; EXECUTAR e digite <strong>cmd</strong> &gt; OK ( Para abrir o Terminal do Windows )<br />
+Acesse a pasta digitando:<br />
+<strong><span style="color: #808080;">cd Desktop/pasta_do_ffmpeg/</span><br />
+</strong>em seguida:<br />
+<span style="color: #808080;"><strong>ffmpeg.exe -i &#8220;../video_entrada.mp4&#8221; -vcodec wmv1 -acodec wmav2 -deinterlace -sameq &#8220;../video_saida.wmv&#8221;</strong></span></p>
+<p style="text-align: justify;">Onde meu arquivo se chama video_entrada.mp4 e se encontra na área de trabalho.<br />
+( Utilizamos ../ para sair da pasta do ffmpeg e acessar o filme.avi a partir da área de trabalho. )</p>
+<p style="text-align: justify;"><strong>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+Leitura recomendada: </strong><a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">Windows VS FFmpeg e Mplayer</a><br />
+<strong>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</strong></p>
+<p><strong></strong></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1784" data-post-type="none" ><small class="wp_rp_publish_date">01/03/2010</small> <a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" class="wp_rp_title">FFmpeg: converta vídeos para iPhone</a></li><li data-position="1" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li><li data-position="4" data-poid="in-70" data-post-type="none" ><small class="wp_rp_publish_date">12/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/12/ffmpeg-extraindo-imagens-de-um-video-snapshot-parte-ii.html" class="wp_rp_title">FFmpeg: Extraindo imagens de um vídeo ( Snapshot ) &#8211; Parte II</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F16%2Fffmpeg-conversao-de-mp4-para-wmv.html&amp;linkname=FFmpeg%3A%20Convers%C3%A3o%20de%20mp4%20para%20wmv" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F16%2Fffmpeg-conversao-de-mp4-para-wmv.html&amp;linkname=FFmpeg%3A%20Convers%C3%A3o%20de%20mp4%20para%20wmv" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F16%2Fffmpeg-conversao-de-mp4-para-wmv.html&amp;title=FFmpeg%3A%20Convers%C3%A3o%20de%20mp4%20para%20wmv" id="wpa2a_18"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Mplayer: Extraindo o áudio de um vídeo</title>
+		<link>https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html#respond</comments>
+		<pubDate>Fri, 20 Feb 2009 17:44:18 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Áudio e Vídeo]]></category>
+		<category><![CDATA[Mplayer]]></category>
+		<category><![CDATA[audio]]></category>
+		<category><![CDATA[codec]]></category>
+		<category><![CDATA[converter]]></category>
+		<category><![CDATA[extrair]]></category>
+		<category><![CDATA[gravar]]></category>
+		<category><![CDATA[multimedia]]></category>
+		<category><![CDATA[separar]]></category>
+		<category><![CDATA[video]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=143</guid>
+		<description><![CDATA[Para separar o arquivo de áudio num vídeo, podemos utilizar o Mplayer. Este procedimento pode ser bastante utilizado para quem quer extrair o áudio de um clip por exemplo. Linha de comando: mplayer video_qualquer.avi -ao pcm:file=saida_audio.wav -vc dummy -aid 1 -vo null Onde, video_qualquer.avi = O video a ser convertido. Poder ser em outros formatos &#8230; <a href="https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html" class="more-link">Continue lendo <span class="screen-reader-text">Mplayer: Extraindo o áudio de um vídeo</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<figure id="attachment_84" style="width: 216px" class="wp-caption aligncenter"><img class="size-full wp-image-84" title="Mplayer" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/216px-mplayersvg.png" alt="Mplayer: http://www.mplayerhq.hu" width="216" height="185" /><figcaption class="wp-caption-text">Mplayer: http://www.mplayerhq.hu</figcaption></figure>
+<p>Para separar o arquivo de áudio num vídeo, podemos utilizar o Mplayer.<br />
+Este procedimento pode ser bastante utilizado para quem quer extrair o áudio de um clip por exemplo.<br />
+Linha de comando:</p>
+<p><strong>mplayer video_qualquer.avi -ao pcm:file=saida_audio.wav -vc dummy -aid 1 -vo null</strong></p>
+<p>Onde,</p>
+<p><span style="color: #ff0000;">video_qualquer.avi</span> = O video a ser convertido. Poder ser em outros formatos como .mpg ou .mov por exemplo.</p>
+<p><span style="color: #ff0000;">-ao</span> = codec de audio. Neste caso utilizamos o PCM</p>
+<p><span style="color: #ff0000;">pcm:file</span> = Utilizamos o PCM como codec pois o mesmo aceita um parametro &#8220;file&#8221; onde podemos especificar o arquivo de saida.</p>
+<p><span style="color: #ff0000;">saida_audio.wav</span> = Arquivo de áudio de saída. Extensão wav, devido ao codec selecionado &#8220;pcm&#8221;.</p>
+<p><span style="color: #ff0000;">-vc dummy</span> = Codec de vídeo. No caso selecionamos <strong>dummy</strong> para que o vídeo seja desconsiderado.</p>
+<p><span style="color: #ff0000;">-aid 1</span> = Seleciona o canal de áudio. No caso, primeiro canal. Se o arquivo for um .VOB ( DVD ) pode ter diversos canais de áudio, devido as dublagens e etc..</p>
+<p><span style="color: #ff0000;">-vo null</span> = Atribui um valor nulo para saída de vídeo. Isso significa que ao fazer o procedimento, o vídeo não será exibido pelo player.</p>
+<p style="text-align: justify;">——————————————————</p>
+<p style="text-align: justify;"><strong>Instalação do pacote Mplayer ( Mencoder incluído )</strong></p>
+<p style="text-align: justify;">Visite o POST: <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" target="_blank">Mplayer: Projeto baseado no FFmpeg</a></p>
+<p style="text-align: justify;">——————————————————<strong><br />
+</strong></p>
+<h3 style="text-align: justify;"><strong>Procedimento de Uso:</strong></h3>
+<p><strong><img class="noalign size-full wp-image-30" title="ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/ubuntu.png" alt="ubuntu" width="50" height="50" /></strong>Usuários Linux tem sempre mais facilidade, nesse tipo de procedimento.</p>
+<p style="text-align: justify;">Basta abrir o Terminal e digitar:<br />
+<strong>mplayer video_qualquer.avi -ao pcm:file=saida_audio.wav -vc dummy -aid 1 -vo null</strong><strong></strong></p>
+<p style="text-align: justify;">Onde meu arquivo se chama video_qualquer.avi e se encontra na área de trabalho.<br />
+( Levando em consideração que ao abrir o terminal você vai estar dentro da pasta home do usuário local )</p>
+<p style="text-align: justify;">——————————————————</p>
+<p><strong><img class="noalign size-full wp-image-29" title="logo_windows" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/logo_windows.gif" alt="logo_windows" width="50" height="50" /></strong>Usuários Windows levam mais tempo para poder executar o comando.<br />
+Entre em INICIAR &gt; EXECUTAR e digite <strong>cmd</strong> &gt; OK ( Para abrir o Terminal do Windows )<br />
+Acesse a pasta digitando:<br />
+<strong>cd Desktop/pasta_do_mplayer/<br />
+</strong>em seguida:<br />
+<strong>mplayer &#8220;../video_qualquer.avi&#8221; -ao pcm:file=&#8221;../saida_audio.wav&#8221; -vc dummy -aid 1 -vo null</strong><br />
+Onde meu arquivo se chama video_qualquer.avi<strong> </strong>e se encontra na área de trabalho.<br />
+( Utilizamos <strong><span style="color: #ff0000;">../</span></strong> para sair da pasta do mplayer e acessar o video_qualquer.avi e gravar o saida_audio.wav na área de trabalho. )<br />
+Para maiores informações visite o POST: <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" target="_blank">Windows XP vs FFmpeg e Mplayer</a></p>
+<p style="text-align: justify;">——————————————————</p>
+<p>Em caso de dúvidas, entre em contato …</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-125" data-post-type="none" ><small class="wp_rp_publish_date">19/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" class="wp_rp_title">Mplayer: Rotacionando um Vídeo</a></li><li data-position="1" data-poid="in-40" data-post-type="none" ><small class="wp_rp_publish_date">10/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/10/ffmpeg-formatos-de-codecs-e-container-disponiveis.html" class="wp_rp_title">FFmpeg: Formatos de CODECs disponíveis</a></li><li data-position="2" data-poid="in-89" data-post-type="none" ><small class="wp_rp_publish_date">13/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/13/windows-xp-vs-ffmpeg-e-mplayer.html" class="wp_rp_title">Windows XP vs FFmpeg e Mplayer</a></li><li data-position="3" data-poid="in-83" data-post-type="none" ><small class="wp_rp_publish_date">15/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/15/mplayer-projeto-baseado-no-ffmpeg.html" class="wp_rp_title">Mplayer: Projeto baseado no FFmpeg</a></li><li data-position="4" data-poid="in-27" data-post-type="none" ><small class="wp_rp_publish_date">09/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/09/ffmpeg-solucao-ideal-para-audio-e-video.html" class="wp_rp_title">FFmpeg: Solução ideal para Áudio e Vídeo</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F20%2Fmplayer-extraindo-o-audio-de-um-video.html&amp;linkname=Mplayer%3A%20Extraindo%20o%20%C3%A1udio%20de%20um%20v%C3%ADdeo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F20%2Fmplayer-extraindo-o-audio-de-um-video.html&amp;linkname=Mplayer%3A%20Extraindo%20o%20%C3%A1udio%20de%20um%20v%C3%ADdeo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F20%2Fmplayer-extraindo-o-audio-de-um-video.html&amp;title=Mplayer%3A%20Extraindo%20o%20%C3%A1udio%20de%20um%20v%C3%ADdeo" id="wpa2a_20"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/20/mplayer-extraindo-o-audio-de-um-video.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

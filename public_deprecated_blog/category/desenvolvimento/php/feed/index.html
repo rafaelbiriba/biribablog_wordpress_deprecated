@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>PHP &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/desenvolvimento/php/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>OpenCart: Com o aumento do dolar, veja como atualizar o preço de todos os seus produtos via SQL</title>
+		<link>https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html</link>
+		<comments>https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html#respond</comments>
+		<pubDate>Thu, 01 Aug 2013 01:34:13 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[desconto]]></category>
+		<category><![CDATA[dica]]></category>
+		<category><![CDATA[opencart]]></category>
+		<category><![CDATA[produto]]></category>
+		<category><![CDATA[servidor]]></category>
+		<category><![CDATA[sql]]></category>
+		<category><![CDATA[tabela]]></category>
+		<category><![CDATA[valor]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3120</guid>
+		<description><![CDATA[Com o aumento do dolar, resolvi postar aqui como fazer para aumentar o preço de todos os seus produtos baseado numa porcentagem. No caso tive que aumentar 0.05% em cima de todos os produtos. Para fazer isso, você precisa rodar uma linha SQL diretamente no servidor (pode ser feito facilmente pelo phpmysql admin do seu &#8230; <a href="https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html" class="more-link">Continue lendo <span class="screen-reader-text">OpenCart: Com o aumento do dolar, veja como atualizar o preço de todos os seus produtos via SQL</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="alignleft size-full wp-image-3121" alt="opencart-634x250" src="https://rafaelbiriba.com/wp-content/uploads/2013/07/opencart-634x250.jpg" width="634" height="250" srcset="https://rafaelbiriba.com/wp-content/uploads/2013/07/opencart-634x250.jpg 634w, https://rafaelbiriba.com/wp-content/uploads/2013/07/opencart-634x250-300x118.jpg 300w" sizes="(max-width: 634px) 100vw, 634px" /></p>
+<p style="text-align: justify;">Com o aumento do dolar, resolvi postar aqui como fazer para aumentar o preço de todos os seus produtos baseado numa porcentagem.</p>
+<p style="text-align: justify;">No caso tive que aumentar 0.05% em cima de todos os produtos.</p>
+<p style="text-align: justify;">Para fazer isso, você precisa rodar uma linha SQL diretamente no servidor (pode ser feito facilmente pelo phpmysql admin do seu provedor de hospedagem)</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="sql" style="font-family:monospace;"><span style="color: #993333; font-weight: bold;">UPDATE</span> opencart_product <span style="color: #993333; font-weight: bold;">SET</span> price <span style="color: #66cc66;">=</span> round<span style="color: #66cc66;">&#40;</span>price<span style="color: #66cc66;">*</span><span style="color: #cc66cc;">1.05</span><span style="color: #66cc66;">,</span><span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Onde &#8220;opencart_product&#8221; é o nome da minha tabela de produtos e &#8220;1.05&#8221; é o valor que quero deixar no produto, no caso 100% + 0.05%.</p>
+<p style="text-align: justify;">Você também pode baixar o valor do produto proporcionalmente dessa mesma forma. Se você tirar 10% de todos os produtos a query ficaria assim:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="sql" style="font-family:monospace;"><span style="color: #993333; font-weight: bold;">UPDATE</span> opencart_product <span style="color: #993333; font-weight: bold;">SET</span> price <span style="color: #66cc66;">=</span> round<span style="color: #66cc66;">&#40;</span>price<span style="color: #66cc66;">*</span><span style="color: #cc66cc;">0.9</span><span style="color: #66cc66;">,</span><span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Espero que essa informação seja útil para você, assim como foi para mim <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="1" data-poid="in-3113" data-post-type="none" ><small class="wp_rp_publish_date">18/05/2013</small> <a href="https://rafaelbiriba.com/2013/05/18/code-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html" class="wp_rp_title">Code School vai liberar 48 horas de acesso gratuito aos cursos online </a></li><li data-position="2" data-poid="in-1490" data-post-type="none" ><small class="wp_rp_publish_date">17/11/2009</small> <a href="https://rafaelbiriba.com/2009/11/17/melhor-prevenir-do-que-remediar-backup-do-blog.html" class="wp_rp_title">Melhor Prevenir do que Remediar: Backup do Blog</a></li><li data-position="3" data-poid="in-2702" data-post-type="none" ><small class="wp_rp_publish_date">23/02/2011</small> <a href="https://rafaelbiriba.com/2011/02/23/wordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html" class="wp_rp_title">WordPress: Cuidados e dicas para atualizar a versão para 3.1</a></li><li data-position="4" data-poid="in-188" data-post-type="none" ><small class="wp_rp_publish_date">27/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html" class="wp_rp_title">PHP: Ocultando erros de código</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F07%2F31%2Fopencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html&amp;linkname=OpenCart%3A%20Com%20o%20aumento%20do%20dolar%2C%20veja%20como%20atualizar%20o%20pre%C3%A7o%20de%20todos%20os%20seus%20produtos%20via%20SQL" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F07%2F31%2Fopencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html&amp;linkname=OpenCart%3A%20Com%20o%20aumento%20do%20dolar%2C%20veja%20como%20atualizar%20o%20pre%C3%A7o%20de%20todos%20os%20seus%20produtos%20via%20SQL" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F07%2F31%2Fopencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html&amp;title=OpenCart%3A%20Com%20o%20aumento%20do%20dolar%2C%20veja%20como%20atualizar%20o%20pre%C3%A7o%20de%20todos%20os%20seus%20produtos%20via%20SQL" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Feliz ano novo com javascript !</title>
+		<link>https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html</link>
+		<comments>https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html#comments</comments>
+		<pubDate>Thu, 24 Dec 2009 21:47:49 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[alert]]></category>
+		<category><![CDATA[ano novo]]></category>
+		<category><![CDATA[codigo]]></category>
+		<category><![CDATA[natal]]></category>
+		<category><![CDATA[script]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1810</guid>
+		<description><![CDATA[Primeiramente, gostaria de desejar a todos os leitores e amigos que acompanham meu blog: Um feliz natal e um próspero ano novo ! Entrando nesse ritmo de natal e ano novo, desenvolvi um pequeno código em javascript para desejar feliz natal e ano novo para os leitores do meu blog. O código está realmente simples, &#8230; <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="more-link">Continue lendo <span class="screen-reader-text">Feliz ano novo com javascript !</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="size-full wp-image-1817 alignleft" title="natal-16" src="https://rafaelbiriba.com/wp-content/uploads/2009/12/natal-16.jpg" alt="natal-16" width="233" height="350" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/12/natal-16.jpg 233w, https://rafaelbiriba.com/wp-content/uploads/2009/12/natal-16-199x300.jpg 199w" sizes="(max-width: 233px) 100vw, 233px" />Primeiramente, gostaria de desejar a <strong>todos os leitores e amigos</strong> que acompanham meu blog:</p>
+<h3 style="text-align: justify;"><span style="color: #ff0000;"><strong>Um feliz natal e um próspero ano novo !</strong></span><br /></h3>
+<p style="text-align: justify;">Entrando nesse ritmo de natal e ano novo, desenvolvi um pequeno código em javascript para desejar feliz natal e ano novo para os leitores do meu blog.</p>
+<p style="text-align: justify;">O código está realmente simples, e pode ser alterado e utilizado aonde quiser&#8230; Só não esqueça de deixar sua opnião nos comentários abaixo!</p>
+<p style="text-align: justify;"><strong>O script funciona da seguinte maneira:</strong><br />3 variáveis são definidas no inicio: <br />Data atual (<span style="color: #ff0000;">var agora</span>).<br />Data do ano novo (<span style="color: #ff0000;">var anoNovo</span>).<br />Data máxima de exibição (<span style="color: #ff0000;">var anoNovoMax</span>).</p>
+<p style="text-align: justify;">O alert com a mensagem será exibida enquanto a data atual estiver dentro do intervalo das outras 2 datas.</p>
+<p style="text-align: justify;">Abaixo segue o código:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #339933;">&lt;</span>script language<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;JavaScript&quot;</span><span style="color: #339933;">&gt;</span>
+<span style="color: #000066; font-weight: bold;">var</span> agora <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> <span style="">Date</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> anoNovo <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> <span style="">Date</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">2010</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> anoNovoMax <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> <span style="">Date</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">2010</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">23</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">59</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">59</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>agora <span style="color: #339933;">&gt;=</span> anoNovo <span style="color: #339933;">&amp;&amp;</span> agora<span style="color: #339933;">&lt;</span>anoNovoMax<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Feliz ano novo !&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;"><strong>Para implementar no wordpress, é bem simples:</strong><br />Adicione um Widget de texto em seu wordpress, e sem atribuir um titulo, insira o codigo javascript diretamente no campo de baixo &#8220;descrição&#8221;. Fazendo isso, o widget não ficará visível, mas o código vai funcionar&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;"><strong>Para implementar em seu site:</strong><br />Basta inserir o javascript em sua página.</p>
+<p style="text-align: justify;"><span style="color: #ff0000;"><strong>Dica:</strong></span><br />Como o javascript pega a data da máquina do cliente, você corre o risco de pegar a data errada.  Uma solução seria usar o PHP para definir a data, ou seja,  seria a data atual seu servidor. Exemplo:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;">var agora = new Date(<span style="color: #000000; font-weight: bold;">&lt;?php</span> <span style="color: #b1b100;">echo</span> <span style="color: #990000;">date</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Y, m, d, H, i, s&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>);</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;"><strong>Então é isso&#8230; Façam bom proveito !</strong></p>
+<p style="text-align: justify;">Aqui no blog, já está implementado as mensagens de Feliz Natal e Feliz Ano Novo&#8230; Serão exibidas durante todo o dia 25 e 01, respectivamente ! <strong>Visitem o Blog e confiram !</strong> <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-188" data-post-type="none" ><small class="wp_rp_publish_date">27/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html" class="wp_rp_title">PHP: Ocultando erros de código</a></li><li data-position="1" data-poid="in-791" data-post-type="none" ><small class="wp_rp_publish_date">02/07/2009</small> <a href="https://rafaelbiriba.com/2009/07/02/php-arquivo-de-log-personalizado.html" class="wp_rp_title">PHP: Arquivo de log personalizado</a></li><li data-position="2" data-poid="in-2428" data-post-type="none" ><small class="wp_rp_publish_date">27/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html" class="wp_rp_title">HTML5: Trocando mensagens entre a página e iframes</a></li><li data-position="3" data-poid="in-2430" data-post-type="none" ><small class="wp_rp_publish_date">04/05/2011</small> <a href="https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html" class="wp_rp_title">The Wilderness Downtown: Experimento do Google usando HTML5</a></li><li data-position="4" data-poid="in-2337" data-post-type="none" ><small class="wp_rp_publish_date">18/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/18/net-sftp-calculando-o-progresso-do-upload.html" class="wp_rp_title">Net-SFTP: Calculando o progresso do upload</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F12%2F24%2Ffeliz-ano-novo-com-javascript.html&amp;linkname=Feliz%20ano%20novo%20com%20javascript%20%21" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F12%2F24%2Ffeliz-ano-novo-com-javascript.html&amp;linkname=Feliz%20ano%20novo%20com%20javascript%20%21" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F12%2F24%2Ffeliz-ano-novo-com-javascript.html&amp;title=Feliz%20ano%20novo%20com%20javascript%20%21" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>PHP: Arquivo de log personalizado</title>
+		<link>https://rafaelbiriba.com/2009/07/02/php-arquivo-de-log-personalizado.html</link>
+		<comments>https://rafaelbiriba.com/2009/07/02/php-arquivo-de-log-personalizado.html#comments</comments>
+		<pubDate>Fri, 03 Jul 2009 02:08:38 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[codigo]]></category>
+		<category><![CDATA[historico]]></category>
+		<category><![CDATA[log]]></category>
+		<category><![CDATA[logger]]></category>
+		<category><![CDATA[registro]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=791</guid>
+		<description><![CDATA[&#160; Semana passada, estive fazendo num pequeno site, uma área de login. Foi então que fiz uma funçãozinha no PHP que gera logs diários dos eventos ocorridos desde o login até o logoff, como por exemplo, ações tomadas pelos usuários na parte administrativa. Abaixo, vocês poderão conferir o código que utilizei, logicamente adaptado para que &#8230; <a href="https://rafaelbiriba.com/2009/07/02/php-arquivo-de-log-personalizado.html" class="more-link">Continue lendo <span class="screen-reader-text">PHP: Arquivo de log personalizado</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p>&nbsp;</p>
+
+<figure id="attachment_186" style="width: 232px" class="wp-caption alignleft"><img class="size-full wp-image-186" title="php-logo-sombra" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/php-logo-sombra.jpg" alt="PHP: http://www.php.net/" width="232" height="196" /><figcaption class="wp-caption-text">PHP: http://www.php.net/</figcaption></figure>
+<p style="text-align: justify;">Semana passada, estive fazendo num pequeno site, uma área de login. Foi então que fiz uma funçãozinha no PHP que gera logs diários dos eventos ocorridos desde o login até o logoff, como por exemplo, ações tomadas pelos usuários na parte administrativa.</p>
+<p style="text-align: justify;">Abaixo, vocês poderão conferir o código que utilizei, logicamente adaptado para que fosse publicado aqui.</p>
+<p style="text-align: justify;">Os arquivos de log são gerados baseado no dia em que se encontra. Como os arquivos estão em formato <strong>.txt</strong>, utilizei um prefixo no arquivo, para que o acesso não seja tão óbvio por pessoas desautorizadas.</p>
+<p style="text-align: justify;">A função armazena no arquivo a hora da ocorrência, seguido pelo IP da máquina do cliente e a mensagem definida por você.</p>
+<p style="text-align: justify;">Vamos então seguir para o código:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+<span style="color: #990000;">date_default_timezone_set</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'America/Sao_Paulo'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> Logger<span style="color: #009900;">&#40;</span><span style="color: #000088;">$msg</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+&nbsp;
+<span style="color: #000088;">$data</span> <span style="color: #339933;">=</span> <span style="color: #990000;">date</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;d-m-y&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$hora</span> <span style="color: #339933;">=</span> <span style="color: #990000;">date</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;H:i:s&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$ip</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_SERVER</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'REMOTE_ADDR'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//Nome do arquivo:</span>
+<span style="color: #000088;">$arquivo</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Logger_<span style="color: #006699; font-weight: bold;">$data</span>.txt&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//Texto a ser impresso no log:</span>
+<span style="color: #000088;">$texto</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;[<span style="color: #006699; font-weight: bold;">$hora</span>][<span style="color: #006699; font-weight: bold;">$ip</span>]&gt; <span style="color: #006699; font-weight: bold;">$msg</span> <span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$manipular</span> <span style="color: #339933;">=</span> <span style="color: #990000;">fopen</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;<span style="color: #006699; font-weight: bold;">$arquivo</span>&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;a+b&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #990000;">fwrite</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$manipular</span><span style="color: #339933;">,</span> <span style="color: #000088;">$texto</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #990000;">fclose</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$manipular</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></td></tr></table></div>
+
+
+
+<p>Salve o arquivo acima como <strong>logger.php</strong></p>
+<p>Na linha <strong>3</strong><strong> </strong> estou declarando o timezone para São Paulo, mesmo estando no Rio de Janeiro, o horário é o mesmo. Isso serve para configurar a data para minha localidade, já que no meu caso, o servidor se encontra em outro fuso horário.</p>
+<p>Nas linhas <strong>7</strong>, <strong>8</strong> e <strong>9</strong> estou declarando as variáveis de data, hora e ip da máquina que gerou o log (cliente).</p>
+<p>Na linha <strong>12</strong> está o nome do arquivo. Será algo do tipo <span style="color: #ff0000;">Logger_19-06-2009.txt</span> (dia-mês-ano). Caso deseje armazenar o log em uma pasta já existente, altere a linha para:<span style="color: #000000;"> <strong><br />$arquivo = &#8220;<span style="color: #ff0000;">minhapasta/</span>Logger_$data.txt&#8221;;</strong></span></p>
+<p>Na linha <strong>17</strong> está a função de abertura do arquivo.  Passando o &#8220;a+&#8221; como parâmetro, apenas nos dias que tiver alguma coisa para ser inserida no log, é que o arquivo será criado ou se já existir, escreverá o registro no fim do arquivo. O parâmetro &#8220;b&#8221; serve para questões de portabilidade ( inserção recomendado no manual do php )</p>
+<p>As linhas <strong>18</strong> e <strong>19</strong> manipulam e fecham o arquivo definido na linha 12.</p>
+<p>Agora vamos para o código onde vamos utilizar nossa função:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+<span style="color: #b1b100;">include</span> <span style="color: #0000ff;">&quot;logger.php&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+Logger<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Testando a função logger !&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+Logger<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Como você pode ver, estou logando uma informação !&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+Logger<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Teste 1, Teste 2, Teste 3!&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></td></tr></table></div>
+
+
+
+<p>Salve o arquivo acima como <strong>teste.php</strong> na mesma página onde se encontra o <span style="color: #ff0000;">logger.php</span>.</p>
+<p>Pronto. O Script acima gera 3 saídas consecutivas no seu arquivo de log.<br />Conferindo o resultado: <br />Nome do arquivo gerado:<span style="color: #ff0000;"><br />Logger_19-06-09.txt</span><br />Conteúdo: <br /><span style="color: #ff0000;">[21:57:36][201.7.xxx.xxx]&gt; Testando a função logger ! <br />[21:57:36][201.7.xxx.xxx]&gt; Como você pode ver, estou logando uma informação ! <br />[21:57:36][201.7.xxx.xxx]&gt; Teste 1, Teste 2, Teste 3! </span></p>
+<p>Bom, espero que o script sirva para mais alguém. <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><strong>===========================================</strong></p>
+<p style="text-align: justify;"><strong>Atualização em 13/abril/2011</strong></p>
+<p style="text-align: justify;">A leitora Renata nos comentários de hoje (13/04/11) deixou uma dúvida muito boa&#8230; Vale a pena editar a matéria e acrescentar a solução dela aqui&#8230;</p>
+<p style="text-align: justify;">Ela estava encontrando problemas para centralizar os arquivos de log em um só lugar. Ela trabalhava com pastas para organizar seus arquivos, e ao incluir a função logger nos arquivos, fazia com que os logs fossem gravados separadamente em cada pasta.</p>
+<p style="text-align: justify;"><strong>Por que isso ocorreu ? </strong></p>
+<p style="text-align: justify;">Ela estava incluindo a função da maneira correta: <strong><span style="color: #ff0000;">include &#8220;../logger.php&#8221;;</span></strong> mas o problema estava mesmo dentro da função Logger.</p>
+<p style="text-align: justify;">Na variável $arquivo, onde definimos o nome do arquivo de log, a função parte do princípio que o arquivo .txt está do lado do arquivo .php que contém a função&#8230;</p>
+<p style="text-align: justify;">Consideremos o seguinte path de diretórios:</p>
+<p style="text-align: justify;">/<br />/logs/Logger.txt<br />/logger.php<br />/folder1/pagina1.php</p>
+<p style="text-align: justify;">Ao incluir a função logger de dentro da &#8220;pagina1&#8221;, chamando a função como a Renata fez (&#8220;../logger.php&#8221;), faz com que ao definir a variavel $arquivo = &#8220;teste.txt&#8221; o PHP vai salvar o arquivo dentro da pasta &#8220;folder1&#8221; pois ele interpreta o codigo a partir daquele contexto.</p>
+<p style="text-align: justify;">Para resolver isso, ao entrar na função Logger, voce precisa mudar o contexto da execução para ele salvar o log corretamente na pasta log (independente de onde ela estiver), e no final da função, você precisa voltar o contexto para onde ele estava, para evitar possiveis problemas.</p>
+<p style="text-align: justify;">Segue então o novo código que resolve o problema:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+<span style="color: #990000;">date_default_timezone_set</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'America/Sao_Paulo'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> Logger<span style="color: #009900;">&#40;</span><span style="color: #000088;">$msg</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//pega o path completo de onde esta executanto</span>
+<span style="color: #000088;">$caminho_atual</span> <span style="color: #339933;">=</span> <span style="color: #990000;">getcwd</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+<span style="color: #666666; font-style: italic;">//muda o contexto de execução para a pasta logs</span>
+<span style="color: #990000;">chdir</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;/home/rafaelbiriba/public_html/logs&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$data</span> <span style="color: #339933;">=</span> <span style="color: #990000;">date</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;d-m-y&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$hora</span> <span style="color: #339933;">=</span> <span style="color: #990000;">date</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;H:i:s&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$ip</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_SERVER</span><span style="color: #009900;">&#91;</span><span style="color: #0000ff;">'REMOTE_ADDR'</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//Nome do arquivo:</span>
+<span style="color: #000088;">$arquivo</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Logger_<span style="color: #006699; font-weight: bold;">$data</span>.txt&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//Texto a ser impresso no log:</span>
+<span style="color: #000088;">$texto</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;[<span style="color: #006699; font-weight: bold;">$hora</span>][<span style="color: #006699; font-weight: bold;">$ip</span>]&gt; <span style="color: #006699; font-weight: bold;">$msg</span> <span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$manipular</span> <span style="color: #339933;">=</span> <span style="color: #990000;">fopen</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;<span style="color: #006699; font-weight: bold;">$arquivo</span>&quot;</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">&quot;a+b&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #990000;">fwrite</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$manipular</span><span style="color: #339933;">,</span> <span style="color: #000088;">$texto</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #990000;">fclose</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$manipular</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">//Volta o contexto de execução para o caminho em que estava antes</span>
+<span style="color: #990000;">chdir</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$caminho_atual</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre></td></tr></table></div>
+
+
+
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-188" data-post-type="none" ><small class="wp_rp_publish_date">27/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html" class="wp_rp_title">PHP: Ocultando erros de código</a></li><li data-position="1" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="2" data-poid="in-549" data-post-type="none" ><small class="wp_rp_publish_date">02/05/2009</small> <a href="https://rafaelbiriba.com/2009/05/02/qr-code-gere-com-o-google-chart-api.html" class="wp_rp_title">QR Code: Gere com o Google Chart API</a></li><li data-position="3" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="4" data-poid="in-2337" data-post-type="none" ><small class="wp_rp_publish_date">18/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/18/net-sftp-calculando-o-progresso-do-upload.html" class="wp_rp_title">Net-SFTP: Calculando o progresso do upload</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F07%2F02%2Fphp-arquivo-de-log-personalizado.html&amp;linkname=PHP%3A%20Arquivo%20de%20log%20personalizado" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F07%2F02%2Fphp-arquivo-de-log-personalizado.html&amp;linkname=PHP%3A%20Arquivo%20de%20log%20personalizado" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F07%2F02%2Fphp-arquivo-de-log-personalizado.html&amp;title=PHP%3A%20Arquivo%20de%20log%20personalizado" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/07/02/php-arquivo-de-log-personalizado.html/feed</wfw:commentRss>
+		<slash:comments>33</slash:comments>
+		</item>
+		<item>
+		<title>PHP: Ocultando erros de código</title>
+		<link>https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html</link>
+		<comments>https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html#comments</comments>
+		<pubDate>Fri, 27 Feb 2009 16:26:19 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[codigo]]></category>
+		<category><![CDATA[erro]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=188</guid>
+		<description><![CDATA[É muito comum após concluir todo e desenvolvimento de um projeto PHP, alguns error serem mostrados na tela, como um E_WARNING ou E_NOTICE. Isso pode ocorrer por muitos motivos, como indisponibilidade temporária no acesso ao banco de dados, tempo máximo de execução excedido, dentre outros. Durante o desenvolvimento é altamente recomendado deixar os erros habilitados, &#8230; <a href="https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html" class="more-link">Continue lendo <span class="screen-reader-text">PHP: Ocultando erros de código</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<figure id="attachment_186" style="width: 232px" class="wp-caption aligncenter"><img class="size-full wp-image-186" title="php-logo-sombra" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/php-logo-sombra.jpg" alt="PHP: http://www.php.net/" width="232" height="196" /><figcaption class="wp-caption-text">PHP: http://www.php.net/</figcaption></figure>
+<p style="text-align: justify;">É muito comum após concluir todo e desenvolvimento de um projeto PHP, alguns error serem mostrados na tela, como um <strong>E_WARNING</strong> ou <strong>E_NOTICE</strong>. Isso pode ocorrer por muitos motivos, como indisponibilidade temporária no acesso ao banco de dados, tempo máximo de execução excedido, dentre outros.</p>
+<p style="text-align: justify;">Durante o desenvolvimento é altamente recomendado deixar os erros habilitados, justamente para ser feita a depuração dos mesmos, antes de finalizar o projeto. Depois de concluido, podemos desabilitar os erros, para caso haja uma eventualidade, não fique aparecendo diretamente na tela do usuário / cliente !</p>
+<p style="text-align: justify;">Para isso, vamos criar uma página PHP, onde vamos deixar os comandos para habilitar/desabilitar de forma simples e rápida, e vamos incluir a página criada nas páginas em que os erros não deverão ser exibidos. Vamos começar:</p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">[ mostra_erros.php ]</span><br />
+&lt;?php</strong></p>
+<p style="text-align: justify;"><strong>error_reporting(0);<br />
+ini_set(&#8220;display_errors&#8221;, 0 );</strong></p>
+<p style="text-align: justify;"><strong>?&gt;</strong></p>
+<p style="text-align: justify;">Definimos  de início <span style="color: #ff0000;">error_reporting</span> para ser <span style="color: #ff0000;">zero</span>, com isso nenhum erro é reportado. Logo em seguida atribuimos ao <span style="color: #ff0000;">display_errors</span> o valor <span style="color: #ff0000;">zero</span>, poderia ser também <strong>true</strong> ou <strong>false</strong>, <span style="color: #ff0000;">um</span> e <span style="color: #ff0000;">zero</span>, respectivamente. O código acima fará com que o PHP não exiba nenhum tipo de erro na tela. Para exibir todos os erros novamente utilize o código abaixo:<br />
+<strong><span style="color: #ff0000;">[ mostra_erros.php ]</span><br />
+&lt;?php</strong></p>
+<p style="text-align: justify;"><strong>error_reporting(E_ALL);<br />
+ini_set(&#8220;display_errors&#8221;, 1 );</strong></p>
+<p style="text-align: justify;"><strong>?&gt;</strong></p>
+<p style="text-align: justify;">Veremos a seguir, algumas outras combinações, para ser exibido somente o erro desejado. Primeiro vamos entender o que cada erro mais comum do PHP quer dizer:<br />
+( Definições completas disponíveis no manual <a href="http://br.php.net/manual/pt_BR/errorfunc.constants.php#errorfunc.constants.errorlevels.e-error" target="_blank">PHP.net</a>: )</p>
+<p style="text-align: justify;"><strong>E_ERROR: </strong> Estes indicam erros que não podem ser recuperados, como problemas de alocação de memória. A execução do script é interrompida.<br />
+<strong>E_WARNING: </strong>Avisos em tempo de execução (erros não fatais). A execução do script não é interrompida.<br />
+<strong>E_PARSE: </strong> Erro em tempo de compilação. Erros gerados pelo interpretador.<br />
+<strong>E_NOTICE: </strong>Indica que o script encontrou alguma coisa que pode indicar um erro, mas que também possa acontecer durante a execução normal do script.<br />
+<strong>E_STRICT: </strong>Permite ao PHP sugerir mudanças ao seu código as quais irão assegurar melhor interoperabilidade e compatibilidade futura do seu código.<br />
+<strong>E_ALL:</strong> Todos erros e avisos, como suportado, exceto de nível E_STRICT</p>
+<p style="text-align: justify;">Caso você deseje exibir apenas os erros de tipo E_WARNING deve ser usado o seguinte código:</p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">[ mostra_erros.php ]</span><br />
+&lt;?php</strong></p>
+<p style="text-align: justify;"><strong>error_reporting(</strong><strong>E_WARNING</strong><strong>);<br />
+ini_set(&#8220;display_errors&#8221;, 1 );</strong></p>
+<p style="text-align: justify;"><strong>?&gt;</strong></p>
+<p style="text-align: justify;">Observe que agora atribuimos ao <span style="color: #ff0000;">display_errors</span> o valor <span style="color: #ff0000;">1</span> ( true ), para reportamos apenas os erros <span style="color: #ff0000;">E_WARNING</span>, como definimos na função <span style="color: #ff0000;">error_reporting</span>.</p>
+<p style="text-align: justify;">Podemos ainda utilizar as seguinte combinações:</p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">[ mostra_erros.php ]</span><br />
+&lt;?php</strong></p>
+<p style="text-align: justify;"><strong>error_reporting(E_ERROR | </strong><strong>E_WARNING | E_PARSE</strong><strong>);<br />
+ini_set(&#8220;display_errors&#8221;, 1 );</strong></p>
+<p style="text-align: justify;"><strong>?&gt;</strong></p>
+<p style="text-align: justify;">Desta forma apenas os erros do tipo E_ERROR, E_WARNING e E_PARSE serão exibidos na tela. Uma outra forma seria:</p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">[ mostra_erros.php ]</span></strong><br />
+<strong>&lt;?php</strong></p>
+<p style="text-align: justify;"><strong>error_reporting(</strong><strong>E_ALL ^ E_WARNING</strong><strong>);<br />
+ini_set(&#8220;display_errors&#8221;, 1 );</strong></p>
+<p style="text-align: justify;"><strong>?&gt;</strong></p>
+<p style="text-align: justify;">Com isso, todos os erros serão mostrados ( E_ALL ), com exceção do E_WARNING.</p>
+<p style="text-align: justify;">Já temos nosso arquivo de configuração ( <strong>mostra_erros.php</strong> ), agora basta chamar o arquivo de configuração nas páginas em que gostaria de alterar a configuração.</p>
+<p style="text-align: justify;"><strong>&lt;?php</strong></p>
+<p style="text-align: justify;"><strong>include &#8220;mostra_erros.php&#8221;;</strong></p>
+<p style="text-align: justify;"><strong>?&gt;</strong></p>
+<p style="text-align: justify;">Adicione a &#8216;include&#8217; acima no inicio das páginas PHP,  para que seja definido os parametros antes da página ser carregada. Quando precisar depurar algum erro nos códigos, ou acrescentar mais linhas ao código, basta alterar o arquivo <span style="color: #ff0000;">mostra_erros.php</span> e habilitar a exibição dos erros conforme foi apresentado nos exemplos acima.</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-791" data-post-type="none" ><small class="wp_rp_publish_date">02/07/2009</small> <a href="https://rafaelbiriba.com/2009/07/02/php-arquivo-de-log-personalizado.html" class="wp_rp_title">PHP: Arquivo de log personalizado</a></li><li data-position="1" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="2" data-poid="in-489" data-post-type="none" ><small class="wp_rp_publish_date">29/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/29/ruby-require-rubygems-alternativas.html" class="wp_rp_title">Ruby: Alternativas para require &#8216;rubygems&#8217;</a></li><li data-position="3" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="4" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F27%2Fphp-ocultando-erros-de-codigo.html&amp;linkname=PHP%3A%20Ocultando%20erros%20de%20c%C3%B3digo" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F27%2Fphp-ocultando-erros-de-codigo.html&amp;linkname=PHP%3A%20Ocultando%20erros%20de%20c%C3%B3digo" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F02%2F27%2Fphp-ocultando-erros-de-codigo.html&amp;title=PHP%3A%20Ocultando%20erros%20de%20c%C3%B3digo" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html/feed</wfw:commentRss>
+		<slash:comments>16</slash:comments>
+		</item>
+	</channel>
+</rss>

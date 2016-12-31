@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Travian versão 3.5: Fim do greasemonkey e seus scripts ?  | Rafael Biriba Blog</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://rafaelbiriba.com/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel="alternate" type="application/rss+xml" title="Feed para Rafael Biriba Blog &raquo;" href="https://rafaelbiriba.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários para Rafael Biriba Blog &raquo;" href="https://rafaelbiriba.com/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários para Rafael Biriba Blog &raquo; Travian versão 3.5: Fim do greasemonkey e seus scripts ?" href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.rafaelbiriba.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wgs-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/wgs.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/style.css?ver=4.5.3' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='github-profile-octicons-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/octicons/octicons.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='github-profile-widget-styles-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/widget.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='A2A_SHARE_SAVE-css'  href='https://rafaelbiriba.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.12' type='text/css' media='all' />
+<link rel='stylesheet' id='fbSEOStylesheet-css'  href='https://rafaelbiriba.com/wp-content/plugins/seo-facebook-comments/assets/fbseo-style.css?ver=4.5.3' type='text/css' media='all' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.2 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-7346716-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/content-slide/js/coin-slider.js?ver=4.5.3'></script>
+<link rel='https://api.w.org/' href='https://rafaelbiriba.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rafaelbiriba.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rafaelbiriba.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='WolframAlpha: Busque o que você quer saber !' href='https://rafaelbiriba.com/2009/05/16/wolframalpha-busque-o-que-voce-quer-saber.html' />
+<link rel='next' title='Newsletter para o WordPress 2.7.1' href='https://rafaelbiriba.com/2009/05/21/newsletter-para-o-wordpress-271.html' />
+<meta name="generator" content="WordPress 4.5.3" />
+<link rel='shortlink' href='https://rafaelbiriba.com/?p=726' />
+<link rel="alternate" type="application/json+oembed" href="https://rafaelbiriba.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F05%2F17%2Ftravian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" />
+<link rel="alternate" type="text/xml+oembed" href="https://rafaelbiriba.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F05%2F17%2Ftravian-versao-35-fim-do-greasemonkey-e-seus-scripts.html&#038;format=xml" />
+
+<script type="text/javascript"><!--
+var a2a_config=a2a_config||{},wpa2a={done:false,html_done:false,script_ready:false,script_load:function(){var a=document.createElement('script'),s=document.getElementsByTagName('script')[0];a.type='text/javascript';a.async=true;a.src='https://static.addtoany.com/menu/page.js';s.parentNode.insertBefore(a,s);wpa2a.script_load=function(){};},script_onready:function(){wpa2a.script_ready=true;if(wpa2a.html_done)wpa2a.init();},init:function(){for(var i=0,el,target,targets=wpa2a.targets,length=targets.length;i<length;i++){el=document.getElementById('wpa2a_'+(i+1));target=targets[i];a2a_config.linkname=target.title;a2a_config.linkurl=target.url;a2a_config.linkmedia=target.media;if(el){a2a.init('page',{target:el});el.id='';}wpa2a.done=true;}wpa2a.targets=[];}};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.callbacks.push({ready:wpa2a.script_onready});a2a_config.templates=a2a_config.templates||{};a2a_localize = {
+	Share: "Compartilhar",
+	Save: "Salvar",
+	Subscribe: "Inscrever",
+	Email: "Email",
+	Bookmark: "Favoritos",
+	ShowAll: "Mostrar tudo",
+	ShowLess: "Mostrar menos",
+	FindServices: "Procurar serviço(s)",
+	FindAnyServiceToAddTo: "Encontrar rapidamente qualquer serviço para",
+	PoweredBy: "Serviço fornecido por",
+	ShareViaEmail: "Share via email",
+	SubscribeViaEmail: "Subscribe via email",
+	BookmarkInYourBrowser: "Adicionar aos favoritos",
+	BookmarkInstructions: "Press Ctrl+D or \u2318+D to bookmark this page",
+	AddToYourFavorites: "Adicionar a favoritos",
+	SendFromWebOrProgram: "Send from any email address or email program",
+	EmailProgram: "Email program",
+	More: "More&#8230;"
+};
+
+//--></script>
+<script type="text/javascript">
+	var $jquery = jQuery.noConflict(); 
+	$jquery(document).ready(function() 
+	{
+		$jquery('#wpcontent_slider').coinslider(
+	{ 
+	width: 980, 
+	height: 370, 
+	spw: 7, 
+	sph: 5, 
+	delay: 3000, 
+	sDelay: 30, 
+	opacity: 0.7, 
+	titleSpeed: 500, 
+	effect: 'random', 
+	navigation: true, 
+	links : true, 
+	hoverPause: true });
+		});
+	</script>
+<style type="text/css" media="screen">
+		
+#wpcontent_slider_container
+{
+	overflow: hidden; position: relative; padding:0px;margin:0px; text-align:center; width:980px !important;
+	height:370px !important;
+}
+#wpcontent_slider 
+{ overflow: hidden; position: relative; font-family:\'Trebuchet MS\', Helvetica, sans-serif;border:0px solid #ffffff; text-align:left;}
+#wpcontent_slider a,#wpcontent_slider a img { border: none; text-decoration: none; outline: none; }
+#wpcontent_slider h4,#wpcontent_slider h4 a 
+{margin: 0px;padding: 0px; font-family: 'Trebuchet MS', Helvetica, sans-serif;
+text-decoration:none;font-size: 18px; color:#ffffff;}
+#wpcontent_slider .cs-title {width: 100%;padding: 10px; background: #ffffff; color: #000000; font-family: 'Trebuchet MS', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal;line-height: normal;}
+#wpcontent_slider_container .cs-prev,#wpcontent_slider_container .cs-next {font-weight: bold;background: #000000;
+font-size: 28px; font-family: "Courier New", Courier, monospace; color: #ffffff !important;
+padding: 0px 10px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;}
+#wpcontent_slider_container .cs-buttons { font-size: 0px; padding: 10px 0px 10px 0px;
+margin:0px auto; float:left;clear:left;
+}
+#wpcontent_slider_container .cs-buttons a { outline:none; margin-left: 5px; height: 10px; width: 10px; float: left; border: 1px solid #000000; color: #000000; text-indent: -1000px; 
+}
+#wpcontent_slider_container .cs-active { background-color: #000000; color: #FFFFFF; }
+#wpcs_link_love,#wpcs_link_love a{display:none;}
+</style>
+<!-- End Content Slider Settings -->
+
+
+		<style type="text/css">
+			.cbd {
+				position: fixed;
+				left: 5px;
+				bottom: 5px;
+			}
+			.cbd a img {
+				border: 0;
+			}
+		</style>
+	<meta property='fb:admins' content='1644160548' /><meta property='og:title' content='Travian versão 3.5: Fim do greasemonkey e seus scripts ? ' /><meta property='og:site_name' content='Rafael Biriba Blog' /><meta property='og:url' content='https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html' /><meta property='og:type' content='article' /><meta property='fb:app_id' content='589867447707428'>
+	<link rel="stylesheet" href="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded/shutter-reloaded.css?ver=2.4" type="text/css" media="screen" />
+	<style type='text/css'>
+div#shNavBar a {color: #000000;}
+div#shNavBar {background-color:#ffff00;}
+div#shNavBar {color:#000000;}
+div#shDisplay div#shTitle {color:#ffff00;}
+</style>
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "https://rafaelbiriba.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6';
+	window._wp_rp_post_id = '726';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = 'Travian+vers%C3%A3o+3.5%3A+Fim+do+greasemonkey+e+seus+scripts+%3F+';
+	window._wp_rp_post_tags = ['3.5', 'online', 'complemento', 'player', 'crop', 'scripts', 'game', 'travian', 'greasemonkey', 'userscript', 'jogo', 'web+browser', 'medieval', 'jogos+online', 'travian', 'dado', 'todo', 'server', 'font', 'foi', 'verso', 'smart', 'os', 'de', 'br', 'da', 'nova', 'alm', 'na', 'script'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.6" async></script>
+</head>
+
+<body class="single single-post postid-726 single-format-standard masthead-fixed singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="https://rafaelbiriba.com/blogwp.html" rel="home">Rafael Biriba Blog</a></h1>
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">Pesquisar</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">Menu principal</button>
+				<a class="screen-reader-text skip-link" href="#content">Pular para o conteúdo</a>
+				<div id="primary-menu" class="nav-menu"><ul><li class="page_item page-item-3171"><a href="https://rafaelbiriba.com/search_gcse">Busca</a></li><li class="page_item page-item-101"><a href="https://rafaelbiriba.com/contatos">Contatos</a></li><li class="page_item page-item-1251"><a href="https://rafaelbiriba.com/twitter">Twitter</a></li></ul></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get"
+    class="search-form" action="https://rafaelbiriba.com//search_gcse">
+    <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input type="text" value="" name="q" id="q" />
+        <input type="submit" id="searchsubmit"
+            value="Pesquisar" />
+    </div>
+</form>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 798x80 images only -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="6793331087"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+			
+<article id="post-726" class="post-726 post type-post status-publish format-standard hentry category-jogos-online category-travian-jogos-online tag-159 tag-complemento tag-crop tag-game tag-greasemonkey tag-jogo tag-medieval tag-online tag-player tag-scripts tag-travian tag-userscript tag-web-browser">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/jogos-online" rel="category tag">Jogos Online</a>, <a href="https://rafaelbiriba.com/category/jogos-online/travian-jogos-online" rel="category tag">Travian</a></span>
+		</div>
+		<h1 class="entry-title">Travian versão 3.5: Fim do greasemonkey e seus scripts ?</h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" rel="bookmark"><time class="entry-date" datetime="2009-05-17T16:00:29+00:00">17/05/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html#comments"><span class="dsq-postid" data-dsqidentifier="726 https://rafaelbiriba.com/?p=726">144 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+
+<figure id="attachment_228" style="width: 384px" class="wp-caption aligncenter"><img class="size-full wp-image-228" title="travian" src="https://rafaelbiriba.com/wp-content/uploads/2009/02/travian.jpg" alt="Travian: http://www.travian.com.br/" width="384" height="245" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/02/travian.jpg 384w, https://rafaelbiriba.com/wp-content/uploads/2009/02/travian-300x191.jpg 300w" sizes="(max-width: 384px) 100vw, 384px" /><figcaption class="wp-caption-text">Travian: http://www.travian.com.br</figcaption></figure>
+<p style="text-align: justify;">Isso mesmo ! Pegando todos de surpresa, na semana passada todos os servers migraram para a nova versão T3.5, o que todos não sabiam, é que os scripts iriam parar de funcionar.</p>
+<p style="text-align: justify;">Testei mais de 35 scripts diferentes disponíveis no ( <a title="http://userscripts.org/scripts/search?q=travian" href="http://userscripts.org/scripts/search?q=travian" target="_blank">http://userscripts.org/scripts/search?q=travian</a> ) e quase nenhum funciona na versão nova. Um dos que funcionou corretamente foi o Travain3 Beyond: <a title="http://userscripts.org/scripts/show/28129" href="http://userscripts.org/scripts/show/28129" target="_blank">http://userscripts.org/scripts/show/28129 </a>( Link enviado por email pela leitora <a title="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-68" href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-68" target="_blank">Leticia</a> ), alem de mostrar niveis de lotação do armazem e celeiro, é cheio de informações desnecessárias, achei muito confuso e não recomendo. Mas de qualquer forma agradeço a <a title="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-68" href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-68" target="_blank">Leticia</a> pelo envio do Script.<br /><br />No userscripts tem vários scripts para o travian dizendo que funciona na versão 3.5, não acredite. <br />Estive comparando o código fonte do script antigo com o código usado nas páginas da nova versão, e além das variáveis, a manipulação dos dados mudou também. Estou fazendo uns testes aqui, com o antigo script Travian Smart Queue tentando adapta-lo, mas quase não tive sucesso. O Javascript é bem complexo !<br /><br />Resta-nos agora jogar, de forma correta e sem códigos. Por um lado é ruim, mas pelo outro pense que muitos que jogavam 100% baseado nos códigos, vão ficar impossibilitados dando vantagem para alguns outros !<br /><br />Não sei de vocês, mas não gostei da nova versão, prefiro a  antiga ( Mais informação da versão 3.5 em: <a title="http://forum.travian.com.br/showthread.php?t=26658" href="http://forum.travian.com.br/showthread.php?t=26658" target="_blank">http://forum.travian.com.br/showthread.php?t=26658</a> )<br /><br />Vamos esperar ansiosos pelos novos scripts funcionando, pois com certeza vamos conseguir utilizar todos eles de novo ! Fiquem atentos aqui, pois voltarei a publicar caso tenha alguma novidade relevante sobre o assunto !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1771" data-post-type="none" ><small class="wp_rp_publish_date">01/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html" class="wp_rp_title">Travian 3.6: Nova versão veio para assustar</a></li><li data-position="1" data-poid="in-435" data-post-type="none" ><small class="wp_rp_publish_date">08/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" class="wp_rp_title">Travian: Greasemonkey e seus Scripts</a></li><li data-position="2" data-poid="in-2216" data-post-type="none" ><small class="wp_rp_publish_date">08/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html" class="wp_rp_title">Captcha no Travian: Será o fim dos scripts ?</a></li><li data-position="3" data-poid="in-229" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/28/travian-jogo-online-multiplayer.html" class="wp_rp_title">Travian: Jogo Online Multiplayer</a></li><li data-position="4" data-poid="in-2956" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser.html" class="wp_rp_title">5 bons motivos para você não perder tempo com travian ou outro jogo web browser</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_1"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" data-text="Travian versão 3.5: Fim do greasemonkey e seus scripts ?"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F05%2F17%2Ftravian-versao-35-fim-do-greasemonkey-e-seus-scripts.html&amp;linkname=Travian%20vers%C3%A3o%203.5%3A%20Fim%20do%20greasemonkey%20e%20seus%20scripts%20%3F" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F05%2F17%2Ftravian-versao-35-fim-do-greasemonkey-e-seus-scripts.html&amp;linkname=Travian%20vers%C3%A3o%203.5%3A%20Fim%20do%20greasemonkey%20e%20seus%20scripts%20%3F" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a>
+<script type="text/javascript"><!--
+if(wpa2a)wpa2a.script_load();
+//--></script>
+</div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/35" rel="tag">3.5</a><a href="https://rafaelbiriba.com/tag/complemento" rel="tag">complemento</a><a href="https://rafaelbiriba.com/tag/crop" rel="tag">crop</a><a href="https://rafaelbiriba.com/tag/game" rel="tag">game</a><a href="https://rafaelbiriba.com/tag/greasemonkey" rel="tag">greasemonkey</a><a href="https://rafaelbiriba.com/tag/jogo" rel="tag">jogo</a><a href="https://rafaelbiriba.com/tag/medieval" rel="tag">medieval</a><a href="https://rafaelbiriba.com/tag/online" rel="tag">online</a><a href="https://rafaelbiriba.com/tag/player" rel="tag">player</a><a href="https://rafaelbiriba.com/tag/scripts" rel="tag">scripts</a><a href="https://rafaelbiriba.com/tag/travian" rel="tag">travian</a><a href="https://rafaelbiriba.com/tag/userscript" rel="tag">userscript</a><a href="https://rafaelbiriba.com/tag/web-browser" rel="tag">web browser</a></span></footer></article><!-- #post-## -->
+	<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Navegação de posts</h1>
+		<div class="nav-links">
+			<a href="https://rafaelbiriba.com/2009/05/16/wolframalpha-busque-o-que-voce-quer-saber.html" rel="prev"><span class="meta-nav">Post anterior</span>WolframAlpha: Busque o que você quer saber !</a><a href="https://rafaelbiriba.com/2009/05/21/newsletter-para-o-wordpress-271.html" rel="next"><span class="meta-nav">Próximo post</span>Newsletter para o WordPress 2.7.1</a>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	<div id="fbSEOComments">	<fb:comments
+                                id='seoFacebookCommentsPlugin'
+								href='https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html'
+								num_posts='10'
+								colorscheme='light'
+								order_by=''></fb:comments></div><div id='fb-root'></div>
+                    <script>
+                            window.fbAsyncInit = function() {
+                                FB.init({
+                                  appId      : '589867447707428', // App ID
+                                  status     : true, // check login status
+                                  cookie     : true, // enable cookies to allow the server to access the session
+                                  xfbml      : true  // parse XFBML
+                                });
+                                // Additional initialization code here
+                              };
+                                //  Load the SDK Asynchronously
+                              (function(d){
+                                 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                                 if (d.getElementById(id)) {return;}
+                                 js = d.createElement('script'); js.id = id; js.async = true;
+                                 js.src = "//connect.facebook.net/pt_BR/all.js";
+                                 ref.parentNode.insertBefore(js, ref);
+                           }(document))
+                    </script>
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="post pingback">
+        <p>Pingback: <a href='https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html' rel='external nofollow' class='url'>Travian: Greasemonkey e seus Scripts | Rafael Biriba Blog</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-76">
+        <div id="dsq-comment-header-76" class="dsq-comment-header">
+            <cite id="dsq-cite-76">
+                <a id="dsq-author-user-76" href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" target="_blank" rel="nofollow">Teles</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-76" class="dsq-comment-body">
+            <div id="dsq-comment-message-76" class="dsq-comment-message"><p>Rapaz, muito bom seu post, bem difícil arrumar um blog com informações atualizadas igual a sua. Tb to passando um perrengue com esses novos scrpits, não gostei do novo beyond e outras ferramentas que usava tb ficaram inutilizadas. Tá sendo quase tudo no dedo. Achei um farmachine que funciona, pelo menos isto. Quando souber de scripts bons bota aí q faço uma visita. Se puder me avisar por email agradeço ainda mais. Abraço e parabéns pelo post</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-77">
+        <div id="dsq-comment-header-77" class="dsq-comment-header">
+            <cite id="dsq-cite-77">
+                <a id="dsq-author-user-77" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-77" class="dsq-comment-body">
+            <div id="dsq-comment-message-77" class="dsq-comment-message"><p>Teles, agradeço os elogios&#8230;Tenho certeza que logo os scripts voltaram a funcionar. Visite quando quiser para conferir algumas novas informações. Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-80">
+        <div id="dsq-comment-header-80" class="dsq-comment-header">
+            <cite id="dsq-cite-80">
+                <span id="dsq-author-user-80">Bruno</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-80" class="dsq-comment-body">
+            <div id="dsq-comment-message-80" class="dsq-comment-message"><p>Boas nao tinha conhecimento destes scripts agora compreendo como nunca evluia tao rapido<br />
+espero que haja para a nova versao para começar a utlizar<br />
+bom blog bem organizado<br />
+parabens</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-81">
+        <div id="dsq-comment-header-81" class="dsq-comment-header">
+            <cite id="dsq-cite-81">
+                <a id="dsq-author-user-81" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-81" class="dsq-comment-body">
+            <div id="dsq-comment-message-81" class="dsq-comment-message"><p>Bruno, agradeços os elogios&#8230; Pena que você só soube dos scripts agora que eles não funcionam ! Já andei testando uns por aí, e acho que não está muito longe dos scripts voltarem a funcionar. Fique atento as novidades&#8230; Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-85">
+        <div id="dsq-comment-header-85" class="dsq-comment-header">
+            <cite id="dsq-cite-85">
+                <span id="dsq-author-user-85">Bruno</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-85" class="dsq-comment-body">
+            <div id="dsq-comment-message-85" class="dsq-comment-message"><p>ja expermentas-te este <a href="http://userscripts.org/scripts/show/28129" rel="nofollow">http://userscripts.org/scripts/show/28129</a><br />
+pois dizem que funciona mas comigo sempre que tento fazer algo volta sempre ao login</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-87">
+        <div id="dsq-comment-header-87" class="dsq-comment-header">
+            <cite id="dsq-cite-87">
+                <a id="dsq-author-user-87" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-87" class="dsq-comment-body">
+            <div id="dsq-comment-message-87" class="dsq-comment-message"><p>Conforme eu escrevi no Post acima, este script (Travian3 Beyond: <a href="http://userscripts.org/scripts/show/28129" rel="nofollow">http://userscripts.org/scripts/show/28129</a>) funciona corretamente, só que as informações exibidas são confusas e bagunçadas. Existem uns 3 ou 4 scripts que são suficientes para jogar bem. Infelizmente a versão 3.5 acabou com o funcionamento de muitos deles. </p>
+<p>Dê uma olhada nos comentários deste Post: <a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" title="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" rel="nofollow">https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html</a>, o leitor Teles recomendou um script ótimo ( Travian Task queue ) dê uma olhada e depois me fala o que achou ! Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-89">
+        <div id="dsq-comment-header-89" class="dsq-comment-header">
+            <cite id="dsq-cite-89">
+                <span id="dsq-author-user-89">Bruno</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-89" class="dsq-comment-body">
+            <div id="dsq-comment-message-89" class="dsq-comment-message"><p>o script pode ser bom mas acontece tal e qual como o outro volto sempre ao login nao consigo fazer nada devo de andar a fazer algo mal como é a primeira vez que utilizo isto mas ei de conseguir<br />
+Abraços</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-92">
+        <div id="dsq-comment-header-92" class="dsq-comment-header">
+            <cite id="dsq-cite-92">
+                <a id="dsq-author-user-92" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-92" class="dsq-comment-body">
+            <div id="dsq-comment-message-92" class="dsq-comment-message"><p>Bruno, faz o seguinte, qual a versão do seu firefox e do seu greasemonkey instalado ? </p>
+<p>Versão do firefox:  Clique em &#8220;Ajuda/Help&#8221; e depois em &#8220;Sobre Mozilla/About Mozilla&#8221; ( O meu é  3.0.10 )</p>
+<p>Versão do Greasemonkey: Clique em &#8220;Tools/Ferramentas&#8221; e depois em &#8220;Add-ons/Complementos&#8221; verifique a versão do complemento greasemonkey ! ( O meu é 0.8.20090123.1 )</p>
+<p>No aguardo,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-93">
+        <div id="dsq-comment-header-93" class="dsq-comment-header">
+            <cite id="dsq-cite-93">
+                <span id="dsq-author-user-93">Bruno</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-93" class="dsq-comment-body">
+            <div id="dsq-comment-message-93" class="dsq-comment-message"><p>tudo igual temho de pesquisar a ver se alguem anda com omesmo problema</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-94">
+        <div id="dsq-comment-header-94" class="dsq-comment-header">
+            <cite id="dsq-cite-94">
+                <a id="dsq-author-user-94" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-94" class="dsq-comment-body">
+            <div id="dsq-comment-message-94" class="dsq-comment-message"><p>Faz o seguinte teste: Entre em <a href='https://rafaelbiriba.com/category/aplicativos/portable-apps' title='https://rafaelbiriba.com/category/aplicativos/portable-apps' rel="nofollow">https://rafaelbiriba.com/category/aplicativos/portable-apps</a> e pegue o link para faze o download do firefox Portátil.</p>
+<p> Instale o firefox portátil em uma pasta qualquer do seu computador, instale o greasemonkey  e os scripts do travian nele, e faça os testes.</p>
+<p>Com isso, saberemos se o problema é com o seu firefox&#8230; E se funcionar, você terá uma cópia portátil do firefox com os scripts do travian, que podem ser carregados pra lá e pra cá com um pendrive&#8230; =)</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-95">
+        <div id="dsq-comment-header-95" class="dsq-comment-header">
+            <cite id="dsq-cite-95">
+                <span id="dsq-author-user-95">Bruno</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-95" class="dsq-comment-body">
+            <div id="dsq-comment-message-95" class="dsq-comment-message"><p>ja consegui apgauei os cookies e por enquanto esta a dar so mais uma coisa so este script esta a dar ou os outros ja foram atualizados</p>
+<p>obrigado</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-96">
+        <div id="dsq-comment-header-96" class="dsq-comment-header">
+            <cite id="dsq-cite-96">
+                <a id="dsq-author-user-96" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-96" class="dsq-comment-body">
+            <div id="dsq-comment-message-96" class="dsq-comment-message"><p>Não entendi muito, mas alguns scripts já estão funcionando&#8230; </p>
+<p>Procure por aqueles que na descrição ou no nome esteja escrito que foi atualizado para a versão T3.5 do travian !</p>
+<p>Apesar que muitos estão escrito que funcionam, apenas 50% dos scripts que você testar vai funcionar realmente. </p>
+<p>Então, boa sorte na sua caçada ! =P</p>
+<p>O Task Queue que você instalou ( <a href='http://userscripts.org/scripts/show/28129' title='http://userscripts.org/scripts/show/28129' rel="nofollow">http://userscripts.org/scripts/show/28129</a> ) pra mim já resolve meus problemas. A Minha falta de tempo pra acessar do jogo é muita, então eu coloco uma lista de coisas pra construir, e já facilita 100% !</p>
+<p>Bom jogo pra você !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-128">
+        <div id="dsq-comment-header-128" class="dsq-comment-header">
+            <cite id="dsq-cite-128">
+                <span id="dsq-author-user-128">pedro</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-128" class="dsq-comment-body">
+            <div id="dsq-comment-message-128" class="dsq-comment-message"><p>cara olha eu so fikei sabendo agora por seus poste k a alteraçao grafica era o 3.5<br />
+meus scripts sempre funcionaram.. meu problema é k meu pc deixou de ligar e agora tou usando outro e nao lembro kual a pag em k os fui buscar&#8230;<br />
+tava usando o travian3beyond mas agora nao consigo por nada a funcionar&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-132">
+        <div id="dsq-comment-header-132" class="dsq-comment-header">
+            <cite id="dsq-cite-132">
+                <a id="dsq-author-user-132" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-132" class="dsq-comment-body">
+            <div id="dsq-comment-message-132" class="dsq-comment-message"><p>Bom Pedro, eu ainda não tive tempo, mas logo irei testar alguns scripts e postar quais estão mesmo funcionando na nova versão do travian !</p>
+<p>É só questão de tempo e todos os scripts voltaram a ativa !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-227">
+        <div id="dsq-comment-header-227" class="dsq-comment-header">
+            <cite id="dsq-cite-227">
+                <span id="dsq-author-user-227">cleber</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-227" class="dsq-comment-body">
+            <div id="dsq-comment-message-227" class="dsq-comment-message"><p>boa noite.</p>
+<p>instalei este script greasemonkey que voce postou,mas so fica na pagina do perfil,nao consigo aumentar os recursos e nem os edificios,voce pode me ajudar com este problema.</p>
+<p>jogo no travian br7</p>
+<p>obrigado desde ja.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-230">
+        <div id="dsq-comment-header-230" class="dsq-comment-header">
+            <cite id="dsq-cite-230">
+                <a id="dsq-author-user-230" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-230" class="dsq-comment-body">
+            <div id="dsq-comment-message-230" class="dsq-comment-message"><p>Olá Cleber,</p>
+<p>Já tentou desativar o greasemonkey para ver se volta ao normal ?</p>
+<p>Basta dar um clique no icone do greasemonkey no navegador, que ele vai escurecer, ou seja, desativar. Com isso o travian vai voltar ao normal !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-238">
+        <div id="dsq-comment-header-238" class="dsq-comment-header">
+            <cite id="dsq-cite-238">
+                <span id="dsq-author-user-238">felipluiz</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-238" class="dsq-comment-body">
+            <div id="dsq-comment-message-238" class="dsq-comment-message"><p>boa noite</p>
+<p>ola queria saber se ja sabem se conseguiram resolver a questao de mandar ataques sucesivos.</p>
+<p>e se possivel poderia deixar claro como pois olhei em outros post e nao achei nada.</p>
+<p>valeu</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-239">
+        <div id="dsq-comment-header-239" class="dsq-comment-header">
+            <cite id="dsq-cite-239">
+                <a id="dsq-author-user-239" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-239" class="dsq-comment-body">
+            <div id="dsq-comment-message-239" class="dsq-comment-message"><p>Olá Felip,</p>
+<p>Bom, pelo que sei o Script Farming Machine está funcionando na nova versão do Travian: <a href="http://userscripts.org/scripts/show/48557" rel="nofollow">http://userscripts.org/scripts/show/48557</a></p>
+<p>Instale ele e tente usá-lo! Basta programar um ataque e ele farma automatiamente!</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-248">
+        <div id="dsq-comment-header-248" class="dsq-comment-header">
+            <cite id="dsq-cite-248">
+                <a id="dsq-author-user-248" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-248" class="dsq-comment-body">
+            <div id="dsq-comment-message-248" class="dsq-comment-message"><p>Boas gostaria que alguem me de-se uma dica como funciona o script  Travian Task Queue, na parte em que metemos os edificios a evoluir, na situaçao dos ataques eu sei fazer, agora nos edificios esta algo que ñ esta bem ou sou eu que estou fazendo algo mal.<br />
+ja usei, este script antes da versao 3.5, sempre usei um montes de script, gostaria uma ajuda nesta questao</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-250">
+        <div id="dsq-comment-header-250" class="dsq-comment-header">
+            <cite id="dsq-cite-250">
+                <a id="dsq-author-user-250" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-250" class="dsq-comment-body">
+            <div id="dsq-comment-message-250" class="dsq-comment-message"><p>Olá Fire,</p>
+<p>Acho que eu não entendi muito bem sua dúvida&#8230;<br />
+Mas vou tentar esclarecer alguma coisa obre o script.</p>
+<p>Para programar a evolução de um edifício, basta entrar na tela do próprio edifício, que terá um botão escrito &#8220;>>Melhorar mais tarde&#8221;, onde você pode agendar a contrução !</p>
+<p>Por exemplo para elevar 2 levels de um edificio, você agenda um pra 10 min. e o outro pra 20 min., tem que dar tempo de um acabar, antes de iniciar o outro&#8230; Se não, não vai funcionar !</p>
+<p>Bom, espero ter ajudado !</p>
+<p>Obrigado pela visita e volte sempre !</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-251">
+        <div id="dsq-comment-header-251" class="dsq-comment-header">
+            <cite id="dsq-cite-251">
+                <a id="dsq-author-user-251" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-251" class="dsq-comment-body">
+            <div id="dsq-comment-message-251" class="dsq-comment-message"><p>ñ era bem isto a minha duvida, eu ñ estou a conseguir por os tempo na tabela para poder evoluir os edificios, quando meto, o script ñ faz nada.</p>
+<p>porem quando meto para atacar ele ataca, agora com os edificios ñ faz nada. talvez tem algo de errado ou sou eu que faço mal</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-254">
+        <div id="dsq-comment-header-254" class="dsq-comment-header">
+            <cite id="dsq-cite-254">
+                <a id="dsq-author-user-254" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-254" class="dsq-comment-body">
+            <div id="dsq-comment-message-254" class="dsq-comment-message"><p>Olá Fire,</p>
+<p>Entendi o seu problema.</p>
+<p>Tente remover o script e instalar este aqui: <a href="http://userscripts.org/scripts/show/13693" rel="nofollow">http://userscripts.org/scripts/show/13693</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-255">
+        <div id="dsq-comment-header-255" class="dsq-comment-header">
+            <cite id="dsq-cite-255">
+                <a id="dsq-author-user-255" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-255" class="dsq-comment-body">
+            <div id="dsq-comment-message-255" class="dsq-comment-message"><p><a href="#comment-254" rel="nofollow">@ Rafael Biriba</a><br />
+este ñ funciona para versao 3.5 o que vc posto</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-256">
+        <div id="dsq-comment-header-256" class="dsq-comment-header">
+            <cite id="dsq-cite-256">
+                <a id="dsq-author-user-256" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-256" class="dsq-comment-body">
+            <div id="dsq-comment-message-256" class="dsq-comment-message"><p>Olá Fire,</p>
+<p>Obrigado por lembrar&#8230;</p>
+<p>Correção:<br />
+Baixe este aqui:<br />
+<a href="http://userscripts.org/scripts/show/49694" rel="nofollow">http://userscripts.org/scripts/show/49694</a></p>
+<p>Testei aqui e funcionou ! 😉</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-257">
+        <div id="dsq-comment-header-257" class="dsq-comment-header">
+            <cite id="dsq-cite-257">
+                <a id="dsq-author-user-257" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-257" class="dsq-comment-body">
+            <div id="dsq-comment-message-257" class="dsq-comment-message"><p>sim eu baixei. mas nada deu, talvez seja algo que estou fazendo mal, como vc mete os tempos na tabela ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-258">
+        <div id="dsq-comment-header-258" class="dsq-comment-header">
+            <cite id="dsq-cite-258">
+                <a id="dsq-author-user-258" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-258" class="dsq-comment-body">
+            <div id="dsq-comment-message-258" class="dsq-comment-message"><p>Bom, </p>
+<p>Eu clico em melhorar mais tarde, e insiro o tempo em minutos e aperto OK.</p>
+<p>Caso você queria executar mais um agendamento, é só fazer isso de novo !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-259">
+        <div id="dsq-comment-header-259" class="dsq-comment-header">
+            <cite id="dsq-cite-259">
+                <a id="dsq-author-user-259" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-259" class="dsq-comment-body">
+            <div id="dsq-comment-message-259" class="dsq-comment-message"><p>vc coloca o tempo do edificio ? </p>
+<p>ñ percebi muito bem</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-260">
+        <div id="dsq-comment-header-260" class="dsq-comment-header">
+            <cite id="dsq-cite-260">
+                <a id="dsq-author-user-260" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-260" class="dsq-comment-body">
+            <div id="dsq-comment-message-260" class="dsq-comment-message"><p>vamos imaginar. aldeia tem recursos, clico em melhorar mais tarde.<br />
+isto vai abrir uma tabela oa lado, com dois espaço<br />
+1- espaço tem o tempo adecorrer do server<br />
+2- espaço esta em branco( onde nos colocamos o tempo)</p>
+<p>vamos supor que vamos upar o lvl 4 da mina ferro</p>
+<p>Custo do melhoramento para nível 4:<br />
+madeira465 | barro375 | ferro140 | cereal280 | consumo de cereal2 | duração0:12:20 </p>
+<p>vc poderia mostrar como coloca o tempo na opçao da tabela ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-261">
+        <div id="dsq-comment-header-261" class="dsq-comment-header">
+            <cite id="dsq-cite-261">
+                <a id="dsq-author-user-261" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-261" class="dsq-comment-body">
+            <div id="dsq-comment-message-261" class="dsq-comment-message"><p>Não, você deve colocar o tempo que o script deve esperar para iniciar a construção!</p>
+<p>Entendeu ? Você vai agendar a construção e o script iniciará automaticamente! </p>
+<p>Tente mexer um pouco, coloque algum tempo e verifique como o script funciona!</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-262">
+        <div id="dsq-comment-header-262" class="dsq-comment-header">
+            <cite id="dsq-cite-262">
+                <a id="dsq-author-user-262" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-262" class="dsq-comment-body">
+            <div id="dsq-comment-message-262" class="dsq-comment-message"><p>O espaço que você diz ser o 1, deve ser desconsiderado!</p>
+<p>Preencha somente o segundo campo com os minutos que você desejar, para o agendamento !</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-263">
+        <div id="dsq-comment-header-263" class="dsq-comment-header">
+            <cite id="dsq-cite-263">
+                <a id="dsq-author-user-263" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-263" class="dsq-comment-body">
+            <div id="dsq-comment-message-263" class="dsq-comment-message"><p>certo, eu coloco  30 que seria 30 min, clico OK, mas nada dá. nem mexe</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-264">
+        <div id="dsq-comment-header-264" class="dsq-comment-header">
+            <cite id="dsq-cite-264">
+                <a id="dsq-author-user-264" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-264" class="dsq-comment-body">
+            <div id="dsq-comment-message-264" class="dsq-comment-message"><p>Bom, então talvez eu não saiba resolver, porque o script funciona aqui ! =/</p>
+<p>Geralmente ele cria uma lista de tarefas na lateral&#8230; ao adicionar 30, ele irá tentar contruir aquele edifício depois de 30 min., conseguindo ou não ele mostra uma aviso na tela.</p>
+<p>Agora, se você ta dizendo que nada acontece, nem um aviso, é porque tem algum problema ou com seu navegador, ou com o grease monkey  ou com o script!</p>
+<p>Já verificou se há mais de um Task Queu instalado, ou seja, você removeu os que não funcionavam ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-276">
+        <div id="dsq-comment-header-276" class="dsq-comment-header">
+            <cite id="dsq-cite-276">
+                <a id="dsq-author-user-276" href="http://www.travian.com.br" target="_blank" rel="nofollow">Fire</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-276" class="dsq-comment-body">
+            <div id="dsq-comment-message-276" class="dsq-comment-message"><p>todos os que ñ funcionava retirei eles, so que é claro tenho mais script.</p>
+<p>como farming machine, beyonde, attakc builder, auto login. vc acha que poderia ser isto problema ? por causa de ter mais script</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-278">
+        <div id="dsq-comment-header-278" class="dsq-comment-header">
+            <cite id="dsq-cite-278">
+                <a id="dsq-author-user-278" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-278" class="dsq-comment-body">
+            <div id="dsq-comment-message-278" class="dsq-comment-message"><p>Sim Fire,</p>
+<p>Seria interessante desabilitar todos e só deixar o Task Queue ativo para testes !</p>
+<p>Eu só acho estranho, porque não era pra ter incompatibilidade pois são coisas diferentes e nem é tão complicado, como eu disse acima, basta preencher o campo que falta no formulário com o tempo desejado e apertar ok, você terá adicionado um item na lista de tarefas. </p>
+<p>Basta esperar que o task queue vai comunica-lo se ele conseguiu construir ou não !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-279">
+        <div id="dsq-comment-header-279" class="dsq-comment-header">
+            <cite id="dsq-cite-279">
+                <span id="dsq-author-user-279">justblue</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-279" class="dsq-comment-body">
+            <div id="dsq-comment-message-279" class="dsq-comment-message"><p>Os meus estao todos a trabalhar , na versao 3.5 </p>
+<p>acho que devias tentar outra vez</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-280">
+        <div id="dsq-comment-header-280" class="dsq-comment-header">
+            <cite id="dsq-cite-280">
+                <span id="dsq-author-user-280">chyko</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-280" class="dsq-comment-body">
+            <div id="dsq-comment-message-280" class="dsq-comment-message"><p>eu  instalei ANTIFARM\TROOP SAVER-ORIGINAL isso  sendo q tenho o 3.5, vc teria um script com a masma função q funcione? ou estou errando em algo?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-281">
+        <div id="dsq-comment-header-281" class="dsq-comment-header">
+            <cite id="dsq-cite-281">
+                <a id="dsq-author-user-281" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-281" class="dsq-comment-body">
+            <div id="dsq-comment-message-281" class="dsq-comment-message"><p>Olá chyko,</p>
+<p>Pelo que vi aqui, a maioria dos script antifarm que eu vi, tem que fazer algumas modificações no código !</p>
+<p>Sugiro que dê uma pesquisada no userscript.com algum antifarm para travian compativel com a versão 3.5  e que não precise de modificação no código !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-283">
+        <div id="dsq-comment-header-283" class="dsq-comment-header">
+            <cite id="dsq-cite-283">
+                <span id="dsq-author-user-283">tiago</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-283" class="dsq-comment-body">
+            <div id="dsq-comment-message-283" class="dsq-comment-message"><p>bem eu sou novo com scripts pois nunca usei e queria experimentar algo de novo e que deve alguma graça ao travian </p>
+<p>será k me podia ajudar??</p>
+<p>eu volto maiis tarde para ver a resposta</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-284">
+        <div id="dsq-comment-header-284" class="dsq-comment-header">
+            <cite id="dsq-cite-284">
+                <a id="dsq-author-user-284" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-284" class="dsq-comment-body">
+            <div id="dsq-comment-message-284" class="dsq-comment-message"><p>Olá Tiago,</p>
+<p>Certamente os scripts darão não só mais graça, mas facilidades ao travian !</p>
+<p>Se você nunca utilizou, no link abaixo você aprende a instala-lo:<br />
+<a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" rel="nofollow">https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html</a></p>
+<p>Repare que eu falo de alguns scripts mais utilizados. Nem todos ainda funcionam devido a essa atualização do travian para o 3.5</p>
+<p>Mas no meu caso, instalando o Task queue e o Resource, o jogo já fica bastante simples !</p>
+<p>Logicamente, você pode integrar a infinidade de scripts que existem para o travian, como antifarm, que salva suas tropas segundos antes de receber um ataque, ou o Farm Machine que ataca seus inimigos cadastrados automaticamente par roubar recursos e por aí vai !</p>
+<p>Só lembrando que usar scripts no jogo é ilegal ! Eu não vejo formas deles detectarem, mas se te pegarem podem banir a sua conta !<br />
+Eu sempre usei, e nunca tive problemas, mas é sempre bom lembrar ! Evite falar sobre isso nas mensagens internas do jogo, para que não te denunciem ! =D</p>
+<p>Abraços e boa sorte ! =)</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-288">
+        <div id="dsq-comment-header-288" class="dsq-comment-header">
+            <cite id="dsq-cite-288">
+                <span id="dsq-author-user-288">tiago</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-288" class="dsq-comment-body">
+            <div id="dsq-comment-message-288" class="dsq-comment-message"><p>obrigado pela dica</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-289">
+        <div id="dsq-comment-header-289" class="dsq-comment-header">
+            <cite id="dsq-cite-289">
+                <a id="dsq-author-user-289" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-289" class="dsq-comment-body">
+            <div id="dsq-comment-message-289" class="dsq-comment-message"><p>Que nada !</p>
+<p>Obrigado pela visita e volte sempre ! 🙂</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-292">
+        <div id="dsq-comment-header-292" class="dsq-comment-header">
+            <cite id="dsq-cite-292">
+                <span id="dsq-author-user-292">hugo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-292" class="dsq-comment-body">
+            <div id="dsq-comment-message-292" class="dsq-comment-message"><p><a href="#comment-284" rel="nofollow">@ Rafael Biriba</a><br />
+boas&#8230;<br />
+tou com dificuldades em usar o beyond! tambem já tentei o resource mas tambem sem sorte.. há alguma coisa que esteja a funcionar bem?<br />
+abraço e parabens pelo blog.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-294">
+        <div id="dsq-comment-header-294" class="dsq-comment-header">
+            <cite id="dsq-cite-294">
+                <span id="dsq-author-user-294">elias</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-294" class="dsq-comment-body">
+            <div id="dsq-comment-message-294" class="dsq-comment-message"><p>Gostaria de saber se o Greasemonkey que eu usava na versão antiga pode ser usado nessa atual?<br />
+se não, qual vc me indicaria nesses padrões<br />
+grato</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-301">
+        <div id="dsq-comment-header-301" class="dsq-comment-header">
+            <cite id="dsq-cite-301">
+                <span id="dsq-author-user-301">Truta Bruta</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-301" class="dsq-comment-body">
+            <div id="dsq-comment-message-301" class="dsq-comment-message"><p><a href="#comment-289" rel="nofollow">@ Rafael Biriba</a><br />
+Rafael bom dia, se vc poder ajudar na seguinte situação, é o seguinte onde consigo um script pronto de jogos on-line no estilo do travian????</p>
+<p>sem mais fico no aguardo.</p>
+<p>Obs: Seu poste ficou muito bom</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-308">
+        <div id="dsq-comment-header-308" class="dsq-comment-header">
+            <cite id="dsq-cite-308">
+                <a id="dsq-author-user-308" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-308" class="dsq-comment-body">
+            <div id="dsq-comment-message-308" class="dsq-comment-message"><blockquote cite="#commentbody-292"><p>
+<strong><a href="#comment-292" rel="nofollow">hugo</a> :</strong>
+<p><a href="#comment-284" rel="nofollow">@ Rafael Biriba</a><br />
+boas…<br />
+tou com dificuldades em usar o beyond! tambem já tentei o resource mas tambem sem sorte.. há alguma coisa que esteja a funcionar bem?<br />
+abraço e parabens pelo blog.</p>
+</blockquote>
+<p>Olá Hugo,</p>
+<p>Que tipo de dificuldades você está tendo ?</p>
+<p>Abraços e valeu pelos elogios&#8230; 🙂</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-309">
+        <div id="dsq-comment-header-309" class="dsq-comment-header">
+            <cite id="dsq-cite-309">
+                <a id="dsq-author-user-309" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-309" class="dsq-comment-body">
+            <div id="dsq-comment-message-309" class="dsq-comment-message"><blockquote cite="#commentbody-294"><p>
+<strong><a href="#comment-294" rel="nofollow">elias</a> :</strong>
+<p>Gostaria de saber se o Greasemonkey que eu usava na versão antiga pode ser usado nessa atual?<br />
+se não, qual vc me indicaria nesses padrões<br />
+grato</p>
+</blockquote>
+<p>Olá Elias,</p>
+<p>Apenas o Travian mudou de versão&#8230; Isso significa que você deve mudar ou instalar novos scripts compatíveis com a nova versão.</p>
+<p>Isso não quer dizer que você tem que mudar o greasemonkey !<br />
+Só tome o cuidado de remover os scripts velhos que você não usa mais, para evitar incompatibilidades !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-310">
+        <div id="dsq-comment-header-310" class="dsq-comment-header">
+            <cite id="dsq-cite-310">
+                <a id="dsq-author-user-310" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-310" class="dsq-comment-body">
+            <div id="dsq-comment-message-310" class="dsq-comment-message"><blockquote cite="#commentbody-301"><p>
+<strong><a href="#comment-301" rel="nofollow">Truta Bruta</a> :</strong>
+<p><a href="#comment-289" rel="nofollow">@ Rafael Biriba</a><br />
+Rafael bom dia, se vc poder ajudar na seguinte situação, é o seguinte onde consigo um script pronto de jogos on-line no estilo do travian????<br />
+sem mais fico no aguardo.<br />
+Obs: Seu poste ficou muito bom</p>
+</blockquote>
+<p>Olá Truta,</p>
+<p>Você pode procurar scripts pelo site: <a href="http://userscripts.org/" rel="nofollow">http://userscripts.org/</a><br />
+Só tome cuidado, para instalar apenas scripts confiáveis ou populares, por medida de segurança !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-631">
+        <div id="dsq-comment-header-631" class="dsq-comment-header">
+            <cite id="dsq-cite-631">
+                <a id="dsq-author-user-631" href="http://www.CompletosBR.org" target="_blank" rel="nofollow">Saulo N. C.</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-631" class="dsq-comment-body">
+            <div id="dsq-comment-message-631" class="dsq-comment-message"><p>&#8220;Alem de mostrar niveis de lotação do armazem e celeiro, é cheio de informações desnecessárias, achei muito confuso e não recomendo.&#8221;</p>
+<p>Não é desnecessário e nem confuso. É o senhor que não soube configurar. Já está com versão nova 3.8.8.8.8 (Sim muitos oitos, rs) e cada dia(s) eles procuram melhorar mais os serviços com atualizações.<br />
+Sou usuário e admiro muito o trabalho de tal equipe.</p>
+<p>Aloha</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-632">
+        <div id="dsq-comment-header-632" class="dsq-comment-header">
+            <cite id="dsq-cite-632">
+                <a id="dsq-author-user-632" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-632" class="dsq-comment-body">
+            <div id="dsq-comment-message-632" class="dsq-comment-message"><p>Olá Saulo,</p>
+<p>Depende do ponto de vista ! Eu achei o plugin com muitas informações em tela, bem mais do que eu realmente preciso usar&#8230;</p>
+<p>De qualquer forma, opnião é opnião&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-633">
+        <div id="dsq-comment-header-633" class="dsq-comment-header">
+            <cite id="dsq-cite-633">
+                <a id="dsq-author-user-633" href="http://www.CompletosBR.org" target="_blank" rel="nofollow">Saulo N. C.</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-633" class="dsq-comment-body">
+            <div id="dsq-comment-message-633" class="dsq-comment-message"><p>Rafael, </p>
+<p>Muito simples, configuração! Basta da uma ajustada ali, outra lá&#8230; Acabam de implantar a opção do script BR, assim facilitando os leigos na língua.</p>
+<p>Aloha</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-635">
+        <div id="dsq-comment-header-635" class="dsq-comment-header">
+            <cite id="dsq-cite-635">
+                <a id="dsq-author-user-635" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-635" class="dsq-comment-body">
+            <div id="dsq-comment-message-635" class="dsq-comment-message"><p>Bom Saulo,</p>
+<p>Então não sei&#8230; Eu jogo travian no servidor speed, alterando, um servidor sim e um servidor não&#8230;</p>
+<p>Agora estou esperando o speed recomeçar, e junto com ele, postarei mais informações aqui !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-722">
+        <div id="dsq-comment-header-722" class="dsq-comment-header">
+            <cite id="dsq-cite-722">
+                <span id="dsq-author-user-722">rui</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-722" class="dsq-comment-body">
+            <div id="dsq-comment-message-722" class="dsq-comment-message"><p>Boas,<br />
+tenho um problema&#8230;uso o task queue e aparentemente funciona bem mas quando chega a hora de fazer o que está agendado, não faz. Diz (numa caixa preenchida a vermelho) p. ex.: 1 bárbaro não pode ser treinado. Isso acontece sempre, seja para melhorar edifícios ou treinar tropa mesmo que tenha recursos que cheguem&#8230; &#8211;&#8216;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-723">
+        <div id="dsq-comment-header-723" class="dsq-comment-header">
+            <cite id="dsq-cite-723">
+                <a id="dsq-author-user-723" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-723" class="dsq-comment-body">
+            <div id="dsq-comment-message-723" class="dsq-comment-message"><p>Olá Rui,</p>
+<p>Quando você usa task queue, os horários de construção devem ser muito bem calculados&#8230;</p>
+<p>Por exemplo, se eu mandar construir um celeiro agora e um soldado daqui a 3 segundos, provavelmente o soldado vai falhar&#8230;<br />
+Isso ocorre, porque pra constuir o celeiro, ele recarrega a pagina, e não dá tempo de completar a terefa seguinte&#8230;</p>
+<p>Ou então, você está dando muita distância entre as contruções&#8230; O Travian disconecta o usuário se ficar algum tempo sem fazer nada&#8230;</p>
+<p>Provavelmente você está fazendo uma dessas duas possibilidades&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-724">
+        <div id="dsq-comment-header-724" class="dsq-comment-header">
+            <cite id="dsq-cite-724">
+                <span id="dsq-author-user-724">rui</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-724" class="dsq-comment-body">
+            <div id="dsq-comment-message-724" class="dsq-comment-message"><p>olá<br />
+Obrigado desde já pela sua resposta!<br />
+Pois mas acontece que nunca consegui construir nem treinar nada com o task queue. Acontece sempre esse erro. Até já experimentei colocar a treinar uma tropa 1minuto depois (até aí tudo normal) e quando passa esse minuto dá a tal mensagem a dizer não foi possível. Isso acontece sempre seja a tarefa que for.</p>
+<p>Abraço</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-725">
+        <div id="dsq-comment-header-725" class="dsq-comment-header">
+            <cite id="dsq-cite-725">
+                <a id="dsq-author-user-725" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-725" class="dsq-comment-body">
+            <div id="dsq-comment-message-725" class="dsq-comment-message"><p>Estranho&#8230; Eu nunca tentei criar nada com o task queue&#8230; Só usava com construções&#8230; Deve ser alguma incompatibilidade de tipo da civilização&#8230;</p>
+<p>Agora nas contruções é bem estranho&#8230; Você instalou qual task queue ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-726">
+        <div id="dsq-comment-header-726" class="dsq-comment-header">
+            <cite id="dsq-cite-726">
+                <span id="dsq-author-user-726">rui</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-726" class="dsq-comment-body">
+            <div id="dsq-comment-message-726" class="dsq-comment-message"><p>Instalei este: <a href="http://userscripts.org/scripts/show/49694" rel="nofollow">http://userscripts.org/scripts/show/49694</a><br />
+Será por ser no travianPT?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-727">
+        <div id="dsq-comment-header-727" class="dsq-comment-header">
+            <cite id="dsq-cite-727">
+                <a id="dsq-author-user-727" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-727" class="dsq-comment-body">
+            <div id="dsq-comment-message-727" class="dsq-comment-message"><p>Não tenho certeza&#8230; Creio que a diferença de servidor não interfere&#8230;</p>
+<p>Tente outras versões do task queue ! talvez resolva !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-748">
+        <div id="dsq-comment-header-748" class="dsq-comment-header">
+            <cite id="dsq-cite-748">
+                <a id="dsq-author-user-748" href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" target="_blank" rel="nofollow">michel</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-748" class="dsq-comment-body">
+            <div id="dsq-comment-message-748" class="dsq-comment-message"><p><a href="#comment-80" rel="nofollow">@Bruno</a><br />
+pow teria como me ensinar a usar scripts<br />
+falou<br />
+meu msn é<br />
+birunga_andrade;;;;;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-749">
+        <div id="dsq-comment-header-749" class="dsq-comment-header">
+            <cite id="dsq-cite-749">
+                <a id="dsq-author-user-749" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-749" class="dsq-comment-body">
+            <div id="dsq-comment-message-749" class="dsq-comment-message"><p>Olá Michel,</p>
+<p>Para aprender a usar os scripts, a melhor coisa é ir tentando e aprender mexendo&#8230;</p>
+<p>Sempre funciona, melhor do que ser explicado&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-858">
+        <div id="dsq-comment-header-858" class="dsq-comment-header">
+            <cite id="dsq-cite-858">
+                <span id="dsq-author-user-858">Rui</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-858" class="dsq-comment-body">
+            <div id="dsq-comment-message-858" class="dsq-comment-message"><p>Boas Rafael</p>
+<p>Li atentamente o seu blog e gostaria que me tirasse uma duvida,que era a seguinte,eu instalei agora o antifarm e gostava de saber se ele so funciona quando a conta esta on,isto é se o pc precisa de tar ligado e com o travian on&#8230;</p>
+<p>abraço</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-859">
+        <div id="dsq-comment-header-859" class="dsq-comment-header">
+            <cite id="dsq-cite-859">
+                <a id="dsq-author-user-859" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-859" class="dsq-comment-body">
+            <div id="dsq-comment-message-859" class="dsq-comment-message"><p>Olá Rui,</p>
+<p>O Greasemonkey é um plugin para Firefox que roda scripts em cima de qualquer site&#8230;</p>
+<p>Isso nos dá o poder de usar alguns códigos que automatizam o travian&#8230; </p>
+<p>Então, respondendo sua pergunta: o script que você instalou (AntiFarm), só vai funcionar, enquanto houver um firefox aberto com o greasemonkey rodando este script.</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-910">
+        <div id="dsq-comment-header-910" class="dsq-comment-header">
+            <cite id="dsq-cite-910">
+                <span id="dsq-author-user-910">Waguinho</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-910" class="dsq-comment-body">
+            <div id="dsq-comment-message-910" class="dsq-comment-message"><p>Ae Rafael blz ?!<br />
+Então instalei o farm machine e não funfa sendo que é o T3.5, será que ainda está com bug ?<br />
+Ótimo Blog, abraços !</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-913">
+        <div id="dsq-comment-header-913" class="dsq-comment-header">
+            <cite id="dsq-cite-913">
+                <a id="dsq-author-user-913" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-913" class="dsq-comment-body">
+            <div id="dsq-comment-message-913" class="dsq-comment-message"><p>Olá Waguinho,</p>
+<p>Qual script do farm machine você instalou ?</p>
+<p>Eu uso o Farming Machine for Travian 3.5 (<a href="http://userscripts.org/scripts/show/48557" rel="nofollow">http://userscripts.org/scripts/show/48557</a>), aqui funciona perfeitamente&#8230;</p>
+<p>Abraços e boa sorte,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-914">
+        <div id="dsq-comment-header-914" class="dsq-comment-header">
+            <cite id="dsq-cite-914">
+                <span id="dsq-author-user-914">Waguinho</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-914" class="dsq-comment-body">
+            <div id="dsq-comment-message-914" class="dsq-comment-message"><p>Exato Rafael, estava até hoje ele, so que até reiniciou meu pc e não voltou a funcionar mais, já desistalei e instalei novamente o mozilla e o greasymonkey e nada.</p>
+<p>Mais mesmo assim, obrigado pela atenção<br />
+Abraços !</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-915">
+        <div id="dsq-comment-header-915" class="dsq-comment-header">
+            <cite id="dsq-cite-915">
+                <a id="dsq-author-user-915" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-915" class="dsq-comment-body">
+            <div id="dsq-comment-message-915" class="dsq-comment-message"><p>Aqui nos últimos dias o travian vem se comportando muito estranho tambem&#8230; Depois da uma olhada, lá na área de Travian Plus, agora tem uma opção que custa 100 de ouro, mas não está escrito o que é !</p>
+<p>Ela aparece para você também ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-916">
+        <div id="dsq-comment-header-916" class="dsq-comment-header">
+            <cite id="dsq-cite-916">
+                <span id="dsq-author-user-916">Waguinho</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-916" class="dsq-comment-body">
+            <div id="dsq-comment-message-916" class="dsq-comment-message"><p>Isso Rafael<br />
+Sim parece so que a descrição não aparece.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-917">
+        <div id="dsq-comment-header-917" class="dsq-comment-header">
+            <cite id="dsq-cite-917">
+                <a id="dsq-author-user-917" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-917" class="dsq-comment-body">
+            <div id="dsq-comment-message-917" class="dsq-comment-message"><p>Então está confirmado! A equipe do travian está testando alguma nova versão, só que parece muito mal implementada&#8230;</p>
+<p>Vamos aguardar e ficar atento as novidades&#8230; 😀</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-918">
+        <div id="dsq-comment-header-918" class="dsq-comment-header">
+            <cite id="dsq-cite-918">
+                <span id="dsq-author-user-918">Waguinho</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-918" class="dsq-comment-body">
+            <div id="dsq-comment-message-918" class="dsq-comment-message"><p>Ja atualizou aqui, ouro clube<br />
+Creio eu que será pra diminuir os script&#8217;s ou não ?!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-919">
+        <div id="dsq-comment-header-919" class="dsq-comment-header">
+            <cite id="dsq-cite-919">
+                <a id="dsq-author-user-919" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-919" class="dsq-comment-body">
+            <div id="dsq-comment-message-919" class="dsq-comment-message"><p>Sim, já reparei&#8230; Estou escrevendo um post sobre isso! Acesse o blog dentro de algumas horas&#8230; Ou assine a newsletter !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-929">
+        <div id="dsq-comment-header-929" class="dsq-comment-header">
+            <cite id="dsq-cite-929">
+                <span id="dsq-author-user-929">junior</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-929" class="dsq-comment-body">
+            <div id="dsq-comment-message-929" class="dsq-comment-message"><p>amigo tem como vc me passar os nomes dos melhores scripts pra eu ter no travian, não sei quais usar.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-931">
+        <div id="dsq-comment-header-931" class="dsq-comment-header">
+            <cite id="dsq-cite-931">
+                <a id="dsq-author-user-931" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-931" class="dsq-comment-body">
+            <div id="dsq-comment-message-931" class="dsq-comment-message"><p>Olá Junior,</p>
+<p>Devido a nova versão do travian 3.6 alguns scripts deixaram de funcionar&#8230; Verifique alguns bons scripts em:<br />
+<a href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html#comment-928" rel="nofollow">https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html#comment-928</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html' rel='external nofollow' class='url'>Retrospectiva 2009: Os posts mais visitados do blog | Rafael Biriba Blog</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='http://planeta-globo.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog/' rel='external nofollow' class='url'>Retrospectiva 2009: Os posts mais visitados do blog | Planeta Globo.com</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1269">
+        <div id="dsq-comment-header-1269" class="dsq-comment-header">
+            <cite id="dsq-cite-1269">
+                <a id="dsq-author-user-1269" href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html#comments" target="_blank" rel="nofollow">guilhermexD</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1269" class="dsq-comment-body">
+            <div id="dsq-comment-message-1269" class="dsq-comment-message"><p>eu gostaria de scripts que fizesem tropas !</p>
+<p>é possivel ??</p>
+<p>e recursos ??</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-1271">
+        <div id="dsq-comment-header-1271" class="dsq-comment-header">
+            <cite id="dsq-cite-1271">
+                <a id="dsq-author-user-1271" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1271" class="dsq-comment-body">
+            <div id="dsq-comment-message-1271" class="dsq-comment-message"><p>Que faz tropas não existe&#8230;<br />
+Você pode usar o Task Queue para agendar a construção da tropa&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1422">
+        <div id="dsq-comment-header-1422" class="dsq-comment-header">
+            <cite id="dsq-cite-1422">
+                <span id="dsq-author-user-1422">Carrari</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1422" class="dsq-comment-body">
+            <div id="dsq-comment-message-1422" class="dsq-comment-message"><p>Eu instalei o beyond nos meus 2 PCs,e funcionam perfeitamene.<br />
+mas Fui instalar em um outro PC na casa de um amigo,aparentemente fiz tudo conforme fiz no meu.<br />
+Atualização do firefox para a ultima versão-&gt;greansmonkey-&gt;proxifire.<br />
+depois disso omecei a instalar os script,Eu acho que esqueci algum item especifico,pois nesses outros doid PCs,fazemos o loguin mas quando clicamos em pra ir pro centro da aldeia ou em algum campo ou mina,o jogo volta pro loguin.<br />
+Comentarios a parte:<br />
+os scripts ajudam muito a melhrar o jogo,mas sou contra o farme machine.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-1423">
+        <div id="dsq-comment-header-1423" class="dsq-comment-header">
+            <cite id="dsq-cite-1423">
+                <a id="dsq-author-user-1423" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1423" class="dsq-comment-body">
+            <div id="dsq-comment-message-1423" class="dsq-comment-message"><p>Olá Carrari,</p>
+<p>Desabilitando o greasemonkey, o travian volta a funcionar corretamente ?</p>
+<p>Aguardo sua resposta,</p>
+<p>&#8212;<br />
+Quanto a sua opnião do farm machine, eu concordo que é uma forma MUITO esperta de &#8220;burlar&#8221; o jogo&#8230; Mas quem aceita jogar com um script, tem que aceitar todos os outros&#8230; Afinal roubar de um jeito ou de outro, não muda o significado da palavra roubar !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1458">
+        <div id="dsq-comment-header-1458" class="dsq-comment-header">
+            <cite id="dsq-cite-1458">
+                <span id="dsq-author-user-1458">kaique</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1458" class="dsq-comment-body">
+            <div id="dsq-comment-message-1458" class="dsq-comment-message"><p>rafael, ja tentei varios scripts de auto ataque mais nenhum é bom, eu queria um que eu colocasse as coordenadas e as quantidades de tropas e programar para atacar. voce pode me passa um que voce ache bom para isso?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-1459">
+        <div id="dsq-comment-header-1459" class="dsq-comment-header">
+            <cite id="dsq-cite-1459">
+                <a id="dsq-author-user-1459" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1459" class="dsq-comment-body">
+            <div id="dsq-comment-message-1459" class="dsq-comment-message"><p>Olá Kaique,</p>
+<p>Verifique se a solução abaixo serve para você!</p>
+<p><a href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html#comment-239" rel="nofollow">https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html#comment-239</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1467">
+        <div id="dsq-comment-header-1467" class="dsq-comment-header">
+            <cite id="dsq-cite-1467">
+                <span id="dsq-author-user-1467">kaique</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1467" class="dsq-comment-body">
+            <div id="dsq-comment-message-1467" class="dsq-comment-message"><p>o brigado, eu tentei usar o travian-babysitter só que é muito complicado só consegui até agora fazer os ataques e fazer a evolução dos capos que programei.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-1468">
+        <div id="dsq-comment-header-1468" class="dsq-comment-header">
+            <cite id="dsq-cite-1468">
+                <span id="dsq-author-user-1468">kaique</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1468" class="dsq-comment-body">
+            <div id="dsq-comment-message-1468" class="dsq-comment-message"><p>não consego usar agora o scrpts , UHAUHAUHA como eu faço para fazer os ataques?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-1471">
+        <div id="dsq-comment-header-1471" class="dsq-comment-header">
+            <cite id="dsq-cite-1471">
+                <a id="dsq-author-user-1471" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1471" class="dsq-comment-body">
+            <div id="dsq-comment-message-1471" class="dsq-comment-message"><p>Olá Kaique,</p>
+<p>Nunca usei o travian-babysitter e ele também não é um script do greasemonkey&#8230;<br />
+Infelizmente não posso ajuda-lo !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-1516">
+        <div id="dsq-comment-header-1516" class="dsq-comment-header">
+            <cite id="dsq-cite-1516">
+                <span id="dsq-author-user-1516">Naana</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1516" class="dsq-comment-body">
+            <div id="dsq-comment-message-1516" class="dsq-comment-message"><p>Olá, Rafael:</p>
+<p>Eu instalei o antifarm troop saver, mas não sei quais/como/onde colocar as coordenadas. Poderia me ajudar? Eu abri o script no editor, mas tudo ali me parece uma grande confusão (rs)</p>
+<p>Umabraço e parabéns pelo blog.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-1517">
+        <div id="dsq-comment-header-1517" class="dsq-comment-header">
+            <cite id="dsq-cite-1517">
+                <a id="dsq-author-user-1517" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1517" class="dsq-comment-body">
+            <div id="dsq-comment-message-1517" class="dsq-comment-message"><p>Olá Naana,</p>
+<p>Se eu não me engano, eu expliquei isso aqui:<br />
+<a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-1195" rel="nofollow">https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-1195</a></p>
+<p>Dá uma olhada, se não resolver volta aqui para tentarmos de novo&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-1522">
+        <div id="dsq-comment-header-1522" class="dsq-comment-header">
+            <cite id="dsq-cite-1522">
+                <span id="dsq-author-user-1522">OwneD</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1522" class="dsq-comment-body">
+            <div id="dsq-comment-message-1522" class="dsq-comment-message"><p>Bom dia, gostaria de saber se tem algum farming machine funcionando atualmente?</p>
+<p>e como se usa dei uma procurada rapida e nao achei como faz para ele funcionar?</p>
+<p>abraço</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-1524">
+        <div id="dsq-comment-header-1524" class="dsq-comment-header">
+            <cite id="dsq-cite-1524">
+                <a id="dsq-author-user-1524" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1524" class="dsq-comment-body">
+            <div id="dsq-comment-message-1524" class="dsq-comment-message"><p>Olá,</p>
+<p>Dá uma olhada nesta resposta aqui:<br />
+<a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-431" rel="nofollow">https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-431</a></p>
+<p>Acho que a versão que indiquei ainda funciona&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-1562">
+        <div id="dsq-comment-header-1562" class="dsq-comment-header">
+            <cite id="dsq-cite-1562">
+                <span id="dsq-author-user-1562">carrari</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1562" class="dsq-comment-body">
+            <div id="dsq-comment-message-1562" class="dsq-comment-message"><p>Realmente Rafael,não existe meio pecado,;P,<br />
+Eu estava usando um HD e tinha tudo funcionando redondinho,todos os scrips batiam certinho,sinal q fiz toda a instalação correta,pra confirmar,meus acertos instalei tambem no PC de minha filha,tambem rodou que foi uma beleza,mas infeismente tive que trocar meu HD(meu sobrinho mexeu nele e xapou ele de virus),deixei ele guardado pra monta em outra maquina e tirar os virus na raça.<br />
+Bom agora com o novo HD,entro no jogo mas quando clico em qulquer ponto volta pro loguin novamente,e jogar com o explorer não tem graça nenhuma.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-1564">
+        <div id="dsq-comment-header-1564" class="dsq-comment-header">
+            <cite id="dsq-cite-1564">
+                <a id="dsq-author-user-1564" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1564" class="dsq-comment-body">
+            <div id="dsq-comment-message-1564" class="dsq-comment-message"><p>Olá carrari,</p>
+<p>Vai desabilitando os scripts… Deve ter algum que está incompatível…<br />
+Tente jogar com o greasemonkey todo desabilitado… Se funcionar assim, certamente é algum script…</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1567">
+        <div id="dsq-comment-header-1567" class="dsq-comment-header">
+            <cite id="dsq-cite-1567">
+                <span id="dsq-author-user-1567">Eliseu Carrari</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1567" class="dsq-comment-body">
+            <div id="dsq-comment-message-1567" class="dsq-comment-message"><p>desativei todos os script,e continua a mesma,Deixei toda a caixa de escript em branco.Vou dar mais uma olhada no link q vc deixou la em cima pro outro colega e instalar os q estão la,o ais importante pra mim é o NPC,que faz uma grande economia de gold.<br />
+Obrigado pela atenção.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-1570">
+        <div id="dsq-comment-header-1570" class="dsq-comment-header">
+            <cite id="dsq-cite-1570">
+                <a id="dsq-author-user-1570" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1570" class="dsq-comment-body">
+            <div id="dsq-comment-message-1570" class="dsq-comment-message"><p>Olá Eliseu,</p>
+<p>Se com todos os scripts desabilitados você continua não conseguindo jogar, com exatamente esse problema:</p>
+<p>&#8220;entro no jogo mas quando clico em qulquer ponto volta pro loguin novamente&#8221;</p>
+<p>Tenho quase certeza que é o seu navegador&#8230; Instale uma ultima versão do firefox,&#8230; Deve estar havendo algum problema aí quanto a autenticação, como por exemplo o cookie&#8230; O travian só joga você de volta pro login, quando você não está logado&#8230;</p>
+<p>Boa sorte&#8230; Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1571">
+        <div id="dsq-comment-header-1571" class="dsq-comment-header">
+            <cite id="dsq-cite-1571">
+                <span id="dsq-author-user-1571">Eliseu Carrari</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1571" class="dsq-comment-body">
+            <div id="dsq-comment-message-1571" class="dsq-comment-message"><p><a href="#comment-1570" rel="nofollow">@ Rafael Biriba</a><br />
+Eu desinstalei o firefox junto com seus cookies,e voltou a funcionar,reinstalei o greasemonkey,Tentarei reinstalar os script que o mestre (vc 😉 ) citou acima.<br />
+quanto a versão do firefox é atualizada.mas mesmo assim verei se tem mais ua nova atualização.Se eu descobrir a falha te passo para vc ajudar outros com o mesmo problema.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-1572">
+        <div id="dsq-comment-header-1572" class="dsq-comment-header">
+            <cite id="dsq-cite-1572">
+                <a id="dsq-author-user-1572" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1572" class="dsq-comment-body">
+            <div id="dsq-comment-message-1572" class="dsq-comment-message"><p>Reinstalando o firefox resolvou o problema de voltar pro login, do travian ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1625">
+        <div id="dsq-comment-header-1625" class="dsq-comment-header">
+            <cite id="dsq-cite-1625">
+                <span id="dsq-author-user-1625">Marco</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1625" class="dsq-comment-body">
+            <div id="dsq-comment-message-1625" class="dsq-comment-message"><p><a href="#comment-1572" rel="nofollow">@ Rafael Biriba</a><br />
+Estou  encontrando o mesmo problema&#8230;<br />
+Ja fiz esses procedimentos de desinstalar completamente e reinstalar mas n adiantou..</p>
+<p>Descobri uma coisa, (vamos ver se isso ajuda alguem ai a achar a solução) eu jogo o server 3, e la ele apresenta os erros q o eliseu mencionou, porém, no server 4, ele roda os scripts perfeitamente..</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-1626">
+        <div id="dsq-comment-header-1626" class="dsq-comment-header">
+            <cite id="dsq-cite-1626">
+                <a id="dsq-author-user-1626" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1626" class="dsq-comment-body">
+            <div id="dsq-comment-message-1626" class="dsq-comment-message"><p>Olá Marco,</p>
+<p>Faça um teste simples pra mim:<br />
+Dê um único clique em cima do icone do greasemonkey lá no canto inferior direito, e ele vai desativar (vai ficar apagado).<br />
+Feito isso, teste se você consegue jogar no servidor 3 e no servidor 4 sem nenhum problema&#8230;</p>
+<p>Os servidores devem estar com versões diferentes de travian, fazendo com que os scripts se comportem de maneira inesperada.</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1669">
+        <div id="dsq-comment-header-1669" class="dsq-comment-header">
+            <cite id="dsq-cite-1669">
+                <span id="dsq-author-user-1669">lucas</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1669" class="dsq-comment-body">
+            <div id="dsq-comment-message-1669" class="dsq-comment-message"><p>cara&#8230; eh facil dos MH acharem um hacker?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-1670">
+        <div id="dsq-comment-header-1670" class="dsq-comment-header">
+            <cite id="dsq-cite-1670">
+                <a id="dsq-author-user-1670" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1670" class="dsq-comment-body">
+            <div id="dsq-comment-message-1670" class="dsq-comment-message"><p>Se no travian hacker significar utilizar scripts, acho muito dificil um Multi Hunter descobrir&#8230;.</p>
+<p>Mas há meios sim&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1671">
+        <div id="dsq-comment-header-1671" class="dsq-comment-header">
+            <cite id="dsq-cite-1671">
+                <span id="dsq-author-user-1671">lucas</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1671" class="dsq-comment-body">
+            <div id="dsq-comment-message-1671" class="dsq-comment-message"><p>e como eles conseguiriam? eh facil de achar? peguem frequentemente?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-1672">
+        <div id="dsq-comment-header-1672" class="dsq-comment-header">
+            <cite id="dsq-cite-1672">
+                <a id="dsq-author-user-1672" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1672" class="dsq-comment-body">
+            <div id="dsq-comment-message-1672" class="dsq-comment-message"><p>Acredite Lucas,</p>
+<p>Pode usar os scripts sem medo, eles não vão te pegar !<br />
+Só soube de um caso que o Multi Hunter pegou, mas foi porque denunciaram o jogador e depois o MH ficou de marcação, e acabou descobrindo pelas mensagens que ele trocava, falando sobre os scripts&#8230;</p>
+<p>Existe outros metodos de descobrir, mas não dá pra dizer ao certo, se é o script ou você que está jogando&#8230;</p>
+<p>Abraços e bom jogo !</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1724">
+        <div id="dsq-comment-header-1724" class="dsq-comment-header">
+            <cite id="dsq-cite-1724">
+                <span id="dsq-author-user-1724">Streptococcus Starignaphs</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1724" class="dsq-comment-body">
+            <div id="dsq-comment-message-1724" class="dsq-comment-message"><p><a href="#comment-77" rel="nofollow">@Rafael Biriba</a> </p>
+<p>Olá, gosteu do teu Blog, e tenho interesse em saber se ainda há algum script para o Travian 3.5 que permita pré-programar uma construção futuro, quando estivermos off line e o recurso for suficiente ??</p>
+<p>Obrigado !</p>
+<p>PS.: Você tem conta atual no BR4 ? qual ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-1725">
+        <div id="dsq-comment-header-1725" class="dsq-comment-header">
+            <cite id="dsq-cite-1725">
+                <a id="dsq-author-user-1725" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1725" class="dsq-comment-body">
+            <div id="dsq-comment-message-1725" class="dsq-comment-message"><p>Olá,</p>
+<p>Que bom que tenha gostado do blog !<br />
+Não existe nenhum script que funcione offline&#8230; Todos eles rodam através do greasemonkey, ou seja, com o seu navegador aberto&#8230;</p>
+<p>Para programar uma contrução offline, somente assinando o pacote ouro clube e utilizar a função que custa 1 de ouro se eu não me engano !</p>
+<p>P.S: Eu só jogo em servidores speed (BRx). Nesse eu não estou jogando não.. só no próximo&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1735">
+        <div id="dsq-comment-header-1735" class="dsq-comment-header">
+            <cite id="dsq-cite-1735">
+                <span id="dsq-author-user-1735">Joony</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1735" class="dsq-comment-body">
+            <div id="dsq-comment-message-1735" class="dsq-comment-message"><p>cara poorque não consigo instalar farm machine todos estão pegando menos ele pode me explicar ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-1736">
+        <div id="dsq-comment-header-1736" class="dsq-comment-header">
+            <cite id="dsq-cite-1736">
+                <a id="dsq-author-user-1736" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1736" class="dsq-comment-body">
+            <div id="dsq-comment-message-1736" class="dsq-comment-message"><p>Enviado em 01/12/2009 às 12:26</p>
+<p>Olá Joony,</p>
+<p>Qual script do farm machine você instalou ? Provavelmente é incompatibilidade de versão !</p>
+<p>Eu usa o Farming Machine for Travian 3.5 (<a href="http://userscripts.org/scripts/show/48557" rel="nofollow">http://userscripts.org/scripts/show/48557</a>),  e funcionava perfeitamente…</p>
+<p>Testa esse e depois me fala&#8230;</p>
+<p>Abraços e boa sorte,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-1737">
+        <div id="dsq-comment-header-1737" class="dsq-comment-header">
+            <cite id="dsq-cite-1737">
+                <span id="dsq-author-user-1737">Joony</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1737" class="dsq-comment-body">
+            <div id="dsq-comment-message-1737" class="dsq-comment-message"><p>apareceu isso amigo</p>
+<p>Esta não é a aldeia de um Farm<br />
+A tentar substituir a aldeia<br />
+Substituir para a aldeia: (NaN|NaN), Depois de 12 Segundo</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-1738">
+        <div id="dsq-comment-header-1738" class="dsq-comment-header">
+            <cite id="dsq-cite-1738">
+                <span id="dsq-author-user-1738">Joony</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1738" class="dsq-comment-body">
+            <div id="dsq-comment-message-1738" class="dsq-comment-message"><p>eu uso mesma versão qe vc todos ta pegando normal menos ele e preciso farmar estou com 5k de saltas parados; tentar me ajudar ai amigo</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-1739">
+        <div id="dsq-comment-header-1739" class="dsq-comment-header">
+            <cite id="dsq-cite-1739">
+                <a id="dsq-author-user-1739" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1739" class="dsq-comment-body">
+            <div id="dsq-comment-message-1739" class="dsq-comment-message"><p>Estranho&#8230; Parece que você está usando errado !</p>
+<p>Eu usei o farm machine há muito tempo&#8230; Não lembro mais como funciona direito&#8230; =/</p>
+<p>Mas o script está funcionando, é algum problema de uso mesmo&#8230;</p>
+<p>Boa sorte&#8230;. Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-1740">
+        <div id="dsq-comment-header-1740" class="dsq-comment-header">
+            <cite id="dsq-cite-1740">
+                <span id="dsq-author-user-1740">joony</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1740" class="dsq-comment-body">
+            <div id="dsq-comment-message-1740" class="dsq-comment-message"><p>conhece outro tipo de programa?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-1741">
+        <div id="dsq-comment-header-1741" class="dsq-comment-header">
+            <cite id="dsq-cite-1741">
+                <a id="dsq-author-user-1741" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1741" class="dsq-comment-body">
+            <div id="dsq-comment-message-1741" class="dsq-comment-message"><p>Já ouviu falar do travian baby sitter ?<br />
+Eu nunca usei, mas sei de pessoas que usam&#8230;</p>
+<p><a href="http://www.travianbabysitter.com" rel="nofollow">http://www.travianbabysitter.com</a></p>
+<p>Tenta usar este, é muito mais completo&#8230; Se você conseguir utilizar, vai ser uma ajuda e tanto.</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-1742">
+        <div id="dsq-comment-header-1742" class="dsq-comment-header">
+            <cite id="dsq-cite-1742">
+                <span id="dsq-author-user-1742">joony</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1742" class="dsq-comment-body">
+            <div id="dsq-comment-message-1742" class="dsq-comment-message"><p>Beleza ;</p>
+<p>valew qlq coisa me avisa de novidades;</p>
+<p>abraço</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-2042">
+        <div id="dsq-comment-header-2042" class="dsq-comment-header">
+            <cite id="dsq-cite-2042">
+                <span id="dsq-author-user-2042">lolo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2042" class="dsq-comment-body">
+            <div id="dsq-comment-message-2042" class="dsq-comment-message"><p>colega sabes algum scrip ou algum do genero para descobrir a k horas o pessoal costuma tar logado nas suas contas?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-2044">
+        <div id="dsq-comment-header-2044" class="dsq-comment-header">
+            <cite id="dsq-cite-2044">
+                <a id="dsq-author-user-2044" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2044" class="dsq-comment-body">
+            <div id="dsq-comment-message-2044" class="dsq-comment-message"><p>Olá,</p>
+<p>Infelizmente nunca vi nenhum script parecido !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-2048">
+        <div id="dsq-comment-header-2048" class="dsq-comment-header">
+            <cite id="dsq-cite-2048">
+                <span id="dsq-author-user-2048">lolo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2048" class="dsq-comment-body">
+            <div id="dsq-comment-message-2048" class="dsq-comment-message"><p>tens a ultima versao d TM?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2049">
+        <div id="dsq-comment-header-2049" class="dsq-comment-header">
+            <cite id="dsq-cite-2049">
+                <span id="dsq-author-user-2049">lolo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2049" class="dsq-comment-body">
+            <div id="dsq-comment-message-2049" class="dsq-comment-message"><p>tens ultima versao tm (crack) ou algum conhecimento do genero?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-2050">
+        <div id="dsq-comment-header-2050" class="dsq-comment-header">
+            <cite id="dsq-cite-2050">
+                <a id="dsq-author-user-2050" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2050" class="dsq-comment-body">
+            <div id="dsq-comment-message-2050" class="dsq-comment-message"><p>Desculpe, não entendi sua pergunta =/</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2058">
+        <div id="dsq-comment-header-2058" class="dsq-comment-header">
+            <cite id="dsq-cite-2058">
+                <span id="dsq-author-user-2058">lolo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2058" class="dsq-comment-body">
+            <div id="dsq-comment-message-2058" class="dsq-comment-message"><p>conheces o TM?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-2059">
+        <div id="dsq-comment-header-2059" class="dsq-comment-header">
+            <cite id="dsq-cite-2059">
+                <a id="dsq-author-user-2059" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2059" class="dsq-comment-body">
+            <div id="dsq-comment-message-2059" class="dsq-comment-message"><p>Não conheço não&#8230; O que seria ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2070">
+        <div id="dsq-comment-header-2070" class="dsq-comment-header">
+            <cite id="dsq-cite-2070">
+                <span id="dsq-author-user-2070">lolo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2070" class="dsq-comment-body">
+            <div id="dsq-comment-message-2070" class="dsq-comment-message"><p>travian manager</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-2073">
+        <div id="dsq-comment-header-2073" class="dsq-comment-header">
+            <cite id="dsq-cite-2073">
+                <a id="dsq-author-user-2073" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2073" class="dsq-comment-body">
+            <div id="dsq-comment-message-2073" class="dsq-comment-message"><p>Não conheço não&#8230; O que ele faz ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2153">
+        <div id="dsq-comment-header-2153" class="dsq-comment-header">
+            <cite id="dsq-cite-2153">
+                <span id="dsq-author-user-2153">W.Jr</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2153" class="dsq-comment-body">
+            <div id="dsq-comment-message-2153" class="dsq-comment-message"><p>nao acho nenhum link para baixar o travian beyond, poderia me ajudar?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-2157">
+        <div id="dsq-comment-header-2157" class="dsq-comment-header">
+            <cite id="dsq-cite-2157">
+                <a id="dsq-author-user-2157" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2157" class="dsq-comment-body">
+            <div id="dsq-comment-message-2157" class="dsq-comment-message"><p>Testa esse aqui:<br />
+Travian3 Beyond &#8211; ML&#038;CN &#8211; <a href="http://userscripts.org/scripts/show/28129" rel="nofollow">http://userscripts.org/scripts/show/28129</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2170">
+        <div id="dsq-comment-header-2170" class="dsq-comment-header">
+            <cite id="dsq-cite-2170">
+                <span id="dsq-author-user-2170">W.Jr</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2170" class="dsq-comment-body">
+            <div id="dsq-comment-message-2170" class="dsq-comment-message"><p>o beleza, já estou dependente dele.<br />
+Valew.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-2171">
+        <div id="dsq-comment-header-2171" class="dsq-comment-header">
+            <cite id="dsq-cite-2171">
+                <span id="dsq-author-user-2171">W.Jr</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2171" class="dsq-comment-body">
+            <div id="dsq-comment-message-2171" class="dsq-comment-message"><p>Será porque que quando coloco o cursor em cima de uma aldeia não aparece mais o tempo que levaria um ataque? Tem algumas coisas que não estão aparecendo.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2179">
+        <div id="dsq-comment-header-2179" class="dsq-comment-header">
+            <cite id="dsq-cite-2179">
+                <span id="dsq-author-user-2179">Marlon</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2179" class="dsq-comment-body">
+            <div id="dsq-comment-message-2179" class="dsq-comment-message"><p>Pode ser a versão do Beyond&#8230; Dê uma pesquisada nas outras versões pelo site: <a href="http://www.userscripts.org/" rel="nofollow">http://www.userscripts.org/</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-2416">
+        <div id="dsq-comment-header-2416" class="dsq-comment-header">
+            <cite id="dsq-cite-2416">
+                <span id="dsq-author-user-2416">Paulin</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2416" class="dsq-comment-body">
+            <div id="dsq-comment-message-2416" class="dsq-comment-message"><p>TM é um BOT ele faz de tudo&#8230; TUDO MESMO<br />
+ele pode ser usado durante 5 dias de graça ou pode ser obtido se vc tiver disposto a gasta cerca de 90 reais e ter um cartão de credito internacional =)<br />
+Ah um tempo atraz o pessoal conseguiu burlar o TM crackeando ele mais isso hoje ja nao é mais possivel, Só pagando mesmo (:<br />
+Cara eu tava querendo um programa pra farmar QUE ESTEJA FUNCIONANDO 😡</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-4036">
+        <div id="dsq-comment-header-4036" class="dsq-comment-header">
+            <cite id="dsq-cite-4036">
+                <span id="dsq-author-user-4036">jefersasuke</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4036" class="dsq-comment-body">
+            <div id="dsq-comment-message-4036" class="dsq-comment-message"><p>o meu travian queue est funcionando, só nao consigo dar ordens para evoluir campos de produçao, pode me ajudar?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-4040">
+        <div id="dsq-comment-header-4040" class="dsq-comment-header">
+            <cite id="dsq-cite-4040">
+                <a id="dsq-author-user-4040" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4040" class="dsq-comment-body">
+            <div id="dsq-comment-message-4040" class="dsq-comment-message"><p>Qual a versão do Task Queue você instalou ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-4195">
+        <div id="dsq-comment-header-4195" class="dsq-comment-header">
+            <cite id="dsq-cite-4195">
+                <span id="dsq-author-user-4195">EDVALDO</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4195" class="dsq-comment-body">
+            <div id="dsq-comment-message-4195" class="dsq-comment-message"><p>Olá tudo bem?<br />
+eu gostaria de saber se tem algun script para colocar soldados caso tenha mande p/ mim por favor,ok?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-4196">
+        <div id="dsq-comment-header-4196" class="dsq-comment-header">
+            <cite id="dsq-cite-4196">
+                <span id="dsq-author-user-4196">EDVALDO</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4196" class="dsq-comment-body">
+            <div id="dsq-comment-message-4196" class="dsq-comment-message"><p><a href="mailto:edmaro@hotmail.com">edmaro@hotmail.com</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-4287">
+        <div id="dsq-comment-header-4287" class="dsq-comment-header">
+            <cite id="dsq-cite-4287">
+                <a id="dsq-author-user-4287" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4287" class="dsq-comment-body">
+            <div id="dsq-comment-message-4287" class="dsq-comment-message"><p>Olá Edvaldo,</p>
+<p>não entendi sua pergunta&#8230; Como assim colocar soldados ?<br />
+Voce quis dizer fazer os soldados ? Já tentou o task queue ?</p>
+<p>Abraços&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-4798">
+        <div id="dsq-comment-header-4798" class="dsq-comment-header">
+            <cite id="dsq-cite-4798">
+                <span id="dsq-author-user-4798">Thais</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4798" class="dsq-comment-body">
+            <div id="dsq-comment-message-4798" class="dsq-comment-message"><p>Olá Rafa&#8230;<br />
+adorei as dicas do blog =)<br />
++ tenho uma duvida, esse scripts funcionam no servidor portugues?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-4800">
+        <div id="dsq-comment-header-4800" class="dsq-comment-header">
+            <cite id="dsq-cite-4800">
+                <a id="dsq-author-user-4800" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4800" class="dsq-comment-body">
+            <div id="dsq-comment-message-4800" class="dsq-comment-message"><p>Olá Thais,</p>
+<p>Serve sim, qualquer script para qualquer servidor travian&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-6541">
+        <div id="dsq-comment-header-6541" class="dsq-comment-header">
+            <cite id="dsq-cite-6541">
+                <span id="dsq-author-user-6541">Rosi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6541" class="dsq-comment-body">
+            <div id="dsq-comment-message-6541" class="dsq-comment-message"><p>Olá</p>
+<p>eu baixei todos os aplicativos mas quando eu abro minhas construções não aparece a opção de melhorar mais tarde para agendar a construção o que eu faço??</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-6566">
+        <div id="dsq-comment-header-6566" class="dsq-comment-header">
+            <cite id="dsq-cite-6566">
+                <a id="dsq-author-user-6566" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6566" class="dsq-comment-body">
+            <div id="dsq-comment-message-6566" class="dsq-comment-message"><p>Olá Rosi,<br />
+Qual o aplicativo e versão você instalou ? Task Queue ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-6572">
+        <div id="dsq-comment-header-6572" class="dsq-comment-header">
+            <cite id="dsq-cite-6572">
+                <span id="dsq-author-user-6572">Rosi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6572" class="dsq-comment-body">
+            <div id="dsq-comment-message-6572" class="dsq-comment-message"><p>Som, o Task Queue e o Travian3 beyond<br />
+da essa msg ao instalar</p>
+<p>Não foi possível iniciar o editor.<br />
+[Exception&#8230; &#8220;Component returned failure code: 0x80520003 (NS_ERROR_FILE_EXECUTION_FAILED) [nsIProcess.run]&#8221;  nsresult: &#8220;0x80520003 (NS_ERROR_FILE_EXECUTION_FAILED)&#8221;  location: &#8220;JS frame :: chrome://greasemonkey/content/utils.js :: launchApplicationWithDoc :: line 186&#8221;  data: no]</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-6573">
+        <div id="dsq-comment-header-6573" class="dsq-comment-header">
+            <cite id="dsq-cite-6573">
+                <a id="dsq-author-user-6573" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6573" class="dsq-comment-body">
+            <div id="dsq-comment-message-6573" class="dsq-comment-message"><p>Quais os links que você usou para instalar ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-6575">
+        <div id="dsq-comment-header-6575" class="dsq-comment-header">
+            <cite id="dsq-cite-6575">
+                <span id="dsq-author-user-6575">Rosi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6575" class="dsq-comment-body">
+            <div id="dsq-comment-message-6575" class="dsq-comment-message"><p>usei esse</p>
+<p><a href="http://userscripts.org/scripts/show/49694" rel="nofollow">http://userscripts.org/scripts/show/49694</a></p>
+<p>mas qdo acaba d instalar da uma msg d erro cód: 800A138F</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7373">
+        <div id="dsq-comment-header-7373" class="dsq-comment-header">
+            <cite id="dsq-cite-7373">
+                <span id="dsq-author-user-7373">Israel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7373" class="dsq-comment-body">
+            <div id="dsq-comment-message-7373" class="dsq-comment-message"><p>Olá amigo eu gostaria de saber se existe algum scripter que você possa faser trocas com o NPC de graça . E queria saber se você tem algum Tropp saver para a versão 3.5<br />
+obrigado .</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-7385">
+        <div id="dsq-comment-header-7385" class="dsq-comment-header">
+            <cite id="dsq-cite-7385">
+                <span id="dsq-author-user-7385">Paulo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7385" class="dsq-comment-body">
+            <div id="dsq-comment-message-7385" class="dsq-comment-message"><p>eai galera , so o Travian 3 Beyond q funfa, e o resto, nao tem mais??? o task Queue nao funfa po&#8230;rs</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7440">
+        <div id="dsq-comment-header-7440" class="dsq-comment-header">
+            <cite id="dsq-cite-7440">
+                <a id="dsq-author-user-7440" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7440" class="dsq-comment-body">
+            <div id="dsq-comment-message-7440" class="dsq-comment-message"><p><a href="#comment-6575" rel="nofollow">@Rosi </a> e <a href="#comment-7385" rel="nofollow">@Paulo </a> </p>
+<p>Já tentaram usar esse aqui ?<br />
+<a href="http://userscripts.org/scripts/show/13693" rel="nofollow">http://userscripts.org/scripts/show/13693</a></p>
+<p>Se funcionar, me avisem&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-7450">
+        <div id="dsq-comment-header-7450" class="dsq-comment-header">
+            <cite id="dsq-cite-7450">
+                <a id="dsq-author-user-7450" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7450" class="dsq-comment-body">
+            <div id="dsq-comment-message-7450" class="dsq-comment-message"><p>Olá <a href="#comment-7373" rel="nofollow">@Israel</a>, </p>
+<p>Sobre os scripts do travian você tem que entender o seguinte: Todos eles rodam do lado do cliente, ou seja do jogador. Trocas NPCs, compra de soldados e de edificios, tudo isso vai para o servidor do travian. Não tem como trocar de graça no NPC sem gold, ou baratear o custo das tropas com scripts.</p>
+<p>Se vocês virem algum script que prometa qualquer coisa desse tipo, é mentira&#8230; Sugiro que vocês instalem apenas scripts conhecidos e que alguém já tenha testado. É muito fácil instalar um script desconhecido que estrague ou roube a sua conta. Então cuidado.</p>
+<p>Quanto ao troop saver, eu não sei se essa versão ainda funciona, poderia testar por favor ?  <a href="http://userscripts.org/topics/65349" rel="nofollow">http://userscripts.org/topics/65349</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7513">
+        <div id="dsq-comment-header-7513" class="dsq-comment-header">
+            <cite id="dsq-cite-7513">
+                <span id="dsq-author-user-7513">Marcelo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7513" class="dsq-comment-body">
+            <div id="dsq-comment-message-7513" class="dsq-comment-message"><p>Dica legal: Existem programas que ajudam o jogador Travian a fazer tarefas rotineiras e ainda ajuda a gerenciar.</p>
+<p>Veja mais em: <a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-7511" rel="nofollow">https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-7511</a></p>
+<p>Show de bola, estou usando</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-7783">
+        <div id="dsq-comment-header-7783" class="dsq-comment-header">
+            <cite id="dsq-cite-7783">
+                <a id="dsq-author-user-7783" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7783" class="dsq-comment-body">
+            <div id="dsq-comment-message-7783" class="dsq-comment-message"><p>Olá Marcelo,</p>
+<p>Andei olhando o tutorial que você informou&#8230; Quando tiver tempo, irei criar uma conta de teste e testar esse gerenciador&#8230;</p>
+<p>Gostaria de deixar claro a todos, que esses tipos de programas podem ser perigosos&#8230; Se o autor for uma pessoa &#8220;esperta&#8221; e quiser dar uma de esperto, ele pode capturar as senhas das suas contas&#8230; Então cuidado nos lugares onde vocês colocam seus usuário e senhas do travian&#8230;</p>
+<p>Abraços a todos,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='http://planeta-globo.com/2012/02/26/problemas-com-o-youtube-publique-no-vimeocom/' rel='external nofollow' class='url'>Problemas com o youtube ? Publique no Vimeo.com | Planeta Globo.com</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-44951">
+        <div id="dsq-comment-header-44951" class="dsq-comment-header">
+            <cite id="dsq-cite-44951">
+                <span id="dsq-author-user-44951">PEDRO</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-44951" class="dsq-comment-body">
+            <div id="dsq-comment-message-44951" class="dsq-comment-message"><p>Tem um cara que conseguiu fazer multiplicação de tropas e os donos do travian estao oferecendo 5 mil de ouro pra quem conseguir desvendar isse segredo&#8230;</p>
+<p>Alguem sabe como se faz?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+	<aside id="text-569858663" class="widget widget_text">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- vertical blog -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="7274679989"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside></div><!-- #content-sidebar -->
+<div id="secondary">
+		<h2 class="site-description">Tecnologia e informação no lugar certo !</h2>
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="text-569858664" class="widget widget_text"><h1 class="widget-title">Blog Desatualizado</h1>			<div class="textwidget">Depois de muitos anos, está na hora de mudar!
+Em breve um novo blog, muito melhor e com mais conteúdo!
+Se você está lendo isso, tente acessar <a href="https://rafaelbiriba.com/blog" target="_blank">https://rafaelbiriba.com/blog</a> para ver se o novo blog já está disponível!! :)
+Previsão de ir online: Agosto/2016</div>
+		</aside><aside id="text-347930551" class="widget widget_text"><h1 class="widget-title">Sobre o Autor</h1>			<div class="textwidget"><img alt="" src="https://1.gravatar.com/avatar/908bb0e461d553752af1df7c5849df52?s=80&amp;d=&amp;r=G" class="avatar avatar-42 photo" height="80" width="80">
+<div style="text-align: justify;"><strong>Rafael Biriba</strong>: Full Stack Web Developer since 2008 with experience in the development field using technologies like Ruby on Rails, PHP, HTML5, Javascript (Jquery / Backbone.js), Video encoding and delivery (Flash Media Server, Wowza, ffmpeg tools), Database SQL and NoSQL (Mysql, MongoDB, Redis), Virtualization and automation using virtualbox. With knowledge of development techniques and practices such as TDD, Domain Driven Design and Object Oriented Design.</div></div>
+		</aside><aside id="github-profile-2" class="widget widget_github-profile"><aside><h1 class="widget-title">Github</h1><div class="github-widget" id="github-profile-2"><header class="github-widget-header"><img class="github-widget-company-logo" title="GitHub" src="https://assets-cdn.github.com/favicon.ico"/><div class="github-widget-header-text"><a class="github-widget-header-link" target="_blank" href="https://github.com/rafaelbiriba" title="View profile">rafaelbiriba (Rafael Biriba)</a></div></header><div class="github-widget-content"><a target="_blank" href="https://github.com/rafaelbiriba" title="View profile"><img class="github-profile-pic" src="https://avatars.githubusercontent.com/u/324743?v=3" style="border-radius: 5px"> <span class="github-names"> <p class="github-name">Rafael Biriba</p> <span class="github-username">rafaelbiriba</span> </span></a><div class="github-block github-vcard-stats"><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/followers"><strong class="github-vcard-stat-count">30</strong><span class="text-muted">Followers</span></a><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/following"><strong class="github-vcard-stat-count">9</strong><span class="text-muted">Following</span></a><div style="clear: both;"></div></div> </div></div></aside></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h1 class="widget-title">Nuvem de Tags</h1><div class="tagcloud"><a href='https://rafaelbiriba.com/tag/904' class='tag-link-127 tag-link-position-1' title='5 tópicos' style='font-size: 8pt;'>9.04</a>
+<a href='https://rafaelbiriba.com/tag/armazenamento' class='tag-link-76 tag-link-position-2' title='7 tópicos' style='font-size: 11.36pt;'>armazenamento</a>
+<a href='https://rafaelbiriba.com/tag/atualizando' class='tag-link-132 tag-link-position-3' title='5 tópicos' style='font-size: 8pt;'>atualizando</a>
+<a href='https://rafaelbiriba.com/tag/atualizar' class='tag-link-130 tag-link-position-4' title='10 tópicos' style='font-size: 15.28pt;'>atualizar</a>
+<a href='https://rafaelbiriba.com/tag/audio' class='tag-link-22 tag-link-position-5' title='10 tópicos' style='font-size: 15.28pt;'>audio</a>
+<a href='https://rafaelbiriba.com/tag/blog' class='tag-link-188 tag-link-position-6' title='15 tópicos' style='font-size: 19.76pt;'>blog</a>
+<a href='https://rafaelbiriba.com/tag/codec' class='tag-link-26 tag-link-position-7' title='12 tópicos' style='font-size: 17.24pt;'>codec</a>
+<a href='https://rafaelbiriba.com/tag/codigo' class='tag-link-46 tag-link-position-8' title='9 tópicos' style='font-size: 14.16pt;'>codigo</a>
+<a href='https://rafaelbiriba.com/tag/converter' class='tag-link-23 tag-link-position-9' title='12 tópicos' style='font-size: 17.24pt;'>converter</a>
+<a href='https://rafaelbiriba.com/tag/decifrar' class='tag-link-79 tag-link-position-10' title='5 tópicos' style='font-size: 8pt;'>decifrar</a>
+<a href='https://rafaelbiriba.com/tag/desenvolvimento' class='tag-link-487 tag-link-position-11' title='13 tópicos' style='font-size: 18.36pt;'>Desenvolvimento</a>
+<a href='https://rafaelbiriba.com/tag/disco' class='tag-link-16 tag-link-position-12' title='6 tópicos' style='font-size: 9.96pt;'>disco</a>
+<a href='https://rafaelbiriba.com/tag/estag' class='tag-link-173 tag-link-position-13' title='9 tópicos' style='font-size: 14.16pt;'>estag</a>
+<a href='https://rafaelbiriba.com/tag/estagio' class='tag-link-168 tag-link-position-14' title='12 tópicos' style='font-size: 17.24pt;'>estágio</a>
+<a href='https://rafaelbiriba.com/tag/faetec' class='tag-link-192 tag-link-position-15' title='8 tópicos' style='font-size: 12.76pt;'>faetec</a>
+<a href='https://rafaelbiriba.com/tag/ffmpeg' class='tag-link-484 tag-link-position-16' title='12 tópicos' style='font-size: 17.24pt;'>FFmpeg</a>
+<a href='https://rafaelbiriba.com/tag/game' class='tag-link-53 tag-link-position-17' title='5 tópicos' style='font-size: 8pt;'>game</a>
+<a href='https://rafaelbiriba.com/tag/globocom' class='tag-link-171 tag-link-position-18' title='10 tópicos' style='font-size: 15.28pt;'>globo.com</a>
+<a href='https://rafaelbiriba.com/tag/google' class='tag-link-40 tag-link-position-19' title='7 tópicos' style='font-size: 11.36pt;'>google</a>
+<a href='https://rafaelbiriba.com/tag/gravar' class='tag-link-24 tag-link-position-20' title='9 tópicos' style='font-size: 14.16pt;'>gravar</a>
+<a href='https://rafaelbiriba.com/tag/imagem' class='tag-link-29 tag-link-position-21' title='6 tópicos' style='font-size: 9.96pt;'>imagem</a>
+<a href='https://rafaelbiriba.com/tag/inscricao' class='tag-link-170 tag-link-position-22' title='14 tópicos' style='font-size: 19.2pt;'>inscrição</a>
+<a href='https://rafaelbiriba.com/tag/ist-rio' class='tag-link-191 tag-link-position-23' title='8 tópicos' style='font-size: 12.76pt;'>ist-rio</a>
+<a href='https://rafaelbiriba.com/tag/leitura' class='tag-link-80 tag-link-position-24' title='7 tópicos' style='font-size: 11.36pt;'>leitura</a>
+<a href='https://rafaelbiriba.com/tag/medieval' class='tag-link-55 tag-link-position-25' title='5 tópicos' style='font-size: 8pt;'>medieval</a>
+<a href='https://rafaelbiriba.com/tag/multimedia' class='tag-link-27 tag-link-position-26' title='13 tópicos' style='font-size: 18.36pt;'>multimedia</a>
+<a href='https://rafaelbiriba.com/tag/online' class='tag-link-51 tag-link-position-27' title='15 tópicos' style='font-size: 19.76pt;'>online</a>
+<a href='https://rafaelbiriba.com/tag/oportunidade' class='tag-link-169 tag-link-position-28' title='10 tópicos' style='font-size: 15.28pt;'>oportunidade</a>
+<a href='https://rafaelbiriba.com/tag/player' class='tag-link-34 tag-link-position-29' title='7 tópicos' style='font-size: 11.36pt;'>player</a>
+<a href='https://rafaelbiriba.com/tag/processo-seletivo' class='tag-link-172 tag-link-position-30' title='14 tópicos' style='font-size: 19.2pt;'>processo seletivo</a>
+<a href='https://rafaelbiriba.com/tag/ruby' class='tag-link-492 tag-link-position-31' title='10 tópicos' style='font-size: 15.28pt;'>Ruby</a>
+<a href='https://rafaelbiriba.com/tag/rubygems' class='tag-link-103 tag-link-position-32' title='8 tópicos' style='font-size: 12.76pt;'>rubygems</a>
+<a href='https://rafaelbiriba.com/tag/rubyonrails' class='tag-link-105 tag-link-position-33' title='5 tópicos' style='font-size: 8pt;'>rubyonrails</a>
+<a href='https://rafaelbiriba.com/tag/sistema' class='tag-link-133 tag-link-position-34' title='5 tópicos' style='font-size: 8pt;'>sistema</a>
+<a href='https://rafaelbiriba.com/tag/sistema-operacional' class='tag-link-12 tag-link-position-35' title='5 tópicos' style='font-size: 8pt;'>sistema operacional</a>
+<a href='https://rafaelbiriba.com/tag/stream' class='tag-link-25 tag-link-position-36' title='8 tópicos' style='font-size: 12.76pt;'>stream</a>
+<a href='https://rafaelbiriba.com/tag/tecnologia' class='tag-link-490 tag-link-position-37' title='17 tópicos' style='font-size: 21.44pt;'>Tecnologia</a>
+<a href='https://rafaelbiriba.com/tag/travian' class='tag-link-49 tag-link-position-38' title='6 tópicos' style='font-size: 9.96pt;'>travian</a>
+<a href='https://rafaelbiriba.com/tag/ubuntu' class='tag-link-11 tag-link-position-39' title='9 tópicos' style='font-size: 14.16pt;'>ubuntu</a>
+<a href='https://rafaelbiriba.com/tag/versao' class='tag-link-129 tag-link-position-40' title='8 tópicos' style='font-size: 12.76pt;'>versão</a>
+<a href='https://rafaelbiriba.com/tag/video' class='tag-link-21 tag-link-position-41' title='18 tópicos' style='font-size: 22pt;'>video</a>
+<a href='https://rafaelbiriba.com/tag/virtual' class='tag-link-17 tag-link-position-42' title='6 tópicos' style='font-size: 9.96pt;'>virtual</a>
+<a href='https://rafaelbiriba.com/tag/web' class='tag-link-15 tag-link-position-43' title='16 tópicos' style='font-size: 20.6pt;'>web</a>
+<a href='https://rafaelbiriba.com/tag/web-browser' class='tag-link-56 tag-link-position-44' title='6 tópicos' style='font-size: 9.96pt;'>web browser</a>
+<a href='https://rafaelbiriba.com/tag/wordpress' class='tag-link-494 tag-link-position-45' title='13 tópicos' style='font-size: 18.36pt;'>Wordpress</a></div>
+</aside><aside id="wp_related_posts_widget" class="widget widget_wp_related_posts">
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h1 class="widget-title">Leia também:</h1><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1771" data-post-type="none" ><small class="wp_rp_publish_date">01/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html" class="wp_rp_title">Travian 3.6: Nova versão veio para assustar</a></li><li data-position="1" data-poid="in-435" data-post-type="none" ><small class="wp_rp_publish_date">08/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" class="wp_rp_title">Travian: Greasemonkey e seus Scripts</a></li><li data-position="2" data-poid="in-2216" data-post-type="none" ><small class="wp_rp_publish_date">08/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html" class="wp_rp_title">Captcha no Travian: Será o fim dos scripts ?</a></li><li data-position="3" data-poid="in-229" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/28/travian-jogo-online-multiplayer.html" class="wp_rp_title">Travian: Jogo Online Multiplayer</a></li><li data-position="4" data-poid="in-2956" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser.html" class="wp_rp_title">5 bons motivos para você não perder tempo com travian ou outro jogo web browser</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		<div class="cbd"></div>
+		<script src="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded//shutter-reloaded.js?ver=2.5" type="text/javascript"></script>
+	<script type="text/javascript">
+	var shutterSettings = {"imgDir":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/shutter-reloaded\/\/menu\/","imageCount":true,"FS":false,"textBtns":true,"oneSet":true};
+	try{}catch(e){}	</script>
+	
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+								<a href="https://br.wordpress.org/">Orgulhosamente mantido com WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	
+<script type="text/javascript"><!--
+wpa2a.targets=[
+{title:"Travian vers\u00e3o 3.5: Fim do greasemonkey e seus scripts ?",url:"https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html"}];
+wpa2a.html_done=true;if(wpa2a.script_ready&&!wpa2a.done)wpa2a.init();wpa2a.script_load();
+//--></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var scriptParams = {"google_search_engine_id":"partner-pub-1303939561252359:5952361189"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/assets/js/google_cse_v2.js?ver=1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Enviando ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.2'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/comment-reply.min.js?ver=4.5.3'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/wp-embed.min.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.5.3","language":""},"disqusIdentifier":"726 http:\/\/www.rafaelbiriba.com\/?p=726","disqusShortname":"rafaelbiriba","disqusTitle":"Travian vers\u00e3o 3.5: Fim do greasemonkey e seus scripts ?","disqusUrl":"http:\/\/www.rafaelbiriba.com\/2009\/05\/17\/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html","options":{"manualSync":false},"postId":"726"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/disqus.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"rafaelbiriba"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/count.js?ver=4.5.3'></script>
+</body>
+</html>

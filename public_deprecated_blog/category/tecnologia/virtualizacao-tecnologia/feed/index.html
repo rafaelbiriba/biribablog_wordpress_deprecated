@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Virtualização &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/tecnologia/virtualizacao-tecnologia/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</title>
+		<link>https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html</link>
+		<comments>https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html#comments</comments>
+		<pubDate>Thu, 08 Mar 2012 23:22:15 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[clone]]></category>
+		<category><![CDATA[clonevm]]></category>
+		<category><![CDATA[disco]]></category>
+		<category><![CDATA[disk]]></category>
+		<category><![CDATA[modifyhd]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[vboxmanage]]></category>
+		<category><![CDATA[vdi]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1466</guid>
+		<description><![CDATA[Bom, hoje eu tive que clonar uma máquina virtual minha. Então comecei a fazer o procedimento que eu já fazia à algum tempo&#8230; Desligar a VM, Duplicar seu HD, Criar uma nova VM, Configurar para ficar igual a vm original, atribuir o hd clonado e por fim ligar a vm. Isso realmente dá um pouco &#8230; <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><a href="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png"><img class="size-full wp-image-1877 alignleft" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" /></a></p>
+<p style="text-align: justify;">Bom, hoje eu tive que clonar uma máquina virtual minha.</p>
+<p style="text-align: justify;">Então comecei a fazer o procedimento que eu já fazia à algum tempo&#8230;</p>
+<p style="text-align: justify;">Desligar a VM, Duplicar seu HD, Criar uma nova VM, Configurar para ficar igual a vm original, atribuir o hd clonado e por fim ligar a vm.</p>
+<p style="text-align: justify;">Isso realmente dá um pouco de trabalho, caso você precise clonar uma vm, para umas 3 ou 4 máquinas iguais&#8230;</p>
+<p style="text-align: justify;">Então como resolver ?</p>
+<p style="text-align: justify;">Olhando a <a title="https://www.virtualbox.org/manual/ch08.html#vboxmanage-clonevm" href="https://www.virtualbox.org/manual/ch08.html#vboxmanage-clonevm" target="_blank">documentação do virtualbox</a>, descobri algo realmente decente para este problema: Clone de VM <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">O comando que resolveu o meu problema e pode resolver o seu é o:</p>
+<p style="text-align: justify;"><strong>VBoxManage clonevm &#8220;Win XP Original&#8221; &#8211;name &#8220;VM Clone XP 1&#8221; &#8211;register</strong></p>
+<p style="text-align: justify;">Funcionou perfeitamente. A VM clonada herdou todas as configurações corretamente&#8230; Que beleza! =)</p>
+<p style="text-align: justify;">E para fechar com chave de ouro, experimente rodar o comando acima de clone junto com o comando:</p>
+<p style="text-align: justify;"><strong>VBoxManage startvm &#8220;VM Clone XP 1&#8221;</strong></p>
+<p style="text-align: justify;">Com isso você clona e logo em seguida já liga a nova máquina =)</p>
+<p style="text-align: justify;">Consegue ter uma visão &#8220;cloud&#8221; nisso ? É possível duplicar ou deletar VMs em tempo real na hora que você precisar&#8230; (Fica a dica ;))</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="1" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="2" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="3" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="4" data-poid="in-3038" data-post-type="none" ><small class="wp_rp_publish_date">10/07/2012</small> <a href="https://rafaelbiriba.com/2012/07/10/dropbox-aumentara-o-espaco-em-disco-dos-seus-planos.html" class="wp_rp_title">Dropbox aumentará o espaço em disco dos seus planos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F03%2F08%2Fvirtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html&amp;linkname=VirtualBox%3A%20Como%20clonar%20uma%20m%C3%A1quina%20virtual%20inteira%20usando%20o%20VBoxManage" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F03%2F08%2Fvirtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html&amp;linkname=VirtualBox%3A%20Como%20clonar%20uma%20m%C3%A1quina%20virtual%20inteira%20usando%20o%20VBoxManage" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F03%2F08%2Fvirtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html&amp;title=VirtualBox%3A%20Como%20clonar%20uma%20m%C3%A1quina%20virtual%20inteira%20usando%20o%20VBoxManage" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+		<item>
+		<title>VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</title>
+		<link>https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html</link>
+		<comments>https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html#comments</comments>
+		<pubDate>Sun, 03 Apr 2011 18:07:50 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[disco]]></category>
+		<category><![CDATA[disk]]></category>
+		<category><![CDATA[modifyhd]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[vboxmanage]]></category>
+		<category><![CDATA[vdi]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2787</guid>
+		<description><![CDATA[Para facilitar a vida de quem precisa redimensionar o disco virtual de uma VM, foi lançado o serviço &#8220;modifyhd&#8221; que pode ser acessado pelo VBoxManage. Infelizmente esse serviço está disponível apenas na versão 4. Se a versão do seu virtualbox for mais antiga, sugiro que faça essa atualização. Nessa nova versão, foram corrigidos vários bugs &#8230; <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="alignright size-full wp-image-1877" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" /></p>
+<p style="text-align: justify;">Para facilitar a vida de quem precisa redimensionar o disco virtual de uma VM, foi lançado o serviço &#8220;modifyhd&#8221; que pode ser acessado pelo VBoxManage.</p>
+<p style="text-align: justify;"><strong>Infelizmente esse serviço está disponível apenas na versão 4</strong>. Se a versão do seu virtualbox for mais antiga, sugiro que faça essa atualização. Nessa nova versão, foram corrigidos vários bugs (são tantos que não dá para listar aqui. Veja a lista completa em: <a title="http://www.virtualbox.org/wiki/Changelog" href="http://www.virtualbox.org/wiki/Changelog" target="_blank">http://www.virtualbox.org/wiki/Changelog</a>). Você pode fazer o download da versão nova versão em: <a title="http://www.virtualbox.org/wiki/Downloads" href="http://www.virtualbox.org/wiki/Downloads" target="_blank">http://www.virtualbox.org/wiki/Downloads</a></p>
+<p style="text-align: justify;">Mas se você ainda usa uma versão antiga do virtualbox, veja esse tutorial: <a title="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" target="_blank">VirtualBox 3: Aumentanto o tamanho do disco virtual da vm</a></p>
+<p style="text-align: justify;">Bom, para redimensionar o disco, você deve executar na linha de comando, em um terminal/console o seguinte comando:</p>
+<p style="text-align: justify;"><strong>VBoxManage modifyhd &lt;<span style="color: #ff0000;">caminho completo para o vdi</span>&gt; &#8211;resize &lt;<span style="color: #ff0000;">tamanho em mb</span>&gt;</strong></p>
+<p style="text-align: justify;">Tentei fazer um teste. Então escolhi peguei o disco do meu WindowsXP de 20GB e rodei o comando:</p>
+<p style="text-align: justify;">VBoxManage modifyhd /Users/rafaelbiriba/Library/VirtualBox/HardDisks/WindowsXP.vdi &#8211;resize 15000</p>
+<p style="text-align: justify;">Resultado:</p>
+<p style="text-align: justify;"><span style="color: #ff0000;">Progress state: VBOX_E_NOT_SUPPORTED VBoxManage: error: Resize hard disk operation for this format is not implemented yet!</span></p>
+<p style="text-align: justify;">Para minha surpresa, o <strong>modifyhd</strong> só funciona para aumentar o disco. Ainda não foi implementado a funcionalidade para diminuir o disco.</p>
+<p style="text-align: justify;">Então depois de um novo teste:</p>
+<p style="text-align: justify;">VBoxManage modifyhd /Users/rafaelbiriba/Library/VirtualBox/HardDisks/WindowsXP.vdi &#8211;resize 22000</p>
+<p style="text-align: justify;">O resultado foi exatamente o esperado (22000 MB = 21.48 GB):<br /><img class="aligncenter size-full wp-image-2796" title="virtualbox-windowsxp-22GB" src="https://rafaelbiriba.com/wp-content/uploads/2011/04/virtualbox-windowsxp-22GB.png" alt="" width="580" height="31" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/04/virtualbox-windowsxp-22GB.png 580w, https://rafaelbiriba.com/wp-content/uploads/2011/04/virtualbox-windowsxp-22GB-300x16.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></p>
+<p style="text-align: justify;">Ao invés de usar o &#8211;resize passando o valor em MB, você também pode usar o &#8211;resizebyte e passar o valor em bytes.</p>
+<p style="text-align: justify;">Depois de redimencionar o disco, você precisa aumentar o tamanho da partição, para ocupar também o novo espaço disponibilizado. Para isso, você pode baixar o live cd do Gparted (<a title="http://gparted.sourceforge.net/download.php" href="http://gparted.sourceforge.net/download.php" target="_blank">http://gparted.sourceforge.net/download.php</a>) e alterar o tamanho da partição.</p>
+<p style="text-align: justify;">Você também pode acessar o guia em: <a title="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" target="_blank">https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html</a> e no 8º passo eu mostro como fazer para redimensionar a partição usando o GParted.</p>
+<p style="text-align: justify;">Então é isso&#8230; Qualquer dúvida, crítica, elogio ou sugestão, podem me deixar um comentário abaixo <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="1" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="2" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="3" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="4" data-poid="in-3038" data-post-type="none" ><small class="wp_rp_publish_date">10/07/2012</small> <a href="https://rafaelbiriba.com/2012/07/10/dropbox-aumentara-o-espaco-em-disco-dos-seus-planos.html" class="wp_rp_title">Dropbox aumentará o espaço em disco dos seus planos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F04%2F03%2Fvirtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html&amp;linkname=VirtualBox%204.0.4%3A%20Nova%20funcionalidade%20permite%20expandir%20o%20tamanho%20do%20disco%20vdi" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F04%2F03%2Fvirtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html&amp;linkname=VirtualBox%204.0.4%3A%20Nova%20funcionalidade%20permite%20expandir%20o%20tamanho%20do%20disco%20vdi" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F04%2F03%2Fvirtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html&amp;title=VirtualBox%204.0.4%3A%20Nova%20funcionalidade%20permite%20expandir%20o%20tamanho%20do%20disco%20vdi" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html/feed</wfw:commentRss>
+		<slash:comments>24</slash:comments>
+		</item>
+		<item>
+		<title>VirtualBox 3: Aumentando o tamanho do disco virtual da VM</title>
+		<link>https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html</link>
+		<comments>https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html#comments</comments>
+		<pubDate>Wed, 16 Mar 2011 17:00:05 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[disco]]></category>
+		<category><![CDATA[disk]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[vdi]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2656</guid>
+		<description><![CDATA[Sempre que preciso criar uma nova vm no virtualbox, eu perco algum tempo na tela de criação de disco. São sempre as mesmas perguntas: &#8220;Quanto de espaço vou precisar nessa vm ?&#8221; &#8220;O que vai rodar nela ?&#8221; &#8220;E se eu não criar um disco com espaço suficiente ?&#8221; Depois de perder alguns minutos e &#8230; <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox 3: Aumentando o tamanho do disco virtual da VM</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><a href="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png"><img class="alignright size-full wp-image-1877" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" /></a>Sempre que preciso criar uma nova vm no virtualbox, eu perco algum tempo na tela de criação de disco.</p>
+<p style="text-align: justify;">São sempre as mesmas perguntas:</p>
+<ul style="text-align: justify;">
+	<li>&#8220;Quanto de espaço vou precisar nessa vm ?&#8221;</li>
+	<li>&#8220;O que vai rodar nela ?&#8221;</li>
+	<li>&#8220;E se eu não criar um disco com espaço suficiente ?&#8221;</li>
+</ul>
+<p style="text-align: justify;">Depois de perder alguns minutos e finalmente decidir o tamanho do disco, eu prossigo com a criação e instalação da nova VM.</p>
+<p style="text-align: justify;">É bem comum se criar VM Windows por exemplo com apenas 10GB de disco. E se você precisar instalar alguns programas pesados ? Será mesmo um problema quando sua máquina virtual fica sem espaço em disco ? Bom, com esse tutorial a resposta é <strong>não</strong>.</p>
+<p style="text-align: justify;">Nos passos abaixo, explicarei com detalhes como aumentar o tamanho do seu disco virtual <strong>(.vdi)</strong>:</p>
+<p style="text-align: justify;"><strong>[Post escrito e testado baseado no VirtualBox 3.2.6]</strong></p>
+<h3 style="text-align: justify;">1º passo: Criar um novo disco com um espaço maior.</h3>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2664" title="virtual-media-manager-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.32.30-PM.png" alt="" width="500" height="313" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.32.30-PM.png 500w, https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.32.30-PM-300x187.png 300w" sizes="(max-width: 500px) 100vw, 500px" />Para isso, abra o gerenciador de disco virtual ou o virtual disk manager e crie um novo disco.</p>
+<p style="text-align: justify;">Para os exemplos a seguir, eu criei o disco <strong>novoDisco30GB.vdi</strong></p>
+<h3 style="text-align: justify;">2º passo: Escolher a máquina virtual com o disco a ser modificado</h3>
+<p style="text-align: justify;">Ao decidir qual vm terá seu disco alterado, certifique-se que ela está desligada e entre nas configurações da VM. Vá até a categoria storage ou armazenamento:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2675" title="two-disks-vm-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.09.47-PM.png" alt="" width="300" height="60" /></p>
+<p style="text-align: justify;">O objetivo é fazer com que a vm fique com 2 discos. No meu exemplo utilizei a controladora SATA. Mas funciona da mesma forma para que utiliza controladora IDE. Basta colocar o segundo disco como IDE Primary Slave.</p>
+<h3 style="text-align: justify;">3º passo: Fazer o download da imagem .iso do Gparted live cd</h3>
+<p style="text-align: justify;">Acesse a url: <a title="http://sourceforge.net/projects/gparted/" href="http://sourceforge.net/projects/gparted/" target="_blank">http://sourceforge.net/projects/gparted/</a> e baixe a ultima versão da imagem .iso</p>
+<p style="text-align: justify;">O Gparted é um editor de partição gratuito, que vamos usar para redimensionar as partições conforme desejarmos.</p>
+<h3 style="text-align: justify;">4º passo: Adicionar o liveCD Gparted na maquina virtual</h3>
+<p style="text-align: justify;">Adicione o .iso na sua vm de forma que fique assim:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2678" title="added-iso-vm-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.10.13-PM1.png" alt="" width="300" height="60" /></p>
+<p style="text-align: justify;">Para quem usa controlador IDE, basta adicionar na posição IDE Secondary Master.</p>
+<p style="text-align: justify;">Certifique-se também que a ordem de boot da sua VM está com o CD-Rom antes do HD:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2672" title="cdrom-boot-order-vm-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-12.59.00-PM.png" alt="" width="300" height="67" /></p>
+<h3 style="text-align: justify;">5º passo: Iniciar a VM pelo LiveCD do GParted</h3>
+<p style="text-align: justify;">Ligue a VM e inicie escolhendo a opção do GParted:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2679" title="gparted-boot" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.04.36-PM.png" alt="" width="300" height="67" />Ele irá oferecer alguma opções de formato do teclado e linguagem. Você pode ir pelas configuraões padrões apertando &#8220;ENTER&#8221; em todas as opções oferecidas até chegar na tela do sistema:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2681" title="gparted-livecd-after-boot" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.17.45-PM.png" alt="" width="300" height="150" /></p>
+<h3 style="text-align: justify;">6º passo: Verificar os nomes dos discos</h3>
+<p style="text-align: justify;">Assim que o GParted iniciar, o programa já deve vir aberto. Se não estiver em execução, você pode inicar o GParted pelo icone na área de trabalho.</p>
+<p style="text-align: justify;">Depois disso, você precisa anotar os nomes dos discos:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2682" title="disks-names-gparted-window" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.20.36-PM.png" alt="" width="218" height="84" />Então, no próximo passo nós iremos copiar todo o conteúdo do disco /dev/sda (20 GB) para o /dev/sdb (30 GB).</p>
+<h3 style="text-align: justify;">7º passo: Transferindo os dados de um disco para o outro</h3>
+<p style="text-align: justify;">Antes de fazer a cópia, certifique-se de ter fechado o programa do GParted. Agora abra o terminal, clicando no icone na área de trabalho.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2683" title="gparted-terminal" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-1.23.37-PM.png" alt="" width="300" height="122" />Agora, basta rodar o comando:<br /><strong><span style="font-family: Verdana; font-size: xx-small;"><span style="font-size: x-small;">sudo dd if=/dev/sda of=/dev/sdb</span></span></strong></p>
+<p style="text-align: justify;"><strong>Atenção</strong>: Tenha certeza que está fazendo a cópia certa. <strong>if</strong> é o caminho do disco de origem, neste caso o sda que é o de 20GB. E <strong>of</strong> é o caminho do disco de destino, neste caso o sdb que é o de 30GB.</p>
+<p style="text-align: justify;">Dependendo do tamanho do disco, esse processo pode demorar um pouco. Para testar o meu exemplo, levou cerca de 22 minutos para transferir todo o hd de 20GB para o de 30GB.</p>
+<h3 style="text-align: justify;">8º passo: Redimensionar a partição do novo disco</h3>
+<p style="text-align: justify;">Feito o passo anterior, feche o terminal e reinicie a vm, abrindo pelo liveCD do GParted novamente. Essa reinicialização não é obrigatória, mas serve para evitar problemas no novo disco, já que por algum motivo o GParted fica reclamando de que nao consegue ler os dados da nova partição.</p>
+<p style="text-align: justify;">Bom, depois de reiniciar, vamos redimensionar o novo HD.</p>
+<p style="text-align: justify;">Se for uma <strong>VM windows</strong>, basta clicar com o botão direito sobre o /dev/sdb1 e clicar em redimensionar / resize e arrastar a partição até preencher todo o espaço disponível:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2685" title="resize-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.41.45-PM.png" alt="" width="288" height="114" /></p>
+<p style="text-align: justify;">Depois disso basta apertar em aplicar e pular para o próximo passo&#8230;</p>
+<p style="text-align: justify;">No meu caso, estou redimensionando em um HD <strong>com linux</strong>, então entre a partição do sistema e o espaço disponível tem a partição do swap.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2687" title="gparted-show-linux-partition" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.48.55-PM.png" alt="" width="300" height="87" /></p>
+<p style="text-align: justify;">Para poder redimensionar o disco, você precisa remover o &#8220;swap&#8221; que está em nosso caminho.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2688" title="gparted-swap-deleted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.49.16-PM.png" alt="" width="300" height="64" /></p>
+<p style="text-align: justify;">Depois de deletar o swap, clique com o botão direito e depois em redimensionar / resize para chegar na tela abaixo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2689" title="gparted-resizing-partition-linux" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.49.29-PM.png" alt="" width="300" height="154" /></p>
+<p style="text-align: justify;">Arraste o tamanho do disco até o limite desejado. Lembre-se de deixar um pouco de espaço para recriar o swap novamente. Geralmente o swap é criado com o dobro do tamanho da memória da máquina.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2690" title="gparted-partition-resized-linux" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.50.01-PM.png" alt="" width="300" height="64" /></p>
+<p style="text-align: justify;">Depois de aumentar a partição primária, crie no espaço que sobrou uma partição estendida, onde iremos definir o novo swap.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2691" title="creating-new-partition-gparted-linux" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.50.25-PM.png" alt="" width="300" height="146" /></p>
+<p style="text-align: justify;">Criado a partição estendida, crie dentro dela uma partição lógica com o file-system &#8220;linux swap&#8221;</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2692" title="gparted-show-partition-table" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.50.45-PM.png" alt="" width="300" height="72" /></p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2693" title="creating-swap-partition-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.51.00-PM.png" alt="" width="300" height="147" /></p>
+<p style="text-align: justify;">Pronto. Terminamos de redimensionar o disco.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2694" title="show-partition-table-complete-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.51.14-PM.png" alt="" width="300" height="75" /></p>
+<p style="text-align: justify;">Agora basta aplicar as modificações e esperar um pouco.</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2695" title="apply-modification-gparted" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.51.26-PM.png" alt="" width="300" height="122" />Feito isso, já podemos desligar a vm.</p>
+<h3 style="text-align: justify;">9º passo: Ligar a VM com o novo disco</h3>
+<p style="text-align: justify;">Remova o disco antigo da vm, remova o cd de boot e depois ligue a vm com o novo disco !</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2696" title="virtualbox-only-one-bootable-image" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.53.37-PM.png" alt="" width="300" height="53" /></p>
+<h3 style="text-align: justify;">10º passo: Agora, basta aproveitar a sua VM com um disco maior</h3>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2697" title="login-ubuntu-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-2.55.15-PM.png" alt="" width="300" height="238" /></p>
+<h3 style="text-align: justify;">11º passo (Passo necessário no Ubuntu): Trocando o uuid do disco do swap.</h3>
+<p style="text-align: justify;">Em alguns linux, com o ubuntu, ele grava em um arquivo o uuid (id do disco) que o sistema usa.</p>
+<p style="text-align: justify;">Como fizemos algumas modificaçoes nas partições, esses ids mudaram. Então precisamos editar o arquivo que fica em <strong>/etc/fstab</strong> como mostra a figura abaixo:</p>
+<p style="text-align: justify;"><img class="aligncenter size-full wp-image-2698" title="editing-fstab-virtualbox" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-3.51.58-PM.png" alt="" width="500" height="252" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-3.51.58-PM.png 500w, https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-18-at-3.51.58-PM-300x151.png 300w" sizes="(max-width: 500px) 100vw, 500px" /></p>
+<p style="text-align: justify;">Com o comando: <strong>ls -la /dev/disk/by-uuid/</strong> você pode listar os novos ids e a onde eles estão montados.</p>
+<p style="text-align: justify;">No caso da imagem acima, basta atualizar o arquivo fstab com o uuid do disco em sda1 e depois em sda5.</p>
+<p style="text-align: justify;">Reinicie a VM e estará tudo funcionando corretamente <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;"><strong>==========================================</strong></p>
+<p style="text-align: justify;"><span style="color: #ff0000;"><strong>IMPORTANTE</strong></span>: Em 22/12/2010 foi lançado a versão 4 do virtualbox. Umas das principais modificações foi o suporte ao redimensionamento do disco. Em breve escreverei um novo post falando sobre essa funcionalidade.<br />Eu só publiquei essa matéria pois estava como rascunho a muito, muito tempo. E além do mais, nem todo mundo atualiza a versão do virtualbox, então pode ser útil para alguém&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br /><strong>==========================================<br /></strong><strong>[Post escrito e testado baseado no VirtualBox 3.2.6]</strong></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="1" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="2" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="3" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="4" data-poid="in-3038" data-post-type="none" ><small class="wp_rp_publish_date">10/07/2012</small> <a href="https://rafaelbiriba.com/2012/07/10/dropbox-aumentara-o-espaco-em-disco-dos-seus-planos.html" class="wp_rp_title">Dropbox aumentará o espaço em disco dos seus planos</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F03%2F16%2Fvirtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html&amp;linkname=VirtualBox%203%3A%20Aumentando%20o%20tamanho%20do%20disco%20virtual%20da%20VM" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F03%2F16%2Fvirtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html&amp;linkname=VirtualBox%203%3A%20Aumentando%20o%20tamanho%20do%20disco%20virtual%20da%20VM" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F03%2F16%2Fvirtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html&amp;title=VirtualBox%203%3A%20Aumentando%20o%20tamanho%20do%20disco%20virtual%20da%20VM" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html/feed</wfw:commentRss>
+		<slash:comments>39</slash:comments>
+		</item>
+		<item>
+		<title>VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</title>
+		<link>https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html</link>
+		<comments>https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html#comments</comments>
+		<pubDate>Wed, 14 Jul 2010 15:12:48 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[automatizar]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[VBoxHeadless]]></category>
+		<category><![CDATA[vboxmanage]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+		<category><![CDATA[vrdp]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2152</guid>
+		<description><![CDATA[Já tem algum tempo que ando brincando com o VirtualBox e um dos objetivos era automatizar a criação de novas VMs. Durante as pesquisas e testes, descobri que criar máquinas virtuais utilizando o VBoxManage* é bastante simples. *VBoxManage: É uma interface do virtualbox por linha de comando (terminal), onde você pode controlar totalmente suas máquinas &#8230; <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><a href="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png"><img class="size-full wp-image-1877 alignleft" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="virtualbox-image" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" /></a>Já tem algum tempo que ando brincando com o VirtualBox e um dos objetivos era automatizar a criação de novas VMs.</p>
+<p style="text-align: justify;">Durante as pesquisas e testes, descobri que criar máquinas virtuais utilizando o VBoxManage<strong>*</strong> é bastante simples.</p>
+<p style="text-align: justify;"><strong>*VBoxManage:</strong> É uma interface do virtualbox por linha de comando (terminal), onde você pode controlar totalmente suas máquinas virtuais.</p>
+<p style="text-align: justify;"><strong>Dica:</strong> Leia a documentação para conhecer todas as funções disponíveis: <a title="http://www.virtualbox.org/manual/ch08.html" href="http://www.virtualbox.org/manual/ch08.html" target="_blank">http://www.virtualbox.org/manual/ch08.html</a></p>
+<p style="text-align: justify;">Então vamos começar&#8230; No exemplo a seguir vou criar uma vm para um CentOS 5.4: (Os comandos em <strong>negrito</strong> devem ser executados no terminal)</p>
+<p style="text-align: justify;"><strong>VBoxManage createvm -name &#8220;centos54&#8221; &#8211;register<br /></strong><span style="color: #ff0000;">Cria uma vm com o nome &#8216;centos54&#8217; e com configurações padrões</span></p>
+<p style="text-align: justify;"><strong>VBoxManage modifyvm &#8220;centos54&#8221; &#8211;ostype RedHat &#8211;memory &#8220;128&#8221; &#8211;acpi on &#8211;boot1 dvd &#8211;nic1 bridged &#8211;bridgeadapter1 wlan0</strong><br /><span style="color: #ff0000;">Altera o tipo da vm para RedHat (por causa do CentOS), altera a memória para 128 MB, configura o dvd para ser o primeiro boot, e habilita uma placa de rede em modo bridge apontando para minha interface de rede wireless wlan0 (em alguns casos talvez seja eth0). Você pode habilitar mais de uma interface de rede, basta passar as configurações das placas assim: &#8211;nic1 &#8230; &#8211;nic2 &#8230; -nic3 &#8230;</span></p>
+<p style="text-align: justify;"><strong>VBoxManage createhd -filename &#8220;centos54.vdi&#8221; -size 6000 &#8211;remember</strong><br /><span style="color: #ff0000;">Cria o HD da nova vm com 6 GB de espaço</span></p>
+<p style="text-align: justify;"><strong>VBoxManage storagectl &#8220;centos54&#8221; &#8211;name &#8220;IDE Controller&#8221; &#8211;add ide &#8211;controller PIIX4</strong><br /><span style="color: #ff0000;">Habilita o controlador IDE de disco na vm</span></p>
+<p style="text-align: justify;"><strong>VBoxManage storageattach &#8220;centos54&#8221; &#8211;storagectl &#8220;IDE Controller&#8221; &#8211;port 0 &#8211;device 0 &#8211;type hdd &#8211;medium &#8220;centos54.vdi&#8221;<br /></strong><span style="color: #ff0000;">Adiciona o disco vdi da vm no controlador IDE e define o tipo com hard disk drive (hdd)</span></p>
+<p style="text-align: justify;"><strong>VBoxManage openmedium dvd /home/rafael/Desktop/CentOS-5.4-i386-bin-1of6.iso </strong><br /><span style="color: #ff0000;">Adiciona ao virtualbox (não na vm), o link para a imagem do disco</span></p>
+<div class="gmail_quote" style="text-align: justify;"><strong>VBoxManage storageattach &#8220;centos54&#8221; &#8211;storagectl &#8220;IDE Controller&#8221; &#8211;port 0 &#8211;device 1 &#8211;type dvd &#8211;medium /home/rafael/Desktop/CentOS-5.</strong><strong>4-i386-bin-1of6.iso </strong><br /><span style="color: #ff0000;">Adiociona a imagem do disco para boot e instalação do sistema operacional na VM. Note que agora o device é definido como 1, pois o hd está no device 0.<br /></span></div>
+<p style="text-align: justify;">Feito isso, agora estamos prontos para poder iniciar a VM:<br /><strong>nohup VBoxHeadless &#8211;startvm &#8220;centos54&#8221; -p 3001</strong><br />O vboxheadless responsável por iniciar a vm prende o processo ao terminal. Portanto se você fechar o terminal, o processo de start da vm morre. Para resolver isso, usamos o <strong>nohup</strong> que mantém o processo rodando mesmo que o terminal seja fechado. O vboxheadless inicia a vm e habilita o protocolo RDP (Remote Desktop Protocol) para que você possa acessar a vm. O parâmetro <strong>-p</strong> serve exatamente para definir a porta de acesso do RDP, e o endereço de acesso é 127.0.0.1 ou localhost.</p>
+<p style="text-align: justify;">Para desligar a VM:<strong><br />VBoxManage controlvm &#8220;centos54&#8221; poweroff<br /></strong></p>
+<p style="text-align: justify;">Para remover o DVD de boot da VM:<strong><br />VBoxManage storageattach &#8220;centos54&#8221; &#8211;storagectl &#8220;IDE Controller&#8221; &#8211;port 0 &#8211;device 1 &#8211;type dvd &#8211;medium noneforceunmount<br /></strong></p>
+<p style="text-align: justify;"></p>
+<p style="text-align: justify;">Então é isso&#8230; Em breve vou mostrar como duplicar as vms e seus discos.<br /><strong>Dica:</strong> Leia a documentação para conhecer todas as funções disponíveis do VBoxManage: <br /><a title="http://www.virtualbox.org/manual/ch08.html" href="http://www.virtualbox.org/manual/ch08.html" target="_blank">http://www.virtualbox.org/manual/ch08.html</a></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="1" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="2" data-poid="in-1875" data-post-type="none" ><small class="wp_rp_publish_date">22/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="wp_rp_title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></li><li data-position="3" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="4" data-poid="in-1178" data-post-type="none" ><small class="wp_rp_publish_date">22/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" class="wp_rp_title">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F07%2F14%2Fvirtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html&amp;linkname=VirtualBox%3A%20Criando%20e%20iniciando%20uma%20VM%20pelo%20terminal%20com%20o%20VBoxManage" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F07%2F14%2Fvirtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html&amp;linkname=VirtualBox%3A%20Criando%20e%20iniciando%20uma%20VM%20pelo%20terminal%20com%20o%20VBoxManage" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F07%2F14%2Fvirtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html&amp;title=VirtualBox%3A%20Criando%20e%20iniciando%20uma%20VM%20pelo%20terminal%20com%20o%20VBoxManage" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html/feed</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		</item>
+		<item>
+		<title>VirtualBox: VMs com IPs estáticos e internet de maneira simples</title>
+		<link>https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html</link>
+		<comments>https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html#comments</comments>
+		<pubDate>Mon, 22 Feb 2010 11:30:07 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Redes]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[dhcp]]></category>
+		<category><![CDATA[host]]></category>
+		<category><![CDATA[maquina]]></category>
+		<category><![CDATA[nat]]></category>
+		<category><![CDATA[network]]></category>
+		<category><![CDATA[rede]]></category>
+		<category><![CDATA[vbox]]></category>
+		<category><![CDATA[vboxnet0]]></category>
+		<category><![CDATA[virtual]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<category><![CDATA[virtualização]]></category>
+		<category><![CDATA[vm]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1875</guid>
+		<description><![CDATA[Tem certas coisas que você só aprende tentando&#8230; Mas esse assunto foi muito além desse princípio. Durante toda a semana, procurei por soluções para colocar 2 máquinas virtuais acessíveis pela minha máquina hospedeira, com ip fixo e com internet. O que acontece é o seguinte: Quem possui as versões mais atuais do virtualbox (a minha &#8230; <a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" class="more-link">Continue lendo <span class="screen-reader-text">VirtualBox: VMs com IPs estáticos e internet de maneira simples</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="size-full wp-image-1877 alignleft" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="virtualbox-image" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" />Tem certas coisas que você só aprende tentando&#8230; Mas esse assunto foi muito além desse princípio.</p>
+<p style="text-align: justify;">Durante toda a semana, procurei por soluções para colocar 2 máquinas virtuais acessíveis pela minha máquina hospedeira, com ip fixo e com internet.</p>
+<p style="text-align: justify;">O que acontece é o seguinte: Quem possui as versões mais atuais do virtualbox (a minha é a 3.1.2), possui uma opção de adaptador de rede, que se chama <strong>host-only</strong>. Ela cria uma conexão de rede em seu sistema hospedeiro, e utiliza um DHCP próprio para gerenciar as VMs, e com isso você consegue tanto utilizar internet, quanto se comunicar entre máquina real e máquina virtual.</p>
+<p style="text-align: justify;">O problema é que preciso garantir que estou dando SSH para a VM certa. O DHCP pode comprometer essa garantia.</p>
+<p style="text-align: justify;">O que tentei fazer&#8230; Atribuir um ip fixo na máquina virtual. Mas sem utilizar o DHCP, faz com que a VM fique sem conectividade com a internet.</p>
+<p style="text-align: justify;">Procurando pelo google, vi várias soluções que se resumiam em criar interfaces de redes virtuais para cada VM e compartilhando a conexão de internet entre elas, alterando tudo no arquivo <strong>/etc/netwotk/interfaces</strong> (ubuntu) e mais algumas outras coisas.</p>
+<p style="text-align: justify;">Eu não só testei várias soluções, como nenhuma delas funcionou, e ainda fiquei com alguns problemas de rede, mas que foram facilmente resolvidos.</p>
+<p style="text-align: justify;">Não querendo complicar uma coisa tão simples, consegui achar uma solução que resolve tudo com apenas alguns cliques, sem alterar nenhuma configuração e nem arriscar problemas na sua rede atual (<strong>eth0</strong>) =D</p>
+<p style="text-align: justify;">Então, vamos para a <span style="color: #ff0000;"><strong>solução final</strong></span>:</p>
+<p style="text-align: justify;">Existe uma outra opção para sua interface de rede no virtualbox: NAT. Ela atribui um IP para sua VM, que é inacessível não só entre a maquina real e a virtual, quanto entre as máquinas virtuais também&#8230; Essa opção apenas libera o acesso à internet para a VM.</p>
+<p style="text-align: justify;">A solução foi utilizar 2 interfaces de rede para cada VM. A primeira interface foi definida como <strong>NAT</strong> e a segunda como <strong>host-only</strong>. A ordem é importante&#8230; Certifique-se que a primeira interface é a NAT. Também é necessário <span style="color: #ff0000;">desativar o DHCP</span> <span style="color: #ff0000;">do host-only</span> (Vá em Arquivo &gt; Preferências &gt; Rede &gt; &#8220;Edite a Rede Virtual do Host-Only&#8221; &gt; &#8220;Na aba Servidor DHCP, desmarque a opção Habilitar Servidor&#8221;).</p>
+<p style="text-align: justify;">Feito isso, inicie a VM e atribua um IP fixo para a interface que utiliza o host-only&#8230; E como eu disse acima, essa interface com ip fixo fica acessível entre as máquinas virtuais e a real, perdendo apenas a conexão com a internet. Mas como você configurou uma interface NAT anteriormente, o problema está resolvido! <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><img class="aligncenter size-full wp-image-1893" title="virtual-box-rede-2-interfaces" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg" alt="virtual-box-rede-2-interfaces" width="434" height="77" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg 434w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces-300x53.jpg 300w" sizes="(max-width: 434px) 100vw, 434px" /></p>
+<p style="text-align: justify;">A imagem acima é um pedaço da descrição de uma das minhas máquinas virtuais que rodam num virtualbox para windows. A idéia é a mesma tanto para windows quanto para linux. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;"><strong>Curiosidade:</strong> Note que no windows o nome do adaptador de rede para o host-only é &#8220;VirtualBox Host-Only Ethernet Adapter&#8221; e no linux é &#8220;vboxnet0&#8221;.</p>
+<p style="text-align: justify;"><strong>Dica rápida: </strong>Se o seu virtualbox foi instalado pelo aptitude/synaptic do ubuntu (linux), certamente você possui uma versão velha e com poucos recursos&#8230; Sugiro baixar uma versão mais atual no site do <a title="http://www.virtualbox.org" href="http://www.virtualbox.org" target="_blank">virtualbox</a>.</p>
+<p style="text-align: justify;">Se conseguir uma outra solução, não deixe de compartilhar aqui! <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />Espero ter ajudado !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="1" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="2" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="3" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="4" data-poid="in-1106" data-post-type="none" ><small class="wp_rp_publish_date">02/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" class="wp_rp_title">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;title=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" id="wpa2a_10"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html/feed</wfw:commentRss>
+		<slash:comments>182</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Configurando teclado ABNT2 no vmware-server-console</title>
+		<link>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html</link>
+		<comments>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html#comments</comments>
+		<pubDate>Sat, 22 Aug 2009 19:19:24 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[abnt2]]></category>
+		<category><![CDATA[configurar]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[teclado]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vmware]]></category>
+		<category><![CDATA[vmware-server-console]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1178</guid>
+		<description><![CDATA[&#160; Um dos problemas que eu acho extremamente chato, é não poder usar as setas, o ctrl, a barra e outras teclas não habilitadas no vmware-server-console. Você pode ler sobre a instalação do console no ubuntu, clicando aqui. Se você der uma pesquisada no google, rapidamente vai encontrar formas de resolver o problema. Uma delas &#8230; <a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure>
+
+<p>&nbsp;</p>
+<p style="text-align: justify;">Um dos problemas que eu acho extremamente chato, é não poder usar as setas, o ctrl, a barra e outras teclas não habilitadas no vmware-server-console. Você pode ler sobre a instalação do console no ubuntu, <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">clicando aqui</a>.</p>
+<p style="text-align: justify;">Se você der uma pesquisada no google, rapidamente vai encontrar formas de resolver o problema. Uma delas é fazer o mapeamento das teclas que devem ser inseridas na configuração do vmware.</p>
+<p style="text-align: justify;">A questão é onde está o arquivo de configuração. Isso depende de como você <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">instalou</a> o vmware.<br />No meu caso está em <span style="color: #ff0000;">/etc/vmware-server-console/config</span>.</p>
+<p style="text-align: justify;">Adicionem as seguintes linhas no final do arquivo de configuração: <br />(<strong>OBS</strong>: Tem que ser root para fazer a alteração e certifique-se que o vmware não está aberto)</p>
+<p style="text-align: justify;"><strong>xkeymap.keycode.108 = 0x138 # Alt_R<br />xkeymap.keycode.106 = 0x135 # KP_Divide<br />xkeymap.keycode.104 = 0x11c # KP_Enter<br />xkeymap.keycode.111 = 0x148 # Up<br />xkeymap.keycode.116 = 0x150 # Down<br />xkeymap.keycode.113 = 0x14b # Left<br />xkeymap.keycode.114 = 0x14d # Right<br />xkeymap.keycode.105 = 0x11d # Control_R<br />xkeymap.keycode.118 = 0x152 # Insert<br />xkeymap.keycode.119 = 0x153 # Delete<br />xkeymap.keycode.110 = 0x147 # Home<br />xkeymap.keycode.115 = 0x14f # End<br />xkeymap.keycode.112 = 0x149 # Prior<br />xkeymap.keycode.117 = 0x151 # Next<br />xkeymap.keycode.78 = 0x46 # Scroll_Lock<br />xkeymap.keycode.127 = 0x100 # Pause<br />xkeymap.keycode.133 = 0x15b # Meta_L<br />xkeymap.keycode.134 = 0x15c # Meta_R<br />xkeymap.keycode.135 = 0x15d # Menu<br />xkeymap.keycode.97 = 0x073 # Slash </strong></p>
+<p style="text-align: justify;">Se você não achou o arquivo de configuração, veja algumas outras possibilidades: <span style="color: #808080;"><br /><span style="color: #0000ff;">.vmware/config</span></span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">~/vmware/preferences</span></span>,<br /><span style="color: #0000ff;">/etc/vmware/config</span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">/usr/lib/vmware/config</span></span></p>
+<p style="text-align: justify;">Espero ter ajudado&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1190" data-post-type="none" ><small class="wp_rp_publish_date">09/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="wp_rp_title">Ubuntu: Instalação do vmware-server-console</a></li><li data-position="1" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li><li data-position="2" data-poid="in-598" data-post-type="none" ><small class="wp_rp_publish_date">22/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/22/ubuntu-vem-por-ai-a-versao-904.html" class="wp_rp_title">Ubuntu: Vem por aí a versão 9.04</a></li><li data-position="3" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="4" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;title=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" id="wpa2a_12"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html/feed</wfw:commentRss>
+		<slash:comments>7</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu: Instalação do vmware-server-console</title>
+		<link>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html</link>
+		<comments>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html#comments</comments>
+		<pubDate>Mon, 10 Aug 2009 01:51:10 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Aplicativos]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[Virtualização]]></category>
+		<category><![CDATA[instalação]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vmware]]></category>
+		<category><![CDATA[vmware-server-console]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1190</guid>
+		<description><![CDATA[Sempre que preciso, eu perco algum tempo em procurar e instalar vmware-server-console. Então resolvi postar para facilitar. 🙂 Primeiro, faça o download pelo site do vmware (http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip), onde você deve extrair o pacote (23mb) para obter o VMware-server-console-1.0.9-156507.tar.gz Ou então, baixe o pacote direto pelo link do meu blog: (apenas 9 mb 😉) https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz Ou &#8230; <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu: Instalação do vmware-server-console</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<h2>
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure></h2>
+<p style="text-align: justify;">Sempre que preciso, eu perco algum tempo em procurar e instalar vmware-server-console. <br />Então resolvi postar para facilitar. <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Primeiro, faça o download pelo site do vmware (<a title="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" href="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" target="_blank">http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip</a>), onde você deve extrair o pacote (23mb) para obter o VMware-server-console-1.0.9-156507.tar.gz</p>
+<p style="text-align: justify;">Ou então, <strong>baixe o pacote direto pelo link do meu blog</strong>: (<span style="color: #ff0000;">apenas 9 mb <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></span>) <a title="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" href="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" target="_blank"><br />https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz</a></p>
+<p style="text-align: justify;">Ou apenas siga os <strong>comandos abaixo</strong> pelo terminal:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>www.rafaelbiriba.com<span style="color: #000000; font-weight: bold;">/</span>VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> vmware-server-console-distrib<span style="color: #000000; font-weight: bold;">/</span>
+<span style="color: #c20cb9; font-weight: bold;">sudo</span> .<span style="color: #000000; font-weight: bold;">/</span>vmware-install.pl</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Caso tenha alguma dúvida/problema na instalação, verifique o link: <a title="http://help.ubuntu.com/community/VMware/Server" href="http://help.ubuntu.com/community/VMware/Server" target="_blank">http://help.ubuntu.com/community/VMware/Server</a> na seção <strong>VMware Server Console Installation </strong>ou pergunte por aqui mesmo. <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1178" data-post-type="none" ><small class="wp_rp_publish_date">22/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" class="wp_rp_title">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</a></li><li data-position="1" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="2" data-poid="in-6" data-post-type="none" ><small class="wp_rp_publish_date">06/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" class="wp_rp_title">Windows XP vs Linux UBUNTU</a></li><li data-position="3" data-poid="in-1680" data-post-type="none" ><small class="wp_rp_publish_date">29/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" class="wp_rp_title">Ubuntu 9.10: Disponível para Download ou Atualização</a></li><li data-position="4" data-poid="in-620" data-post-type="none" ><small class="wp_rp_publish_date">23/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/23/ubuntu-904-disponivel-para-download.html" class="wp_rp_title">Ubuntu: 9.04 disponível para download !</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;title=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" id="wpa2a_14"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html/feed</wfw:commentRss>
+		<slash:comments>4</slash:comments>
+		</item>
+	</channel>
+</rss>

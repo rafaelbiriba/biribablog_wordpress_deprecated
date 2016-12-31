@@ -1,0 +1,2932 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<!--<![endif]-->
+<head>
+<base href="https://rafaelbiriba.com/blogwp.html" />
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>VirtualBox: VMs com IPs estáticos e internet de maneira simples | Rafael Biriba Blog</title>
+	
+	
+	<!--[if lt IE 9]>
+	<script src="https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	
+
+
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.rafaelbiriba.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wgs-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/wgs.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/style.css?ver=4.5.3' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='github-profile-octicons-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/octicons/octicons.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='github-profile-widget-styles-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/widget.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='A2A_SHARE_SAVE-css'  href='https://rafaelbiriba.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.12' type='text/css' media='all' />
+<link rel='stylesheet' id='fbSEOStylesheet-css'  href='https://rafaelbiriba.com/wp-content/plugins/seo-facebook-comments/assets/fbseo-style.css?ver=4.5.3' type='text/css' media='all' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.2 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-7346716-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/content-slide/js/coin-slider.js?ver=4.5.3'></script>
+<link rel='https://api.w.org/' href='https://rafaelbiriba.com/wp-json/' />
+
+ 
+
+<link rel='next' title='FFmpeg: converta vídeos para iPhone' href='https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html' />
+
+<link rel='shortlink' href='https://rafaelbiriba.com/?p=1875' />
+
+
+
+<script type="text/javascript"><!--
+var a2a_config=a2a_config||{},wpa2a={done:false,html_done:false,script_ready:false,script_load:function(){var a=document.createElement('script'),s=document.getElementsByTagName('script')[0];a.type='text/javascript';a.async=true;a.src='https://static.addtoany.com/menu/page.js';s.parentNode.insertBefore(a,s);wpa2a.script_load=function(){};},script_onready:function(){wpa2a.script_ready=true;if(wpa2a.html_done)wpa2a.init();},init:function(){for(var i=0,el,target,targets=wpa2a.targets,length=targets.length;i<length;i++){el=document.getElementById('wpa2a_'+(i+1));target=targets[i];a2a_config.linkname=target.title;a2a_config.linkurl=target.url;a2a_config.linkmedia=target.media;if(el){a2a.init('page',{target:el});el.id='';}wpa2a.done=true;}wpa2a.targets=[];}};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.callbacks.push({ready:wpa2a.script_onready});a2a_config.templates=a2a_config.templates||{};a2a_localize = {
+	Share: "Compartilhar",
+	Save: "Salvar",
+	Subscribe: "Inscrever",
+	Email: "Email",
+	Bookmark: "Favoritos",
+	ShowAll: "Mostrar tudo",
+	ShowLess: "Mostrar menos",
+	FindServices: "Procurar serviço(s)",
+	FindAnyServiceToAddTo: "Encontrar rapidamente qualquer serviço para",
+	PoweredBy: "Serviço fornecido por",
+	ShareViaEmail: "Share via email",
+	SubscribeViaEmail: "Subscribe via email",
+	BookmarkInYourBrowser: "Adicionar aos favoritos",
+	BookmarkInstructions: "Press Ctrl+D or \u2318+D to bookmark this page",
+	AddToYourFavorites: "Adicionar a favoritos",
+	SendFromWebOrProgram: "Send from any email address or email program",
+	EmailProgram: "Email program",
+	More: "More&#8230;"
+};
+
+//--></script>
+<script type="text/javascript">
+	var $jquery = jQuery.noConflict(); 
+	$jquery(document).ready(function() 
+	{
+		$jquery('#wpcontent_slider').coinslider(
+	{ 
+	width: 980, 
+	height: 370, 
+	spw: 7, 
+	sph: 5, 
+	delay: 3000, 
+	sDelay: 30, 
+	opacity: 0.7, 
+	titleSpeed: 500, 
+	effect: 'random', 
+	navigation: true, 
+	links : true, 
+	hoverPause: true });
+		});
+	</script>
+<style type="text/css" media="screen">
+		
+#wpcontent_slider_container
+{
+	overflow: hidden; position: relative; padding:0px;margin:0px; text-align:center; width:980px !important;
+	height:370px !important;
+}
+#wpcontent_slider 
+{ overflow: hidden; position: relative; font-family:\'Trebuchet MS\', Helvetica, sans-serif;border:0px solid #ffffff; text-align:left;}
+#wpcontent_slider a,#wpcontent_slider a img { border: none; text-decoration: none; outline: none; }
+#wpcontent_slider h4,#wpcontent_slider h4 a 
+{margin: 0px;padding: 0px; font-family: 'Trebuchet MS', Helvetica, sans-serif;
+text-decoration:none;font-size: 18px; color:#ffffff;}
+#wpcontent_slider .cs-title {width: 100%;padding: 10px; background: #ffffff; color: #000000; font-family: 'Trebuchet MS', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal;line-height: normal;}
+#wpcontent_slider_container .cs-prev,#wpcontent_slider_container .cs-next {font-weight: bold;background: #000000;
+font-size: 28px; font-family: "Courier New", Courier, monospace; color: #ffffff !important;
+padding: 0px 10px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;}
+#wpcontent_slider_container .cs-buttons { font-size: 0px; padding: 10px 0px 10px 0px;
+margin:0px auto; float:left;clear:left;
+}
+#wpcontent_slider_container .cs-buttons a { outline:none; margin-left: 5px; height: 10px; width: 10px; float: left; border: 1px solid #000000; color: #000000; text-indent: -1000px; 
+}
+#wpcontent_slider_container .cs-active { background-color: #000000; color: #FFFFFF; }
+#wpcs_link_love,#wpcs_link_love a{display:none;}
+</style>
+<!-- End Content Slider Settings -->
+
+
+		<style type="text/css">
+			.cbd {
+				position: fixed;
+				left: 5px;
+				bottom: 5px;
+			}
+			.cbd a img {
+				border: 0;
+			}
+		</style>
+	<meta property='fb:admins' content='1644160548' /><meta property='og:title' content='VirtualBox: VMs com IPs estáticos e internet de maneira simples' /><meta property='og:site_name' content='Rafael Biriba Blog' /><meta property='og:url' content='https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html' /><meta property='og:type' content='article' /><meta property='fb:app_id' content='589867447707428'>
+	<link rel="stylesheet" href="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded/shutter-reloaded.css?ver=2.4" type="text/css" media="screen" />
+	<style type='text/css'>
+div#shNavBar a {color: #000000;}
+div#shNavBar {background-color:#ffff00;}
+div#shNavBar {color:#000000;}
+div#shDisplay div#shTitle {color:#ffff00;}
+</style>
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "https://rafaelbiriba.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6';
+	window._wp_rp_post_id = '1875';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = 'VirtualBox%3A+VMs+com+IPs+est%C3%A1ticos+e+internet+de+maneira+simples';
+	window._wp_rp_post_tags = ['dhcp', 'vboxnet0', 'host', 'virtual', 'maquina', 'virtualbox', 'nat', 'virtualiza%C3%A7%C3%A3o', 'network', 'vm', 'rede', 'vbox', 'redes', 'tecnologia', 'virtualiza%C3%A7%C3%A3o', 'aplicativos', 'quanto', 'foi', 'rede', 'alm', 'uma', 'voc', 'googl', 'sem', 'ela', 'internet', 'virtualbox', 'na', 'ssh', 'de', 'toda'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.6" async></script>
+</head>
+
+<body class="single single-post postid-1875 single-format-standard masthead-fixed singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="https://rafaelbiriba.com/blogwp.html" rel="home">Rafael Biriba Blog</a></h1>
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">Pesquisar</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">Menu principal</button>
+				<a class="screen-reader-text skip-link" href="#content">Pular para o conteúdo</a>
+				<div id="primary-menu" class="nav-menu"><ul><li class="page_item page-item-3171"><a href="https://rafaelbiriba.com/search_gcse">Busca</a></li><li class="page_item page-item-101"><a href="https://rafaelbiriba.com/contatos">Contatos</a></li><li class="page_item page-item-1251"><a href="https://rafaelbiriba.com/twitter">Twitter</a></li></ul></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get"
+    class="search-form" action="https://rafaelbiriba.com//search_gcse">
+    <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input type="text" value="" name="q" id="q" />
+        <input type="submit" id="searchsubmit"
+            value="Pesquisar" />
+    </div>
+</form>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 798x80 images only -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="6793331087"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+			
+<article id="post-1875" class="post-1875 post type-post status-publish format-standard hentry category-aplicativos category-redes category-tecnologia category-virtualizacao-tecnologia tag-dhcp tag-host tag-maquina tag-nat tag-network tag-rede tag-vbox tag-vboxnet0 tag-virtual tag-virtualbox tag-virtualizacao tag-vm">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/aplicativos" rel="category tag">Aplicativos</a>, <a href="https://rafaelbiriba.com/category/redes" rel="category tag">Redes</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a>, <a href="https://rafaelbiriba.com/category/tecnologia/virtualizacao-tecnologia" rel="category tag">Virtualização</a></span>
+		</div>
+		<h1 class="entry-title">VirtualBox: VMs com IPs estáticos e internet de maneira simples</h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" rel="bookmark"><time class="entry-date" datetime="2010-02-22T08:30:07+00:00">22/02/2010</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html#comments"><span class="dsq-postid" data-dsqidentifier="1875 https://rafaelbiriba.com/?p=1875">182 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+<p style="text-align: justify;"><img class="size-full wp-image-1877 alignleft" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="virtualbox-image" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" />Tem certas coisas que você só aprende tentando&#8230; Mas esse assunto foi muito além desse princípio.</p>
+<p style="text-align: justify;">Durante toda a semana, procurei por soluções para colocar 2 máquinas virtuais acessíveis pela minha máquina hospedeira, com ip fixo e com internet.</p>
+<p style="text-align: justify;">O que acontece é o seguinte: Quem possui as versões mais atuais do virtualbox (a minha é a 3.1.2), possui uma opção de adaptador de rede, que se chama <strong>host-only</strong>. Ela cria uma conexão de rede em seu sistema hospedeiro, e utiliza um DHCP próprio para gerenciar as VMs, e com isso você consegue tanto utilizar internet, quanto se comunicar entre máquina real e máquina virtual.</p>
+<p style="text-align: justify;">O problema é que preciso garantir que estou dando SSH para a VM certa. O DHCP pode comprometer essa garantia.</p>
+<p style="text-align: justify;">O que tentei fazer&#8230; Atribuir um ip fixo na máquina virtual. Mas sem utilizar o DHCP, faz com que a VM fique sem conectividade com a internet.</p>
+<p style="text-align: justify;">Procurando pelo google, vi várias soluções que se resumiam em criar interfaces de redes virtuais para cada VM e compartilhando a conexão de internet entre elas, alterando tudo no arquivo <strong>/etc/netwotk/interfaces</strong> (ubuntu) e mais algumas outras coisas.</p>
+<p style="text-align: justify;">Eu não só testei várias soluções, como nenhuma delas funcionou, e ainda fiquei com alguns problemas de rede, mas que foram facilmente resolvidos.</p>
+<p style="text-align: justify;">Não querendo complicar uma coisa tão simples, consegui achar uma solução que resolve tudo com apenas alguns cliques, sem alterar nenhuma configuração e nem arriscar problemas na sua rede atual (<strong>eth0</strong>) =D</p>
+<p style="text-align: justify;">Então, vamos para a <span style="color: #ff0000;"><strong>solução final</strong></span>:</p>
+<p style="text-align: justify;">Existe uma outra opção para sua interface de rede no virtualbox: NAT. Ela atribui um IP para sua VM, que é inacessível não só entre a maquina real e a virtual, quanto entre as máquinas virtuais também&#8230; Essa opção apenas libera o acesso à internet para a VM.</p>
+<p style="text-align: justify;">A solução foi utilizar 2 interfaces de rede para cada VM. A primeira interface foi definida como <strong>NAT</strong> e a segunda como <strong>host-only</strong>. A ordem é importante&#8230; Certifique-se que a primeira interface é a NAT. Também é necessário <span style="color: #ff0000;">desativar o DHCP</span> <span style="color: #ff0000;">do host-only</span> (Vá em Arquivo &gt; Preferências &gt; Rede &gt; &#8220;Edite a Rede Virtual do Host-Only&#8221; &gt; &#8220;Na aba Servidor DHCP, desmarque a opção Habilitar Servidor&#8221;).</p>
+<p style="text-align: justify;">Feito isso, inicie a VM e atribua um IP fixo para a interface que utiliza o host-only&#8230; E como eu disse acima, essa interface com ip fixo fica acessível entre as máquinas virtuais e a real, perdendo apenas a conexão com a internet. Mas como você configurou uma interface NAT anteriormente, o problema está resolvido! 🙂</p>
+<p><img class="aligncenter size-full wp-image-1893" title="virtual-box-rede-2-interfaces" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg" alt="virtual-box-rede-2-interfaces" width="434" height="77" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg 434w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces-300x53.jpg 300w" sizes="(max-width: 434px) 100vw, 434px" /></p>
+<p style="text-align: justify;">A imagem acima é um pedaço da descrição de uma das minhas máquinas virtuais que rodam num virtualbox para windows. A idéia é a mesma tanto para windows quanto para linux. 😉</p>
+<p style="text-align: justify;"><strong>Curiosidade:</strong> Note que no windows o nome do adaptador de rede para o host-only é &#8220;VirtualBox Host-Only Ethernet Adapter&#8221; e no linux é &#8220;vboxnet0&#8221;.</p>
+<p style="text-align: justify;"><strong>Dica rápida: </strong>Se o seu virtualbox foi instalado pelo aptitude/synaptic do ubuntu (linux), certamente você possui uma versão velha e com poucos recursos&#8230; Sugiro baixar uma versão mais atual no site do <a title="http://www.virtualbox.org" href="http://www.virtualbox.org" target="_blank">virtualbox</a>.</p>
+<p style="text-align: justify;">Se conseguir uma outra solução, não deixe de compartilhar aqui! 🙂<br />Espero ter ajudado !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="1" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="2" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="3" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="4" data-poid="in-1106" data-post-type="none" ><small class="wp_rp_publish_date">02/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" class="wp_rp_title">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_1"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" data-text="VirtualBox: VMs com IPs estáticos e internet de maneira simples"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a>
+<script type="text/javascript"><!--
+if(wpa2a)wpa2a.script_load();
+//--></script>
+</div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/dhcp" rel="tag">dhcp</a><a href="https://rafaelbiriba.com/tag/host" rel="tag">host</a><a href="https://rafaelbiriba.com/tag/maquina" rel="tag">maquina</a><a href="https://rafaelbiriba.com/tag/nat" rel="tag">nat</a><a href="https://rafaelbiriba.com/tag/network" rel="tag">network</a><a href="https://rafaelbiriba.com/tag/rede" rel="tag">rede</a><a href="https://rafaelbiriba.com/tag/vbox" rel="tag">vbox</a><a href="https://rafaelbiriba.com/tag/vboxnet0" rel="tag">vboxnet0</a><a href="https://rafaelbiriba.com/tag/virtual" rel="tag">virtual</a><a href="https://rafaelbiriba.com/tag/virtualbox" rel="tag">virtualbox</a><a href="https://rafaelbiriba.com/tag/virtualizacao" rel="tag">virtualização</a><a href="https://rafaelbiriba.com/tag/vm" rel="tag">vm</a></span></footer></article><!-- #post-## -->
+	<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Navegação de posts</h1>
+		<div class="nav-links">
+			<a href="https://rafaelbiriba.com/2010/02/08/cloud-crowd-a-primeira-action.html" rel="prev"><span class="meta-nav">Post anterior</span>Cloud Crowd: A primeira action</a><a href="https://rafaelbiriba.com/2010/03/01/ffmpeg-converta-videos-para-iphone.html" rel="next"><span class="meta-nav">Próximo post</span>FFmpeg: converta vídeos para iPhone</a>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	<div id="fbSEOComments">	<fb:comments
+                                id='seoFacebookCommentsPlugin'
+								href='https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html'
+								num_posts='10'
+								colorscheme='light'
+								order_by=''></fb:comments></div><div id='fb-root'></div>
+                    <script>
+                            window.fbAsyncInit = function() {
+                                FB.init({
+                                  appId      : '589867447707428', // App ID
+                                  status     : true, // check login status
+                                  cookie     : true, // enable cookies to allow the server to access the session
+                                  xfbml      : true  // parse XFBML
+                                });
+                                // Additional initialization code here
+                              };
+                                //  Load the SDK Asynchronously
+                              (function(d){
+                                 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                                 if (d.getElementById(id)) {return;}
+                                 js = d.createElement('script'); js.id = id; js.async = true;
+                                 js.src = "//connect.facebook.net/pt_BR/all.js";
+                                 ref.parentNode.insertBefore(js, ref);
+                           }(document))
+                    </script>
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-1644">
+        <div id="dsq-comment-header-1644" class="dsq-comment-header">
+            <cite id="dsq-cite-1644">
+                <span id="dsq-author-user-1644">Sérgio Fugioka</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1644" class="dsq-comment-body">
+            <div id="dsq-comment-message-1644" class="dsq-comment-message"><p>Perfeito funcionou legal hehe muito obrigado&#8230;<br />
+adiciona ai para configurar o lado cliente&#8230; acho que alguns que vão ler irão ter duvidas como configurar a rede dentro da VM&#8230; estava com duvida e coloquei as 2 interfaces para receberem o ip dinamico(dhcp)&#8230;<br />
+muito bom artigo&#8230; está de parabéns&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-1645">
+        <div id="dsq-comment-header-1645" class="dsq-comment-header">
+            <cite id="dsq-cite-1645">
+                <a id="dsq-author-user-1645" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1645" class="dsq-comment-body">
+            <div id="dsq-comment-message-1645" class="dsq-comment-message"><p>Olá Sérgio,</p>
+<p>Fico feliz que tenha resolvido seu problema.<br />
+Obrigado pela visita e volte sempre !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-1701">
+        <div id="dsq-comment-header-1701" class="dsq-comment-header">
+            <cite id="dsq-cite-1701">
+                <a id="dsq-author-user-1701" href="http://codificando.com" target="_blank" rel="nofollow">Emerson Macedo</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1701" class="dsq-comment-body">
+            <div id="dsq-comment-message-1701" class="dsq-comment-message"><p>Rafael,</p>
+<p>Essas infos tem no manual PDF que você baixa no próprio site do VirtualBox. Ia te poupar um bom tempo de pesquisa hehehehe.</p>
+<p>Eu tb uso assim aqui em casa é realmente é muito bom.</p>
+<p>Abraços,</p>
+<p>Emerson</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-1705">
+        <div id="dsq-comment-header-1705" class="dsq-comment-header">
+            <cite id="dsq-cite-1705">
+                <a id="dsq-author-user-1705" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1705" class="dsq-comment-body">
+            <div id="dsq-comment-message-1705" class="dsq-comment-message"><p>Olá Emerson,</p>
+<p>Confesso que não olhei o manual mesmo não&#8230; Procurei pelo google, e não achei muita coisa a respeito,&#8230;</p>
+<p>Então arrumei uma maneira de resolver o problema, mesmo desconhecendo o manual =)</p>
+<p>Mas valeu a dica !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-1928">
+        <div id="dsq-comment-header-1928" class="dsq-comment-header">
+            <cite id="dsq-cite-1928">
+                <span id="dsq-author-user-1928">Thiago</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1928" class="dsq-comment-body">
+            <div id="dsq-comment-message-1928" class="dsq-comment-message"><p>Consegui fazer de outra forma&#8230;<br />
+Meu S.O é Windows 7 Ultimate e no VirtualBox(3.1.2) tenho o Ubuntu 9.04.Pois bem o que eu fiz foi desabilitar a placa de rede VirtualBox Host-Only Network que é instalada no Windows,na placa de rede nas configurações da VM coloquei como Bridge e selecionei a placa de rede que o host usa para acesso à internet.Na placa de rede da VM deixei como DHCP,mas é possível colocar IP fixo também,mas logicamente na mesma faixa de IP da placa de rede do Host.Não esquecendo que a dica postada por nosso amigo Rafael &#8220;Também é necessário desativar o DHCP do host-only (Vá em Arquivo &gt; Preferências &gt; Rede &gt; “Edite a Rede Virtual do Host-Only” &gt; “Na aba Servidor DHCP, desmarque a opção Habilitar Servidor”).&#8221; deve ser efetuada antes de tudo isso que eu fiz.<br />
+No mais esta funcionando perfeitamente.<br />
+Quem souber de mais outra forma avisa aqui para gente!</p>
+<p>Abraços!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-1930">
+        <div id="dsq-comment-header-1930" class="dsq-comment-header">
+            <cite id="dsq-cite-1930">
+                <a id="dsq-author-user-1930" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-1930" class="dsq-comment-body">
+            <div id="dsq-comment-message-1930" class="dsq-comment-message"><p>Olá Thiago,</p>
+<p>Utilizar o &#8220;Bridge&#8221; é uma opção sim. Ela geralmente pega um IP da mesma rede que a da máquina real&#8230;</p>
+<p>O problema em fazer isso, é que se a máquina real estiver desconectada da rede, as virtuais também ficarão desconectadas e portanto inacessíveis à um SSH local por exemplo&#8230;</p>
+<p>Mas valeu pela sugestão, é válida sim !</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-191913">
+        <div id="dsq-comment-header-191913" class="dsq-comment-header">
+            <cite id="dsq-cite-191913">
+                <span id="dsq-author-user-191913">Glauber</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-191913" class="dsq-comment-body">
+            <div id="dsq-comment-message-191913" class="dsq-comment-message"><p>Não consigo acessar o face afs</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2159">
+        <div id="dsq-comment-header-2159" class="dsq-comment-header">
+            <cite id="dsq-cite-2159">
+                <span id="dsq-author-user-2159">Paulo Diogo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2159" class="dsq-comment-body">
+            <div id="dsq-comment-message-2159" class="dsq-comment-message"><p>PERFEITO! tava precisando disso msm meu querido =D flw</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-2160">
+        <div id="dsq-comment-header-2160" class="dsq-comment-header">
+            <cite id="dsq-cite-2160">
+                <a id="dsq-author-user-2160" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2160" class="dsq-comment-body">
+            <div id="dsq-comment-message-2160" class="dsq-comment-message"><p>Que bom que serviu para você também&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-2539">
+        <div id="dsq-comment-header-2539" class="dsq-comment-header">
+            <cite id="dsq-cite-2539">
+                <a id="dsq-author-user-2539" href="http://www.flogao.com.brarnaldo23" target="_blank" rel="nofollow">Arnaldo</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2539" class="dsq-comment-body">
+            <div id="dsq-comment-message-2539" class="dsq-comment-message"><p>Boa tarde,<br />
+é pessoal o passo-a-passo aí acima vale a pena testar, pois aqui está funcionando de boa.<br />
+Minha máquina é um Win7 64bits, isntalei a MV VirtualBox e dentro um XP 64bits, estava com esse problema de não acessar a net. depois dessa mudança&#8230; tá só o GOLD :D.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-2540">
+        <div id="dsq-comment-header-2540" class="dsq-comment-header">
+            <cite id="dsq-cite-2540">
+                <a id="dsq-author-user-2540" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-2540" class="dsq-comment-body">
+            <div id="dsq-comment-message-2540" class="dsq-comment-message"><p>Que bom que serviu para você !</p>
+<p>Obrigado pela visita e volte sempre !</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-3516">
+        <div id="dsq-comment-header-3516" class="dsq-comment-header">
+            <cite id="dsq-cite-3516">
+                <span id="dsq-author-user-3516">Paulo Menezes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3516" class="dsq-comment-body">
+            <div id="dsq-comment-message-3516" class="dsq-comment-message"><p>Obrigado Rafael, ajudou pacas&#8230;..</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-3517">
+        <div id="dsq-comment-header-3517" class="dsq-comment-header">
+            <cite id="dsq-cite-3517">
+                <a id="dsq-author-user-3517" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3517" class="dsq-comment-body">
+            <div id="dsq-comment-message-3517" class="dsq-comment-message"><p>Fico feliz por você!</p>
+<p>Obrigado pela visita e volte sempre ! 😉</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3995">
+        <div id="dsq-comment-header-3995" class="dsq-comment-header">
+            <cite id="dsq-cite-3995">
+                <a id="dsq-author-user-3995" href="http://www.italofernandesss.blogspot.com" target="_blank" rel="nofollow">Italo Fernandes</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-3995" class="dsq-comment-body">
+            <div id="dsq-comment-message-3995" class="dsq-comment-message"><p>Cara vlw sua explicação!!!<br />
+Tava doido precisando de uma solução pra um artigo da faculdade e no último dia consegui resolver tudo com seu tuto aki e ainda de quebra aprendi como funciona tudo pra explicar na palestra. </p>
+<p>Um abraço ai e vlw.</p>
+<p>Italo Fernandes<br />
+Bacharelando em Sistemas de Informação &#8211; UFPB</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-4009">
+        <div id="dsq-comment-header-4009" class="dsq-comment-header">
+            <cite id="dsq-cite-4009">
+                <a id="dsq-author-user-4009" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4009" class="dsq-comment-body">
+            <div id="dsq-comment-message-4009" class="dsq-comment-message"><p>Que bom que gostou ! Como foi a apresentação ?</p>
+<p>Abraços e volte sempre&#8230;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-33958">
+        <div id="dsq-comment-header-33958" class="dsq-comment-header">
+            <cite id="dsq-cite-33958">
+                <a id="dsq-author-user-33958" href="http://1" target="_blank" rel="nofollow">tony</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33958" class="dsq-comment-body">
+            <div id="dsq-comment-message-33958" class="dsq-comment-message"><p>vc pode me ajudar remoto não to consiguindo configurar noip2 blz</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-4352">
+        <div id="dsq-comment-header-4352" class="dsq-comment-header">
+            <cite id="dsq-cite-4352">
+                <span id="dsq-author-user-4352">Lico</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4352" class="dsq-comment-body">
+            <div id="dsq-comment-message-4352" class="dsq-comment-message"><p>Olá estou precisando configurar o uma rede domestica estou usando o xp dentro do w7 como poderia faser isoo ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-4353">
+        <div id="dsq-comment-header-4353" class="dsq-comment-header">
+            <cite id="dsq-cite-4353">
+                <span id="dsq-author-user-4353">Lico</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4353" class="dsq-comment-body">
+            <div id="dsq-comment-message-4353" class="dsq-comment-message"><p>Olá estou precisando configurar o uma rede domestica estou usando o xp dentro do w7 como poderia faser isoo ? O tuto acima tambem pode funcionar ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-4354">
+        <div id="dsq-comment-header-4354" class="dsq-comment-header">
+            <cite id="dsq-cite-4354">
+                <a id="dsq-author-user-4354" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4354" class="dsq-comment-body">
+            <div id="dsq-comment-message-4354" class="dsq-comment-message"><p>O que exatamente você precisa, quando você diz rede domestica ? Se for apenas para a maquina virtual acessar a internet, a opção NAT resolve o seu problema ! </p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-4473">
+        <div id="dsq-comment-header-4473" class="dsq-comment-header">
+            <cite id="dsq-cite-4473">
+                <span id="dsq-author-user-4473">Wellington</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4473" class="dsq-comment-body">
+            <div id="dsq-comment-message-4473" class="dsq-comment-message"><p>Cara eu naum to conseguino conectar na minha vm,e eu to usano o Xp =/</p>
+<p>&#8230;jah tentei usar o Vmware..agora to usano esse mas memo assim naum consigo nem ao menos ver a cara do google na minha Vm</p>
+<p>Oq sera q pode tah acontecendo?</p>
+<p>T_T algem  me ajuda</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-4475">
+        <div id="dsq-comment-header-4475" class="dsq-comment-header">
+            <cite id="dsq-cite-4475">
+                <a id="dsq-author-user-4475" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4475" class="dsq-comment-body">
+            <div id="dsq-comment-message-4475" class="dsq-comment-message"><p>Olá Wellington,</p>
+<p>Não entendi direito uma coisa. A VM que você está tentando acessar está rodando no VMware server ou no Virtualbox ?<br />
+Esta rodando local no seu computador mesmo ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-4525">
+        <div id="dsq-comment-header-4525" class="dsq-comment-header">
+            <cite id="dsq-cite-4525">
+                <span id="dsq-author-user-4525">Márcio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4525" class="dsq-comment-body">
+            <div id="dsq-comment-message-4525" class="dsq-comment-message"><p>Opa! Vlw, funfou legal aki comigo, e a VM ainda acessa internet&#8230;.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-4527">
+        <div id="dsq-comment-header-4527" class="dsq-comment-header">
+            <cite id="dsq-cite-4527">
+                <a id="dsq-author-user-4527" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4527" class="dsq-comment-body">
+            <div id="dsq-comment-message-4527" class="dsq-comment-message"><p>Olá Marcio,<br />
+Que bom que conseguiu&#8230;<br />
+Obrigado pela visita e volte sempre !<br />
+Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-4555">
+        <div id="dsq-comment-header-4555" class="dsq-comment-header">
+            <cite id="dsq-cite-4555">
+                <span id="dsq-author-user-4555">Márcio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4555" class="dsq-comment-body">
+            <div id="dsq-comment-message-4555" class="dsq-comment-message"><p>Boa noite Rafael, através deste seu tutorail, consegui fazer com que as máquinas tanto a real como a virtual se comuniquem entre si, mas tenho um outro problema, é q to treinando Pentest nas máquinas e to usando sniffers como o Wireshark e Cain p/ interceptar pacotes gerado nas mákinas e os programas não estão conseguindo pegar os IPs das outras máquinas, só consegue pegar das máquinas em q o programa tá instalado, então, vc tem alguma dica de como solucionar este problema? Vlw abraço.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-4556">
+        <div id="dsq-comment-header-4556" class="dsq-comment-header">
+            <cite id="dsq-cite-4556">
+                <a id="dsq-author-user-4556" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4556" class="dsq-comment-body">
+            <div id="dsq-comment-message-4556" class="dsq-comment-message"><p>Olá Márcio,</p>
+<p>Neste caso, dependendo da rede que você estiver, habilite as VMs para subir as placas de rede no modo bridge, para que a VM tenha um ip real e válido de rede.</p>
+<p>Assim, se a configuração da rede permitir, se a sua maquina hospedeira tem o ip 192.168.0.1, a primeira vm deve pegar por dhcp o ip 192.168.0.2, e assim sucessivamente,&#8230;<br />
+Isso fará com que as vms se comuniquem entre si e entre a máquina hospedeira, pois todos são endereços válidos da rede.</p>
+<p>Faz um teste ai, depois me fala&#8230;<br />
+Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-4566">
+        <div id="dsq-comment-header-4566" class="dsq-comment-header">
+            <cite id="dsq-cite-4566">
+                <span id="dsq-author-user-4566">Wellington</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4566" class="dsq-comment-body">
+            <div id="dsq-comment-message-4566" class="dsq-comment-message"><p><a href="#comment-4475" rel="nofollow">@Rafael Biriba </a>  No virtual,e sim to usano pelo meu Pc mesmo!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-4568">
+        <div id="dsq-comment-header-4568" class="dsq-comment-header">
+            <cite id="dsq-cite-4568">
+                <a id="dsq-author-user-4568" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-4568" class="dsq-comment-body">
+            <div id="dsq-comment-message-4568" class="dsq-comment-message"><p>Wellington,<br />
+Poderia explicar melhor o seu problema ?<br />
+Se o virtualbox está instalado na sua máquina, porque não está conseguindo acessar as vms ?<br />
+Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-6299">
+        <div id="dsq-comment-header-6299" class="dsq-comment-header">
+            <cite id="dsq-cite-6299">
+                <span id="dsq-author-user-6299">Alan</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6299" class="dsq-comment-body">
+            <div id="dsq-comment-message-6299" class="dsq-comment-message"><p>Boa tarde.</p>
+<p>O solução que você encontrou para o problema realmente funciona, mas há uma maneira mais simples.<br />
+Com as máquinas virtuais em host-only, coloque o gateway delas apontando para o host. E no host compartilhe a internet:<br />
+iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE.</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-6300">
+        <div id="dsq-comment-header-6300" class="dsq-comment-header">
+            <cite id="dsq-cite-6300">
+                <a id="dsq-author-user-6300" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6300" class="dsq-comment-body">
+            <div id="dsq-comment-message-6300" class="dsq-comment-message"><p>Sua solução parece boa também, mas não sei se apenas adicionando regras no iptables resolve o problema de todos. Se você precisar cortar a rede local e deixar a vm na internet, então você terá que trocar o adaptador de rede, ao invés de apenas &#8220;desliga-lo&#8221;.</p>
+<p>Conseguiu entender ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7016">
+        <div id="dsq-comment-header-7016" class="dsq-comment-header">
+            <cite id="dsq-cite-7016">
+                <span id="dsq-author-user-7016">Rodolfo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7016" class="dsq-comment-body">
+            <div id="dsq-comment-message-7016" class="dsq-comment-message"><p>Rapaz parabéns pelo tutorial consegui instalar o Windows Server 2008 e outros sistemas, consegui eles se enchergarem na rede tudo perfeito, já estava quase me matando parabéns&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-7030">
+        <div id="dsq-comment-header-7030" class="dsq-comment-header">
+            <cite id="dsq-cite-7030">
+                <a id="dsq-author-user-7030" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7030" class="dsq-comment-body">
+            <div id="dsq-comment-message-7030" class="dsq-comment-message"><p>Olá Rodolfo,</p>
+<p>Que bom que conseguiu resolver seu problema&#8230;<br />
+Obrigado pela visita e volte sempre 😉</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7310">
+        <div id="dsq-comment-header-7310" class="dsq-comment-header">
+            <cite id="dsq-cite-7310">
+                <span id="dsq-author-user-7310">Rodolfo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7310" class="dsq-comment-body">
+            <div id="dsq-comment-message-7310" class="dsq-comment-message"><p>Rafael, não me lembro com fiz funcionar a rede, uma dúvida o servidor deixa um adptador com Nat ou hospedeira, nos host XP deixa com rede interna? no servidor 2008 posso criar um dominio, servidor dhcp dns, que vai funcionar normalmente a internet tambem, as configurações de ip tem que usar as que as placa de rede virtual recebe ou posso colocar qualquer faixa de IP?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-7346">
+        <div id="dsq-comment-header-7346" class="dsq-comment-header">
+            <cite id="dsq-cite-7346">
+                <a id="dsq-author-user-7346" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7346" class="dsq-comment-body">
+            <div id="dsq-comment-message-7346" class="dsq-comment-message"><p>Olá Rodolfo,<br />
+Não entendi muito bem sua pergunta.</p>
+<p>De qualquer forna, se você optar por NAT, sua máquina hospedeira e nenhuma outra VM conseguirá acessar.</p>
+<p>Com a rede interna, só haverá comunicação entre as vms e não com a máquina hospedeira&#8230;</p>
+<p>Poderia dividir a sua duvidas e tentar expressar melhor o que você está querendo fazer ??</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7367">
+        <div id="dsq-comment-header-7367" class="dsq-comment-header">
+            <cite id="dsq-cite-7367">
+                <span id="dsq-author-user-7367">Paulo Henrique</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7367" class="dsq-comment-body">
+            <div id="dsq-comment-message-7367" class="dsq-comment-message"><p>Kra, não consegui fazer isto funcionar da maneira que está aqui no tutorial não. Meu host é windows minha vm é o centos. Em modo Bridge eu consigo acesso a internet, porém não tem comunicação entre o host e a vm.<br />
+Não sei oq pode estar errado, a versão da minha vm eh 3.2.6!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-7449">
+        <div id="dsq-comment-header-7449" class="dsq-comment-header">
+            <cite id="dsq-cite-7449">
+                <a id="dsq-author-user-7449" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7449" class="dsq-comment-body">
+            <div id="dsq-comment-message-7449" class="dsq-comment-message"><p>Olá Paulo,<br />
+Você vai ter que usar 2 placas de rede. Uma em modo NAT que irá fornecer a conectividade com a internet e a outra em host-only que irá permitir a comunicação entre o host e a vm.</p>
+<p>Se no modo bridge não funcionou, provavelmente você não conseguiu pegar um IP válido. Provavelmente seu roteador não está permitindo o modo bridge da sua placa de rede.</p>
+<p>Tenta mais uma vez seguindo o passo a passo&#8230; Em qual parte você não conseguiu ou se enrolou ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7455">
+        <div id="dsq-comment-header-7455" class="dsq-comment-header">
+            <cite id="dsq-cite-7455">
+                <span id="dsq-author-user-7455">Paulo Henrique</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7455" class="dsq-comment-body">
+            <div id="dsq-comment-message-7455" class="dsq-comment-message"><p><a href="#comment-7449" rel="nofollow">@Rafael Biriba </a><br />
+Olá Rafael,</p>
+<p>Configurei a primeira placa em NAT, a segunda em Host-only, Desativei a opção de Servidor DHCP &#8211; &#8220;Habilitar Servidor&#8221;. Na V.M, configurei eth0 e eth1 para IP fixo e ainda assim não consegui o acesso. Também tentei com a eth0 em dhcp e também não deu certo.</p>
+<p>Não tive problemas em seguir o tutorial, será que pode ser a minha infra?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-7464">
+        <div id="dsq-comment-header-7464" class="dsq-comment-header">
+            <cite id="dsq-cite-7464">
+                <a id="dsq-author-user-7464" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7464" class="dsq-comment-body">
+            <div id="dsq-comment-message-7464" class="dsq-comment-message"><p>Olá <a href="#comment-7455" rel="nofollow">@Paulo Henrique</a>,</p>
+<p>Tente o seguinte:<br />
+Desative todas as placas de rede da VM. Depois habilite apenas uma no modo NAT&#8230; Deixe a vm tentar pegar o IP por DHCP&#8230;<br />
+Você deveria ter acesso a internet na vm&#8230;</p>
+<p>Depois habilite apenas com o Host-Only&#8230; Sua máquina (física) deve conseguir enxergar a VM, mas sem internet.</p>
+<p>Fazendo isso, você irá descobrir qual dos dois pontos não está funcionando, então poderemos arrumar.</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='https://rafaelbiriba.com/2011/01/07/retrospectiva-2010-recordar-e-viver.html' rel='external nofollow' class='url'>Retrospectiva 2010: Recordar é viver | Rafael Biriba Blog</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-7550">
+        <div id="dsq-comment-header-7550" class="dsq-comment-header">
+            <cite id="dsq-cite-7550">
+                <span id="dsq-author-user-7550">Rodolfo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7550" class="dsq-comment-body">
+            <div id="dsq-comment-message-7550" class="dsq-comment-message"><p>Achei uma saída, Windows Server 2008 2 adaptador de redes um com NAT, outro como REDE INTERNA, NAT você compartilha a internet para as estações, feito isso configure a placa interna com ip fixo, coloque o mesmo grupo tanto o servidor como as estações, desative o firewall do server e das estações, quando vc compartilha a internet, você pode deixar as estações com ip automaticamente que funciona, depois disso os computadores se enchergando, e só criar um dominio que funciona tambem, sem problemas&#8230;. Rafael aqui funciono obrigado, estou comprando um livro sobre o virtualbox abraço</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-7551">
+        <div id="dsq-comment-header-7551" class="dsq-comment-header">
+            <cite id="dsq-cite-7551">
+                <span id="dsq-author-user-7551">Rodolfo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7551" class="dsq-comment-body">
+            <div id="dsq-comment-message-7551" class="dsq-comment-message"><p>nas estações deixar só um adaptador de rede placa de rede interna..</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-7552">
+        <div id="dsq-comment-header-7552" class="dsq-comment-header">
+            <cite id="dsq-cite-7552">
+                <a id="dsq-author-user-7552" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7552" class="dsq-comment-body">
+            <div id="dsq-comment-message-7552" class="dsq-comment-message"><p>Olá Rodolfo,</p>
+<p>Valeu por compartilhar sua solução&#8230; Em breve estarei postando mais dicas sobre o virtualbox&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-8057">
+        <div id="dsq-comment-header-8057" class="dsq-comment-header">
+            <cite id="dsq-cite-8057">
+                <span id="dsq-author-user-8057">Luciano Parintins</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8057" class="dsq-comment-body">
+            <div id="dsq-comment-message-8057" class="dsq-comment-message"><p>Perfeita explicação, passei a tarde toda procurando alguma solução e no final dela acabei caindo aqui. =). Amanhã irei testar essa solução que pelo visto é a mais prática.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-even depth-1" id="dsq-comment-8085">
+        <div id="dsq-comment-header-8085" class="dsq-comment-header">
+            <cite id="dsq-cite-8085">
+                <a id="dsq-author-user-8085" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8085" class="dsq-comment-body">
+            <div id="dsq-comment-message-8085" class="dsq-comment-message"><p>Olá Luciano,<br />
+Que bom que pelo menos, depois de tanto trabalho, você conseguiu achar uma solução&#8230;<br />
+Mas e aí, funcionou direitinho ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-8173">
+        <div id="dsq-comment-header-8173" class="dsq-comment-header">
+            <cite id="dsq-cite-8173">
+                <span id="dsq-author-user-8173">Luciano Parintins</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8173" class="dsq-comment-body">
+            <div id="dsq-comment-message-8173" class="dsq-comment-message"><p><a href="#comment-8085" rel="nofollow">@Rafael Biriba </a><br />
+Funcionou sim. Valeu.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-8174">
+        <div id="dsq-comment-header-8174" class="dsq-comment-header">
+            <cite id="dsq-cite-8174">
+                <a id="dsq-author-user-8174" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8174" class="dsq-comment-body">
+            <div id="dsq-comment-message-8174" class="dsq-comment-message"><p><a href="#comment-8173" rel="nofollow">@Luciano Parintins </a><br />
+Que bom que conseguiu resolver o problema&#8230; =)</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-8230">
+        <div id="dsq-comment-header-8230" class="dsq-comment-header">
+            <cite id="dsq-cite-8230">
+                <span id="dsq-author-user-8230">Diego</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8230" class="dsq-comment-body">
+            <div id="dsq-comment-message-8230" class="dsq-comment-message"><p>Fala Rafael, muito bom o site.</p>
+<p>Não sei se estou desvirtuando o objetivo do tópico mas estou com uma dúvida.</p>
+<p>Quero colocar um servidor no ar (SVN) com VirtualBox. Mas pelo visto não está tendo comunicação do &#8220;mundo&#8221; externo com a minha VM.</p>
+<p>Qual modo você acha que devo usar?</p>
+<p>Lembrando.</p>
+<p>1 &#8211; Tenho no-ip na VM.<br />
+2 &#8211; Portas 443 abertas tanto no roteador como no windows e firewall desativado também.</p>
+<p>Está como NAT (pelo visto não tem comunicação externa).</p>
+<p>Já fez vez alguma coisa parecida utilizando VirtualBox como servidor para acesso externo?</p>
+<p>Abraço.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-8231">
+        <div id="dsq-comment-header-8231" class="dsq-comment-header">
+            <cite id="dsq-cite-8231">
+                <a id="dsq-author-user-8231" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8231" class="dsq-comment-body">
+            <div id="dsq-comment-message-8231" class="dsq-comment-message"><p>Para que você consiga acessar a vm, você precisa de um ip de rede válido.</p>
+<p>Você usa algum roteador ? Se sim, você precisa usar o modo bridge para pegar um ip real de rede. Depois disso no Roteador você precisa mapear as portas para esse ip. (Exemplo: Se sua vm tiver o ip  de rede 192.168.0.2 ,  você precisa dizer ao roteador que todo o acesso vindo pela porta 443 tem que ser jogada para o ip 192.168.0.2)</p>
+<p>Se você não tiver roteador, então pelo windows você precisa rotear a conexão, pois quando o windows receber acesso pela porta 443, ele tem que jogar para o ip da vm. Sendo assim você deve usar o modo Host-Only Adapter e fazer as configurações de roteamento pelo windows.</p>
+<p>Feito isso, você vai conseguir utilizar a vm via comunicação externa. </p>
+<p>Conseguiu entender ou precisa explicar melhor ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-8232">
+        <div id="dsq-comment-header-8232" class="dsq-comment-header">
+            <cite id="dsq-cite-8232">
+                <span id="dsq-author-user-8232">Diego</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8232" class="dsq-comment-body">
+            <div id="dsq-comment-message-8232" class="dsq-comment-message"><p>Caramba cara, respondeu rápido. ahuahuhua&#8230;</p>
+<p>Assim que chegar em casa vou fazer os testes.</p>
+<p>Vou colocar em modo bridge. Fiz o mapeamento no roteador para o meu IP da VM tudo certinho. Pelo que vi hoje é por causa que está NAT na VM. </p>
+<p>Qualquer dúvida posto aqui e se der certo posto a solução.</p>
+<p>Abraço.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-8233">
+        <div id="dsq-comment-header-8233" class="dsq-comment-header">
+            <cite id="dsq-cite-8233">
+                <a id="dsq-author-user-8233" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8233" class="dsq-comment-body">
+            <div id="dsq-comment-message-8233" class="dsq-comment-message"><p><a href="#comment-8232" rel="nofollow">@Diego </a><br />
+Ok, ficarei no aguardo&#8230;</p>
+<p>Boa sorte lá&#8230; Se precisar estou por aqui&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-8249">
+        <div id="dsq-comment-header-8249" class="dsq-comment-header">
+            <cite id="dsq-cite-8249">
+                <span id="dsq-author-user-8249">Diego</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8249" class="dsq-comment-body">
+            <div id="dsq-comment-message-8249" class="dsq-comment-message"><p>Fala Rafael,</p>
+<p>Deu certo cara, só troquei de NAT para bridge. Aqui vai a dica: Quando estava em NAT o modem não reconhecia a máquina virtual (nome do PC da máquina virtual) para colocar o IP. Só foi trocar que deu certo, abri a porta somente para a VM no modem. </p>
+<p>Agora só alegria. he he he.</p>
+<p>Abraço.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-8250">
+        <div id="dsq-comment-header-8250" class="dsq-comment-header">
+            <cite id="dsq-cite-8250">
+                <a id="dsq-author-user-8250" href="http://redes" target="_blank" rel="nofollow">Rodolfo</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8250" class="dsq-comment-body">
+            <div id="dsq-comment-message-8250" class="dsq-comment-message"><p>no virtualbox em modo NAT, apenas os pcs virtuais se enchergam o mundo externo fica fora, pelo meu conceito e apanhando bastante a melhor forma e a bridge, porque ela se comunica com o mundo virtual e externo ao mesmo tempo, só tome cuidado que depende do tanto de VMS que você cria, vai oculpando espaço no seu hd, então deixa uma partição boa para estudar so resto e tranquilo abraço</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-8257">
+        <div id="dsq-comment-header-8257" class="dsq-comment-header">
+            <cite id="dsq-cite-8257">
+                <span id="dsq-author-user-8257">Diego</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8257" class="dsq-comment-body">
+            <div id="dsq-comment-message-8257" class="dsq-comment-message"><p>Rafael, que tema você usou nesse site? Quero criar um para ajudar a galera também.</p>
+<p>Abraço.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-8258">
+        <div id="dsq-comment-header-8258" class="dsq-comment-header">
+            <cite id="dsq-cite-8258">
+                <a id="dsq-author-user-8258" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8258" class="dsq-comment-body">
+            <div id="dsq-comment-message-8258" class="dsq-comment-message"><p><a href="#comment-8257" rel="nofollow">@Diego </a><br />
+Que bom que resolveu seu problema 😉</p>
+<p>Não lembro o nome do meu tema, mas busca no site do <a href="http://www.neoease.com/" rel="nofollow">http://www.neoease.com/</a> que você vai achar 😉</p>
+<p>Abraços e boa sorte na criação do seu tema&#8230; Quando terminar passa aí para divulgar&#8230; Se ficar muito bom, talvez eu possa aplicar aqui no blog :p</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-8259">
+        <div id="dsq-comment-header-8259" class="dsq-comment-header">
+            <cite id="dsq-cite-8259">
+                <a id="dsq-author-user-8259" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8259" class="dsq-comment-body">
+            <div id="dsq-comment-message-8259" class="dsq-comment-message"><p><a href="#comment-8250" rel="nofollow">@Rodolfo </a><br />
+Vamos dividir o seu comentário por partes&#8230;</p>
+<p>Primeiro ponto:<br />
+Você tá confundindo NAT com a rede interna de vms do virtualbox&#8230; O NAT apenas é um mapeamento de um ip temporário para que sua vm possa acessar a internet da máquina hospedeira (Fiz o teste aqui com 2 vms usando NAT, elas pegaram o mesmo ip. Algo tipo 10.02.15).<br />
+Se você escolher a opção rede interna, aí sim, elas vão ter ips internos validos e você vai poder conversar entre elas e não com a máquina hospedeira&#8230; </p>
+<p>Segundo ponto:<br />
+Criar vms não ocupam espaço, o que ocupa o espaço são os discos das vms&#8230; Quando você for criar um disco novo, escolha a opcão de expansão dinâmica, assim mesmo se você escolher 20 GB de espaço, no inicio ele vai ocupar muito menos&#8230; Ele vai ocupando espaço sob demanda, sendo assim você pode ter várias vms sem problemas. O problema vai ser quando esses discos das vms começarem a encher 😉</p>
+<p>Mesmo assim, muito obrigado por participar comentando no post. Você conseguiu entender ? Se quiser posso explicar de uma outra forma&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-8938">
+        <div id="dsq-comment-header-8938" class="dsq-comment-header">
+            <cite id="dsq-cite-8938">
+                <a id="dsq-author-user-8938" href="http://gwdsolutions.com.br" target="_blank" rel="nofollow">Dany Anderson</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8938" class="dsq-comment-body">
+            <div id="dsq-comment-message-8938" class="dsq-comment-message"><p>Boa tarde Rafael,</p>
+<p>Muito bacana suas materias, meus parabéns! 😀</p>
+<p>Cara, me dá um hell se puder&#8230;instalei o VirtualBox no Linux, segui um de seus materiais para criar a VM porém agora não sei como acessá-la.</p>
+<p>Como eu faria isso quando a VM está instalada no Linux? Qual interface gráfica eu usaria para administrar as VMs?!</p>
+<p>Desde já agradeço.</p>
+<p>Dany Anderson</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-8943">
+        <div id="dsq-comment-header-8943" class="dsq-comment-header">
+            <cite id="dsq-cite-8943">
+                <a id="dsq-author-user-8943" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8943" class="dsq-comment-body">
+            <div id="dsq-comment-message-8943" class="dsq-comment-message"><p><a href="#comment-8938" rel="nofollow">@Dany Anderson </a><br />
+Você está rodando um linux sem interface gráfica ?</p>
+<p>Você não consegue iniciar a vm utilizando o vboxmanage ? Segue o link:<br />
+<a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" rel="nofollow">https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9357">
+        <div id="dsq-comment-header-9357" class="dsq-comment-header">
+            <cite id="dsq-cite-9357">
+                <span id="dsq-author-user-9357">cintia</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-9357" class="dsq-comment-body">
+            <div id="dsq-comment-message-9357" class="dsq-comment-message"><p>olha tem um problema com meu msn ,pois não consigo ligar minha web cam ,ou estar indisponivel  , quando mando minha chamada de video ou,quando envio minha imagem  de web cam,,,aparece que a pessoa reijeitou meu convite,mas na verdade  é que o convite nem chega pra outra pessoa.já tentei configurar em ferramenta ,mas não consigo ligar,por favor me de uma solução.ficarei grata,obrigado</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-even depth-1" id="dsq-comment-9398">
+        <div id="dsq-comment-header-9398" class="dsq-comment-header">
+            <cite id="dsq-cite-9398">
+                <a id="dsq-author-user-9398" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-9398" class="dsq-comment-body">
+            <div id="dsq-comment-message-9398" class="dsq-comment-message"><p>Olá <a href="#comment-9357" rel="nofollow">@cintia</a>,</p>
+<p>Você consegue usar a webcam em algum outro lugar ? Ela funciona direito ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9686">
+        <div id="dsq-comment-header-9686" class="dsq-comment-header">
+            <cite id="dsq-cite-9686">
+                <span id="dsq-author-user-9686">FERNANDO TANDELI</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-9686" class="dsq-comment-body">
+            <div id="dsq-comment-message-9686" class="dsq-comment-message"><p>ola ,,, gostaria que me tirasse uma duvida , tenho seven ultimate no pc real e o xp sp3 na maquina virtual , minha conexão é via radio e me pede loguin e senha toda vez que eu vou conectar ,,, conecto normal no pc real , mais quando vou conectar na vb tambem pede loguim e senha ,,dai coloco  o mesmo loguim e mesma senha , mais da uma mensagem do meu servidor dizendo que não posso conectar dois usuarios com o mesmo ip ,,,o que eu faço ,,por favor me ajude !!!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-9746">
+        <div id="dsq-comment-header-9746" class="dsq-comment-header">
+            <cite id="dsq-cite-9746">
+                <a id="dsq-author-user-9746" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-9746" class="dsq-comment-body">
+            <div id="dsq-comment-message-9746" class="dsq-comment-message"><p>Olá Fernando,</p>
+<p>Já tentou colocar a interface de rede em modo NAT ?</p>
+<p>Depois de se logar na máquina física, usando a interface NAT, deveria ser possível acessar a internet pela sua VM.</p>
+<p>Faça um teste e depois volta aqui para dizer se funcionou ;P</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='http://planeta-globo.com/2011/01/07/retrospectiva-2010-recordar-e-viver-2/' rel='external nofollow' class='url'>Retrospectiva 2010: Recordar é viver | Planeta Globo.com</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='http://planeta-globo.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm-2/' rel='external nofollow' class='url'>VirtualBox 3: Aumentando o tamanho do disco virtual da VM | Planeta Globo.com</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-14566">
+        <div id="dsq-comment-header-14566" class="dsq-comment-header">
+            <cite id="dsq-cite-14566">
+                <span id="dsq-author-user-14566">luca</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-14566" class="dsq-comment-body">
+            <div id="dsq-comment-message-14566" class="dsq-comment-message"><p>Tutorial muito bom, deu certo pra mim também. Já estava tentando a um tempão e não encontrava nada relevante.<br />
+Muito Obrigado.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-14623">
+        <div id="dsq-comment-header-14623" class="dsq-comment-header">
+            <cite id="dsq-cite-14623">
+                <a id="dsq-author-user-14623" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-14623" class="dsq-comment-body">
+            <div id="dsq-comment-message-14623" class="dsq-comment-message"><p>Que bom que conseguiu resolver o problema&#8230;</p>
+<p>Obrigado pela visita e volte sempre&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-17110">
+        <div id="dsq-comment-header-17110" class="dsq-comment-header">
+            <cite id="dsq-cite-17110">
+                <span id="dsq-author-user-17110">Adriano</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-17110" class="dsq-comment-body">
+            <div id="dsq-comment-message-17110" class="dsq-comment-message"><p>Opa, valeu amigo, estava quebrando a cabeça com isso e era tão simples&#8230; 😀</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-17848">
+        <div id="dsq-comment-header-17848" class="dsq-comment-header">
+            <cite id="dsq-cite-17848">
+                <a id="dsq-author-user-17848" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-17848" class="dsq-comment-body">
+            <div id="dsq-comment-message-17848" class="dsq-comment-message"><p>Obrigado pela visita e volte sempre 😉</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-17836">
+        <div id="dsq-comment-header-17836" class="dsq-comment-header">
+            <cite id="dsq-cite-17836">
+                <span id="dsq-author-user-17836">André</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-17836" class="dsq-comment-body">
+            <div id="dsq-comment-message-17836" class="dsq-comment-message"><p>Amigo, eu rodo um jogo Chamado Metin2 onde eu emulava ele no meu pc pelo virtual pc ou virtual box usando um loopback e o ip no sysintall era do loopback. Agora eu aluguei um host onde veio com 1 ip publico 1 ip private e 1 ip do virtual box  entao nao consigo colocar para funcionar de jeito nenhum o meu servidor&#8230; saberia qual configuração eu teno que fazer e qual ip eu colocaria no sysintal.. pq tem ipv4 padrao e ipv4 getway que tem que terminar com 100 isso está me pegando e nao consigo montar =/ agradeço desde já =D</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-17847">
+        <div id="dsq-comment-header-17847" class="dsq-comment-header">
+            <cite id="dsq-cite-17847">
+                <a id="dsq-author-user-17847" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-17847" class="dsq-comment-body">
+            <div id="dsq-comment-message-17847" class="dsq-comment-message"><p>Olá,</p>
+<p>Já tentou ver na documentação do jogo ?</p>
+<p>Consegue descrever melhor o problema ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-18163">
+        <div id="dsq-comment-header-18163" class="dsq-comment-header">
+            <cite id="dsq-cite-18163">
+                <span id="dsq-author-user-18163">Andre</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18163" class="dsq-comment-body">
+            <div id="dsq-comment-message-18163" class="dsq-comment-message"><p>Ola amigo Rafael, eu fiz todos os passos que vc ensina, porem nao sei como configurar esta parte &#8220;Feito isso, inicie a VM e atribua um IP fixo para a interface que utiliza o host-only…&#8221; e por mais que eu tente nao conecta ao jogo.. que é em vhd  se possivel for tem como vc me adicionar no msn ? pq ja vai fazer um mes de dedicado pago ( 300 reais) e ainda nao consegui colocar o jogo online ou seja to perdendo dinheiro.. tem como me ajudar? desde ja agradeço.</p>
+<p>E parabens pelo belo trabalho feito neste blog.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-18188">
+        <div id="dsq-comment-header-18188" class="dsq-comment-header">
+            <cite id="dsq-cite-18188">
+                <a id="dsq-author-user-18188" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18188" class="dsq-comment-body">
+            <div id="dsq-comment-message-18188" class="dsq-comment-message"><p>O Host-Only é a comunicação da maquina fisica com a máquina virtual&#8230; Voce precisa atribuir um ip manualmente a essa interface de rede para estabelecer a comunicação&#8230;</p>
+<p>De uma olhada no Google sobre &#8220;atribuindo um ip ao dispositivo de rede&#8221; ou algo assim para entender melhor sobre o assunto&#8230;</p>
+<p>Quanto ao seu problema em geral, porque nao tenta contratar alguem com alguma experiencia na instalação desse jogo, para que você não desperdice dinheiro ??</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-18572">
+        <div id="dsq-comment-header-18572" class="dsq-comment-header">
+            <cite id="dsq-cite-18572">
+                <span id="dsq-author-user-18572">jo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18572" class="dsq-comment-body">
+            <div id="dsq-comment-message-18572" class="dsq-comment-message"><p>Segui o tuto. Em &#8220;conexões de redes&#8221; no windows(maquina real) configurei o adaptador de rede virtual com um ip fixo 192.168.10.5 e, na maquina virtual ubuntu um ip na mesma faixa de rede &#8220;mas não o mesmo&#8221; com um &#8220;sudo ifconfig eth5 inet 192.168.10.6&#8221; e ficou funcionando blz.<br />
+Só fiquei com uma dúvida: Como faço a interface eth5 iniciar com esse ip sempre que a maquina virtual for reiniciada?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-18574">
+        <div id="dsq-comment-header-18574" class="dsq-comment-header">
+            <cite id="dsq-cite-18574">
+                <a id="dsq-author-user-18574" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18574" class="dsq-comment-body">
+            <div id="dsq-comment-message-18574" class="dsq-comment-message"><p>Olá Jo,</p>
+<p>De uma olhada no Google para saber como configurar corretamente no ubuntu, mas o arquivo que voce precisa mexer para definir um ip estático é o /etc/network/interfaces</p>
+<p>De uma olhada neste link:<br />
+<a href="http://www.howtogeek.com/howto/ubuntu/change-ubuntu-server-from-dhcp-to-a-static-ip-address/" rel="nofollow">http://www.howtogeek.com/howto/ubuntu/change-ubuntu-server-from-dhcp-to-a-static-ip-address/</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-18780">
+        <div id="dsq-comment-header-18780" class="dsq-comment-header">
+            <cite id="dsq-cite-18780">
+                <span id="dsq-author-user-18780">Jorge</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18780" class="dsq-comment-body">
+            <div id="dsq-comment-message-18780" class="dsq-comment-message"><p>É possivel configurar uma VPN no virtualBox (WinXP)??</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-18799">
+        <div id="dsq-comment-header-18799" class="dsq-comment-header">
+            <cite id="dsq-cite-18799">
+                <a id="dsq-author-user-18799" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18799" class="dsq-comment-body">
+            <div id="dsq-comment-message-18799" class="dsq-comment-message"><p>Sim é possível.<br />
+Depois de fazer todos esses passos para colocar a internet na VM, siga os passos que encontrei nesse blog:</p>
+<p><a target="_blank" href="http://www.passoapasso.info/informatica/windows/criando-vpn-com-windows-xp-servidor.html" rel="nofollow">http://www.passoapasso.info/informatica/windows/criando-vpn-com-windows-xp-servidor.html</a></p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-18959">
+        <div id="dsq-comment-header-18959" class="dsq-comment-header">
+            <cite id="dsq-cite-18959">
+                <span id="dsq-author-user-18959">Diego</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-18959" class="dsq-comment-body">
+            <div id="dsq-comment-message-18959" class="dsq-comment-message"><p>opa !<br />
+Rafael kra fiz tudo q ta no seu tutorial, mas não consegui o que queria, afinal nem sei se to postando no lugar certo, caso não seja péço desculpas.<br />
+eu gostaria de configurar ip diferente em cada VM<br />
+eu tenho duas vms uma com Win xp sp2 e outra com o Backtrack 5 gostadia de colocar ips diferentes em ambas para realizar ataques por exploit da vm BackTrack na VM alvo Win xp sp2,<br />
+queria algo como por exemplo:</p>
+<p>IP REAL&gt; 187.39.113.59<br />
+VM 1&gt; 187.39.113.60<br />
+VM 2&gt; 187.39.113.58</p>
+<p>só quero uma maneira de mudar o ip da VM, só isso,<br />
+ja olhei em varios tópicos e pesquisei bastante mas não encontro a solução, espero q vc possa me ajudar 🙂<br />
+tentei me expressar o melhor possivel espero q vc entenda minha pergunta =) Obrigado !</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-19021">
+        <div id="dsq-comment-header-19021" class="dsq-comment-header">
+            <cite id="dsq-cite-19021">
+                <a id="dsq-author-user-19021" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19021" class="dsq-comment-body">
+            <div id="dsq-comment-message-19021" class="dsq-comment-message"><p>Olá Diego,</p>
+<p>O ip real que você informou, é um ip de internet&#8230; Não tem como suas VMs pegarem ips validos para a internet&#8230;</p>
+<p>O que voce pode fazer é configurar as interfaces para o modo bridge e com isso terá ips internos válidos e poderá fazer seus testes&#8230;</p>
+<p>Abraços.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-19557">
+        <div id="dsq-comment-header-19557" class="dsq-comment-header">
+            <cite id="dsq-cite-19557">
+                <span id="dsq-author-user-19557">Julio Cezar</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19557" class="dsq-comment-body">
+            <div id="dsq-comment-message-19557" class="dsq-comment-message"><p>Rafael, Obrigado pelo tutorial.<br />
+Aki em casa eu tenho Win7 Ultimate 64Bits.<br />
+Preciso de uma Maquina com S.O Diferente para testar Servidores e WebSites.<br />
+Consigo usar Internet na minha VM em modo NAT.<br />
+so que o IP de Rede dela fica igual IP de rede da minha maquina fisica.<br />
+Se eu coloco modo bridge, minha VM nao conecta a Internet.<br />
+fiz o seu teste e mesmo assim nao funcionou.<br />
+Espero uma respostar Ancioso. Des de já Obrigado!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-19581">
+        <div id="dsq-comment-header-19581" class="dsq-comment-header">
+            <cite id="dsq-cite-19581">
+                <a id="dsq-author-user-19581" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19581" class="dsq-comment-body">
+            <div id="dsq-comment-message-19581" class="dsq-comment-message"><p>Voce tentou habilitar 2 interfaces de rede ao mesmo tempo como eu faço no post ?</p>
+<p>Ainda sim não funcionou ??</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-3" id="dsq-comment-19644">
+        <div id="dsq-comment-header-19644" class="dsq-comment-header">
+            <cite id="dsq-cite-19644">
+                <span id="dsq-author-user-19644">Julio Cezar</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19644" class="dsq-comment-body">
+            <div id="dsq-comment-message-19644" class="dsq-comment-message"><p>Sim, Mesmo assim nao criou um Ip Diferente. Ao menos conecto a Internet!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-4" id="dsq-comment-19645">
+        <div id="dsq-comment-header-19645" class="dsq-comment-header">
+            <cite id="dsq-cite-19645">
+                <span id="dsq-author-user-19645">Julio Cezar</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19645" class="dsq-comment-body">
+            <div id="dsq-comment-message-19645" class="dsq-comment-message"><p>NAO DEU CETO! =S</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-19593">
+        <div id="dsq-comment-header-19593" class="dsq-comment-header">
+            <cite id="dsq-cite-19593">
+                <span id="dsq-author-user-19593">spertnez</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19593" class="dsq-comment-body">
+            <div id="dsq-comment-message-19593" class="dsq-comment-message"><p>Ola,</p>
+<p>estou tendo um problema e acredito que sua dica vai resolver, porém não estou conseguindo.<br />
+Fiz a instalação de um Windows XP no Virtual Box e quero ingressa-lo em um dominio. Mas, não consigo nem pingar no servidor.</p>
+<p>Criei tenho os dois adaptadores o primeiro como NAT e o segundo com IP fixo que aponta para &#8220;minha rede&#8221; com o endereço de dns.</p>
+<p>Mesmo assim não esta rolando. Em Arquivo &#8211;&gt; Preferencia &#8211;&gt; Rede qual o endereço que coloco em Ipv4? Não sei se é nesta parte que estou errando.</p>
+<p>Desde já agradeço pelas dicas vejo que conseguiu ajudar muitas pessoas.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-19594">
+        <div id="dsq-comment-header-19594" class="dsq-comment-header">
+            <cite id="dsq-cite-19594">
+                <a id="dsq-author-user-19594" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19594" class="dsq-comment-body">
+            <div id="dsq-comment-message-19594" class="dsq-comment-message"><p>Com a primeira interface em modo NAT, a internet da VM funciona corretamente ?</p>
+<p>Na segunda interface (host-only):<br />
+O VBox levanta uma &#8220;placa de rede&#8221; em seu pc real para se comunicar com as vms&#8230; você tem que ver no VirtualBox com o IP que ele configurou e então na VM voce deve atribuir um outro ip mas no mesmo range de ip..</p>
+<p>Conseguiu entender mais ou menos ?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-3" id="dsq-comment-19615">
+        <div id="dsq-comment-header-19615" class="dsq-comment-header">
+            <cite id="dsq-cite-19615">
+                <span id="dsq-author-user-19615">spertnez</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19615" class="dsq-comment-body">
+            <div id="dsq-comment-message-19615" class="dsq-comment-message"><p>A internet funciona com a primeira Interface em NAT sim.</p>
+<p>No meu micro real a VM levantou duas placas de rede, ambas com conectividade nula e com ip 169.254&#8230;.</p>
+<p>Na maquina virtual também há duas interfaces, a NAT pegando ip na faixa de 10.0.2.15 e a segunda 169.254&#8230;.</p>
+<p>Pelo que entendi a interface da Maquina Virtual (sem ser a NAT) é a que vai comunicar com a interface do micro real, é isso mesmo?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-4" id="dsq-comment-19616">
+        <div id="dsq-comment-header-19616" class="dsq-comment-header">
+            <cite id="dsq-cite-19616">
+                <a id="dsq-author-user-19616" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19616" class="dsq-comment-body">
+            <div id="dsq-comment-message-19616" class="dsq-comment-message"><p>Sim é isso mesmo&#8230; Setando o ip no range 169.254.*.*, você consegue por exemplo pingar a vm ?? </p>
+<p>(Considerando que será usado essa placa de rede do VBox)</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-5" id="dsq-comment-19849">
+        <div id="dsq-comment-header-19849" class="dsq-comment-header">
+            <cite id="dsq-cite-19849">
+                <span id="dsq-author-user-19849">spertnez</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19849" class="dsq-comment-body">
+            <div id="dsq-comment-message-19849" class="dsq-comment-message"><p>Cara,</p>
+<p>posso dizer que deu certo. Na verdade consigo pingar agora no servidor e vice e versa, testei na rede do meu serviço e lá consegui adicionar a Maquina Virtual no domínio.<br />
+Só não estou conseguindo adicionar na minha rede em casa por problemas com o servidor DNS que ainda não descobri, mas isso é outra história.</p>
+<p>Sua dica esta perfeita e funciona!<br />
+Obrigado mais uma vez e pode ter certeza que sua disposição ajuda muita gente.</p>
+<p>Abraço.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-19658">
+        <div id="dsq-comment-header-19658" class="dsq-comment-header">
+            <cite id="dsq-cite-19658">
+                <span id="dsq-author-user-19658">Julio Cezar</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19658" class="dsq-comment-body">
+            <div id="dsq-comment-message-19658" class="dsq-comment-message"><p>Rafael, Obrigado pelo tutorial.<br />
+Aki em casa eu tenho Win7 Ultimate 64Bits.<br />
+Preciso de uma Maquina com S.O Diferente para testar Servidores e WebSites.<br />
+Consigo usar Internet na minha VM em modo NAT.<br />
+so que o IP de Rede dela fica igual IP de rede da minha maquina fisica.<br />
+Se eu coloco modo bridge, minha VM nao conecta a Internet.<br />
+fiz o seu teste e mesmo assim nao funcionou.<br />
+Espero uma respostar Ancioso. Des de já Obrigado!<br />
+AGORA QUANDO TENTO COLOCAR BRIDGE EM MODO HOST ONLY DA ERRO!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-19662">
+        <div id="dsq-comment-header-19662" class="dsq-comment-header">
+            <cite id="dsq-cite-19662">
+                <a id="dsq-author-user-19662" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19662" class="dsq-comment-body">
+            <div id="dsq-comment-message-19662" class="dsq-comment-message"><p>Quando voce coloca a placa em host-only ela fica com o mesmo ip da maquina fisica ??</p>
+<p>Ja tentou trocar o final do ip e ver se voce consegue comunicação entre a maquina fisica e a maquina virtual ??</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-19663">
+        <div id="dsq-comment-header-19663" class="dsq-comment-header">
+            <cite id="dsq-cite-19663">
+                <span id="dsq-author-user-19663">Julio Cezar</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19663" class="dsq-comment-body">
+            <div id="dsq-comment-message-19663" class="dsq-comment-message"><p>me add no msn ai pf<br />
+msn: <a href="mailto:julio22ro@hotmail.com">julio22ro@hotmail.com</a></p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-3" id="dsq-comment-19664">
+        <div id="dsq-comment-header-19664" class="dsq-comment-header">
+            <cite id="dsq-cite-19664">
+                <a id="dsq-author-user-19664" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-19664" class="dsq-comment-body">
+            <div id="dsq-comment-message-19664" class="dsq-comment-message"><p>Adicionado 😉</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-20076">
+        <div id="dsq-comment-header-20076" class="dsq-comment-header">
+            <cite id="dsq-cite-20076">
+                <span id="dsq-author-user-20076">Victor Guedes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20076" class="dsq-comment-body">
+            <div id="dsq-comment-message-20076" class="dsq-comment-message"><p>Valeu pelo tutorial Rafael, mas ainda estou com um probleminha.<br />
+Estou utilizando a última versão 4.1.2r73507 e me deparando com o seguinte problema, consigo conexão com a internet na VM, consigo acesso ao host pela VM, mas não consigo acesso da VM com o host. Alguém com o mesmo problema? O que você sugere fazer?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-20574">
+        <div id="dsq-comment-header-20574" class="dsq-comment-header">
+            <cite id="dsq-cite-20574">
+                <a id="dsq-author-user-20574" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20574" class="dsq-comment-body">
+            <div id="dsq-comment-message-20574" class="dsq-comment-message"><p>Meio complicado esse problema&#8230; O Host tem acesso a VM, mas a VM não tem acesso ao host, é isso ?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-20577">
+        <div id="dsq-comment-header-20577" class="dsq-comment-header">
+            <cite id="dsq-cite-20577">
+                <span id="dsq-author-user-20577">Victor Guedes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-20577" class="dsq-comment-body">
+            <div id="dsq-comment-message-20577" class="dsq-comment-message"><p>O inverso disto&#8230; quando logado na VM consigo acesso aos arquivos da máquina&#8230; agora quando tento acessar o banco de dados instalado na VM não consigo.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-21175">
+        <div id="dsq-comment-header-21175" class="dsq-comment-header">
+            <cite id="dsq-cite-21175">
+                <span id="dsq-author-user-21175">Wellington monteiro</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21175" class="dsq-comment-body">
+            <div id="dsq-comment-message-21175" class="dsq-comment-message"><p>meu tem alguma video aula ensinando por net no virtualbox???<br />
+pq minha net nao er a cabo e do meu vizinho e nao consigo entra na net ~~<br />
+se haver alguma video aula me mandem o link plz</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-21295">
+        <div id="dsq-comment-header-21295" class="dsq-comment-header">
+            <cite id="dsq-cite-21295">
+                <a id="dsq-author-user-21295" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21295" class="dsq-comment-body">
+            <div id="dsq-comment-message-21295" class="dsq-comment-message"><p>Infelizmente não tenho&#8230; Qual seria a sua dificuldade ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-21743">
+        <div id="dsq-comment-header-21743" class="dsq-comment-header">
+            <cite id="dsq-cite-21743">
+                <span id="dsq-author-user-21743">Nfernandes</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21743" class="dsq-comment-body">
+            <div id="dsq-comment-message-21743" class="dsq-comment-message"><p>boas</p>
+<p>estou usando o virtual box e estou maravilhado mas tenho um problema não consigo usar a porta de comunicação com 1.</p>
+<p>a utilização desta porta é obrigatoria por questoes profissionais.</p>
+<p>ja tentei varias coisas conforme descrito no foruns e até agora não surgio efeito.<br />
+o que me suprende é que todas as portas usb funcionam e tudo o resto funciona.</p>
+<p>obrigado</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-22627">
+        <div id="dsq-comment-header-22627" class="dsq-comment-header">
+            <cite id="dsq-cite-22627">
+                <span id="dsq-author-user-22627">Michel Hespanha</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-22627" class="dsq-comment-body">
+            <div id="dsq-comment-message-22627" class="dsq-comment-message"><p>Ola Rafael, cara excelente documentário,  ta de parabens.</p>
+<p>Estou com a seguinte duvida, tenho o virtualbox intalado no ubuntu 11.04, com as seguintes VM&#8217;s, sever 2003 e XP, no server 2003 tem os seguintes serviços = Ad, Dhcp e Dns. Configurei as interfaces devidamente, consigo fazer com que a maquina XP receba o DHCP do meu server 2003, a maquina XP ja esta logada no dominio 2003, mas eu queria saber se a a possibilidade dessa maquina que esta instalada o virtualbox  (ubuntu 11.04), atravez da placa de rede fisica dela passasse o Dhcp pra minha Swith, e com isso todas as maquinas de minha empresa logassem no meu Dominio 2003 server Dentro do Virtualbox&#8230;.</p>
+<p>Pois ja tentei, e nao conseguir.</p>
+<p>Apenas a maquina Host (Ubuntu 11.04), a placa de rede fisica eth0 recebe o Dhcp do 2003 server, mas nao consigo que atravez da eth0 ifisica do Ubuntu, passasse dhcp para meu Swith,</p>
+<p>Desde ja Obrigado!!</p>
+<p>Atenciosamente.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-24051">
+        <div id="dsq-comment-header-24051" class="dsq-comment-header">
+            <cite id="dsq-cite-24051">
+                <span id="dsq-author-user-24051">Ricardo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-24051" class="dsq-comment-body">
+            <div id="dsq-comment-message-24051" class="dsq-comment-message"><p>Muito bom tutorial. Fiz aqui e deu certo.<br />
+Obrigado!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor even thread-odd thread-alt depth-1" id="dsq-comment-24085">
+        <div id="dsq-comment-header-24085" class="dsq-comment-header">
+            <cite id="dsq-cite-24085">
+                <a id="dsq-author-user-24085" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-24085" class="dsq-comment-body">
+            <div id="dsq-comment-message-24085" class="dsq-comment-message"><p>Que bom&#8230;<br />
+Obrigado pela visita e volte sempre 😉</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-24316">
+        <div id="dsq-comment-header-24316" class="dsq-comment-header">
+            <cite id="dsq-cite-24316">
+                <span id="dsq-author-user-24316">brei ricofoball</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-24316" class="dsq-comment-body">
+            <div id="dsq-comment-message-24316" class="dsq-comment-message"><p>maquina real xp, virtual xp ficou filé até mostra lá o problema agora é os linux da vm&#8230;</p>
+<p>tem que configurar na unha né&#8230;<br />
+muito bom kara ajudou muito agora testar os linux para vê</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-24347">
+        <div id="dsq-comment-header-24347" class="dsq-comment-header">
+            <cite id="dsq-cite-24347">
+                <span id="dsq-author-user-24347">brei ricofoball</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-24347" class="dsq-comment-body">
+            <div id="dsq-comment-message-24347" class="dsq-comment-message"><p>o rafael poxa funcionou só demanhã aqui, fui trampar quando voltei nao funcionava mais porque será?</p>
+<p>&#8230; na maquina real aqui passava o languard detectava as vm.s agora parou o ip delas só fica 10.0.2.15</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-24348">
+        <div id="dsq-comment-header-24348" class="dsq-comment-header">
+            <cite id="dsq-cite-24348">
+                <a id="dsq-author-user-24348" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-24348" class="dsq-comment-body">
+            <div id="dsq-comment-message-24348" class="dsq-comment-message"><p>Já tentou refazer o procedimento ?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-24375">
+        <div id="dsq-comment-header-24375" class="dsq-comment-header">
+            <cite id="dsq-cite-24375">
+                <span id="dsq-author-user-24375">brei ricofoball</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-24375" class="dsq-comment-body">
+            <div id="dsq-comment-message-24375" class="dsq-comment-message"><p>Kara só fui intender ontem anoite como funcionava realmente voltou ao normal obrigado..</p>
+<p>solução;<br />
+cada vm vai ter 2 placas.<br />
+a primeira é eth0 que usa ip 10.0.2.15 esse aqui é o NAT para internet nem precisa mecher.<br />
+agora o eth1 é o da rede entre os pcs. escolha a sua faixa e ponto final.</p>
+<p>obrigado a todos.!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-4" id="dsq-comment-24377">
+        <div id="dsq-comment-header-24377" class="dsq-comment-header">
+            <cite id="dsq-cite-24377">
+                <a id="dsq-author-user-24377" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-24377" class="dsq-comment-body">
+            <div id="dsq-comment-message-24377" class="dsq-comment-message"><p>É exatamente isso que eu expliquei lá em cima =D&#8230; Que bom que conseguiu 😉</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-26173">
+        <div id="dsq-comment-header-26173" class="dsq-comment-header">
+            <cite id="dsq-cite-26173">
+                <span id="dsq-author-user-26173">rodrigow</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26173" class="dsq-comment-body">
+            <div id="dsq-comment-message-26173" class="dsq-comment-message"><p>Parece funcionar pra todo mundo. Mas aqui, deu problema.<br />
+Tentei de tudo que é jeito, e nada.<br />
+Windows 7, hospedando uma vm ubuntu. Primeiro, tentei como diz o artigo, mas continuou sem acesso à Internet.<br />
+O engraçado, é que no meu notebook funciona, utilizando uma placa de rede wireless.<br />
+Começo a achar que é alguma incompatibilidade da placa Realtek com o Oracle VirtualBox. Vou tentar atualizar os drivers &#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-26500">
+        <div id="dsq-comment-header-26500" class="dsq-comment-header">
+            <cite id="dsq-cite-26500">
+                <span id="dsq-author-user-26500">Bruno</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26500" class="dsq-comment-body">
+            <div id="dsq-comment-message-26500" class="dsq-comment-message"><p>Funcionou! Windows 7 [VB Linux Red hat + Elastix]<br />
+tinha tentado todos os tipos de rede!<br />
+NAT: ele nao tinha conexao com o servidor!<br />
+Only host: nao tinha internet!<br />
+coloquei dois adaptadores!<br />
+Deu certo! rs<br />
+VLW</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-26844">
+        <div id="dsq-comment-header-26844" class="dsq-comment-header">
+            <cite id="dsq-cite-26844">
+                <a id="dsq-author-user-26844" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26844" class="dsq-comment-body">
+            <div id="dsq-comment-message-26844" class="dsq-comment-message"><p>Que bom que funcionou para você 🙂<br />
+Faça bom uso =P</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-27097">
+        <div id="dsq-comment-header-27097" class="dsq-comment-header">
+            <cite id="dsq-cite-27097">
+                <span id="dsq-author-user-27097">Nelson Silva</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27097" class="dsq-comment-body">
+            <div id="dsq-comment-message-27097" class="dsq-comment-message"><p>Funcionou perfeitamente&#8230; Apenas para ressaltar, estou usando um MAC e emulando o RUINdows&#8230; </p>
+<p>Muito obrigado.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-27250">
+        <div id="dsq-comment-header-27250" class="dsq-comment-header">
+            <cite id="dsq-cite-27250">
+                <a id="dsq-author-user-27250" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27250" class="dsq-comment-body">
+            <div id="dsq-comment-message-27250" class="dsq-comment-message"><p>Boa&#8230; Que bom que funcionou por aí..</p>
+<p>Abraços e volte sempre&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-27526">
+        <div id="dsq-comment-header-27526" class="dsq-comment-header">
+            <cite id="dsq-cite-27526">
+                <span id="dsq-author-user-27526">Anderson Neves</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27526" class="dsq-comment-body">
+            <div id="dsq-comment-message-27526" class="dsq-comment-message"><p>Olá Rafael, muito bom o seu tuto! Preciso de uma ajuda sua, tenho VBox Instalado em um servidor dedicado com Windows Server 2003, e não estou conseguindo acessar a máquina virtual para enviar arquivos, o que é estranho, pois aqui em casa está super normal, td funcionando, e já no host não está funcionando, apenas em NAT (Só acesso a internet) Mas eu preciso muito acessar minha VM em modo Bridge, para o servidor físico poder se comunicar com a vm e vise-versa. Vc pode me add no msn, pq ai te passo o login e a senha para vc poder dar uma conferida, e ver o que está errado. Pq eu já não sei mais o que fazer, já estou ficando careca de tanto arrancar os cabelos rsrsrs (tenso).</p>
+<p><a href="mailto:anjinhosmall@hotmail.com">anjinhosmall@hotmail.com</a>   (msn, orkut e facebook)</p>
+<p>desde já agradeço!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-27527">
+        <div id="dsq-comment-header-27527" class="dsq-comment-header">
+            <cite id="dsq-cite-27527">
+                <a id="dsq-author-user-27527" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27527" class="dsq-comment-body">
+            <div id="dsq-comment-message-27527" class="dsq-comment-message"><p>Quando voce habilita o modo bridge o que acontece ? Voce lembrou de reiniciar depois de ativar o modo bridge ?</p>
+<p>A maquina fisica habilita o dispositivo de rede do virtualbox para se comunicar por modo bridge ?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-3" id="dsq-comment-27585">
+        <div id="dsq-comment-header-27585" class="dsq-comment-header">
+            <cite id="dsq-cite-27585">
+                <span id="dsq-author-user-27585">Anderson Neves</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27585" class="dsq-comment-body">
+            <div id="dsq-comment-message-27585" class="dsq-comment-message"><p>&#8220;Quando voce habilita o modo bridge o que acontece ? Voce lembrou de reiniciar depois de ativar o modo bridge ?&#8221;<br />
+Inicio a máquina, logo como root, aperto ifconfig e no inet6 aparece um monte de letrinhas com números, sendo que é ali que tem q ficar o ip e não fica =(</p>
+<p>&#8220;A maquina fisica habilita o dispositivo de rede do virtualbox para se comunicar por modo bridge ?&#8221;<br />
+Aparece dosi computadoreszinhos perto do relógio, mas acho q fica sem acesso a rede e sem acesso a internet&#8230; mano me ajuda&#8230; plisss</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-27546">
+        <div id="dsq-comment-header-27546" class="dsq-comment-header">
+            <cite id="dsq-cite-27546">
+                <span id="dsq-author-user-27546">Gabriel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27546" class="dsq-comment-body">
+            <div id="dsq-comment-message-27546" class="dsq-comment-message"><p>Kra é o seguinte,eu quero definir o ip p/ minhas VMS mas como eu faço isso???<br />
+Eu quero tambem fazer cm q um programa conecte a uma porta do moldem,eu já abrir tudo direitinho a porta mas quando eu vo testar o programa ñ conecta a porta&#8230;O q pode ser???<br />
+Obrigadão pela ajuda!!!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-27563">
+        <div id="dsq-comment-header-27563" class="dsq-comment-header">
+            <cite id="dsq-cite-27563">
+                <a id="dsq-author-user-27563" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27563" class="dsq-comment-body">
+            <div id="dsq-comment-message-27563" class="dsq-comment-message"><p>Vamos aos poucos&#8230;</p>
+<p>Sobre os ipds fixos nas vms&#8230; Qual o sistema operacional que está rodando na VM ?</p>
+<p>Explica melhor esse &#8220;programa que conecta em uma porta do modem&#8221;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-27567">
+        <div id="dsq-comment-header-27567" class="dsq-comment-header">
+            <cite id="dsq-cite-27567">
+                <span id="dsq-author-user-27567">Gabriel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27567" class="dsq-comment-body">
+            <div id="dsq-comment-message-27567" class="dsq-comment-message"><p>O S.O q  esto usando é o windowsXp.. .<br />
+o Programa é Turkojan4&#8230;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-4" id="dsq-comment-27568">
+        <div id="dsq-comment-header-27568" class="dsq-comment-header">
+            <cite id="dsq-cite-27568">
+                <a id="dsq-author-user-27568" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27568" class="dsq-comment-body">
+            <div id="dsq-comment-message-27568" class="dsq-comment-message"><p>Para alterar para IP fixo, basta trocar na configuração da placa de rede do windows XP&#8230;</p>
+<p>Quanto ao programa eu não conheço =/</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-5" id="dsq-comment-27571">
+        <div id="dsq-comment-header-27571" class="dsq-comment-header">
+            <cite id="dsq-cite-27571">
+                <span id="dsq-author-user-27571">Gabriel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27571" class="dsq-comment-body">
+            <div id="dsq-comment-message-27571" class="dsq-comment-message"><p>Cara tem cmo vc esplica melhor como fazer isso&#8230;???</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt depth-4" id="dsq-comment-27569">
+        <div id="dsq-comment-header-27569" class="dsq-comment-header">
+            <cite id="dsq-cite-27569">
+                <span id="dsq-author-user-27569">Gabriel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27569" class="dsq-comment-body">
+            <div id="dsq-comment-message-27569" class="dsq-comment-message"><p>o turkojan4 ele cria um serve mas para criar esse serve, ele precisa conectar a uma porta no moldem&#8230;Ai eu já abri aporta no moldem  mas quando eu vo testar a porta ela diz q esta fechada ou possui problemas&#8230;eu  já liberei tmb no Firewall&#8230;O q pode ter sido???</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-5" id="dsq-comment-27573">
+        <div id="dsq-comment-header-27573" class="dsq-comment-header">
+            <cite id="dsq-cite-27573">
+                <a id="dsq-author-user-27573" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27573" class="dsq-comment-body">
+            <div id="dsq-comment-message-27573" class="dsq-comment-message"><p>O turkojan4 é um programa malicioso usado para fins proibidos pela lei.. Não poderei ajudar você&#8230; Desculpe&#8230;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-6" id="dsq-comment-27575">
+        <div id="dsq-comment-header-27575" class="dsq-comment-header">
+            <cite id="dsq-cite-27575">
+                <span id="dsq-author-user-27575">Gabriel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27575" class="dsq-comment-body">
+            <div id="dsq-comment-message-27575" class="dsq-comment-message"><p>ee na questão do ip Fixo cmo fazer isso???<br />
+Obrigado!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-7" id="dsq-comment-27576">
+        <div id="dsq-comment-header-27576" class="dsq-comment-header">
+            <cite id="dsq-cite-27576">
+                <a id="dsq-author-user-27576" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27576" class="dsq-comment-body">
+            <div id="dsq-comment-message-27576" class="dsq-comment-message"><p>Seguiu o tutorial ? Faz o esquema do host-only que vai resolver&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-27579">
+        <div id="dsq-comment-header-27579" class="dsq-comment-header">
+            <cite id="dsq-cite-27579">
+                <span id="dsq-author-user-27579">Gabriel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27579" class="dsq-comment-body">
+            <div id="dsq-comment-message-27579" class="dsq-comment-message"><p>Rafael eu queria fazer assim&#8230;meu ip da maquina real é 192.168.254.1 ee o ip da minha Vms é 10.0.2.15,mas eu queria q o ip da minha VMs Ficase tipo 192.168.254.2 como eu faço isso??<br />
+p/ tipo minha VMs ficasse com a faixa de ip Igual a da minha maquina virtual&#8230;<br />
+Cmo fazer isso???<br />
+Essas informações são p/ meu TCC!<br />
+Brigadão!!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-27580">
+        <div id="dsq-comment-header-27580" class="dsq-comment-header">
+            <cite id="dsq-cite-27580">
+                <a id="dsq-author-user-27580" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27580" class="dsq-comment-body">
+            <div id="dsq-comment-message-27580" class="dsq-comment-message"><p>Coloca a placa de rede em modo bridge e ve se vai funcionar&#8230; se não, pesquisa o modo host-only que você vai conseguir&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt depth-2" id="dsq-comment-27581">
+        <div id="dsq-comment-header-27581" class="dsq-comment-header">
+            <cite id="dsq-cite-27581">
+                <span id="dsq-author-user-27581">Gabriel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27581" class="dsq-comment-body">
+            <div id="dsq-comment-message-27581" class="dsq-comment-message"><p>Corrreção!<br />
+p/ tipo minha VMs ficasse com a faixa de ip Igual a da minha maquina REAL…<br />
+Brigado</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-29793">
+        <div id="dsq-comment-header-29793" class="dsq-comment-header">
+            <cite id="dsq-cite-29793">
+                <span id="dsq-author-user-29793">Rafael</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-29793" class="dsq-comment-body">
+            <div id="dsq-comment-message-29793" class="dsq-comment-message"><p>Xará, parabens pelo post! ajudou muito!<br />
+Consegui acessar a maquina virtual pelo host, mas nao dei conta de fazer o contrario&#8230;. n consigo fazer o ping da maquina virtual p a maquina hospedeira&#8230; o que eu posso fazer?</p>
+<p>vlw</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-29987">
+        <div id="dsq-comment-header-29987" class="dsq-comment-header">
+            <cite id="dsq-cite-29987">
+                <a id="dsq-author-user-29987" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-29987" class="dsq-comment-body">
+            <div id="dsq-comment-message-29987" class="dsq-comment-message"><p>Verifica se o seu firewall da máquina fisica não está impedindo você de fazer a comunicação da VM para sua máquina&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-30580">
+        <div id="dsq-comment-header-30580" class="dsq-comment-header">
+            <cite id="dsq-cite-30580">
+                <span id="dsq-author-user-30580">Ery Maciel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-30580" class="dsq-comment-body">
+            <div id="dsq-comment-message-30580" class="dsq-comment-message"><p>Rafael,</p>
+<p>Muito bom o tutorial, porém vê se você consegue me auxiliar&#8230;<br />
+Tenho um servidor CentOS modo texto e criei uma máquina virtual windows xp, essa maquina virtual windows xp vai ficar dentro desse servidor CentOS.</p>
+<p>Eu hoje consigo acessar o servidor CentOS pela internet sem nenhum problema. O que desejo, é que a máquina virtual windows xp, esteja acessível tanto na internet, quando na rede interna, msma rede onde o servidor CentOS está.</p>
+<p>Hoje tenho configurado no meu roteador, uma regra que tudo que chegar no IP da minha internet em portas especificas, como ssh, postgres ou apache, seja direcionado para o ip interno da rede 192.168.1.199, que é o IP do servidor CentOS.</p>
+<p>Acho que o que eu tenho que fazer, é no roteador liberar o acesso a tudo que chegar pela porta 27015 por exemplo redirecionar para o IP do servidor CentOS na porta 27015 e dentro do servidor CentOS eu mandar para a maquina virtual ou então devo mandar do roteador na porta 27015 direto para a maquina virtual na porta 27015??</p>
+<p>Não sei se consegui me explicar bem&#8230;.</p>
+<p>Abração!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-30886">
+        <div id="dsq-comment-header-30886" class="dsq-comment-header">
+            <cite id="dsq-cite-30886">
+                <a id="dsq-author-user-30886" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-30886" class="dsq-comment-body">
+            <div id="dsq-comment-message-30886" class="dsq-comment-message"><p>Tenho uma ideia melhor pra voce&#8230;</p>
+<p>Tente colocar sua VM em modo Bridge&#8230; Se seu roteador permitir isso, você vai receber um IP válido de rede e com isso irá conseguir fazer o port forward do roteador direto pra VM&#8230;</p>
+<p>Caso contrário, tem que fazer isso mesmo que voce falou&#8230; O roteador tem que redirecionar a porta pro CentOS e o CentOS tem que redirecionar a porta pra VM&#8230;.</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-30920">
+        <div id="dsq-comment-header-30920" class="dsq-comment-header">
+            <cite id="dsq-cite-30920">
+                <span id="dsq-author-user-30920">Ery Maciel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-30920" class="dsq-comment-body">
+            <div id="dsq-comment-message-30920" class="dsq-comment-message"><p>Rafael,</p>
+<p>Acabou que tinha conseguido a solução antes da sua resposta, porém foi exatamente o que fiz, coloquei a VM em modo bridge e assim ela pegou um IP do roteador.</p>
+<p>Dai o que fiz também foi definir um IP fixo para essa VM e fazer no roteador o forward da porta que eu qria direto para o IP fixo da VM.</p>
+<p>Não tinha pensado nisso antes, mas depois de muito esquentar a cabeça veio essa opção.. Eu tava pensando que como era uma VM dentro de um servidor CentOS, que a VM somente seria acessível de dentro do CentOS e por isso precisaria dar o forward para o CentOS e dele redirecionar para dentro da VM.</p>
+<p>De qualquer forma, muito obrigado e o seu POST foi de muita ajuda nessa minha configuração!</p>
+<p>Abraços! 😀</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-4" id="dsq-comment-30921">
+        <div id="dsq-comment-header-30921" class="dsq-comment-header">
+            <cite id="dsq-cite-30921">
+                <a id="dsq-author-user-30921" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-30921" class="dsq-comment-body">
+            <div id="dsq-comment-message-30921" class="dsq-comment-message"><p>Nem todos os roteadores permitem essa opção de fazer esse bridge direto&#8230; Principalmente se você estiver dentro de uma rede corporativa onde essa opção é sempre desabilitada por segurança&#8230;</p>
+<p>Mas sempre há meios de resolver 🙂</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-5" id="dsq-comment-30922">
+        <div id="dsq-comment-header-30922" class="dsq-comment-header">
+            <cite id="dsq-cite-30922">
+                <a id="dsq-author-user-30922" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-30922" class="dsq-comment-body">
+            <div id="dsq-comment-message-30922" class="dsq-comment-message"><p>Acho que não é só o roteador não, a sua interface de rede da máquina fisica também tem que suportar o bridge, porque a final de contas estão trafegando informações de máquinas diferentes pela mesma interface 🙂</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-6" id="dsq-comment-30923">
+        <div id="dsq-comment-header-30923" class="dsq-comment-header">
+            <cite id="dsq-cite-30923">
+                <span id="dsq-author-user-30923">Ery Maciel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-30923" class="dsq-comment-body">
+            <div id="dsq-comment-message-30923" class="dsq-comment-message"><p>Pois é, eu tenho somente uma interface de rede na máquina física e funcionou corretamente.</p>
+<p>Novamente, muito obrigado! (:</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-7" id="dsq-comment-30924">
+        <div id="dsq-comment-header-30924" class="dsq-comment-header">
+            <cite id="dsq-cite-30924">
+                <a id="dsq-author-user-30924" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-30924" class="dsq-comment-body">
+            <div id="dsq-comment-message-30924" class="dsq-comment-message"><p>Sempre que precisar, pode aparecer por aqui&#8230;</p>
+<p>Obrigado pela visita e volte sempre 🙂</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-33511">
+        <div id="dsq-comment-header-33511" class="dsq-comment-header">
+            <cite id="dsq-cite-33511">
+                <a id="dsq-author-user-33511" href="http://marlonpatrick.info" target="_blank" rel="nofollow">Marlon Patrick</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33511" class="dsq-comment-body">
+            <div id="dsq-comment-message-33511" class="dsq-comment-message"><p>Cara, deu certinho seu tutorial..tive algumas dificuldades pra interpretar as entre linhas..mas..testando bastante consegui fazer exatamente o que vc falou. Muito bom..vlw!!!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-33578">
+        <div id="dsq-comment-header-33578" class="dsq-comment-header">
+            <cite id="dsq-cite-33578">
+                <a id="dsq-author-user-33578" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33578" class="dsq-comment-body">
+            <div id="dsq-comment-message-33578" class="dsq-comment-message"><p>Que bom que consegui ajudar mais alguém&#8230; 🙂</p>
+<p>Obrigado pela visita e volte sempre&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-33796">
+        <div id="dsq-comment-header-33796" class="dsq-comment-header">
+            <cite id="dsq-cite-33796">
+                <span id="dsq-author-user-33796">Lendariossj</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33796" class="dsq-comment-body">
+            <div id="dsq-comment-message-33796" class="dsq-comment-message"><p>olá, sabe eu fiz os passos tudo certinho do seu caso e do Thiago nenhum dos dois funcionou aqui.Enfim eu quero q a vm tenha um ip diferente do pc normal de para conectar a internet pra loga em duas contas num certo jogo.Mas é estranho porque uma vez eu puis em modo bridge ae quando formatei ele novamente n funcionou mais então não sei mais oq fazer por favor me da uma ajuda!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-33802">
+        <div id="dsq-comment-header-33802" class="dsq-comment-header">
+            <cite id="dsq-cite-33802">
+                <a id="dsq-author-user-33802" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33802" class="dsq-comment-body">
+            <div id="dsq-comment-message-33802" class="dsq-comment-message"><p>Como no seu caso é pra jogo, não vai funcionar&#8230; As maquinas terão IPs de rede diferentes, mas o IP de saída da sua casa vai ser um só, dado que você só tem UMA internet&#8230; entendeu ?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-33845">
+        <div id="dsq-comment-header-33845" class="dsq-comment-header">
+            <cite id="dsq-cite-33845">
+                <span id="dsq-author-user-33845">Lendariossj</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33845" class="dsq-comment-body">
+            <div id="dsq-comment-message-33845" class="dsq-comment-message"><p>mas como?É estranho mas uma vez consegui porque puis em modo bridge mas quando eu criei outra maquina o modo bridge não ta reconhecendo a rede mais.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-33862">
+        <div id="dsq-comment-header-33862" class="dsq-comment-header">
+            <cite id="dsq-cite-33862">
+                <a id="dsq-author-user-33862" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33862" class="dsq-comment-body">
+            <div id="dsq-comment-message-33862" class="dsq-comment-message"><p>Você trocou de roteador neste meio tempo ? O modo bridge tenta pegar um ip válido de rede, independente do ip que a máquina fisica tem. As o roteador bloqueia essa opção&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-33877">
+        <div id="dsq-comment-header-33877" class="dsq-comment-header">
+            <cite id="dsq-cite-33877">
+                <span id="dsq-author-user-33877">Joyce</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33877" class="dsq-comment-body">
+            <div id="dsq-comment-message-33877" class="dsq-comment-message"><p>No caso de um computador real que não tem IP fixo é possível simular um ambiente com proxy assim?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-33878">
+        <div id="dsq-comment-header-33878" class="dsq-comment-header">
+            <cite id="dsq-cite-33878">
+                <a id="dsq-author-user-33878" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33878" class="dsq-comment-body">
+            <div id="dsq-comment-message-33878" class="dsq-comment-message"><p>Sim. Você pode apontar a sua VM para sair por um Proxy&#8230; Assim o computador real vai sair pelo seu IP de internet e a VM vai sair com o IP do proxy&#8230;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-3" id="dsq-comment-33960">
+        <div id="dsq-comment-header-33960" class="dsq-comment-header">
+            <cite id="dsq-cite-33960">
+                <span id="dsq-author-user-33960">Joyce</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33960" class="dsq-comment-body">
+            <div id="dsq-comment-message-33960" class="dsq-comment-message"><p>Bacana, preciso testar a classe FtpWebRequest com WebProxy e acho que isso vai me salvar&#8230;<br />
+Muito obrigada! 🙂</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-33879">
+        <div id="dsq-comment-header-33879" class="dsq-comment-header">
+            <cite id="dsq-cite-33879">
+                <span id="dsq-author-user-33879">Lendariossj</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33879" class="dsq-comment-body">
+            <div id="dsq-comment-message-33879" class="dsq-comment-message"><p>desculpa a ignorância mas como assim roteador?Tipo poderia me explicar como resolver isso pf?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-33886">
+        <div id="dsq-comment-header-33886" class="dsq-comment-header">
+            <cite id="dsq-cite-33886">
+                <a id="dsq-author-user-33886" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33886" class="dsq-comment-body">
+            <div id="dsq-comment-message-33886" class="dsq-comment-message"><p>Amigo dê uma pesquisada no google melhor sobre o que você está querendo fazer&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-33889">
+        <div id="dsq-comment-header-33889" class="dsq-comment-header">
+            <cite id="dsq-cite-33889">
+                <span id="dsq-author-user-33889">Lendariossj</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33889" class="dsq-comment-body">
+            <div id="dsq-comment-message-33889" class="dsq-comment-message"><p>eu so quero q o modo bridge pegue no meu vbox soh isso cara eu pesquisei mt sobre isso.Soh isso quero q funcione o modo bridge na vm!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-33961">
+        <div id="dsq-comment-header-33961" class="dsq-comment-header">
+            <cite id="dsq-cite-33961">
+                <span id="dsq-author-user-33961">Lendariossj</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33961" class="dsq-comment-body">
+            <div id="dsq-comment-message-33961" class="dsq-comment-message"><p>Acho q vai facilitar pra você me ajudar aqui, o modo bridge n ta achando a placa de rede.Aparece isso: Depois q seleciono modo bridge aparece Nome:placa não selecionada.O que eu posso fazer para reconhecer a placa?Obrigado, espero q me ajude.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-33999">
+        <div id="dsq-comment-header-33999" class="dsq-comment-header">
+            <cite id="dsq-cite-33999">
+                <a id="dsq-author-user-33999" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-33999" class="dsq-comment-body">
+            <div id="dsq-comment-message-33999" class="dsq-comment-message"><p>Quando você escolhe o modo Bridge, você tem que escolher pra qual a placa de rede da sua máquina fisica você quer ligar a ponte (bridge)&#8230;</p>
+<p>Se não está aparecendo nada, é porque não há uma conexão de rede disponível&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt depth-2" id="dsq-comment-38630">
+        <div id="dsq-comment-header-38630" class="dsq-comment-header">
+            <cite id="dsq-cite-38630">
+                <span id="dsq-author-user-38630">Sandro Magno</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-38630" class="dsq-comment-body">
+            <div id="dsq-comment-message-38630" class="dsq-comment-message"><p>Vá em &#8220;Propriedades&#8221; da tua placa real que quer que o VirtualBox use e marque a opção tipo &#8220;VirtualBox Bridged Networking Driver&#8221;, para habilitala para uso do programa de virtualização.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-34007">
+        <div id="dsq-comment-header-34007" class="dsq-comment-header">
+            <cite id="dsq-cite-34007">
+                <span id="dsq-author-user-34007">Lendariossj</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-34007" class="dsq-comment-body">
+            <div id="dsq-comment-message-34007" class="dsq-comment-message"><p>como posso arrumar isso?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-34059">
+        <div id="dsq-comment-header-34059" class="dsq-comment-header">
+            <cite id="dsq-cite-34059">
+                <a id="dsq-author-user-34059" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-34059" class="dsq-comment-body">
+            <div id="dsq-comment-message-34059" class="dsq-comment-message"><p>Só olhando mesmo amigo&#8230; Desculpe não poder ajudar&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-35106">
+        <div id="dsq-comment-header-35106" class="dsq-comment-header">
+            <cite id="dsq-cite-35106">
+                <span id="dsq-author-user-35106">Raphael Graça</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-35106" class="dsq-comment-body">
+            <div id="dsq-comment-message-35106" class="dsq-comment-message"><p>Olá rafael, vê se vc pode me ajudar:</p>
+<p>Meu problema é que minha maquina virtual nao conecta a internet. Possuo o Win7 e nele rodo o virtualbox 3.1.10,<br />
+e uso modem 3g da claro.Oque eu faço pra minha maquina virtual ter internet?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-35107">
+        <div id="dsq-comment-header-35107" class="dsq-comment-header">
+            <cite id="dsq-cite-35107">
+                <a id="dsq-author-user-35107" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-35107" class="dsq-comment-body">
+            <div id="dsq-comment-message-35107" class="dsq-comment-message"><p>Se você hailitar a interface de rede NAT em sua máquina virtual, isso deveria resolver o problema&#8230; Testa aí e depois volta aqui&#8230; Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-35769">
+        <div id="dsq-comment-header-35769" class="dsq-comment-header">
+            <cite id="dsq-cite-35769">
+                <span id="dsq-author-user-35769">Alysson Alverne</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-35769" class="dsq-comment-body">
+            <div id="dsq-comment-message-35769" class="dsq-comment-message"><p>Olá Rafael. </p>
+<p>Só uma pequena descoberta que fiz em um SV de Counter-Strike, eu não consegia acessá-lo com o IP que eu Fixei na Host-Only.<br />
+Então fiz o seguinte, a 1ª Placa que era NAT, troquei para Host-Only.<br />
+E a 2ª Placa deixei como NAT.<br />
+Então consegui me conectar através do IP que fixei e ficar com acesso à internet. </p>
+<p>Vlw pela explicação !</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-35772">
+        <div id="dsq-comment-header-35772" class="dsq-comment-header">
+            <cite id="dsq-cite-35772">
+                <a id="dsq-author-user-35772" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-35772" class="dsq-comment-body">
+            <div id="dsq-comment-message-35772" class="dsq-comment-message"><p>Que bom que conseguiu&#8230; 🙂</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-36165">
+        <div id="dsq-comment-header-36165" class="dsq-comment-header">
+            <cite id="dsq-cite-36165">
+                <a id="dsq-author-user-36165" href="http://aprendeinfo.blogspot.com" target="_blank" rel="nofollow">Andre</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-36165" class="dsq-comment-body">
+            <div id="dsq-comment-message-36165" class="dsq-comment-message"><p>Boa tarde Rafael gostaria que me ajudasse um probleminha que esta dando dor de cabeça rsrs.<br />
+Eu estou usando uma VM com Windows server 2003 e outro XP e criei um servidor dns no server 2003, só que o problema que quando eu coloco o ip dinamico eles se comunica, mas quando eu coloco o ip fixo e apontando o ip do dns no XP eles não reconhece. Eu ja fiz de tudo mudei as redes ja fiz o seu tutorial que resolveu uma parte que era internet, mas comunicar com os Vms com windows server esta osso, poderia me ajudar.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-2" id="dsq-comment-36166">
+        <div id="dsq-comment-header-36166" class="dsq-comment-header">
+            <cite id="dsq-cite-36166">
+                <a id="dsq-author-user-36166" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-36166" class="dsq-comment-body">
+            <div id="dsq-comment-message-36166" class="dsq-comment-message"><p>Não poderia ser o Firewall de alguns dos Windows ?? Você está testando a comunicação entre as maquinas virtuais como ?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-36167">
+        <div id="dsq-comment-header-36167" class="dsq-comment-header">
+            <cite id="dsq-cite-36167">
+                <a id="dsq-author-user-36167" href="http://aprendeinfo.blogspot.com" target="_blank" rel="nofollow">Andre</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-36167" class="dsq-comment-body">
+            <div id="dsq-comment-message-36167" class="dsq-comment-message"><p>Então os Firewalls quantos o windows server 2003 quanto win xp,estão desativados, e isso que é engraçado até sabado estava funcionando direito  daí eu estava abilitando o servidor Dhcp só que estava pegando o ip da minha maquina real daí eu fui mudar rede,depois disso nunca mais foi o mesmo já fiz de tudo o que pude imaginar e nada dos dois se comunicarem, já desistalei o Virtual Box pensando que era alguma configuração que eu fiz, mas o problema persiste se quiser entrar remotamente para ver que eu passo pra você.<br />
+E obrigado desde já por me ajudar resolver esse problema.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt depth-4" id="dsq-comment-36168">
+        <div id="dsq-comment-header-36168" class="dsq-comment-header">
+            <cite id="dsq-cite-36168">
+                <a id="dsq-author-user-36168" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-36168" class="dsq-comment-body">
+            <div id="dsq-comment-message-36168" class="dsq-comment-message"><p>Só teria tempo para ajuda-lo no fim de semana&#8230; Se tiver com problemas até lá entre em contato comigo pelo form do blog&#8230;</p>
+<p>Durante a semana fica dificil mesmo pra mim =/ Teria que ir pesquisando e mexendo até achar o problema&#8230;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-5" id="dsq-comment-36169">
+        <div id="dsq-comment-header-36169" class="dsq-comment-header">
+            <cite id="dsq-cite-36169">
+                <a id="dsq-author-user-36169" href="http://aprendeinfo.blogspot.com" target="_blank" rel="nofollow">Andre</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-36169" class="dsq-comment-body">
+            <div id="dsq-comment-message-36169" class="dsq-comment-message"><p>Assim para os dois Vms se comunicarem entre si qual rede virtua eu poderia usar?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-36287">
+        <div id="dsq-comment-header-36287" class="dsq-comment-header">
+            <cite id="dsq-cite-36287">
+                <a id="dsq-author-user-36287" href="http://aprendeinfo.blogspot.com" target="_blank" rel="nofollow">Andre</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-36287" class="dsq-comment-body">
+            <div id="dsq-comment-message-36287" class="dsq-comment-message"><p>Rafael ainda não consegui faz dias e nada de encontar o problema eu coloquei a versão antiga 3.1.x mas também não deu certo então coloquei a última versão e nada.Desistalei as maquinas virtual e instalei denovo e nada também o problema persiste. Eu tenho um roteador sem fio ele pode influenciar entre os vms não funcionar? 1 semana tentando e nada e pior que estou atrasado no meus estudos por causa disso.<br />
+Obrigado.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-38884">
+        <div id="dsq-comment-header-38884" class="dsq-comment-header">
+            <cite id="dsq-cite-38884">
+                <span id="dsq-author-user-38884">Marcelo MM</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-38884" class="dsq-comment-body">
+            <div id="dsq-comment-message-38884" class="dsq-comment-message"><p>Boa noite! Instalei o virtual box para rodar windows xp dentro do windows 7 para funcionar a impressora lexmark Z603. Porem quando reinicio o PC e tento abrir uma página de internet no windows 7 fica somente carregando e não abre o que poderá ser? Pode me ajudar?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-39450">
+        <div id="dsq-comment-header-39450" class="dsq-comment-header">
+            <cite id="dsq-cite-39450">
+                <span id="dsq-author-user-39450">Carlos Falci</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-39450" class="dsq-comment-body">
+            <div id="dsq-comment-message-39450" class="dsq-comment-message"><p>Rafael , tudo bem?<br />
+Estou com um problema que dura dias e não consigo resolver.<br />
+Tenho um notebook, com windows 7 instalado. Neste tenho o VirtualBox, eu estou com 2 VM&#8217;S ambas com W7. Qual é a proposta: Gostaria muito que eu conseguisse enxergar de quaisquer terminais em minha rede as VM&#8217;S, e vice-versa. O meu problema é, que quando eu inicio a VM consigo enxergar os terminais perfeitamente, os servidores, mas, ao contrário não. Lembrando Rafael, já coloquei as placas (2) a primeira em NAT e a segunda em Bridge e também fiz a configuração sugerida no seu blog. Interessante que eu consegui pingar do host-hospedeiro pro host virtual (dentro do notebook), na configuração, na qual sugeriu no artigo supracitado.<br />
+Agora com a placa em bridge não consigo. Há como contornar isso? Como? Eu realmente tentei resolver esse problema, mas, estou com muita dificuldade.<br />
+Atenciosamente, Carlos.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-39774">
+        <div id="dsq-comment-header-39774" class="dsq-comment-header">
+            <cite id="dsq-cite-39774">
+                <a id="dsq-author-user-39774" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-39774" class="dsq-comment-body">
+            <div id="dsq-comment-message-39774" class="dsq-comment-message"><p>O modo bridge pega um ip válido de rede. As vezes o roteador não permite essa funcionalidade&#8230;</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-3" id="dsq-comment-39792">
+        <div id="dsq-comment-header-39792" class="dsq-comment-header">
+            <cite id="dsq-cite-39792">
+                <span id="dsq-author-user-39792">Carlos Falci</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-39792" class="dsq-comment-body">
+            <div id="dsq-comment-message-39792" class="dsq-comment-message"><p>Man, valeu, eu depois de muito apanhar no windows 7, o firewall estava bloqueando as conexões UDP/TCP, assim, logo concluí-se que a microsoft mais uma vez gosta de atrapalhar a vida dos caras de TI. Ainda bem que em casa uso linux! Obrigado.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-39800">
+        <div id="dsq-comment-header-39800" class="dsq-comment-header">
+            <cite id="dsq-cite-39800">
+                <span id="dsq-author-user-39800">Fernando Ramos</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-39800" class="dsq-comment-body">
+            <div id="dsq-comment-message-39800" class="dsq-comment-message"><p>Ola pessoal estou com um problema eu tenho o win xp instalado em minha maquina e pelo virtual box instalei o winserver 2008, estou tentando utilizar o wds do win server para instalar o windows em outras maquinas da minha rede,como faço para a vm do winserver se comunicar com os pc da rede e conseguir instalar o windows nelas.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-43941">
+        <div id="dsq-comment-header-43941" class="dsq-comment-header">
+            <cite id="dsq-cite-43941">
+                <span id="dsq-author-user-43941">Amadeus</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-43941" class="dsq-comment-body">
+            <div id="dsq-comment-message-43941" class="dsq-comment-message"><p>Boa Noite<br />
+ Estou com um problema, espero que vc possa me ajudar.<br />
+ Criei uma VM com win xp na minha maquina aqui em casa,configurei o no-ip e tudo mais.No meu trabalho instalei um servidor de acesso remoto para ver, quando o funcionário, liga a maquina, e entra na internet.O remoto do programa eu abro dentro da VM mas nao funciona.Testei na maquina fisica e ai funcionou, aqui de casa eu vejo a maquina dele quando entra na net.<br />
+ Poderia me ajudar como eu configuro a vm pra funcionar com no-ip?A porta do roteador ta aberta, nao uso antivirus nem firewall tanto na fisica quanto na virtual.Não entendo pq a fisica vê a maquina normal quando entra, mas a vm não?</p>
+<p>des de ja agradeço</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-45658">
+        <div id="dsq-comment-header-45658" class="dsq-comment-header">
+            <cite id="dsq-cite-45658">
+                <span id="dsq-author-user-45658">Daniel</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-45658" class="dsq-comment-body">
+            <div id="dsq-comment-message-45658" class="dsq-comment-message"><p>Pessoal,</p>
+<p>to com dificuldade para configurar a rede dentro da VM (Linux).</p>
+<p>O acesso a internet está OK, porém não consigo entrar na rede Windows (Máquina hospedeira).</p>
+<p>Meu IP do adaptador de rede do PC -&gt; 192.168.1.7<br />
+IP do do adaptador de rede do VirtalBox -&gt; 192.168.137.1 (Aqui existe o compartilhamento do adaptador de rede entre o do PC e do VirtualBox)<br />
+IP do do adaptador de rede do Roteador -&gt; 192.168.1.5.</p>
+<p>Como preencho a guia &#8220;Configurações de ipv4&#8221; da VM (Linux)?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</li><!-- #comment-## -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-65931">
+        <div id="dsq-comment-header-65931" class="dsq-comment-header">
+            <cite id="dsq-cite-65931">
+                <span id="dsq-author-user-65931">Jeff</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-65931" class="dsq-comment-body">
+            <div id="dsq-comment-message-65931" class="dsq-comment-message"><p>Salvou minha vida, esta é a solução perfeita</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</li><!-- #comment-## -->
+</li><!-- #comment-## -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-74039">
+        <div id="dsq-comment-header-74039" class="dsq-comment-header">
+            <cite id="dsq-cite-74039">
+                <span id="dsq-author-user-74039">juliano</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-74039" class="dsq-comment-body">
+            <div id="dsq-comment-message-74039" class="dsq-comment-message"><p>BOM DIA AMIGO, O QUE ACONTECE AKI E O SEGUINTE: MINHA INTERNET FIKA COM AQUELE PONTO AMARELO NO COMPUTRADOR AO LADO DO RELOGIO, AI CONSIGO ACESSSAR INTERNET NORMAL SO NA VM E NA HOSPEDEIRA DA ERRO DE DNS</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</li><!-- #comment-## -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-195162">
+        <div id="dsq-comment-header-195162" class="dsq-comment-header">
+            <cite id="dsq-cite-195162">
+                <span id="dsq-author-user-195162">Andre A</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-195162" class="dsq-comment-body">
+            <div id="dsq-comment-message-195162" class="dsq-comment-message"><p>Olá Rafael, boa tarde.<br />
+Cara.. estou precisando desenvolver um projeto pra faculdade com a seguinte caracteristica:</p>
+<p>Criar tres máquinas virtuais ubuntu. Sendo uma servidor e duas normais. Vou criar uma scrip para a máquina 1 pegar um arquivo do servidor, editar e enviar para a maaquina 2. Essa maquina 2 vai verificar se o arquivo foi editado e devolver para o servidor.</p>
+<p>Como posso fazer para as maquinas virtuais se comunicarem? Devo deixa-las como dhcp ou atribuir um ip fixo para todas?</p>
+<p>Obrigado</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment byuser comment-author-rafael bypostauthor even depth-2" id="dsq-comment-200799">
+        <div id="dsq-comment-header-200799" class="dsq-comment-header">
+            <cite id="dsq-cite-200799">
+                <a id="dsq-author-user-200799" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-200799" class="dsq-comment-body">
+            <div id="dsq-comment-message-200799" class="dsq-comment-message"><p>Um IP fixo seria bom para você conseguir acessar todas elas, e saber que maquina é qual&#8230; Com DHCP os ips podem mudar e te atrapalhar&#8230;</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-214396">
+        <div id="dsq-comment-header-214396" class="dsq-comment-header">
+            <cite id="dsq-cite-214396">
+                <a id="dsq-author-user-214396" href="http://andredeo.blogspot.com.br" target="_blank" rel="nofollow">André Déo</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-214396" class="dsq-comment-body">
+            <div id="dsq-comment-message-214396" class="dsq-comment-message"><p>Rafael,</p>
+<p>Estava pensando como simular um ambiente para uma aula que vou dar e sua dica foi matadora.</p>
+<p>Perfeito meu amigo!!</p>
+<p>Grande Abraço,<br />
+André Déo</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-240387">
+        <div id="dsq-comment-header-240387" class="dsq-comment-header">
+            <cite id="dsq-cite-240387">
+                <span id="dsq-author-user-240387">Tadeu Matos</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-240387" class="dsq-comment-body">
+            <div id="dsq-comment-message-240387" class="dsq-comment-message"><p>Esse maneira de burlar um firewall ainda pode ser utilizada em 2015 ?</p>
+<p>Seu tópico esta excelente.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</li><!-- #comment-## -->
+</li><!-- #comment-## -->
+</li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+	<aside id="text-569858663" class="widget widget_text">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- vertical blog -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="7274679989"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside></div><!-- #content-sidebar -->
+<div id="secondary">
+		<h2 class="site-description">Tecnologia e informação no lugar certo !</h2>
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="text-569858664" class="widget widget_text"><h1 class="widget-title">Blog Desatualizado</h1>			<div class="textwidget">Depois de muitos anos, está na hora de mudar!
+Em breve um novo blog, muito melhor e com mais conteúdo!
+Se você está lendo isso, tente acessar <a href="https://rafaelbiriba.com/blog" target="_blank">https://rafaelbiriba.com/blog</a> para ver se o novo blog já está disponível!! :)
+Previsão de ir online: Agosto/2016</div>
+		</aside><aside id="text-347930551" class="widget widget_text"><h1 class="widget-title">Sobre o Autor</h1>			<div class="textwidget"><img alt="" src="https://1.gravatar.com/avatar/908bb0e461d553752af1df7c5849df52?s=80&amp;d=&amp;r=G" class="avatar avatar-42 photo" height="80" width="80">
+<div style="text-align: justify;"><strong>Rafael Biriba</strong>: Full Stack Web Developer since 2008 with experience in the development field using technologies like Ruby on Rails, PHP, HTML5, Javascript (Jquery / Backbone.js), Video encoding and delivery (Flash Media Server, Wowza, ffmpeg tools), Database SQL and NoSQL (Mysql, MongoDB, Redis), Virtualization and automation using virtualbox. With knowledge of development techniques and practices such as TDD, Domain Driven Design and Object Oriented Design.</div></div>
+		</aside><aside id="github-profile-2" class="widget widget_github-profile"><aside><h1 class="widget-title">Github</h1><div class="github-widget" id="github-profile-2"><header class="github-widget-header"><img class="github-widget-company-logo" title="GitHub" src="https://assets-cdn.github.com/favicon.ico"/><div class="github-widget-header-text"><a class="github-widget-header-link" target="_blank" href="https://github.com/rafaelbiriba" title="View profile">rafaelbiriba (Rafael Biriba)</a></div></header><div class="github-widget-content"><a target="_blank" href="https://github.com/rafaelbiriba" title="View profile"><img class="github-profile-pic" src="https://avatars.githubusercontent.com/u/324743?v=3" style="border-radius: 5px"> <span class="github-names"> <p class="github-name">Rafael Biriba</p> <span class="github-username">rafaelbiriba</span> </span></a><div class="github-block github-vcard-stats"><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/followers"><strong class="github-vcard-stat-count">30</strong><span class="text-muted">Followers</span></a><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/following"><strong class="github-vcard-stat-count">9</strong><span class="text-muted">Following</span></a><div style="clear: both;"></div></div> </div></div></aside></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h1 class="widget-title">Nuvem de Tags</h1><div class="tagcloud"><a href='https://rafaelbiriba.com/tag/904' class='tag-link-127 tag-link-position-1' title='5 tópicos' style='font-size: 8pt;'>9.04</a>
+<a href='https://rafaelbiriba.com/tag/armazenamento' class='tag-link-76 tag-link-position-2' title='7 tópicos' style='font-size: 11.36pt;'>armazenamento</a>
+<a href='https://rafaelbiriba.com/tag/atualizando' class='tag-link-132 tag-link-position-3' title='5 tópicos' style='font-size: 8pt;'>atualizando</a>
+<a href='https://rafaelbiriba.com/tag/atualizar' class='tag-link-130 tag-link-position-4' title='10 tópicos' style='font-size: 15.28pt;'>atualizar</a>
+<a href='https://rafaelbiriba.com/tag/audio' class='tag-link-22 tag-link-position-5' title='10 tópicos' style='font-size: 15.28pt;'>audio</a>
+<a href='https://rafaelbiriba.com/tag/blog' class='tag-link-188 tag-link-position-6' title='15 tópicos' style='font-size: 19.76pt;'>blog</a>
+<a href='https://rafaelbiriba.com/tag/codec' class='tag-link-26 tag-link-position-7' title='12 tópicos' style='font-size: 17.24pt;'>codec</a>
+<a href='https://rafaelbiriba.com/tag/codigo' class='tag-link-46 tag-link-position-8' title='9 tópicos' style='font-size: 14.16pt;'>codigo</a>
+<a href='https://rafaelbiriba.com/tag/converter' class='tag-link-23 tag-link-position-9' title='12 tópicos' style='font-size: 17.24pt;'>converter</a>
+<a href='https://rafaelbiriba.com/tag/decifrar' class='tag-link-79 tag-link-position-10' title='5 tópicos' style='font-size: 8pt;'>decifrar</a>
+<a href='https://rafaelbiriba.com/tag/desenvolvimento' class='tag-link-487 tag-link-position-11' title='13 tópicos' style='font-size: 18.36pt;'>Desenvolvimento</a>
+<a href='https://rafaelbiriba.com/tag/disco' class='tag-link-16 tag-link-position-12' title='6 tópicos' style='font-size: 9.96pt;'>disco</a>
+<a href='https://rafaelbiriba.com/tag/estag' class='tag-link-173 tag-link-position-13' title='9 tópicos' style='font-size: 14.16pt;'>estag</a>
+<a href='https://rafaelbiriba.com/tag/estagio' class='tag-link-168 tag-link-position-14' title='12 tópicos' style='font-size: 17.24pt;'>estágio</a>
+<a href='https://rafaelbiriba.com/tag/faetec' class='tag-link-192 tag-link-position-15' title='8 tópicos' style='font-size: 12.76pt;'>faetec</a>
+<a href='https://rafaelbiriba.com/tag/ffmpeg' class='tag-link-484 tag-link-position-16' title='12 tópicos' style='font-size: 17.24pt;'>FFmpeg</a>
+<a href='https://rafaelbiriba.com/tag/game' class='tag-link-53 tag-link-position-17' title='5 tópicos' style='font-size: 8pt;'>game</a>
+<a href='https://rafaelbiriba.com/tag/globocom' class='tag-link-171 tag-link-position-18' title='10 tópicos' style='font-size: 15.28pt;'>globo.com</a>
+<a href='https://rafaelbiriba.com/tag/google' class='tag-link-40 tag-link-position-19' title='7 tópicos' style='font-size: 11.36pt;'>google</a>
+<a href='https://rafaelbiriba.com/tag/gravar' class='tag-link-24 tag-link-position-20' title='9 tópicos' style='font-size: 14.16pt;'>gravar</a>
+<a href='https://rafaelbiriba.com/tag/imagem' class='tag-link-29 tag-link-position-21' title='6 tópicos' style='font-size: 9.96pt;'>imagem</a>
+<a href='https://rafaelbiriba.com/tag/inscricao' class='tag-link-170 tag-link-position-22' title='14 tópicos' style='font-size: 19.2pt;'>inscrição</a>
+<a href='https://rafaelbiriba.com/tag/ist-rio' class='tag-link-191 tag-link-position-23' title='8 tópicos' style='font-size: 12.76pt;'>ist-rio</a>
+<a href='https://rafaelbiriba.com/tag/leitura' class='tag-link-80 tag-link-position-24' title='7 tópicos' style='font-size: 11.36pt;'>leitura</a>
+<a href='https://rafaelbiriba.com/tag/medieval' class='tag-link-55 tag-link-position-25' title='5 tópicos' style='font-size: 8pt;'>medieval</a>
+<a href='https://rafaelbiriba.com/tag/multimedia' class='tag-link-27 tag-link-position-26' title='13 tópicos' style='font-size: 18.36pt;'>multimedia</a>
+<a href='https://rafaelbiriba.com/tag/online' class='tag-link-51 tag-link-position-27' title='15 tópicos' style='font-size: 19.76pt;'>online</a>
+<a href='https://rafaelbiriba.com/tag/oportunidade' class='tag-link-169 tag-link-position-28' title='10 tópicos' style='font-size: 15.28pt;'>oportunidade</a>
+<a href='https://rafaelbiriba.com/tag/player' class='tag-link-34 tag-link-position-29' title='7 tópicos' style='font-size: 11.36pt;'>player</a>
+<a href='https://rafaelbiriba.com/tag/processo-seletivo' class='tag-link-172 tag-link-position-30' title='14 tópicos' style='font-size: 19.2pt;'>processo seletivo</a>
+<a href='https://rafaelbiriba.com/tag/ruby' class='tag-link-492 tag-link-position-31' title='10 tópicos' style='font-size: 15.28pt;'>Ruby</a>
+<a href='https://rafaelbiriba.com/tag/rubygems' class='tag-link-103 tag-link-position-32' title='8 tópicos' style='font-size: 12.76pt;'>rubygems</a>
+<a href='https://rafaelbiriba.com/tag/rubyonrails' class='tag-link-105 tag-link-position-33' title='5 tópicos' style='font-size: 8pt;'>rubyonrails</a>
+<a href='https://rafaelbiriba.com/tag/sistema' class='tag-link-133 tag-link-position-34' title='5 tópicos' style='font-size: 8pt;'>sistema</a>
+<a href='https://rafaelbiriba.com/tag/sistema-operacional' class='tag-link-12 tag-link-position-35' title='5 tópicos' style='font-size: 8pt;'>sistema operacional</a>
+<a href='https://rafaelbiriba.com/tag/stream' class='tag-link-25 tag-link-position-36' title='8 tópicos' style='font-size: 12.76pt;'>stream</a>
+<a href='https://rafaelbiriba.com/tag/tecnologia' class='tag-link-490 tag-link-position-37' title='17 tópicos' style='font-size: 21.44pt;'>Tecnologia</a>
+<a href='https://rafaelbiriba.com/tag/travian' class='tag-link-49 tag-link-position-38' title='6 tópicos' style='font-size: 9.96pt;'>travian</a>
+<a href='https://rafaelbiriba.com/tag/ubuntu' class='tag-link-11 tag-link-position-39' title='9 tópicos' style='font-size: 14.16pt;'>ubuntu</a>
+<a href='https://rafaelbiriba.com/tag/versao' class='tag-link-129 tag-link-position-40' title='8 tópicos' style='font-size: 12.76pt;'>versão</a>
+<a href='https://rafaelbiriba.com/tag/video' class='tag-link-21 tag-link-position-41' title='18 tópicos' style='font-size: 22pt;'>video</a>
+<a href='https://rafaelbiriba.com/tag/virtual' class='tag-link-17 tag-link-position-42' title='6 tópicos' style='font-size: 9.96pt;'>virtual</a>
+<a href='https://rafaelbiriba.com/tag/web' class='tag-link-15 tag-link-position-43' title='16 tópicos' style='font-size: 20.6pt;'>web</a>
+<a href='https://rafaelbiriba.com/tag/web-browser' class='tag-link-56 tag-link-position-44' title='6 tópicos' style='font-size: 9.96pt;'>web browser</a>
+<a href='https://rafaelbiriba.com/tag/wordpress' class='tag-link-494 tag-link-position-45' title='13 tópicos' style='font-size: 18.36pt;'>Wordpress</a></div>
+</aside><aside id="wp_related_posts_widget" class="widget widget_wp_related_posts">
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h1 class="widget-title">Leia também:</h1><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2152" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2010</small> <a href="https://rafaelbiriba.com/2010/07/14/virtualbox-criando-e-iniciando-uma-vm-pelo-terminal-com-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Criando e iniciando uma VM pelo terminal com o VBoxManage</a></li><li data-position="1" data-poid="in-1466" data-post-type="none" ><small class="wp_rp_publish_date">08/03/2012</small> <a href="https://rafaelbiriba.com/2012/03/08/virtualbox-como-clonar-uma-maquina-virtual-inteira-usando-o-vboxmanage.html" class="wp_rp_title">VirtualBox: Como clonar uma máquina virtual inteira usando o VBoxManage</a></li><li data-position="2" data-poid="in-2787" data-post-type="none" ><small class="wp_rp_publish_date">03/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/03/virtualbox-4-0-4-nova-funcionalidade-permite-expandir-o-tamanho-do-disco-vdi.html" class="wp_rp_title">VirtualBox 4.0.4: Nova funcionalidade permite expandir o tamanho do disco vdi</a></li><li data-position="3" data-poid="in-2656" data-post-type="none" ><small class="wp_rp_publish_date">16/03/2011</small> <a href="https://rafaelbiriba.com/2011/03/16/virtualbox-3-aumentando-o-tamanho-do-disco-virtual-da-vm.html" class="wp_rp_title">VirtualBox 3: Aumentando o tamanho do disco virtual da VM </a></li><li data-position="4" data-poid="in-1106" data-post-type="none" ><small class="wp_rp_publish_date">02/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" class="wp_rp_title">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		<div class="cbd"></div>
+		<script src="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded//shutter-reloaded.js?ver=2.5" type="text/javascript"></script>
+	<script type="text/javascript">
+	var shutterSettings = {"imgDir":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/shutter-reloaded\/\/menu\/","imageCount":true,"FS":false,"textBtns":true,"oneSet":true};
+	try{}catch(e){}	</script>
+	
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+								<a href="https://br.wordpress.org/">Orgulhosamente mantido com WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	
+<script type="text/javascript"><!--
+wpa2a.targets=[
+{title:"VirtualBox: VMs com IPs est\u00e1ticos e internet de maneira simples",url:"https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html"}];
+wpa2a.html_done=true;if(wpa2a.script_ready&&!wpa2a.done)wpa2a.init();wpa2a.script_load();
+//--></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var scriptParams = {"google_search_engine_id":"partner-pub-1303939561252359:5952361189"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/assets/js/google_cse_v2.js?ver=1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Enviando ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.2'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/comment-reply.min.js?ver=4.5.3'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/wp-embed.min.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.5.3","language":""},"disqusIdentifier":"1875 http:\/\/www.rafaelbiriba.com\/?p=1875","disqusShortname":"rafaelbiriba","disqusTitle":"VirtualBox: VMs com IPs est\u00e1ticos e internet de maneira simples","disqusUrl":"http:\/\/www.rafaelbiriba.com\/2010\/02\/22\/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html","options":{"manualSync":false},"postId":"1875"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/disqus.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"rafaelbiriba"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/count.js?ver=4.5.3'></script>
+</body>
+</html>

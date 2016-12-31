@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<!--<![endif]-->
+<head>
+<base href="https://rafaelbiriba.com/blogwp.html" />
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Captcha no Travian: Será o fim dos scripts ? | Rafael Biriba Blog</title>
+	
+	
+	<!--[if lt IE 9]>
+	<script src="https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	
+
+
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.rafaelbiriba.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wgs-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/wgs.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/style.css?ver=4.5.3' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='github-profile-octicons-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/octicons/octicons.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='github-profile-widget-styles-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/widget.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='A2A_SHARE_SAVE-css'  href='https://rafaelbiriba.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.12' type='text/css' media='all' />
+<link rel='stylesheet' id='fbSEOStylesheet-css'  href='https://rafaelbiriba.com/wp-content/plugins/seo-facebook-comments/assets/fbseo-style.css?ver=4.5.3' type='text/css' media='all' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.2 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-7346716-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/content-slide/js/coin-slider.js?ver=4.5.3'></script>
+<link rel='https://api.w.org/' href='https://rafaelbiriba.com/wp-json/' />
+
+ 
+
+<link rel='next' title='FFmpeg: Convertendo um video em um gif animado' href='https://rafaelbiriba.com/2010/09/17/ffmpeg-convertendo-um-video-em-um-gif-animado.html' />
+
+<link rel='shortlink' href='https://rafaelbiriba.com/?p=2216' />
+
+
+
+<script type="text/javascript"><!--
+var a2a_config=a2a_config||{},wpa2a={done:false,html_done:false,script_ready:false,script_load:function(){var a=document.createElement('script'),s=document.getElementsByTagName('script')[0];a.type='text/javascript';a.async=true;a.src='https://static.addtoany.com/menu/page.js';s.parentNode.insertBefore(a,s);wpa2a.script_load=function(){};},script_onready:function(){wpa2a.script_ready=true;if(wpa2a.html_done)wpa2a.init();},init:function(){for(var i=0,el,target,targets=wpa2a.targets,length=targets.length;i<length;i++){el=document.getElementById('wpa2a_'+(i+1));target=targets[i];a2a_config.linkname=target.title;a2a_config.linkurl=target.url;a2a_config.linkmedia=target.media;if(el){a2a.init('page',{target:el});el.id='';}wpa2a.done=true;}wpa2a.targets=[];}};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.callbacks.push({ready:wpa2a.script_onready});a2a_config.templates=a2a_config.templates||{};a2a_localize = {
+	Share: "Compartilhar",
+	Save: "Salvar",
+	Subscribe: "Inscrever",
+	Email: "Email",
+	Bookmark: "Favoritos",
+	ShowAll: "Mostrar tudo",
+	ShowLess: "Mostrar menos",
+	FindServices: "Procurar serviço(s)",
+	FindAnyServiceToAddTo: "Encontrar rapidamente qualquer serviço para",
+	PoweredBy: "Serviço fornecido por",
+	ShareViaEmail: "Share via email",
+	SubscribeViaEmail: "Subscribe via email",
+	BookmarkInYourBrowser: "Adicionar aos favoritos",
+	BookmarkInstructions: "Press Ctrl+D or \u2318+D to bookmark this page",
+	AddToYourFavorites: "Adicionar a favoritos",
+	SendFromWebOrProgram: "Send from any email address or email program",
+	EmailProgram: "Email program",
+	More: "More&#8230;"
+};
+
+//--></script>
+<script type="text/javascript">
+	var $jquery = jQuery.noConflict(); 
+	$jquery(document).ready(function() 
+	{
+		$jquery('#wpcontent_slider').coinslider(
+	{ 
+	width: 980, 
+	height: 370, 
+	spw: 7, 
+	sph: 5, 
+	delay: 3000, 
+	sDelay: 30, 
+	opacity: 0.7, 
+	titleSpeed: 500, 
+	effect: 'random', 
+	navigation: true, 
+	links : true, 
+	hoverPause: true });
+		});
+	</script>
+<style type="text/css" media="screen">
+		
+#wpcontent_slider_container
+{
+	overflow: hidden; position: relative; padding:0px;margin:0px; text-align:center; width:980px !important;
+	height:370px !important;
+}
+#wpcontent_slider 
+{ overflow: hidden; position: relative; font-family:\'Trebuchet MS\', Helvetica, sans-serif;border:0px solid #ffffff; text-align:left;}
+#wpcontent_slider a,#wpcontent_slider a img { border: none; text-decoration: none; outline: none; }
+#wpcontent_slider h4,#wpcontent_slider h4 a 
+{margin: 0px;padding: 0px; font-family: 'Trebuchet MS', Helvetica, sans-serif;
+text-decoration:none;font-size: 18px; color:#ffffff;}
+#wpcontent_slider .cs-title {width: 100%;padding: 10px; background: #ffffff; color: #000000; font-family: 'Trebuchet MS', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal;line-height: normal;}
+#wpcontent_slider_container .cs-prev,#wpcontent_slider_container .cs-next {font-weight: bold;background: #000000;
+font-size: 28px; font-family: "Courier New", Courier, monospace; color: #ffffff !important;
+padding: 0px 10px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;}
+#wpcontent_slider_container .cs-buttons { font-size: 0px; padding: 10px 0px 10px 0px;
+margin:0px auto; float:left;clear:left;
+}
+#wpcontent_slider_container .cs-buttons a { outline:none; margin-left: 5px; height: 10px; width: 10px; float: left; border: 1px solid #000000; color: #000000; text-indent: -1000px; 
+}
+#wpcontent_slider_container .cs-active { background-color: #000000; color: #FFFFFF; }
+#wpcs_link_love,#wpcs_link_love a{display:none;}
+</style>
+<!-- End Content Slider Settings -->
+
+
+		<style type="text/css">
+			.cbd {
+				position: fixed;
+				left: 5px;
+				bottom: 5px;
+			}
+			.cbd a img {
+				border: 0;
+			}
+		</style>
+	<meta property='fb:admins' content='1644160548' /><meta property='og:title' content='Captcha no Travian: Será o fim dos scripts ?' /><meta property='og:site_name' content='Rafael Biriba Blog' /><meta property='og:url' content='https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html' /><meta property='og:type' content='article' /><meta property='fb:app_id' content='589867447707428'>
+	<link rel="stylesheet" href="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded/shutter-reloaded.css?ver=2.4" type="text/css" media="screen" />
+	<style type='text/css'>
+div#shNavBar a {color: #000000;}
+div#shNavBar {background-color:#ffff00;}
+div#shNavBar {color:#000000;}
+div#shDisplay div#shTitle {color:#ffff00;}
+</style>
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "https://rafaelbiriba.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6';
+	window._wp_rp_post_id = '2216';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = 'Captcha+no+Travian%3A+Ser%C3%A1+o+fim+dos+scripts+%3F';
+	window._wp_rp_post_tags = ['captcha', 'userscript', 'game', 'web+browser', 'greasemonkey', 'medieval', 'online', 'scripts', 'travian', 'jogos+online', 'travian', 'na', 'tipo', 'os', 'captcha', 'script', 'modo', 'para', 'novo', 'como', 'nova', 'jogo', 'ou', 'rob', 'de', 'voc'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.6" async></script>
+</head>
+
+<body class="single single-post postid-2216 single-format-standard masthead-fixed singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="https://rafaelbiriba.com/blogwp.html" rel="home">Rafael Biriba Blog</a></h1>
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">Pesquisar</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">Menu principal</button>
+				<a class="screen-reader-text skip-link" href="#content">Pular para o conteúdo</a>
+				<div id="primary-menu" class="nav-menu"><ul><li class="page_item page-item-3171"><a href="https://rafaelbiriba.com/search_gcse">Busca</a></li><li class="page_item page-item-101"><a href="https://rafaelbiriba.com/contatos">Contatos</a></li><li class="page_item page-item-1251"><a href="https://rafaelbiriba.com/twitter">Twitter</a></li></ul></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get"
+    class="search-form" action="https://rafaelbiriba.com//search_gcse">
+    <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input type="text" value="" name="q" id="q" />
+        <input type="submit" id="searchsubmit"
+            value="Pesquisar" />
+    </div>
+</form>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 798x80 images only -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="6793331087"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+			
+<article id="post-2216" class="post-2216 post type-post status-publish format-standard hentry category-jogos-online category-travian-jogos-online tag-captcha tag-game tag-greasemonkey tag-medieval tag-online tag-scripts tag-travian tag-userscript tag-web-browser">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/jogos-online" rel="category tag">Jogos Online</a>, <a href="https://rafaelbiriba.com/category/jogos-online/travian-jogos-online" rel="category tag">Travian</a></span>
+		</div>
+		<h1 class="entry-title">Captcha no Travian: Será o fim dos scripts ?</h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html" rel="bookmark"><time class="entry-date" datetime="2010-09-08T00:53:38+00:00">08/09/2010</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html#comments"><span class="dsq-postid" data-dsqidentifier="2216 https://rafaelbiriba.com/?p=2216">14 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+<p style="text-align: justify;"><img class="alignleft size-full wp-image-2220" title="travian-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/09/travian-image.jpg" alt="" width="159" height="389" />Apesar de afastado à algum tempo do jogo, resolvi escrever este post para esclarecer algumas coisas sobre a nova implementação de segurança do Travian.</p>
+<p style="text-align: justify;">Como todos já devem ter notado, principalmente a galera que está jogando com scripts no greasemonkey, a equipe de desenvolvedores do Travian adotou um novo modo de evitar os scripts&#8230; Captcha !</p>
+<p style="text-align: justify;"><strong>Mas primeiro, o que é o Captcha (<a title="http://pt.wikipedia.org/wiki/CAPTCHA" href="http://pt.wikipedia.org/wiki/CAPTCHA" target="_blank">wiki</a>) ?</strong><br />Captcha é um tipo de teste cognitivo mais utilizado como ferramenta anti-spam. Na prática, são testes com textos confusos, onde um computador ou um robô ou neste caso um script do travian seja incapaz de responder corretamente.</p>
+<p style="text-align: justify;">O captcha é gerado aleatóriamente pelo servidor, e você deve responder corretamente para poder continuar a navegar. Atualmente já existem meios para quebrar essa segurança por captcha, porém, não há nada desenvolvido para o travian ainda.</p>
+<p style="text-align: justify;"><strong>O problema no travian&#8230;</strong><br />Alguns servidores no travian, e logo serão em todos, já possuem captcha funcionando. Existem um algorítmo rodando aleatoriamente no servidor do travian, para descobrir quem está usando scripts no jogo, e ao detectar alguém, ele habilita o captcha para essa pessoa e até algumas penalidades a mais.</p>
+<p style="text-align: justify;"><strong>Como ele descobre ?</strong><br />Toda vez que você está jogando, a cada clique que você der, será uma requisição feita ao servidor do travian. Esse algorítmo verifica o intervalo de tempo com que essa requisição é feita,&#8230; Se for um intervalo curto e similar aos outros, ele acha que é um robô (script) e automaticamente habilita o captcha.</p>
+<p style="text-align: justify;">Logicamente, se você abrir muitas abas do seu navegador, e fizer muitos ataques rapidamente navegando entre as abas, é bem provável que você receba o captcha.</p>
+<p style="text-align: justify;"><strong>Punições</strong><img class="alignright size-full wp-image-2231" title="travian-captcha" src="https://rafaelbiriba.com/wp-content/uploads/2010/09/travian-captcha.gif" alt="" width="234" height="97" /><br />Como eu falei no inicio, estou meio afatado do travian e por isso não sei se o sistema de punição já está funcionando. Mas se estiver, funciona da seguinte forma:</p>
+<ul style="text-align: justify;">
+	<li>Detectado pela primeira vez: 24 horas de captcha e armazens são esvaziados</li>
+	<li>Detectado pela segunda vez: 24 horas de captcha, armazens são esvaziados e 25% das tropas são perdidas</li>
+	<li>Detectado pela terceira vez: 24 horas de captcha, armazens são esvaziados e 50% das tropas são perdidas</li>
+	<li>Detectado pela quarta vez:  O jogador recebe banimento e o multi-hunter é avisado.</li>
+</ul>
+<p style="text-align: justify;">É muito importante relembrar que todas essas punições e verificações são feitas automaticamente. O algorítmo roda aleatoriamente no servidor do travian, então se você tiver usando script e ainda não foi pego, pode ter sido apenas sorte por enquanto&#8230;</p>
+<p style="text-align: justify;"><strong>Defeitos no sistema</strong><br />Essa implementação ficou uma droga. Existe um video no youtube (<a title="http://www.youtube.com/watch?v=IRD8tBD3oRM" href="http://www.youtube.com/watch?v=IRD8tBD3oRM" target="_blank">http://www.youtube.com/watch?v=IRD8tBD3oRM</a>) que mostra um caso onde o captcha aparece sem utilizar nenhum script. Como eu falei acima, se você for rápido no mouse, pode ser que seja punido como um robô.</p>
+<p style="text-align: justify;"><strong>E os scripts do greasemonkey ? O que fazer ?</strong><br />Se o sistema de punição com o captcha estiver mesmo 100% funcionando, eu sugiro que desabilitem o greasemonkey. Até pior que isso, além de não usar mais os scripts, seria bom também evitar muitos cliques simultâneos e jogar mais &#8220;relaxadamente&#8221; até esse problema ser melhor resolvido.</p>
+<p style="text-align: justify;"><strong>E agora, o que fazer ?<br /></strong>Na verdade, não há muito o que fazer&#8230; Todo esse processo de detecção não depende dos multi-hunters&#8230; Eles nem podem fazer nada a respeito.<br />Alguns jogadores e ex-jogadores estão se mobilizando e reclamando, muito por sinal, no forum do travian. Nos foruns do mundo todo há reclamações de mau funcionamento do novo sistema. Eu gosto da idéia de reclamar no fórum. É a única coisa que podemos fazer e que está ao nosso alcance.</p>
+<p style="text-align: justify;"><strong>Concluindo&#8230;</strong><br />Na minha opnião, acho muito difícil detectar um script rodando no greasemonkey&#8230; Ele simula cliques do mouse&#8230; Se você for tão rápido quanto os scripts, será detectado e punido como ele. Resta agora torcer para que eles desabilitem a ferramenta, ou então melhore a forma de detecção.</p>
+<p style="text-align: justify;"><strong>A pergunta que não quer calar:</strong> Captcha no Travian: Problema ou Solução ?<br />Será mesmo que a equipe conseguiu evitar os scripts finalmente ?<br />Espero ter conseguido esclarecer um pouco sobre o assunto&#8230; Se você tiver uma opnião, um outro ponto de vista, ou até mesmo uma experiência do jogo sobre isso, não deixe de compartilhar conosco.</p>
+<p style="text-align: justify;">Até a próxima pessoal&#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-435" data-post-type="none" ><small class="wp_rp_publish_date">08/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" class="wp_rp_title">Travian: Greasemonkey e seus Scripts</a></li><li data-position="1" data-poid="in-726" data-post-type="none" ><small class="wp_rp_publish_date">17/05/2009</small> <a href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" class="wp_rp_title">Travian versão 3.5: Fim do greasemonkey e seus scripts ? </a></li><li data-position="2" data-poid="in-1771" data-post-type="none" ><small class="wp_rp_publish_date">01/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html" class="wp_rp_title">Travian 3.6: Nova versão veio para assustar</a></li><li data-position="3" data-poid="in-229" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/28/travian-jogo-online-multiplayer.html" class="wp_rp_title">Travian: Jogo Online Multiplayer</a></li><li data-position="4" data-poid="in-2956" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser.html" class="wp_rp_title">5 bons motivos para você não perder tempo com travian ou outro jogo web browser</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_1"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html" data-text="Captcha no Travian: Será o fim dos scripts ?"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F09%2F08%2Fcaptcha-no-travian-sera-o-fim-dos-scripts.html&amp;linkname=Captcha%20no%20Travian%3A%20Ser%C3%A1%20o%20fim%20dos%20scripts%20%3F" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F09%2F08%2Fcaptcha-no-travian-sera-o-fim-dos-scripts.html&amp;linkname=Captcha%20no%20Travian%3A%20Ser%C3%A1%20o%20fim%20dos%20scripts%20%3F" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a>
+<script type="text/javascript"><!--
+if(wpa2a)wpa2a.script_load();
+//--></script>
+</div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/captcha" rel="tag">captcha</a><a href="https://rafaelbiriba.com/tag/game" rel="tag">game</a><a href="https://rafaelbiriba.com/tag/greasemonkey" rel="tag">greasemonkey</a><a href="https://rafaelbiriba.com/tag/medieval" rel="tag">medieval</a><a href="https://rafaelbiriba.com/tag/online" rel="tag">online</a><a href="https://rafaelbiriba.com/tag/scripts" rel="tag">scripts</a><a href="https://rafaelbiriba.com/tag/travian" rel="tag">travian</a><a href="https://rafaelbiriba.com/tag/userscript" rel="tag">userscript</a><a href="https://rafaelbiriba.com/tag/web-browser" rel="tag">web browser</a></span></footer></article><!-- #post-## -->
+	<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Navegação de posts</h1>
+		<div class="nav-links">
+			<a href="https://rafaelbiriba.com/2010/08/31/31-de-agosto-dia-do-blog-2010.html" rel="prev"><span class="meta-nav">Post anterior</span>31 de agosto: Dia do Blog 2010</a><a href="https://rafaelbiriba.com/2010/09/17/ffmpeg-convertendo-um-video-em-um-gif-animado.html" rel="next"><span class="meta-nav">Próximo post</span>FFmpeg: Convertendo um video em um gif animado</a>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	<div id="fbSEOComments">	<fb:comments
+                                id='seoFacebookCommentsPlugin'
+								href='https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html'
+								num_posts='10'
+								colorscheme='light'
+								order_by=''></fb:comments></div><div id='fb-root'></div>
+                    <script>
+                            window.fbAsyncInit = function() {
+                                FB.init({
+                                  appId      : '589867447707428', // App ID
+                                  status     : true, // check login status
+                                  cookie     : true, // enable cookies to allow the server to access the session
+                                  xfbml      : true  // parse XFBML
+                                });
+                                // Additional initialization code here
+                              };
+                                //  Load the SDK Asynchronously
+                              (function(d){
+                                 var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                                 if (d.getElementById(id)) {return;}
+                                 js = d.createElement('script'); js.id = id; js.async = true;
+                                 js.src = "//connect.facebook.net/pt_BR/all.js";
+                                 ref.parentNode.insertBefore(js, ref);
+                           }(document))
+                    </script>
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-6536">
+        <div id="dsq-comment-header-6536" class="dsq-comment-header">
+            <cite id="dsq-cite-6536">
+                <span id="dsq-author-user-6536">Badini</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6536" class="dsq-comment-body">
+            <div id="dsq-comment-message-6536" class="dsq-comment-message"><p>Amigo, parabens pelo blog, sou recem chegado no TRAVIAN mas já estou viciado&#8230;.adoro isso&#8230;.kkk&#8230;&#8230;.ae tenho o programa instalado (script) mas naum como utilizalo, teria como me dar uns toques&#8230;&#8230;vlw abraços, <a href="mailto:danilobadini@hotmail.com">danilobadini@hotmail.com</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-6537">
+        <div id="dsq-comment-header-6537" class="dsq-comment-header">
+            <cite id="dsq-cite-6537">
+                <a id="dsq-author-user-6537" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6537" class="dsq-comment-body">
+            <div id="dsq-comment-message-6537" class="dsq-comment-message"><p>Olá Danilo,</p>
+<p>Dê uma olhada no link: <a href="https://rafaelbiriba.com/tag/travian" rel="nofollow">https://rafaelbiriba.com/tag/travian</a> pois aqui no blog tem muitas informações sobre scripts do travian,&#8230;<br />
+Dê uma olhada também nos comentários dos posts pois expliquei muita coisas por lá&#8230;</p>
+<p>Faz isso, e se ainda sim tiver alguma dúvida ou dificuldade, volta aí&#8230;</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-7514">
+        <div id="dsq-comment-header-7514" class="dsq-comment-header">
+            <cite id="dsq-cite-7514">
+                <span id="dsq-author-user-7514">Marcelo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7514" class="dsq-comment-body">
+            <div id="dsq-comment-message-7514" class="dsq-comment-message"><p>Dica legal: Existem programas que ajudam o jogador Travian a fazer tarefas rotineiras e ainda ajuda a gerenciar.</p>
+<p>Veja mais em: <a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-7511" rel="nofollow">https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html#comment-7511</a></p>
+<p>Show de bola, estou usando</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-7784">
+        <div id="dsq-comment-header-7784" class="dsq-comment-header">
+            <cite id="dsq-cite-7784">
+                <a id="dsq-author-user-7784" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7784" class="dsq-comment-body">
+            <div id="dsq-comment-message-7784" class="dsq-comment-message"><p>Olá Marcelo,</p>
+<p>Andei olhando o tutorial que você informou&#8230; Quando tiver tempo, irei criar uma conta de teste e testar esse gerenciador&#8230;</p>
+<p>Gostaria de deixar claro a todos, que esses tipos de programas podem ser perigosos&#8230; Se o autor for uma pessoa &#8220;esperta&#8221; e quiser dar uma de esperto, ele pode capturar as senhas das suas contas&#8230; Então cuidado nos lugares onde vocês colocam seus usuário e senhas do travian&#8230;</p>
+<p>Abraços a todos,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-8502">
+        <div id="dsq-comment-header-8502" class="dsq-comment-header">
+            <cite id="dsq-cite-8502">
+                <span id="dsq-author-user-8502">Marco Aurelio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8502" class="dsq-comment-body">
+            <div id="dsq-comment-message-8502" class="dsq-comment-message"><p>Rafael, Boa Tarde&#8230;</p>
+<p>Vejo que o Travian houve uma fuga em massa dos jogadores, digo<br />
+&#8220;Jogadores&#8221;. Muito em função das dificuldade de jogo imposta pela empresa detentora do jogo. No entanto devo salientar que &#8220;vantagens sempre existiram no Traviam, como Tambem em qualquer jogo, Uma esta na compra de Ouro  e outra os MH.<br />
+Vamos começar os MH.<br />
+Estes tem acessos a muitas informações sobre o jogo, em alguns casos até a sua senha, com isso eles que são tambem jogadores, se usam destas informações ou previlegios para levar Vantagens. Uma das questões eh que o MH e seus auxiliares são pagos com ouro, não sao funcionarios e não tem nenhum critério de avaliação. Assim estamos sempre nas mão destes.<br />
+Ouro &#8211; O problema dos Scripts eh que não sao pagos, mas pode esperar que logo irão aparecer pacotes para dar ++ vantagens, pois vc ter 25% mais de recursos não eh uma vantagem? Os scripts ou bots, dão vantagem (isso eh muito relativo) sem vc comprar ouro. Isso sim não eh permitido.<br />
+Se a empresa estivesse interessada em manter o jogo igual para todos, não teria os bonos a custa de ouro, liberava os scripts e ainda incentivava tais aplicativos.</p>
+<p>A questão então não são os jogadores e sim a parte financeira da coisa.</p>
+<p>PS&#8230; Parabens pelo Blog</p>
+<p>Abraços</p>
+<p>Marco Aurelio</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-8503">
+        <div id="dsq-comment-header-8503" class="dsq-comment-header">
+            <cite id="dsq-cite-8503">
+                <a id="dsq-author-user-8503" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8503" class="dsq-comment-body">
+            <div id="dsq-comment-message-8503" class="dsq-comment-message"><p>Olá Marcos,</p>
+<p>O problema da empresa liberar esses scripts, pois o jogo fica muito fácil&#8230; Se você impor essas facilidades, o jogo meio que perde o sentido&#8230;</p>
+<p>Porque hoje eu não jogo mais ? Simplesmente por falta de tempo&#8230;.</p>
+<p>Porque se você jogar em um BRx da vida, e ficar mais de 2 horas sem entrar no travian, voce pode perder muitas tropas e etc&#8230;</p>
+<p>Lembro que na epoca que jogava, eu colocava meu despertador para tocar 2 e até 3x de madrugada para poder elevar alguma contrução ou fazer tropas, para de manhã começar os ataques&#8230;</p>
+<p>Lembro de muitas madrugadas que passei acordado para atacar as pessoas, pois so de madrugada voce pode espiar, atacar, atacar de novo e de novo sem o jogador ver&#8230;</p>
+<p>Agora imagina se o Travian tivesse os scripts legalizados ? Para que eu vou levantar de madrugada se eu posso deixar tudo agendado ? O Jogo perde a graça&#8230;</p>
+<p>Mas deixando do jeito que tá, e as algumas pessoas roubando é a melhor solução ? Claro que não&#8230; Mas também não podemos generalizar e sair liberando&#8230;</p>
+<p>Desenvolver essa logica de Captcha para tentar detectar os &#8220;espertos&#8221; foi excelente&#8230; 🙂</p>
+<p>Mas cara, em qualquer jogo tem maneiras de burlar, até na vida real tem maneiras de burlar&#8230; Então é praticamente uma luta sem fim =P</p>
+<p>Estou pensando em voltar a jogar, mas eu vou tentar um servidor lento&#8230; BRx não dá&#8230; Se não vai me atrapalhar no trabalho =) Tem que ser um servidor para eu entrar de manhã e de noite, no máximo&#8230;<br />
+A dica é jogar em servidores estrageiros.. Tem bem menos pessoas jogando e eles não levam tão a sério&#8230; 😉</p>
+<p>Agora, você falou algo que é muito verdade&#8230; Todos esses jogos online, vence que mais paga gold&#8230; Isso sim é injustiça&#8230; Mas também tem solução&#8230; Já cansei de vencer jogadores que gastam muito com gold, só que são péssimos jogadores&#8230;</p>
+<p>Você ainda joga em algum servidor ?</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-8513">
+        <div id="dsq-comment-header-8513" class="dsq-comment-header">
+            <cite id="dsq-cite-8513">
+                <span id="dsq-author-user-8513">Marco Aurelio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8513" class="dsq-comment-body">
+            <div id="dsq-comment-message-8513" class="dsq-comment-message"><p>Marcelo&#8230;</p>
+<p>Nunca fui fã de Jogos, no entanto vim a conhecer o Travian atraves de um amigo e fiquei fissurado, primeiramente joguei o Portugues mas entrei la no mes final e pouco sabia sobre o jogo, mas mesmo assim ainda consegui fazer 3 ou 4 aldeias, aqui no Brasil estava começando o BRX1, isso mesmo o primeiro BRX. E atraves deste amigo entrei no BRX2, tambem era apenas um iniciante que ja sabia como fazer aldeias (heheheh), fui de Romano, No server3 a K@os ganhou da OFF ( 40.000 jogadores iniciais e final tinhas uns 20 mil Ativos e com no minino 3 a 4 mil online&#8230;) fiz varios amigos de todas as partes (Japao, Corea, Portugal, Argentinos e inclusive americanos) se não estou enganado tinha uma tribo inteira com jogadores somente Russos.</p>
+<p>Sempre fui um coadjuvante até o server 4 e 5, qdo então assumi uma tribo (Lider) e me tornei Help de um server.<br />
+A partir dai me tornei o Terror da Madrugada, Criei um Nick, mudei de tribo e fui ser Teotão e descobri o milagre do Gold, afinal ganhava Ouros por mes.</p>
+<p>A minha ultima participação, tinha mais de 180K de Barbaros e 80K Teutão, 22K Catas  12K Arietes e estava na WW qdo a mesma chegou a nivel 100, fiz a gravação e pasme na edição que foi para o Youtube não consta o meu Nick, mas ai eh outra historia.</p>
+<p>Pelo motivo da discordia Jogo, Familia ( a mulher disse ou Eu ou o Jogo ), resolvi parar e so voltei neste server atual, ai descobri que ja tinha o Speed5x voltei como Romano,<br />
+tomei 3 Bans (script de Ataques full) e estou numa das S&amp;D.</p>
+<p>Meu grande Nick &#8211; VERDUN<br />
+Quadrante &#8211; Sempre NE<br />
+Jogo pra Valer &#8211; Sempre Teutão.</p>
+<p>Amigos &#8211; Lindinha (Uma Grande Mulher), Rafael (Precisamos Conversar Mano), SydBoy (Grande Cara), Wesley xxDANxx, Taig, Perola Negra,  Nicolas, lazarus, Nina, Thiago (Grande Romano) e muitos outros.. que por incrivel que pareça, se foram os contatos.</p>
+<p>ABRAÇOS</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment byuser comment-author-rafael bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-8529">
+        <div id="dsq-comment-header-8529" class="dsq-comment-header">
+            <cite id="dsq-cite-8529">
+                <a id="dsq-author-user-8529" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8529" class="dsq-comment-body">
+            <div id="dsq-comment-message-8529" class="dsq-comment-message"><p>Quando eu jovaga ficava sempre no sudeste&#8230;<br />
+S&#038;D ainda existe ?</p>
+<p>Na época, jogava como HT&#8230; Foram os melhores durante anos no travian&#8230; Até que a liderança foi parando de jogar e a nova liderança bagunçou tudo e a aliança se desfez por completo&#8230;</p>
+<p>Quase repeti um período da faculdade por causa do travian&#8230; É meio complicado mesmo. Por ser um jogo muito envolvente, você acaba deixando a vida de lado e isso é ruim =/ sem contar com o dinheiro que eu gastava com gold&#8230;</p>
+<p>Por isso preferi cortar o mal pela raiz, então parei de jogar 😉</p>
+<p>Abraços,</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-8541">
+        <div id="dsq-comment-header-8541" class="dsq-comment-header">
+            <cite id="dsq-cite-8541">
+                <span id="dsq-author-user-8541">Marco Aurelio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8541" class="dsq-comment-body">
+            <div id="dsq-comment-message-8541" class="dsq-comment-message"><p>A S&amp;D tem tudo para sermos campeões (Estou na SD com o nick Sparkuss), ou seja pela N&#8230;esima vez  serão campeões.</p>
+<p>Na verdade os bons jogadores, aqueles que sabem jogar pararam e faz tempo.</p>
+<p>Estes são os Dados do Server Atual (16/02/2011 22:45)</p>
+<p>Jogadores registrados: 	1677<br />
+Jogadores ativos: 	1291<br />
+Jogadores online: 	153</p>
+<p>Maravilha do Mundo<br />
+	Jogador 	                Nome 	                        Aliança     	Nível<br />
+1. 	RoLo CoMpReSsOr 	(DR)*Dead Rabitts*         S&amp;D-PNG   	87<br />
+2. 	Freddy&amp;Praxix   	Riot Act 	                        S&amp;F &amp; ON 	84<br />
+3. 	King Teutobod         NE-POWER               	S&amp;D-PNG  	84<br />
+4. 	Mandraky         	WW-Guerreiros-S&amp;D 	S&amp;D-PNG  	66<br />
+5. 	Sonya Blade     	NW- Forever P&amp;W    	WW P&amp;W 	46<br />
+6. 	&#8211; Neo                	We are the CHAMPIONS 	S&amp;F &amp; ON 	38</p>
+<p>A segunda WW chegou a estar no nivel 99 e não conseguiu segurar a bronca, mas o interessante são as quantidades de jogadores ativos e Online.</p>
+<p>Mas voltando a nossa conversa, eu me lembro que para vc procurar uma crop9 ou 15 vc tinha que se utilizar de artificios, até aparecer um site que lhe ajudava, inclusive lhe mostrando os jogadores inativos.</p>
+<p>Hoje isto esta embutido na compra do Ouro Clube ($$$), que lhe dá muitas vantagens:</p>
+<p>&#8220;Você só será cobrado uma vez para entrar no Ouro Clube (50 ouro). Após isto você terá acesso a várias funcionalidades exclusivas. Algumas destas funções exclusivas serão gratuitas, outras custarão uma quantidade de Ouro por uso.</p>
+<p>Funções Ouro Clube gratuitas:</p>
+<p>    * Lista de assalto<br />
+    * Estatísticas de assalto<br />
+    * Deixar os mercadores irem 3 vezes<br />
+    * Procurar por Crop 9 e 15, incluindo oásis</p>
+<p>Funções Ouro Clube com determinado preço:</p>
+<p>    * Possibilitar até 3 construções simultâneas (1 ouro)<br />
+    * Rota de comércio automática entre as suas aldeias (2 ouro)<br />
+    * Esconder suas tropas de um ataque na floresta (1 ouro por fuga)<br />
+      (somente possível se nos últimos 10 segundos nenhuma tropa Estiver voltando)<br />
+    * Faça as tropas que estão retornando chegarem imediatamente (5 ouro )<br />
+      (não funciona para Senadores, Chefes, Colonizadores e catapultas ou para ataques chegando nas próximas 3 horas)&#8221;</p>
+<p>Ou seja, o que era proibido se tornou liberado desde que vc pague por isso.</p>
+<p>Abraços</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-8542">
+        <div id="dsq-comment-header-8542" class="dsq-comment-header">
+            <cite id="dsq-cite-8542">
+                <a id="dsq-author-user-8542" href="https://rafaelbiriba.com/blogwp.html" target="_blank" rel="nofollow">Rafael Biriba</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-8542" class="dsq-comment-body">
+            <div id="dsq-comment-message-8542" class="dsq-comment-message"><p>Eu parei de jogar um pouco depois de terem liberado esse ouro clube&#8230;<br />
+Cheguei ate a publicar algo sobre isso: <a href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html" rel="nofollow">https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html</a></p>
+<p>Mas realmente, se eles convertessem todas as funcionalidades dos scripts &#8220;ilegais&#8221; que temos hoje, em pacotes de ouro clube, ganhariam ainda mais dinheiro 😉</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-13608">
+        <div id="dsq-comment-header-13608" class="dsq-comment-header">
+            <cite id="dsq-cite-13608">
+                <span id="dsq-author-user-13608">joão</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-13608" class="dsq-comment-body">
+            <div id="dsq-comment-message-13608" class="dsq-comment-message"><p>não é possivel fazer com q estes scripts funcionem mais devagar, como se fosse uma pessoa a jogar?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-21715">
+        <div id="dsq-comment-header-21715" class="dsq-comment-header">
+            <cite id="dsq-cite-21715">
+                <span id="dsq-author-user-21715">Ritsukix</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21715" class="dsq-comment-body">
+            <div id="dsq-comment-message-21715" class="dsq-comment-message"><p>sim tem um modo bem pratico.. banda larga (não presta)<br />
+eu uso o molden ele e mais lento e bem melhor programo para ficar bola verde, fico on somente 2 horas por dia eo resto o bot faz por mim. na internet banda curta</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-21777">
+        <div id="dsq-comment-header-21777" class="dsq-comment-header">
+            <cite id="dsq-cite-21777">
+                <span id="dsq-author-user-21777">Marco Aurelio</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-21777" class="dsq-comment-body">
+            <div id="dsq-comment-message-21777" class="dsq-comment-message"><p>Tem tambem o Travian Babysitter</p>
+<p><a href="http://www.travianbabysitter.com/pt.html" rel="nofollow">http://www.travianbabysitter.com/pt.html</a></p>
+<p>Se vc configurar bem certinho nao terá problemas com os captchas.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="post pingback">
+        <p>Pingback: <a href='http://planeta-globo.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser/' rel='external nofollow' class='url'>5 bons motivos para você não perder tempo com travian ou outro jogo web browser | Planeta Globo.com</a>()</p>
+    </li>
+    </li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+	<aside id="text-569858663" class="widget widget_text">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- vertical blog -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="7274679989"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside></div><!-- #content-sidebar -->
+<div id="secondary">
+		<h2 class="site-description">Tecnologia e informação no lugar certo !</h2>
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="text-569858664" class="widget widget_text"><h1 class="widget-title">Blog Desatualizado</h1>			<div class="textwidget">Depois de muitos anos, está na hora de mudar!
+Em breve um novo blog, muito melhor e com mais conteúdo!
+Se você está lendo isso, tente acessar <a href="https://rafaelbiriba.com/blog" target="_blank">https://rafaelbiriba.com/blog</a> para ver se o novo blog já está disponível!! :)
+Previsão de ir online: Agosto/2016</div>
+		</aside><aside id="text-347930551" class="widget widget_text"><h1 class="widget-title">Sobre o Autor</h1>			<div class="textwidget"><img alt="" src="https://1.gravatar.com/avatar/908bb0e461d553752af1df7c5849df52?s=80&amp;d=&amp;r=G" class="avatar avatar-42 photo" height="80" width="80">
+<div style="text-align: justify;"><strong>Rafael Biriba</strong>: Full Stack Web Developer since 2008 with experience in the development field using technologies like Ruby on Rails, PHP, HTML5, Javascript (Jquery / Backbone.js), Video encoding and delivery (Flash Media Server, Wowza, ffmpeg tools), Database SQL and NoSQL (Mysql, MongoDB, Redis), Virtualization and automation using virtualbox. With knowledge of development techniques and practices such as TDD, Domain Driven Design and Object Oriented Design.</div></div>
+		</aside><aside id="github-profile-2" class="widget widget_github-profile"><aside><h1 class="widget-title">Github</h1><div class="github-widget" id="github-profile-2"><header class="github-widget-header"><img class="github-widget-company-logo" title="GitHub" src="https://assets-cdn.github.com/favicon.ico"/><div class="github-widget-header-text"><a class="github-widget-header-link" target="_blank" href="https://github.com/rafaelbiriba" title="View profile">rafaelbiriba (Rafael Biriba)</a></div></header><div class="github-widget-content"><a target="_blank" href="https://github.com/rafaelbiriba" title="View profile"><img class="github-profile-pic" src="https://avatars.githubusercontent.com/u/324743?v=3" style="border-radius: 5px"> <span class="github-names"> <p class="github-name">Rafael Biriba</p> <span class="github-username">rafaelbiriba</span> </span></a><div class="github-block github-vcard-stats"><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/followers"><strong class="github-vcard-stat-count">30</strong><span class="text-muted">Followers</span></a><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/following"><strong class="github-vcard-stat-count">9</strong><span class="text-muted">Following</span></a><div style="clear: both;"></div></div> </div></div></aside></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h1 class="widget-title">Nuvem de Tags</h1><div class="tagcloud"><a href='https://rafaelbiriba.com/tag/904' class='tag-link-127 tag-link-position-1' title='5 tópicos' style='font-size: 8pt;'>9.04</a>
+<a href='https://rafaelbiriba.com/tag/armazenamento' class='tag-link-76 tag-link-position-2' title='7 tópicos' style='font-size: 11.36pt;'>armazenamento</a>
+<a href='https://rafaelbiriba.com/tag/atualizando' class='tag-link-132 tag-link-position-3' title='5 tópicos' style='font-size: 8pt;'>atualizando</a>
+<a href='https://rafaelbiriba.com/tag/atualizar' class='tag-link-130 tag-link-position-4' title='10 tópicos' style='font-size: 15.28pt;'>atualizar</a>
+<a href='https://rafaelbiriba.com/tag/audio' class='tag-link-22 tag-link-position-5' title='10 tópicos' style='font-size: 15.28pt;'>audio</a>
+<a href='https://rafaelbiriba.com/tag/blog' class='tag-link-188 tag-link-position-6' title='15 tópicos' style='font-size: 19.76pt;'>blog</a>
+<a href='https://rafaelbiriba.com/tag/codec' class='tag-link-26 tag-link-position-7' title='12 tópicos' style='font-size: 17.24pt;'>codec</a>
+<a href='https://rafaelbiriba.com/tag/codigo' class='tag-link-46 tag-link-position-8' title='9 tópicos' style='font-size: 14.16pt;'>codigo</a>
+<a href='https://rafaelbiriba.com/tag/converter' class='tag-link-23 tag-link-position-9' title='12 tópicos' style='font-size: 17.24pt;'>converter</a>
+<a href='https://rafaelbiriba.com/tag/decifrar' class='tag-link-79 tag-link-position-10' title='5 tópicos' style='font-size: 8pt;'>decifrar</a>
+<a href='https://rafaelbiriba.com/tag/desenvolvimento' class='tag-link-487 tag-link-position-11' title='13 tópicos' style='font-size: 18.36pt;'>Desenvolvimento</a>
+<a href='https://rafaelbiriba.com/tag/disco' class='tag-link-16 tag-link-position-12' title='6 tópicos' style='font-size: 9.96pt;'>disco</a>
+<a href='https://rafaelbiriba.com/tag/estag' class='tag-link-173 tag-link-position-13' title='9 tópicos' style='font-size: 14.16pt;'>estag</a>
+<a href='https://rafaelbiriba.com/tag/estagio' class='tag-link-168 tag-link-position-14' title='12 tópicos' style='font-size: 17.24pt;'>estágio</a>
+<a href='https://rafaelbiriba.com/tag/faetec' class='tag-link-192 tag-link-position-15' title='8 tópicos' style='font-size: 12.76pt;'>faetec</a>
+<a href='https://rafaelbiriba.com/tag/ffmpeg' class='tag-link-484 tag-link-position-16' title='12 tópicos' style='font-size: 17.24pt;'>FFmpeg</a>
+<a href='https://rafaelbiriba.com/tag/game' class='tag-link-53 tag-link-position-17' title='5 tópicos' style='font-size: 8pt;'>game</a>
+<a href='https://rafaelbiriba.com/tag/globocom' class='tag-link-171 tag-link-position-18' title='10 tópicos' style='font-size: 15.28pt;'>globo.com</a>
+<a href='https://rafaelbiriba.com/tag/google' class='tag-link-40 tag-link-position-19' title='7 tópicos' style='font-size: 11.36pt;'>google</a>
+<a href='https://rafaelbiriba.com/tag/gravar' class='tag-link-24 tag-link-position-20' title='9 tópicos' style='font-size: 14.16pt;'>gravar</a>
+<a href='https://rafaelbiriba.com/tag/imagem' class='tag-link-29 tag-link-position-21' title='6 tópicos' style='font-size: 9.96pt;'>imagem</a>
+<a href='https://rafaelbiriba.com/tag/inscricao' class='tag-link-170 tag-link-position-22' title='14 tópicos' style='font-size: 19.2pt;'>inscrição</a>
+<a href='https://rafaelbiriba.com/tag/ist-rio' class='tag-link-191 tag-link-position-23' title='8 tópicos' style='font-size: 12.76pt;'>ist-rio</a>
+<a href='https://rafaelbiriba.com/tag/leitura' class='tag-link-80 tag-link-position-24' title='7 tópicos' style='font-size: 11.36pt;'>leitura</a>
+<a href='https://rafaelbiriba.com/tag/medieval' class='tag-link-55 tag-link-position-25' title='5 tópicos' style='font-size: 8pt;'>medieval</a>
+<a href='https://rafaelbiriba.com/tag/multimedia' class='tag-link-27 tag-link-position-26' title='13 tópicos' style='font-size: 18.36pt;'>multimedia</a>
+<a href='https://rafaelbiriba.com/tag/online' class='tag-link-51 tag-link-position-27' title='15 tópicos' style='font-size: 19.76pt;'>online</a>
+<a href='https://rafaelbiriba.com/tag/oportunidade' class='tag-link-169 tag-link-position-28' title='10 tópicos' style='font-size: 15.28pt;'>oportunidade</a>
+<a href='https://rafaelbiriba.com/tag/player' class='tag-link-34 tag-link-position-29' title='7 tópicos' style='font-size: 11.36pt;'>player</a>
+<a href='https://rafaelbiriba.com/tag/processo-seletivo' class='tag-link-172 tag-link-position-30' title='14 tópicos' style='font-size: 19.2pt;'>processo seletivo</a>
+<a href='https://rafaelbiriba.com/tag/ruby' class='tag-link-492 tag-link-position-31' title='10 tópicos' style='font-size: 15.28pt;'>Ruby</a>
+<a href='https://rafaelbiriba.com/tag/rubygems' class='tag-link-103 tag-link-position-32' title='8 tópicos' style='font-size: 12.76pt;'>rubygems</a>
+<a href='https://rafaelbiriba.com/tag/rubyonrails' class='tag-link-105 tag-link-position-33' title='5 tópicos' style='font-size: 8pt;'>rubyonrails</a>
+<a href='https://rafaelbiriba.com/tag/sistema' class='tag-link-133 tag-link-position-34' title='5 tópicos' style='font-size: 8pt;'>sistema</a>
+<a href='https://rafaelbiriba.com/tag/sistema-operacional' class='tag-link-12 tag-link-position-35' title='5 tópicos' style='font-size: 8pt;'>sistema operacional</a>
+<a href='https://rafaelbiriba.com/tag/stream' class='tag-link-25 tag-link-position-36' title='8 tópicos' style='font-size: 12.76pt;'>stream</a>
+<a href='https://rafaelbiriba.com/tag/tecnologia' class='tag-link-490 tag-link-position-37' title='17 tópicos' style='font-size: 21.44pt;'>Tecnologia</a>
+<a href='https://rafaelbiriba.com/tag/travian' class='tag-link-49 tag-link-position-38' title='6 tópicos' style='font-size: 9.96pt;'>travian</a>
+<a href='https://rafaelbiriba.com/tag/ubuntu' class='tag-link-11 tag-link-position-39' title='9 tópicos' style='font-size: 14.16pt;'>ubuntu</a>
+<a href='https://rafaelbiriba.com/tag/versao' class='tag-link-129 tag-link-position-40' title='8 tópicos' style='font-size: 12.76pt;'>versão</a>
+<a href='https://rafaelbiriba.com/tag/video' class='tag-link-21 tag-link-position-41' title='18 tópicos' style='font-size: 22pt;'>video</a>
+<a href='https://rafaelbiriba.com/tag/virtual' class='tag-link-17 tag-link-position-42' title='6 tópicos' style='font-size: 9.96pt;'>virtual</a>
+<a href='https://rafaelbiriba.com/tag/web' class='tag-link-15 tag-link-position-43' title='16 tópicos' style='font-size: 20.6pt;'>web</a>
+<a href='https://rafaelbiriba.com/tag/web-browser' class='tag-link-56 tag-link-position-44' title='6 tópicos' style='font-size: 9.96pt;'>web browser</a>
+<a href='https://rafaelbiriba.com/tag/wordpress' class='tag-link-494 tag-link-position-45' title='13 tópicos' style='font-size: 18.36pt;'>Wordpress</a></div>
+</aside><aside id="wp_related_posts_widget" class="widget widget_wp_related_posts">
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h1 class="widget-title">Leia também:</h1><ul class="related_post wp_rp"><li data-position="0" data-poid="in-435" data-post-type="none" ><small class="wp_rp_publish_date">08/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" class="wp_rp_title">Travian: Greasemonkey e seus Scripts</a></li><li data-position="1" data-poid="in-726" data-post-type="none" ><small class="wp_rp_publish_date">17/05/2009</small> <a href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" class="wp_rp_title">Travian versão 3.5: Fim do greasemonkey e seus scripts ? </a></li><li data-position="2" data-poid="in-1771" data-post-type="none" ><small class="wp_rp_publish_date">01/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html" class="wp_rp_title">Travian 3.6: Nova versão veio para assustar</a></li><li data-position="3" data-poid="in-229" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/28/travian-jogo-online-multiplayer.html" class="wp_rp_title">Travian: Jogo Online Multiplayer</a></li><li data-position="4" data-poid="in-2956" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser.html" class="wp_rp_title">5 bons motivos para você não perder tempo com travian ou outro jogo web browser</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		<div class="cbd"></div>
+		<script src="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded//shutter-reloaded.js?ver=2.5" type="text/javascript"></script>
+	<script type="text/javascript">
+	var shutterSettings = {"imgDir":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/shutter-reloaded\/\/menu\/","imageCount":true,"FS":false,"textBtns":true,"oneSet":true};
+	try{}catch(e){}	</script>
+	
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+								<a href="https://br.wordpress.org/">Orgulhosamente mantido com WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	
+<script type="text/javascript"><!--
+wpa2a.targets=[
+{title:"Captcha no Travian: Ser\u00e1 o fim dos scripts ?",url:"https://rafaelbiriba.com/2010/09/08/captcha-no-travian-sera-o-fim-dos-scripts.html"}];
+wpa2a.html_done=true;if(wpa2a.script_ready&&!wpa2a.done)wpa2a.init();wpa2a.script_load();
+//--></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var scriptParams = {"google_search_engine_id":"partner-pub-1303939561252359:5952361189"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/assets/js/google_cse_v2.js?ver=1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Enviando ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.2'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/comment-reply.min.js?ver=4.5.3'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/wp-embed.min.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"platform":"wordpress@4.5.3","language":""},"disqusIdentifier":"2216 http:\/\/www.rafaelbiriba.com\/?p=2216","disqusShortname":"rafaelbiriba","disqusTitle":"Captcha no Travian: Ser\u00e1 o fim dos scripts ?","disqusUrl":"http:\/\/www.rafaelbiriba.com\/2010\/09\/08\/captcha-no-travian-sera-o-fim-dos-scripts.html","options":{"manualSync":false},"postId":"2216"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/disqus.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"rafaelbiriba"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/count.js?ver=4.5.3'></script>
+</body>
+</html>

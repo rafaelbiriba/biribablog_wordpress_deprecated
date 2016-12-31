@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="pt-BR" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<!--<![endif]-->
+<head>
+<base href="https://rafaelbiriba.com/blogwp.html" />
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Tecnologia | Rafael Biriba Blog - Part 2</title>
+	
+	
+	<!--[if lt IE 9]>
+	<script src="https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	
+<!-- All in One SEO Pack 2.3.8 by Michael Torbert of Semper Fi Web Design[576,626] -->
+<meta name="keywords"  content="dhcp,host,maquina,nat,network,rede,vbox,vboxnet0,virtual,virtualbox,virtualização,vm,aplicativos,redes,tecnologia,blog,estatísticas,leitura,post,retrospectiva,diversos,abnt2,configurar,linux,teclado,ubuntu,vmware,vmware-server-console,sistemas operacionais,instalação,armazenamento,codificação,codigo,código de barras,decifrar,kaywa,qr,qr code,scanner,desenvolvimento,google chart api,celular,extrair,imagem" />
+<meta name="robots" content="noindex,follow" />
+
+
+<link rel="canonical" href="https://rafaelbiriba.com/category/tecnologia/page/2" />
+<!-- /all in one seo pack -->
+
+
+
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.rafaelbiriba.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wgs-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/wgs.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='https://rafaelbiriba.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/style.css?ver=4.5.3' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='github-profile-octicons-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/octicons/octicons.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='github-profile-widget-styles-css'  href='https://rafaelbiriba.com/wp-content/plugins/github-profile-widget/css/widget.css?ver=4.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='A2A_SHARE_SAVE-css'  href='https://rafaelbiriba.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.12' type='text/css' media='all' />
+<link rel='stylesheet' id='fbSEOStylesheet-css'  href='https://rafaelbiriba.com/wp-content/plugins/seo-facebook-comments/assets/fbseo-style.css?ver=4.5.3' type='text/css' media='all' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.2 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-7346716-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/content-slide/js/coin-slider.js?ver=4.5.3'></script>
+<link rel='https://api.w.org/' href='https://rafaelbiriba.com/wp-json/' />
+
+ 
+
+
+<script type="text/javascript"><!--
+var a2a_config=a2a_config||{},wpa2a={done:false,html_done:false,script_ready:false,script_load:function(){var a=document.createElement('script'),s=document.getElementsByTagName('script')[0];a.type='text/javascript';a.async=true;a.src='https://static.addtoany.com/menu/page.js';s.parentNode.insertBefore(a,s);wpa2a.script_load=function(){};},script_onready:function(){wpa2a.script_ready=true;if(wpa2a.html_done)wpa2a.init();},init:function(){for(var i=0,el,target,targets=wpa2a.targets,length=targets.length;i<length;i++){el=document.getElementById('wpa2a_'+(i+1));target=targets[i];a2a_config.linkname=target.title;a2a_config.linkurl=target.url;a2a_config.linkmedia=target.media;if(el){a2a.init('page',{target:el});el.id='';}wpa2a.done=true;}wpa2a.targets=[];}};a2a_config.callbacks=a2a_config.callbacks||[];a2a_config.callbacks.push({ready:wpa2a.script_onready});a2a_config.templates=a2a_config.templates||{};a2a_localize = {
+	Share: "Compartilhar",
+	Save: "Salvar",
+	Subscribe: "Inscrever",
+	Email: "Email",
+	Bookmark: "Favoritos",
+	ShowAll: "Mostrar tudo",
+	ShowLess: "Mostrar menos",
+	FindServices: "Procurar serviço(s)",
+	FindAnyServiceToAddTo: "Encontrar rapidamente qualquer serviço para",
+	PoweredBy: "Serviço fornecido por",
+	ShareViaEmail: "Share via email",
+	SubscribeViaEmail: "Subscribe via email",
+	BookmarkInYourBrowser: "Adicionar aos favoritos",
+	BookmarkInstructions: "Press Ctrl+D or \u2318+D to bookmark this page",
+	AddToYourFavorites: "Adicionar a favoritos",
+	SendFromWebOrProgram: "Send from any email address or email program",
+	EmailProgram: "Email program",
+	More: "More&#8230;"
+};
+
+//--></script>
+<script type="text/javascript">
+	var $jquery = jQuery.noConflict(); 
+	$jquery(document).ready(function() 
+	{
+		$jquery('#wpcontent_slider').coinslider(
+	{ 
+	width: 980, 
+	height: 370, 
+	spw: 7, 
+	sph: 5, 
+	delay: 3000, 
+	sDelay: 30, 
+	opacity: 0.7, 
+	titleSpeed: 500, 
+	effect: 'random', 
+	navigation: true, 
+	links : true, 
+	hoverPause: true });
+		});
+	</script>
+<style type="text/css" media="screen">
+		
+#wpcontent_slider_container
+{
+	overflow: hidden; position: relative; padding:0px;margin:0px; text-align:center; width:980px !important;
+	height:370px !important;
+}
+#wpcontent_slider 
+{ overflow: hidden; position: relative; font-family:\'Trebuchet MS\', Helvetica, sans-serif;border:0px solid #ffffff; text-align:left;}
+#wpcontent_slider a,#wpcontent_slider a img { border: none; text-decoration: none; outline: none; }
+#wpcontent_slider h4,#wpcontent_slider h4 a 
+{margin: 0px;padding: 0px; font-family: 'Trebuchet MS', Helvetica, sans-serif;
+text-decoration:none;font-size: 18px; color:#ffffff;}
+#wpcontent_slider .cs-title {width: 100%;padding: 10px; background: #ffffff; color: #000000; font-family: 'Trebuchet MS', Helvetica, sans-serif; font-size: 12px; letter-spacing: normal;line-height: normal;}
+#wpcontent_slider_container .cs-prev,#wpcontent_slider_container .cs-next {font-weight: bold;background: #000000;
+font-size: 28px; font-family: "Courier New", Courier, monospace; color: #ffffff !important;
+padding: 0px 10px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;}
+#wpcontent_slider_container .cs-buttons { font-size: 0px; padding: 10px 0px 10px 0px;
+margin:0px auto; float:left;clear:left;
+}
+#wpcontent_slider_container .cs-buttons a { outline:none; margin-left: 5px; height: 10px; width: 10px; float: left; border: 1px solid #000000; color: #000000; text-indent: -1000px; 
+}
+#wpcontent_slider_container .cs-active { background-color: #000000; color: #FFFFFF; }
+#wpcs_link_love,#wpcs_link_love a{display:none;}
+</style>
+<!-- End Content Slider Settings -->
+
+
+		<style type="text/css">
+			.cbd {
+				position: fixed;
+				left: 5px;
+				bottom: 5px;
+			}
+			.cbd a img {
+				border: 0;
+			}
+		</style>
+	<meta property='fb:admins' content='1644160548' /><meta property='og:title' content='Aplicativos - Rafael Biriba Blog' /><meta property='og:site_name' content='Rafael Biriba Blog' /><meta property='og:url' content='https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html' /><meta property='og:type' content='article' /><meta property='fb:app_id' content='589867447707428'>
+	<link rel="stylesheet" href="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded/shutter-reloaded.css?ver=2.4" type="text/css" media="screen" />
+	<style type='text/css'>
+div#shNavBar a {color: #000000;}
+div#shNavBar {background-color:#ffff00;}
+div#shNavBar {color:#000000;}
+div#shDisplay div#shTitle {color:#ffff00;}
+</style>
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "https://rafaelbiriba.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.6';
+	window._wp_rp_post_id = '1875';
+	window._wp_rp_num_rel_posts = '5';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = 'VirtualBox%3A+VMs+com+IPs+est%C3%A1ticos+e+internet+de+maneira+simples';
+	window._wp_rp_post_tags = ['dhcp', 'vboxnet0', 'host', 'virtual', 'maquina', 'virtualbox', 'nat', 'virtualiza%C3%A7%C3%A3o', 'network', 'vm', 'rede', 'vbox', 'redes', 'tecnologia', 'virtualiza%C3%A7%C3%A3o', 'aplicativos', 'quanto', 'foi', 'rede', 'alm', 'uma', 'voc', 'googl', 'sem', 'ela', 'internet', 'virtualbox', 'na', 'ssh', 'de', 'toda'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="https://wprp.zemanta.com/static/js/loader.js?version=3.6" async></script>
+</head>
+
+<body class="archive paged category category-tecnologia category-73 paged-2 category-paged-2 masthead-fixed list-view">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="https://rafaelbiriba.com/blogwp.html" rel="home">Rafael Biriba Blog</a></h1>
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">Pesquisar</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">Menu principal</button>
+				<a class="screen-reader-text skip-link" href="#content">Pular para o conteúdo</a>
+				<div id="primary-menu" class="nav-menu"><ul><li class="page_item page-item-3171"><a href="https://rafaelbiriba.com/search_gcse">Busca</a></li><li class="page_item page-item-101"><a href="https://rafaelbiriba.com/contatos">Contatos</a></li><li class="page_item page-item-1251"><a href="https://rafaelbiriba.com/twitter">Twitter</a></li></ul></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get"
+    class="search-form" action="https://rafaelbiriba.com//search_gcse">
+    <div>
+        <label class="screen-reader-text" for="s"></label>
+        <input type="text" value="" name="q" id="q" />
+        <input type="submit" id="searchsubmit"
+            value="Pesquisar" />
+    </div>
+</form>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+
+	<section id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+			
+			<header class="archive-header">
+				<h1 class="archive-title">Arquivo da categoria: Tecnologia</h1>
+
+							</header><!-- .archive-header -->
+
+			
+<article id="post-1875" class="post-1875 post type-post status-publish format-standard hentry category-aplicativos category-redes category-tecnologia category-virtualizacao-tecnologia tag-dhcp tag-host tag-maquina tag-nat tag-network tag-rede tag-vbox tag-vboxnet0 tag-virtual tag-virtualbox tag-virtualizacao tag-vm">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/aplicativos" rel="category tag">Aplicativos</a>, <a href="https://rafaelbiriba.com/category/redes" rel="category tag">Redes</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a>, <a href="https://rafaelbiriba.com/category/tecnologia/virtualizacao-tecnologia" rel="category tag">Virtualização</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" rel="bookmark">VirtualBox: VMs com IPs estáticos e internet de maneira simples</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" rel="bookmark"><time class="entry-date" datetime="2010-02-22T08:30:07+00:00">22/02/2010</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html#comments"><span class="dsq-postid" data-dsqidentifier="1875 https://rafaelbiriba.com/?p=1875">182 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+<p style="text-align: justify;"><img class="size-full wp-image-1877 alignleft" title="virtualbox-image" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png" alt="virtualbox-image" width="256" height="256" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image.png 256w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtualbox-image-150x150.png 150w" sizes="(max-width: 256px) 100vw, 256px" />Tem certas coisas que você só aprende tentando&#8230; Mas esse assunto foi muito além desse princípio.</p>
+<p style="text-align: justify;">Durante toda a semana, procurei por soluções para colocar 2 máquinas virtuais acessíveis pela minha máquina hospedeira, com ip fixo e com internet.</p>
+<p style="text-align: justify;">O que acontece é o seguinte: Quem possui as versões mais atuais do virtualbox (a minha é a 3.1.2), possui uma opção de adaptador de rede, que se chama <strong>host-only</strong>. Ela cria uma conexão de rede em seu sistema hospedeiro, e utiliza um DHCP próprio para gerenciar as VMs, e com isso você consegue tanto utilizar internet, quanto se comunicar entre máquina real e máquina virtual.</p>
+<p style="text-align: justify;">O problema é que preciso garantir que estou dando SSH para a VM certa. O DHCP pode comprometer essa garantia.</p>
+<p style="text-align: justify;">O que tentei fazer&#8230; Atribuir um ip fixo na máquina virtual. Mas sem utilizar o DHCP, faz com que a VM fique sem conectividade com a internet.</p>
+<p style="text-align: justify;">Procurando pelo google, vi várias soluções que se resumiam em criar interfaces de redes virtuais para cada VM e compartilhando a conexão de internet entre elas, alterando tudo no arquivo <strong>/etc/netwotk/interfaces</strong> (ubuntu) e mais algumas outras coisas.</p>
+<p style="text-align: justify;">Eu não só testei várias soluções, como nenhuma delas funcionou, e ainda fiquei com alguns problemas de rede, mas que foram facilmente resolvidos.</p>
+<p style="text-align: justify;">Não querendo complicar uma coisa tão simples, consegui achar uma solução que resolve tudo com apenas alguns cliques, sem alterar nenhuma configuração e nem arriscar problemas na sua rede atual (<strong>eth0</strong>) =D</p>
+<p style="text-align: justify;">Então, vamos para a <span style="color: #ff0000;"><strong>solução final</strong></span>:</p>
+<p style="text-align: justify;">Existe uma outra opção para sua interface de rede no virtualbox: NAT. Ela atribui um IP para sua VM, que é inacessível não só entre a maquina real e a virtual, quanto entre as máquinas virtuais também&#8230; Essa opção apenas libera o acesso à internet para a VM.</p>
+<p style="text-align: justify;">A solução foi utilizar 2 interfaces de rede para cada VM. A primeira interface foi definida como <strong>NAT</strong> e a segunda como <strong>host-only</strong>. A ordem é importante&#8230; Certifique-se que a primeira interface é a NAT. Também é necessário <span style="color: #ff0000;">desativar o DHCP</span> <span style="color: #ff0000;">do host-only</span> (Vá em Arquivo &gt; Preferências &gt; Rede &gt; &#8220;Edite a Rede Virtual do Host-Only&#8221; &gt; &#8220;Na aba Servidor DHCP, desmarque a opção Habilitar Servidor&#8221;).</p>
+<p style="text-align: justify;">Feito isso, inicie a VM e atribua um IP fixo para a interface que utiliza o host-only&#8230; E como eu disse acima, essa interface com ip fixo fica acessível entre as máquinas virtuais e a real, perdendo apenas a conexão com a internet. Mas como você configurou uma interface NAT anteriormente, o problema está resolvido! 🙂</p>
+<p><img class="aligncenter size-full wp-image-1893" title="virtual-box-rede-2-interfaces" src="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg" alt="virtual-box-rede-2-interfaces" width="434" height="77" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces.jpg 434w, https://rafaelbiriba.com/wp-content/uploads/2010/01/virtual-box-rede-2-interfaces-300x53.jpg 300w" sizes="(max-width: 434px) 100vw, 434px" /></p>
+<p style="text-align: justify;">A imagem acima é um pedaço da descrição de uma das minhas máquinas virtuais que rodam num virtualbox para windows. A idéia é a mesma tanto para windows quanto para linux. 😉</p>
+<p style="text-align: justify;"><strong>Curiosidade:</strong> Note que no windows o nome do adaptador de rede para o host-only é &#8220;VirtualBox Host-Only Ethernet Adapter&#8221; e no linux é &#8220;vboxnet0&#8221;.</p>
+<p style="text-align: justify;"><strong>Dica rápida: </strong>Se o seu virtualbox foi instalado pelo aptitude/synaptic do ubuntu (linux), certamente você possui uma versão velha e com poucos recursos&#8230; Sugiro baixar uma versão mais atual no site do <a title="http://www.virtualbox.org" href="http://www.virtualbox.org" target="_blank">virtualbox</a>.</p>
+<p style="text-align: justify;">Se conseguir uma outra solução, não deixe de compartilhar aqui! 🙂<br />Espero ter ajudado !</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_1"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html" data-text="VirtualBox: VMs com IPs estáticos e internet de maneira simples"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F02%2F22%2Fvirtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html&amp;linkname=VirtualBox%3A%20VMs%20com%20IPs%20est%C3%A1ticos%20e%20internet%20de%20maneira%20simples" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a>
+<script type="text/javascript"><!--
+if(wpa2a)wpa2a.script_load();
+//--></script>
+</div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/dhcp" rel="tag">dhcp</a><a href="https://rafaelbiriba.com/tag/host" rel="tag">host</a><a href="https://rafaelbiriba.com/tag/maquina" rel="tag">maquina</a><a href="https://rafaelbiriba.com/tag/nat" rel="tag">nat</a><a href="https://rafaelbiriba.com/tag/network" rel="tag">network</a><a href="https://rafaelbiriba.com/tag/rede" rel="tag">rede</a><a href="https://rafaelbiriba.com/tag/vbox" rel="tag">vbox</a><a href="https://rafaelbiriba.com/tag/vboxnet0" rel="tag">vboxnet0</a><a href="https://rafaelbiriba.com/tag/virtual" rel="tag">virtual</a><a href="https://rafaelbiriba.com/tag/virtualbox" rel="tag">virtualbox</a><a href="https://rafaelbiriba.com/tag/virtualizacao" rel="tag">virtualização</a><a href="https://rafaelbiriba.com/tag/vm" rel="tag">vm</a></span></footer></article><!-- #post-## -->
+
+<article id="post-1847" class="post-1847 post type-post status-publish format-standard hentry category-diversos category-tecnologia tag-blog tag-estatisticas tag-leitura tag-post tag-retrospectiva tag-tecnologia">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/diversos" rel="category tag">Diversos</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html" rel="bookmark">Retrospectiva 2009: Os posts mais visitados do blog</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html" rel="bookmark"><time class="entry-date" datetime="2010-01-02T11:24:31+00:00">02/01/2010</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html#comments"><span class="dsq-postid" data-dsqidentifier="1847 https://rafaelbiriba.com/?p=1847">4 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+
+<figure id="attachment_1846" style="width: 500px" class="wp-caption aligncenter"><img class="size-full wp-image-1846" title="2009" src="https://rafaelbiriba.com/wp-content/uploads/2009/12/2009.jpg" alt="Retrospectiva do Blog 2009" width="500" height="324" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/12/2009.jpg 500w, https://rafaelbiriba.com/wp-content/uploads/2009/12/2009-300x194.jpg 300w" sizes="(max-width: 500px) 100vw, 500px" /><figcaption class="wp-caption-text">Retrospectiva do Blog 2009</figcaption></figure>
+
+<p>Primeiro post de 2010! Nada melhor que uma retrospectiva dos melhores posts do ano passado, para começar este ano bem.</p>
+<p>Os dados foram obtidos cruzando os valores das estatísticas de alguns plugins do wordpress com o google analytics no período de fevereiro à dezembro/2009.</p>
+<p>Filtrei alguns posts, para não indicar muitos links com mesmo conteúdo, assim agradamos a todos&#8230;</p>
+<p>Então, segue a listagem dividida por &#8220;categorias&#8221;:</p>
+<h3>Os mais lidos pelo feed:</h3>
+<p><a title="https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html" href="https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html" target="_blank">Palestra: Vídeos para Internet (XIII Semana Tecnológica do IST-Rio)</a> (491 leituras)</p>
+<p><a title="https://rafaelbiriba.com/2009/10/15/off-topic-blogueiros-de-todo-o-mundo-contra-as-mudancas-climaticas-blog-action-day.html" href="https://rafaelbiriba.com/2009/10/15/off-topic-blogueiros-de-todo-o-mundo-contra-as-mudancas-climaticas-blog-action-day.html" target="_blank">[off-topic] Blogueiros de todo o mundo contra as mudanças climáticas (Blog Action Day)</a> (483 leituras)</p>
+<p><a title="https://rafaelbiriba.com/2009/10/13/evento-xiii-semana-tecnologica-e-cultural-do-ist-rio.html" href="https://rafaelbiriba.com/2009/10/13/evento-xiii-semana-tecnologica-e-cultural-do-ist-rio.html" target="_blank">Evento: XIII Semana Tecnológica e Cultural do IST-Rio</a> (436 leituras)</p>
+<p><a title="https://rafaelbiriba.com/2009/10/30/ist-rio-inscricoes-abertas-vestibular-2010-1%c2%ba-semestre.html" href="https://rafaelbiriba.com/2009/10/30/ist-rio-inscricoes-abertas-vestibular-2010-1%c2%ba-semestre.html" target="_blank">IST-Rio: Inscrições abertas &#8211; Vestibular 2010: 1º semestre</a> (399 leituras)</p>
+<p><a title="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" target="_blank">Ubuntu 9.10: Disponível para Download ou Atualização</a> (388 leituras)</p>
+<p><a title="https://rafaelbiriba.com/2009/11/28/tunneling-com-tsocks.html" href="https://rafaelbiriba.com/2009/11/28/tunneling-com-tsocks.html" target="_blank">Tunneling com Tsocks</a> (381 leituras)</p>
+<h3>Os mais visitados</h3>
+<p><a title="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" href="https://rafaelbiriba.com/2009/04/08/travian-greasemonkey-e-seus-scripts.html" target="_blank">Travian: Greasemonkey e seus Scripts</a> (2856 visitas únicas)</p>
+<p><a title="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" target="_blank">Travian versão 3.5: Fim do greasemonkey e seus scripts ?</a> (1266 visitas únicas)</p>
+<p><a title="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html" href="https://rafaelbiriba.com/2009/12/01/travian-36-nova-versao-veio-para-assustar.html" target="_blank">Travian 3.6: Nova versão veio para assustar</a> (637 visitas únicas)</p>
+<p><a title="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" href="https://rafaelbiriba.com/2009/10/29/ubuntu-910-disponivel-para-download-e-atualizacao.html" target="_blank">Ubuntu 9.10: Disponível para Download ou Atualização</a> (420 visitas únicas)</p>
+<p><a title="https://rafaelbiriba.com/2009/06/08/globocom-aberta-as-inscricoes-para-o-programa-de-estagio.html" href="https://rafaelbiriba.com/2009/06/08/globocom-aberta-as-inscricoes-para-o-programa-de-estagio.html" target="_blank">Globo.com: Aberta as inscrições para o programa de estágio</a> (309 visitas únicas)</p>
+<h3>Os mais comentados:</h3>
+<p><a title="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" target="_blank">Travian versão 3.5: Fim do greasemonkey e seus scripts ?</a> (75 comentários)</p>
+<p><a title="https://rafaelbiriba.com/2009/06/08/globocom-aberta-as-inscricoes-para-o-programa-de-estagio.html" href="https://rafaelbiriba.com/2009/06/08/globocom-aberta-as-inscricoes-para-o-programa-de-estagio.html" target="_blank">Globo.com: Aberta as inscrições para o programa de estágio</a> (68 comentários)</p>
+<p><a title="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" href="https://rafaelbiriba.com/2009/05/17/travian-versao-35-fim-do-greasemonkey-e-seus-scripts.html" target="_blank">Travian versão 3.5: Fim do greasemonkey e seus scripts ?</a> (41 comentários)</p>
+<p><a title="https://rafaelbiriba.com/2009/05/21/newsletter-para-o-wordpress-271.html" href="https://rafaelbiriba.com/2009/05/21/newsletter-para-o-wordpress-271.html" target="_blank">Newsletter para o WordPress 2.7.1</a> (28 comentários)</p>
+<p><strong>Agora, segue algumas curiosidades:</strong></p>
+<h3>Os que eu mais gostei de escrever:</h3>
+<p><a title="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" href="https://rafaelbiriba.com/2009/03/16/ffmpeg-conversao-de-mp4-para-wmv.html" target="_blank">FFmpeg: Conversão de mp4 para wmv</a></p>
+<p><a title="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" href="https://rafaelbiriba.com/2009/02/19/mplayer-rotacionando-um-video.html" target="_blank">Mplayer: Rotacionando um Vídeo</a></p>
+<p><a title="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" href="https://rafaelbiriba.com/2009/02/11/ffmpeg-extraindo-imagens-de-um-video-snapshot.html" target="_blank">FFmpeg: Extraindo imagens de um vídeo ( Snapshot )</a></p>
+<p><a title="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" target="_blank">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></p>
+<h3>Os que mais resolveram problemas de amigos:</h3>
+<p><a title="https://rafaelbiriba.com/2009/05/21/newsletter-para-o-wordpress-271.html" href="https://rafaelbiriba.com/2009/05/21/newsletter-para-o-wordpress-271.html" target="_blank">Newsletter para o WordPress 2.7.1</a></p>
+<p><a title="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" target="_blank">Ubuntu: Não foi possível resolver ‘br.archive.ubuntu.com’</a></p>
+<p><a title="https://rafaelbiriba.com/2009/06/22/pidgin-255-problemas-para-conectar-no-yahoo-messenger.html" href="https://rafaelbiriba.com/2009/06/22/pidgin-255-problemas-para-conectar-no-yahoo-messenger.html" target="_blank">Pidgin 2.5.5: Problemas para conectar no Yahoo Messenger</a></p>
+<p><a title="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" target="_blank">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</a></p>
+<h3>Rapidinhas&#8230;</h3>
+<p>O primeiro do blog: <a title="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" href="https://rafaelbiriba.com/2009/02/06/windows-xp-vs-linux-ubuntu.html" target="_blank">Windows XP vs Linux UBUNTU</a></p>
+<p>O mais recente:  <a title="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" target="_blank">Feliz ano novo com javascript !</a></p>
+<p>O mais rico em conteúdo: <a title="https://rafaelbiriba.com/2009/12/16/pesquisa-cientifica-seguranca-digital.html" href="https://rafaelbiriba.com/2009/12/16/pesquisa-cientifica-seguranca-digital.html" target="_blank">Pesquisa científica: Segurança Digital</a> (A pesquisa foi elaborada durante um período inteiro na faculdade)</p>
+<p>O mais trabalhoso: <a title="https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html" href="https://rafaelbiriba.com/2009/10/25/palestra-videos-para-internet-xiii-semana-tecnologica-do-ist-rio.html" target="_blank">Palestra: Vídeos para Internet (XIII Semana Tecnológica do IST-Rio)</a> (A limitação do youtube quanto a duração do vídeo, me fez perder muito tempo, até utilizar o vimeo.com)</p>
+<h3>Estatística do Blog:</h3>
+<p>Em dezembro/2009:<br />Visitantes: 3671<br /> Páginas visualizadas: 10210</p>
+<p>No ano 2009:<br />Total de visitantes: 23846<br />Páginas visualizadas: 56537</p>
+<p><strong>Então é isso aí&#8230;</strong> Esse ano, pretendo trazer ainda mais informações para vocês&#8230;</p>
+<p>Aproveite e assine a newsletter: <a title="https://rafaelbiriba.com/newsletter" href="https://rafaelbiriba.com/newsletter" target="_blank">https://rafaelbiriba.com/newsletter</a></p>
+<p>Feliz ano novo! 😉</p>
+<p>&nbsp;</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_2"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html" data-text="Retrospectiva 2009: Os posts mais visitados do blog"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F02%2Fretrospectiva-2009-os-posts-mais-visitados-do-blog.html&amp;linkname=Retrospectiva%202009%3A%20Os%20posts%20mais%20visitados%20do%20blog" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F01%2F02%2Fretrospectiva-2009-os-posts-mais-visitados-do-blog.html&amp;linkname=Retrospectiva%202009%3A%20Os%20posts%20mais%20visitados%20do%20blog" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/blog" rel="tag">blog</a><a href="https://rafaelbiriba.com/tag/estatisticas" rel="tag">estatísticas</a><a href="https://rafaelbiriba.com/tag/leitura" rel="tag">leitura</a><a href="https://rafaelbiriba.com/tag/post" rel="tag">post</a><a href="https://rafaelbiriba.com/tag/retrospectiva" rel="tag">retrospectiva</a><a href="https://rafaelbiriba.com/tag/tecnologia" rel="tag">Tecnologia</a></span></footer></article><!-- #post-## -->
+
+<article id="post-1178" class="post-1178 post type-post status-publish format-standard hentry category-aplicativos category-sistemas-operacionais category-tecnologia category-ubuntu-sistemas-operacionais category-virtualizacao-tecnologia tag-abnt2 tag-configurar tag-linux tag-teclado tag-ubuntu tag-vmware tag-vmware-server-console">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/aplicativos" rel="category tag">Aplicativos</a>, <a href="https://rafaelbiriba.com/category/sistemas-operacionais" rel="category tag">Sistemas Operacionais</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a>, <a href="https://rafaelbiriba.com/category/sistemas-operacionais/ubuntu-sistemas-operacionais" rel="category tag">Ubuntu</a>, <a href="https://rafaelbiriba.com/category/tecnologia/virtualizacao-tecnologia" rel="category tag">Virtualização</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" rel="bookmark">Ubuntu: Configurando teclado ABNT2 no vmware-server-console</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" rel="bookmark"><time class="entry-date" datetime="2009-08-22T16:19:24+00:00">22/08/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html#comments"><span class="dsq-postid" data-dsqidentifier="1178 https://rafaelbiriba.com/?p=1178">7 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure>
+
+<p>&nbsp;</p>
+<p style="text-align: justify;">Um dos problemas que eu acho extremamente chato, é não poder usar as setas, o ctrl, a barra e outras teclas não habilitadas no vmware-server-console. Você pode ler sobre a instalação do console no ubuntu, <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">clicando aqui</a>.</p>
+<p style="text-align: justify;">Se você der uma pesquisada no google, rapidamente vai encontrar formas de resolver o problema. Uma delas é fazer o mapeamento das teclas que devem ser inseridas na configuração do vmware.</p>
+<p style="text-align: justify;">A questão é onde está o arquivo de configuração. Isso depende de como você <a title="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" target="_blank">instalou</a> o vmware.<br />No meu caso está em <span style="color: #ff0000;">/etc/vmware-server-console/config</span>.</p>
+<p style="text-align: justify;">Adicionem as seguintes linhas no final do arquivo de configuração: <br />(<strong>OBS</strong>: Tem que ser root para fazer a alteração e certifique-se que o vmware não está aberto)</p>
+<p style="text-align: justify;"><strong>xkeymap.keycode.108 = 0x138 # Alt_R<br />xkeymap.keycode.106 = 0x135 # KP_Divide<br />xkeymap.keycode.104 = 0x11c # KP_Enter<br />xkeymap.keycode.111 = 0x148 # Up<br />xkeymap.keycode.116 = 0x150 # Down<br />xkeymap.keycode.113 = 0x14b # Left<br />xkeymap.keycode.114 = 0x14d # Right<br />xkeymap.keycode.105 = 0x11d # Control_R<br />xkeymap.keycode.118 = 0x152 # Insert<br />xkeymap.keycode.119 = 0x153 # Delete<br />xkeymap.keycode.110 = 0x147 # Home<br />xkeymap.keycode.115 = 0x14f # End<br />xkeymap.keycode.112 = 0x149 # Prior<br />xkeymap.keycode.117 = 0x151 # Next<br />xkeymap.keycode.78 = 0x46 # Scroll_Lock<br />xkeymap.keycode.127 = 0x100 # Pause<br />xkeymap.keycode.133 = 0x15b # Meta_L<br />xkeymap.keycode.134 = 0x15c # Meta_R<br />xkeymap.keycode.135 = 0x15d # Menu<br />xkeymap.keycode.97 = 0x073 # Slash </strong></p>
+<p style="text-align: justify;">Se você não achou o arquivo de configuração, veja algumas outras possibilidades: <span style="color: #808080;"><br /><span style="color: #0000ff;">.vmware/config</span></span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">~/vmware/preferences</span></span>,<br /><span style="color: #0000ff;">/etc/vmware/config</span>, <span style="color: #808080;"><br /><span style="color: #0000ff;">/usr/lib/vmware/config</span></span></p>
+<p style="text-align: justify;">Espero ter ajudado&#8230; 😉</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_3"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html" data-text="Ubuntu: Configurando teclado ABNT2 no vmware-server-console"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F22%2Fubuntu-configurando-teclado-abnt2-no-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Configurando%20teclado%20ABNT2%20no%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/abnt2" rel="tag">abnt2</a><a href="https://rafaelbiriba.com/tag/configurar" rel="tag">configurar</a><a href="https://rafaelbiriba.com/tag/linux" rel="tag">linux</a><a href="https://rafaelbiriba.com/tag/teclado" rel="tag">teclado</a><a href="https://rafaelbiriba.com/tag/ubuntu" rel="tag">ubuntu</a><a href="https://rafaelbiriba.com/tag/vmware" rel="tag">vmware</a><a href="https://rafaelbiriba.com/tag/vmware-server-console" rel="tag">vmware-server-console</a></span></footer></article><!-- #post-## -->
+
+<article id="post-1190" class="post-1190 post type-post status-publish format-standard hentry category-aplicativos category-sistemas-operacionais category-tecnologia category-ubuntu-sistemas-operacionais category-virtualizacao-tecnologia tag-instalacao tag-linux tag-ubuntu tag-vmware tag-vmware-server-console">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/aplicativos" rel="category tag">Aplicativos</a>, <a href="https://rafaelbiriba.com/category/sistemas-operacionais" rel="category tag">Sistemas Operacionais</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a>, <a href="https://rafaelbiriba.com/category/sistemas-operacionais/ubuntu-sistemas-operacionais" rel="category tag">Ubuntu</a>, <a href="https://rafaelbiriba.com/category/tecnologia/virtualizacao-tecnologia" rel="category tag">Virtualização</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" rel="bookmark">Ubuntu: Instalação do vmware-server-console</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" rel="bookmark"><time class="entry-date" datetime="2009-08-09T22:51:10+00:00">09/08/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html#comments"><span class="dsq-postid" data-dsqidentifier="1190 https://rafaelbiriba.com/?p=1190">4 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+<h2>
+
+<figure id="attachment_1179" style="width: 426px" class="wp-caption aligncenter"><img class="size-full wp-image-1179" title="vmware-logo" src="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg" alt="http://www.vmware.com/" width="426" height="113" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo.jpg 426w, https://rafaelbiriba.com/wp-content/uploads/2009/08/vmware-logo-300x79.jpg 300w" sizes="(max-width: 426px) 100vw, 426px" /><figcaption class="wp-caption-text">http://www.vmware.com/</figcaption></figure></h2>
+<p style="text-align: justify;">Sempre que preciso, eu perco algum tempo em procurar e instalar vmware-server-console. <br />Então resolvi postar para facilitar. 🙂</p>
+<p style="text-align: justify;">Primeiro, faça o download pelo site do vmware (<a title="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" href="http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip" target="_blank">http://download3.vmware.com/software/vmserver/VMware-server-linux-client-1.0.9-156507.zip</a>), onde você deve extrair o pacote (23mb) para obter o VMware-server-console-1.0.9-156507.tar.gz</p>
+<p style="text-align: justify;">Ou então, <strong>baixe o pacote direto pelo link do meu blog</strong>: (<span style="color: #ff0000;">apenas 9 mb 😉</span>) <a title="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" href="https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz" target="_blank"><br />https://rafaelbiriba.com/VMware-server-console-1.0.9-156507.tar.gz</a></p>
+<p style="text-align: justify;">Ou apenas siga os <strong>comandos abaixo</strong> pelo terminal:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>www.rafaelbiriba.com<span style="color: #000000; font-weight: bold;">/</span>VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> <span style="color: #660033;">-zxvf</span> VMware-server-console-1.0.9-<span style="color: #000000;">156507</span>.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> vmware-server-console-distrib<span style="color: #000000; font-weight: bold;">/</span>
+<span style="color: #c20cb9; font-weight: bold;">sudo</span> .<span style="color: #000000; font-weight: bold;">/</span>vmware-install.pl</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Caso tenha alguma dúvida/problema na instalação, verifique o link: <a title="http://help.ubuntu.com/community/VMware/Server" href="http://help.ubuntu.com/community/VMware/Server" target="_blank">http://help.ubuntu.com/community/VMware/Server</a> na seção <strong>VMware Server Console Installation </strong>ou pergunte por aqui mesmo. 😉</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_4"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" data-text="Ubuntu: Instalação do vmware-server-console"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F08%2F09%2Fubuntu-instalacao-do-vmware-server-console.html&amp;linkname=Ubuntu%3A%20Instala%C3%A7%C3%A3o%20do%20vmware-server-console" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/instalacao" rel="tag">instalação</a><a href="https://rafaelbiriba.com/tag/linux" rel="tag">linux</a><a href="https://rafaelbiriba.com/tag/ubuntu" rel="tag">ubuntu</a><a href="https://rafaelbiriba.com/tag/vmware" rel="tag">vmware</a><a href="https://rafaelbiriba.com/tag/vmware-server-console" rel="tag">vmware-server-console</a></span></footer></article><!-- #post-## -->
+
+<article id="post-549" class="post-549 post type-post status-publish format-standard hentry category-desenvolvimento category-google-chart-api category-qr-code category-tecnologia tag-armazenamento tag-codificacao tag-codigo tag-codigo-de-barras tag-decifrar tag-kaywa tag-leitura tag-qr tag-qr-code tag-scanner tag-tecnologia">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/desenvolvimento" rel="category tag">Desenvolvimento</a>, <a href="https://rafaelbiriba.com/category/desenvolvimento/google-chart-api" rel="category tag">Google Chart API</a>, <a href="https://rafaelbiriba.com/category/tecnologia/qr-code" rel="category tag">QR Code</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2009/05/02/qr-code-gere-com-o-google-chart-api.html" rel="bookmark">QR Code: Gere com o Google Chart API</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/05/02/qr-code-gere-com-o-google-chart-api.html" rel="bookmark"><time class="entry-date" datetime="2009-05-02T09:30:28+00:00">02/05/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/05/02/qr-code-gere-com-o-google-chart-api.html#comments"><span class="dsq-postid" data-dsqidentifier="549 https://rafaelbiriba.com/?p=549">2 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		
+<p><img class="alignleft" title="QR Code com a URL deste BLOG" src="https://chart.apis.google.com/chart?chs=150x150&amp;cht=qr&amp;chl=https://rafaelbiriba.com&amp;choe=UTF-8" alt="" /></p>
+<p style="text-align: justify;">Devido à rápida difusão e com vários sites e revistas dando ênfase a esse assunto, na semana passada tive mais de 100 visitas vindas diretamente de buscas sobre Qr code pelo Google.</p>
+<p style="text-align: justify;">Então resolvi continuar postando, e dessa vez, como gerar utilizando a ferramenta Chart API do Google.<br />Você que ainda não conhece esta tecnologia, pode ler mais em: <a title="https://rafaelbiriba.com/category/tecnologia/qr-code" href="https://rafaelbiriba.com/category/tecnologia/qr-code" target="_blank">https://rafaelbiriba.com/category/tecnologia/qr-code</a></p>
+<p style="text-align: justify;">A imagem ao lado está sendo gerada pela seguinte URL: ( dividida para uma melhor visualização )</p>
+<p style="text-align: justify;">http://chart.apis.google.com/chart?<br />&amp;chs=<strong>150&#215;150</strong><br />&amp;cht=qr<br />&amp;chl=<strong>https://rafaelbiriba.com</strong><br />&amp;choe=<strong>UTF-8</strong></p>
+<p style="text-align: justify;">Recomendo que apenas os valores em negrito/colorido sejam editados para facilitar a exibição. Qualquer alteração nos outros parâmetros, recomendo ler a documentação em <a title="http://code.google.com/intl/pt-BR/apis/chart/#qrcodes" href="http://code.google.com/intl/pt-BR/apis/chart/#qrcodes" target="_blank">http://code.google.com/intl/pt-BR/apis/chart/#qrcodes</a>.</p>
+<p style="text-align: justify;"><a title="http://chart.apis.google.com/chart?chs=150x150&amp;cht=qr&amp;chl=https://rafaelbiriba.com&amp;choe=UTF-8" href="http://chart.apis.google.com/chart?chs=150x150&amp;cht=qr&amp;chl=https://rafaelbiriba.com&amp;choe=UTF-8" target="_blank">Clique aqui para acessar o link completo do gráfico.</a></p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">&amp;chs = </span></strong><span style="color: #000000;">Dimensões em pixel. De acordo com a documentação do google, a maior dimensão deve ter no máximo 300000 pixel, como por exemplo: 600&#215;500, 300&#215;1000, etc&#8230;<br /></span></p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">&amp;cht = </span></strong><span style="color: #000000;">Tipo do gráfico. Neste caso <strong>qr</strong></span></p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">&amp;chl = </span></strong><span style="color: #000000;">Conteúdo à ser codificado, lembrando que quanto maior o conteúdo, mais linhas e colunas a imagem vai ter, aumentando o seu tamanho, automaticamente.</span></p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">&amp;choe = </span></strong><span style="color: #000000;">Especifica opcionalmente como será a saída codificada. As opções mais comuns são UTF-8 e ISO-8859-1</span></p>
+<p style="text-align: justify;">Antes de gerar o código QR, considere o tipo de dispositivo a ser usado para a leitura do código. Os melhores leitores de código QR conseguem ler códigos versão 40, dispositivos móveis podem ler somente até a versão 4.</p>
+<p style="text-align: justify;">O Google recomenda manter a versão 4, que equivale a cerca de 100 caracteres alfanuméricos no nível de EC padrão.<strong><br /></strong></p>
+<p style="text-align: justify;"><strong>Linhas e Colunas de um QR code:</strong></p>
+<ul style="text-align: justify;">
+	<li> A versão 1 tem 21 linhas e colunas e pode codificar até 25 caracteres alfanuméricos ( EC = L )</li>
+	<li> A versão 2 tem 25 linhas e colunas e pode codificar até 47 caracteres alfanuméricos ( EC = L )</li>
+	<li>A versão 3 tem 29 linhas e colunas e pode codificar até 77 caracteres alfanuméricos ( EC = L )</li>
+	<li>A versão 4 tem 33 linhas e colunas e pode codificar até 114 caracteres alfanuméricos ( EC = L )</li>
+	<li>&#8230;</li>
+	<li>A versão 40 tem 177 linhas e colunas e pode codificar até 4,296 caracteres alfanuméricos ( EC = L )</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #000000;"><strong>Parâmetro opcional: </strong>Correção de erros: ( <strong>EC </strong>)<br /></span></p>
+<p style="text-align: justify;"><strong><span style="color: #ff0000;">&amp;chld = </span></strong><span style="color: #000000;">Adicionando esse parâmetro no final da URL para gerar o QR Code, você pode especificar o tipo de correção de erros. Abaixo segue cada uma das opções disponíveis:<br /><br /></span>&#8211; <strong>L</strong> permite que 7% de um código QR seja restaurado<br /> &#8211; <strong>M </strong>permite que 15% de um código QR seja restaurado<br /> &#8211; <strong>Q</strong> permite que 25% de um código QR seja restaurado<br /> &#8211; <strong>H</strong> permite que 30% de um código QR seja restaurado</p>
+<p style="text-align: justify;"><a title="http://chart.apis.google.com/chart?chs=150x150&amp;cht=qr&amp;chl=https://rafaelbiriba.com&amp;choe=UTF-8&amp;chld=H" href="http://chart.apis.google.com/chart?chs=150x150&amp;cht=qr&amp;chl=https://rafaelbiriba.com&amp;choe=UTF-8&amp;chld=H" target="_blank">Clique aqui para acessar o link completo do gráfico com o parâmetro de correção de erros ( EC = H ).</a></p>
+<p style="text-align: justify;">Acessando o link: <a title="http://code.google.com/intl/pt-BR/apis/chart/#ec_level_table" href="http://code.google.com/intl/pt-BR/apis/chart/#ec_level_table" target="_blank">http://code.google.com/intl/pt-BR/apis/chart/#ec_level_table</a>, é possível analisar a tabela com informações de quantos caracteres podem ser armazenados em cada versão da imagem e com cada um dos nível de correção.</p>
+<p style="text-align: justify;">🙂</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_5"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/05/02/qr-code-gere-com-o-google-chart-api.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/05/02/qr-code-gere-com-o-google-chart-api.html" data-text="QR Code: Gere com o Google Chart API"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F05%2F02%2Fqr-code-gere-com-o-google-chart-api.html&amp;linkname=QR%20Code%3A%20Gere%20com%20o%20Google%20Chart%20API" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F05%2F02%2Fqr-code-gere-com-o-google-chart-api.html&amp;linkname=QR%20Code%3A%20Gere%20com%20o%20Google%20Chart%20API" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/armazenamento" rel="tag">armazenamento</a><a href="https://rafaelbiriba.com/tag/codificacao" rel="tag">codificação</a><a href="https://rafaelbiriba.com/tag/codigo" rel="tag">codigo</a><a href="https://rafaelbiriba.com/tag/codigo-de-barras" rel="tag">código de barras</a><a href="https://rafaelbiriba.com/tag/decifrar" rel="tag">decifrar</a><a href="https://rafaelbiriba.com/tag/kaywa" rel="tag">kaywa</a><a href="https://rafaelbiriba.com/tag/leitura" rel="tag">leitura</a><a href="https://rafaelbiriba.com/tag/qr" rel="tag">QR</a><a href="https://rafaelbiriba.com/tag/qr-code" rel="tag">QR Code</a><a href="https://rafaelbiriba.com/tag/scanner" rel="tag">scanner</a><a href="https://rafaelbiriba.com/tag/tecnologia" rel="tag">Tecnologia</a></span></footer></article><!-- #post-## -->
+
+<article id="post-346" class="post-346 post type-post status-publish format-standard hentry category-qr-code category-tecnologia tag-armazenamento tag-celular tag-codigo-de-barras tag-decifrar tag-kaywa tag-leitura tag-qr-code tag-scanner tag-tecnologia">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/tecnologia/qr-code" rel="category tag">QR Code</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2009/03/20/qr-code-gere-com-o-kaywa.html" rel="bookmark">QR Code: Gere com o Kaywa</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/03/20/qr-code-gere-com-o-kaywa.html" rel="bookmark"><time class="entry-date" datetime="2009-03-20T14:44:21+00:00">20/03/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/03/20/qr-code-gere-com-o-kaywa.html#respond"><span class="dsq-postid" data-dsqidentifier="346 https://rafaelbiriba.com/?p=346">Deixe um comentário</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<figure id="attachment_323" style="width: 150px" class="wp-caption aligncenter"><img class="size-full wp-image-323" title="qr-code" src="https://rafaelbiriba.com/wp-content/uploads/2009/03/qr-code.png" alt="QR Code com a URL deste BLOG" width="150" height="150" /><figcaption class="wp-caption-text">QR Code com a URL deste BLOG</figcaption></figure>
+<p>Após apresentar  tecnologia do <a href="https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html" target="_blank">QR Code</a> e depois mostrar <a href="https://rafaelbiriba.com/2009/03/14/qr-code-faca-a-leitura-pelo-seu-celular.html" target="_blank">como fazer a leitura pelo celular</a>, agora vai a dica de como gerar um QR code através da ferramenta online disponível no site:</p>
+<p><a href="http://qrcode.kaywa.com/" target="_blank">http://qrcode.kaywa.com/</a></p>
+<p>Para gerar, deve ser escolhido o tipo de dado a ser incluído:<br />
+Uma URL, um texto, um numero de telefone ou um SMS.</p>
+<p>Após incluir o conteúdo, é possível definir o tamanho do código.<br />
+S = Pequeno, M = Medio, L = Grande, XL = Muito grande<br />
+Lembrando que o tamanho também é diretamente proporcional ao conteúdo. Então, mesmo que se escolha pequeno, caso haja um conteúdo muito grande, o código sairá grande.</p>
+<p>Faça uns testes e divirta-se.<br />
+Após gerar o código, um link é fornecido para que se coloque o código no seu site.</p>
+<p>😉</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_6"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/03/20/qr-code-gere-com-o-kaywa.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/03/20/qr-code-gere-com-o-kaywa.html" data-text="QR Code: Gere com o Kaywa"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F20%2Fqr-code-gere-com-o-kaywa.html&amp;linkname=QR%20Code%3A%20Gere%20com%20o%20Kaywa" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F20%2Fqr-code-gere-com-o-kaywa.html&amp;linkname=QR%20Code%3A%20Gere%20com%20o%20Kaywa" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/armazenamento" rel="tag">armazenamento</a><a href="https://rafaelbiriba.com/tag/celular" rel="tag">celular</a><a href="https://rafaelbiriba.com/tag/codigo-de-barras" rel="tag">código de barras</a><a href="https://rafaelbiriba.com/tag/decifrar" rel="tag">decifrar</a><a href="https://rafaelbiriba.com/tag/kaywa" rel="tag">kaywa</a><a href="https://rafaelbiriba.com/tag/leitura" rel="tag">leitura</a><a href="https://rafaelbiriba.com/tag/qr-code" rel="tag">QR Code</a><a href="https://rafaelbiriba.com/tag/scanner" rel="tag">scanner</a><a href="https://rafaelbiriba.com/tag/tecnologia" rel="tag">Tecnologia</a></span></footer></article><!-- #post-## -->
+
+<article id="post-337" class="post-337 post type-post status-publish format-standard hentry category-qr-code category-tecnologia tag-armazenamento tag-celular tag-codigo-de-barras tag-decifrar tag-extrair tag-imagem tag-kaywa tag-leitura tag-qr-code tag-scanner tag-tecnologia">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/tecnologia/qr-code" rel="category tag">QR Code</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2009/03/14/qr-code-faca-a-leitura-pelo-seu-celular.html" rel="bookmark">QR Code: Faça a leitura pelo seu celular</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/03/14/qr-code-faca-a-leitura-pelo-seu-celular.html" rel="bookmark"><time class="entry-date" datetime="2009-03-14T12:23:22+00:00">14/03/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/03/14/qr-code-faca-a-leitura-pelo-seu-celular.html#comments"><span class="dsq-postid" data-dsqidentifier="337 https://rafaelbiriba.com/?p=337">20 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<figure id="attachment_323" style="width: 150px" class="wp-caption aligncenter"><img class="size-full wp-image-323" title="qr-code" src="https://rafaelbiriba.com/wp-content/uploads/2009/03/qr-code.png" alt="QR Code com a URL deste BLOG" width="150" height="150" /><figcaption class="wp-caption-text">QR Code com a URL deste BLOG</figcaption></figure>
+<p>*Para quem ainda não conhece a tecnologia QR Code, recomendo a leitura do POST:<br />
+<a href="https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html" target="_blank">https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html</a></p>
+<p>Para fazer a leitura do QR Code pelo seu celular, deve ser baixado uma aplicação em Java. Abaixo sgue os links dos sites que possuem as aplicações, e que funcionam, pois foram testadas por mim.</p>
+<p><strong>Kaywa Reader</strong></p>
+<p><a href="http://reader.kaywa.com/" target="_blank">http://reader.kaywa.com/</a></p>
+<p>Aperte em &#8220;Clique aqui para baixar o Kaywa Reader&#8221;<br />
+Em seguida escolha a forma que deseja fazer o download.</p>
+<p>O ideal é baixar direto do seu celular, mas eu testei a opção: Do computador para o seu celular.<br />
+Ele pede pra selecionar marca e modelo, em seguinda, é necessário fazer o cadastro no site.</p>
+<p>Após isso, basta transferir os arquivos Java para o seu celular, instalar e sair por aí lendo os QR Codes.</p>
+<p><strong>Neo Reader</strong></p>
+<p><a href="http://www.neoreader.com/download.html" target="_blank">http://www.neoreader.com/download.html</a></p>
+<p>No site do Neo Reader, só é possível baixar a aplicação, se for direto pelo celular.<br />
+O Download pode ser feito pela URL: <a href="http://get.neoreader.com/" target="_blank">get.neoreader.com</a></p>
+<p>O Download direto pelo celular, é uma opção adequada, pois o site já reconhece a marca e modelo, e já disponibiliza para download a versão do software compatível com o aparelho !</p>
+<p>Em breve, explicarei como gerar seus QR Codes e como fazer a leitura deles pelo PC.</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_7"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/03/14/qr-code-faca-a-leitura-pelo-seu-celular.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/03/14/qr-code-faca-a-leitura-pelo-seu-celular.html" data-text="QR Code: Faça a leitura pelo seu celular"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F14%2Fqr-code-faca-a-leitura-pelo-seu-celular.html&amp;linkname=QR%20Code%3A%20Fa%C3%A7a%20a%20leitura%20pelo%20seu%20celular" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F14%2Fqr-code-faca-a-leitura-pelo-seu-celular.html&amp;linkname=QR%20Code%3A%20Fa%C3%A7a%20a%20leitura%20pelo%20seu%20celular" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/armazenamento" rel="tag">armazenamento</a><a href="https://rafaelbiriba.com/tag/celular" rel="tag">celular</a><a href="https://rafaelbiriba.com/tag/codigo-de-barras" rel="tag">código de barras</a><a href="https://rafaelbiriba.com/tag/decifrar" rel="tag">decifrar</a><a href="https://rafaelbiriba.com/tag/extrair" rel="tag">extrair</a><a href="https://rafaelbiriba.com/tag/imagem" rel="tag">imagem</a><a href="https://rafaelbiriba.com/tag/kaywa" rel="tag">kaywa</a><a href="https://rafaelbiriba.com/tag/leitura" rel="tag">leitura</a><a href="https://rafaelbiriba.com/tag/qr-code" rel="tag">QR Code</a><a href="https://rafaelbiriba.com/tag/scanner" rel="tag">scanner</a><a href="https://rafaelbiriba.com/tag/tecnologia" rel="tag">Tecnologia</a></span></footer></article><!-- #post-## -->
+
+<article id="post-321" class="post-321 post type-post status-publish format-standard hentry category-qr-code category-tecnologia tag-armazenamento tag-celular tag-codigo-de-barras tag-decifrar tag-extrair tag-imagem tag-leitura tag-qr-code tag-scanner tag-tecnologia">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="https://rafaelbiriba.com/category/tecnologia/qr-code" rel="category tag">QR Code</a>, <a href="https://rafaelbiriba.com/category/tecnologia" rel="category tag">Tecnologia</a></span>
+		</div>
+		<h1 class="entry-title"><a href="https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html" rel="bookmark">QR Code: Código de barras do presente</a></h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html" rel="bookmark"><time class="entry-date" datetime="2009-03-12T15:31:57+00:00">12/03/2009</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="https://rafaelbiriba.com/author/rafael" rel="author">Rafael Biriba</a></span></span>			<span class="comments-link"><a href="https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html#comments"><span class="dsq-postid" data-dsqidentifier="321 https://rafaelbiriba.com/?p=321">5 Comentários</span></a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<figure id="attachment_323" style="width: 150px" class="wp-caption aligncenter"><img class="size-full wp-image-323" title="qr-code" src="https://rafaelbiriba.com/wp-content/uploads/2009/03/qr-code.png" alt="QR Code com a URL deste BLOG" width="150" height="150" /><figcaption class="wp-caption-text">QR Code com a URL deste BLOG</figcaption></figure>
+<p style="text-align: justify;">O QR Code é uma matriz ou um código de barras bi-dimencional, cujo código pode ser interpretado rapidamente. É bastante utilizado no Japão. Através um programa de computador, ou até mesmo um aplicativo para celular, é possível de decifrar o codigo QR,  até mesmo uma camera VGA de baixa resolução para capturar a imagem.</p>
+<p style="text-align: justify;">No Brasil, o primeiro anúncio publicitário a utilizar o código QR foi publicado pela Fast Shop em dezembro de 2007. Mais tarde a Nova Schin publicou um anúncio com o código em junho de 2008 e a Claro fez uma campanha utilizando o Código QR em novembro de 2008.</p>
+<p style="text-align: justify;">Bastante utilizado no ramo publicitário, principalmente pela curiosidade que a imagem propõe, a tecnologia está cada vez mais presente no mercado.</p>
+<p style="text-align: justify;"><strong>Capacidade de Armazenamento:</strong></p>
+<ul style="text-align: justify;">
+<li>Numérica &#8211; Max. 7.089 caracteres</li>
+<li>Alfanumerica &#8211; Max. 4.296 caracteres</li>
+<li>Binário (8 bits) &#8211; Max. 2.953 bytes</li>
+</ul>
+<p style="text-align: justify;">A facilidade  na distribuição de informação é incrível, pois ao invés de digitar a informação, basta apenas tirar uma foto da imagem do código e através de um software é possível extrair os dados.</p>
+<p style="text-align: justify;"><img class="aligncenter size-medium wp-image-324" title="batata_com_qr-code" src="https://rafaelbiriba.com/wp-content/uploads/2009/03/batata_com_qr-code-300x225.jpg" alt="batata_com_qr-code" width="300" height="225" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/03/batata_com_qr-code-300x225.jpg 300w, https://rafaelbiriba.com/wp-content/uploads/2009/03/batata_com_qr-code.jpg 380w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p style="text-align: justify;">Conforme no exemplo, mercados de todo o japão já integraram o QR Code, em seus produtos. Diferente do código de barras tradicional, a leitura é mais rápida e é possível passar mais informações, como preço, data de validade e lote, por exemplo.</p>
+<p style="text-align: justify;"><img class="aligncenter size-medium wp-image-325" title="burger-qr-code" src="https://rafaelbiriba.com/wp-content/uploads/2009/03/burger-qr-code-300x224.png" alt="burger-qr-code" width="300" height="224" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/03/burger-qr-code-300x224.png 300w, https://rafaelbiriba.com/wp-content/uploads/2009/03/burger-qr-code.png 320w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p style="text-align: justify;">No cheeseburguer, o QR Code carrega informações como nome da loja, endereço, telefone, site e outras possíveis informações.</p>
+<p style="text-align: justify;">Muito em breve teremos vários anúncios publicitários no Brasil, utilizando o QR Code, para as mais variadas utilidades. A Tecnologia também nos permite carregar nossas informações &#8221;impressas&#8217;, ou seja podemos gerar um código com uma informação qualquer, e depois imprimi-lo. Para recuperar a informação, basta utilizar um scanner ou somente fotografar a imagem, e através de um software específico extrair os dados novamente.</p>
+<p style="text-align: justify;">Não somente no ramo publicitário, programas de televisão já estão implementando o código. O que diz esta matéria no site do <a href="http://oglobo.globo.com/tecnologia/mat/2009/03/11/qr-code-da-tv-para-celular-754791348.asp" target="_blank">O Globo Tecnologia</a>, onde durante a exibição do Multi Show, um QR Code seria mostrado e quando lido pelo celular direciona o usuário para um conteúdo adicional (texto, fotos, vídeos ou sites ).</p>
+<p style="text-align: justify;"><img class="aligncenter size-medium wp-image-328" title="qrcode-cracha" src="https://rafaelbiriba.com/wp-content/uploads/2009/03/qrcode-cracha-300x252.jpg" alt="qrcode-cracha" width="300" height="252" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/03/qrcode-cracha-300x252.jpg 300w, https://rafaelbiriba.com/wp-content/uploads/2009/03/qrcode-cracha.jpg 500w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p style="text-align: justify;">Devido o seu desempenho, o QR Code também está sendo utilizado nos Crachás das empresas. Carregando todas as informações necessárias, qualquer computador ou roleta habilitada, pode capturar e salvar os dados do QR Code.</p>
+<p style="text-align: justify;">Nos próximos POSTs explicarei como gerar um QR Code, e logicamente fazer a leitura.</p>
+<p style="text-align: justify;">=)</p>
+<div class="addtoany_share_save_container addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list a2a_target" id="wpa2a_8"><a class="a2a_button_facebook_like addtoany_special_service" data-href="https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html"></a><a class="a2a_button_twitter_tweet addtoany_special_service" data-url="https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html" data-text="QR Code: Código de barras do presente"></a><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F12%2Fqr-code-codigo-de-barras-do-presente.html&amp;linkname=QR%20Code%3A%20C%C3%B3digo%20de%20barras%20do%20presente" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F03%2F12%2Fqr-code-codigo-de-barras-do-presente.html&amp;linkname=QR%20Code%3A%20C%C3%B3digo%20de%20barras%20do%20presente" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd addtoany_share_save" href="https://www.addtoany.com/share"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></div></div>	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="https://rafaelbiriba.com/tag/armazenamento" rel="tag">armazenamento</a><a href="https://rafaelbiriba.com/tag/celular" rel="tag">celular</a><a href="https://rafaelbiriba.com/tag/codigo-de-barras" rel="tag">código de barras</a><a href="https://rafaelbiriba.com/tag/decifrar" rel="tag">decifrar</a><a href="https://rafaelbiriba.com/tag/extrair" rel="tag">extrair</a><a href="https://rafaelbiriba.com/tag/imagem" rel="tag">imagem</a><a href="https://rafaelbiriba.com/tag/leitura" rel="tag">leitura</a><a href="https://rafaelbiriba.com/tag/qr-code" rel="tag">QR Code</a><a href="https://rafaelbiriba.com/tag/scanner" rel="tag">scanner</a><a href="https://rafaelbiriba.com/tag/tecnologia" rel="tag">Tecnologia</a></span></footer></article><!-- #post-## -->
+	<nav class="navigation paging-navigation" role="navigation">
+		<h1 class="screen-reader-text">Navegação por posts</h1>
+		<div class="pagination loop-pagination">
+			<a class="prev page-numbers" href="https://rafaelbiriba.com/category/tecnologia/">&larr; Anterior</a>
+<a class='page-numbers' href='https://rafaelbiriba.com/category/tecnologia/'>1</a>
+<span class='page-numbers current'>2</span>		</div><!-- .pagination -->
+	</nav><!-- .navigation -->
+			</div><!-- #content -->
+	</section><!-- #primary -->
+
+<div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+	<aside id="text-569858663" class="widget widget_text">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- vertical blog -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-1303939561252359"
+     data-ad-slot="7274679989"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside></div><!-- #content-sidebar -->
+<div id="secondary">
+		<h2 class="site-description">Tecnologia e informação no lugar certo !</h2>
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="text-569858664" class="widget widget_text"><h1 class="widget-title">Blog Desatualizado</h1>			<div class="textwidget">Depois de muitos anos, está na hora de mudar!
+Em breve um novo blog, muito melhor e com mais conteúdo!
+Se você está lendo isso, tente acessar <a href="https://rafaelbiriba.com/blog" target="_blank">https://rafaelbiriba.com/blog</a> para ver se o novo blog já está disponível!! :)
+Previsão de ir online: Agosto/2016</div>
+		</aside><aside id="text-347930551" class="widget widget_text"><h1 class="widget-title">Sobre o Autor</h1>			<div class="textwidget"><img alt="" src="https://1.gravatar.com/avatar/908bb0e461d553752af1df7c5849df52?s=80&amp;d=&amp;r=G" class="avatar avatar-42 photo" height="80" width="80">
+<div style="text-align: justify;"><strong>Rafael Biriba</strong>: Full Stack Web Developer since 2008 with experience in the development field using technologies like Ruby on Rails, PHP, HTML5, Javascript (Jquery / Backbone.js), Video encoding and delivery (Flash Media Server, Wowza, ffmpeg tools), Database SQL and NoSQL (Mysql, MongoDB, Redis), Virtualization and automation using virtualbox. With knowledge of development techniques and practices such as TDD, Domain Driven Design and Object Oriented Design.</div></div>
+		</aside><aside id="github-profile-2" class="widget widget_github-profile"><aside><h1 class="widget-title">Github</h1><div class="github-widget" id="github-profile-2"><header class="github-widget-header"><img class="github-widget-company-logo" title="GitHub" src="https://assets-cdn.github.com/favicon.ico"/><div class="github-widget-header-text"><a class="github-widget-header-link" target="_blank" href="https://github.com/rafaelbiriba" title="View profile">rafaelbiriba (Rafael Biriba)</a></div></header><div class="github-widget-content"><a target="_blank" href="https://github.com/rafaelbiriba" title="View profile"><img class="github-profile-pic" src="https://avatars.githubusercontent.com/u/324743?v=3" style="border-radius: 5px"> <span class="github-names"> <p class="github-name">Rafael Biriba</p> <span class="github-username">rafaelbiriba</span> </span></a><div class="github-block github-vcard-stats"><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/followers"><strong class="github-vcard-stat-count">30</strong><span class="text-muted">Followers</span></a><a class="github-vcard-stat" target='_blank' href="https://github.com/rafaelbiriba/following"><strong class="github-vcard-stat-count">9</strong><span class="text-muted">Following</span></a><div style="clear: both;"></div></div> </div></div></aside></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h1 class="widget-title">Nuvem de Tags</h1><div class="tagcloud"><a href='https://rafaelbiriba.com/tag/904' class='tag-link-127 tag-link-position-1' title='5 tópicos' style='font-size: 8pt;'>9.04</a>
+<a href='https://rafaelbiriba.com/tag/armazenamento' class='tag-link-76 tag-link-position-2' title='7 tópicos' style='font-size: 11.36pt;'>armazenamento</a>
+<a href='https://rafaelbiriba.com/tag/atualizando' class='tag-link-132 tag-link-position-3' title='5 tópicos' style='font-size: 8pt;'>atualizando</a>
+<a href='https://rafaelbiriba.com/tag/atualizar' class='tag-link-130 tag-link-position-4' title='10 tópicos' style='font-size: 15.28pt;'>atualizar</a>
+<a href='https://rafaelbiriba.com/tag/audio' class='tag-link-22 tag-link-position-5' title='10 tópicos' style='font-size: 15.28pt;'>audio</a>
+<a href='https://rafaelbiriba.com/tag/blog' class='tag-link-188 tag-link-position-6' title='15 tópicos' style='font-size: 19.76pt;'>blog</a>
+<a href='https://rafaelbiriba.com/tag/codec' class='tag-link-26 tag-link-position-7' title='12 tópicos' style='font-size: 17.24pt;'>codec</a>
+<a href='https://rafaelbiriba.com/tag/codigo' class='tag-link-46 tag-link-position-8' title='9 tópicos' style='font-size: 14.16pt;'>codigo</a>
+<a href='https://rafaelbiriba.com/tag/converter' class='tag-link-23 tag-link-position-9' title='12 tópicos' style='font-size: 17.24pt;'>converter</a>
+<a href='https://rafaelbiriba.com/tag/decifrar' class='tag-link-79 tag-link-position-10' title='5 tópicos' style='font-size: 8pt;'>decifrar</a>
+<a href='https://rafaelbiriba.com/tag/desenvolvimento' class='tag-link-487 tag-link-position-11' title='13 tópicos' style='font-size: 18.36pt;'>Desenvolvimento</a>
+<a href='https://rafaelbiriba.com/tag/disco' class='tag-link-16 tag-link-position-12' title='6 tópicos' style='font-size: 9.96pt;'>disco</a>
+<a href='https://rafaelbiriba.com/tag/estag' class='tag-link-173 tag-link-position-13' title='9 tópicos' style='font-size: 14.16pt;'>estag</a>
+<a href='https://rafaelbiriba.com/tag/estagio' class='tag-link-168 tag-link-position-14' title='12 tópicos' style='font-size: 17.24pt;'>estágio</a>
+<a href='https://rafaelbiriba.com/tag/faetec' class='tag-link-192 tag-link-position-15' title='8 tópicos' style='font-size: 12.76pt;'>faetec</a>
+<a href='https://rafaelbiriba.com/tag/ffmpeg' class='tag-link-484 tag-link-position-16' title='12 tópicos' style='font-size: 17.24pt;'>FFmpeg</a>
+<a href='https://rafaelbiriba.com/tag/game' class='tag-link-53 tag-link-position-17' title='5 tópicos' style='font-size: 8pt;'>game</a>
+<a href='https://rafaelbiriba.com/tag/globocom' class='tag-link-171 tag-link-position-18' title='10 tópicos' style='font-size: 15.28pt;'>globo.com</a>
+<a href='https://rafaelbiriba.com/tag/google' class='tag-link-40 tag-link-position-19' title='7 tópicos' style='font-size: 11.36pt;'>google</a>
+<a href='https://rafaelbiriba.com/tag/gravar' class='tag-link-24 tag-link-position-20' title='9 tópicos' style='font-size: 14.16pt;'>gravar</a>
+<a href='https://rafaelbiriba.com/tag/imagem' class='tag-link-29 tag-link-position-21' title='6 tópicos' style='font-size: 9.96pt;'>imagem</a>
+<a href='https://rafaelbiriba.com/tag/inscricao' class='tag-link-170 tag-link-position-22' title='14 tópicos' style='font-size: 19.2pt;'>inscrição</a>
+<a href='https://rafaelbiriba.com/tag/ist-rio' class='tag-link-191 tag-link-position-23' title='8 tópicos' style='font-size: 12.76pt;'>ist-rio</a>
+<a href='https://rafaelbiriba.com/tag/leitura' class='tag-link-80 tag-link-position-24' title='7 tópicos' style='font-size: 11.36pt;'>leitura</a>
+<a href='https://rafaelbiriba.com/tag/medieval' class='tag-link-55 tag-link-position-25' title='5 tópicos' style='font-size: 8pt;'>medieval</a>
+<a href='https://rafaelbiriba.com/tag/multimedia' class='tag-link-27 tag-link-position-26' title='13 tópicos' style='font-size: 18.36pt;'>multimedia</a>
+<a href='https://rafaelbiriba.com/tag/online' class='tag-link-51 tag-link-position-27' title='15 tópicos' style='font-size: 19.76pt;'>online</a>
+<a href='https://rafaelbiriba.com/tag/oportunidade' class='tag-link-169 tag-link-position-28' title='10 tópicos' style='font-size: 15.28pt;'>oportunidade</a>
+<a href='https://rafaelbiriba.com/tag/player' class='tag-link-34 tag-link-position-29' title='7 tópicos' style='font-size: 11.36pt;'>player</a>
+<a href='https://rafaelbiriba.com/tag/processo-seletivo' class='tag-link-172 tag-link-position-30' title='14 tópicos' style='font-size: 19.2pt;'>processo seletivo</a>
+<a href='https://rafaelbiriba.com/tag/ruby' class='tag-link-492 tag-link-position-31' title='10 tópicos' style='font-size: 15.28pt;'>Ruby</a>
+<a href='https://rafaelbiriba.com/tag/rubygems' class='tag-link-103 tag-link-position-32' title='8 tópicos' style='font-size: 12.76pt;'>rubygems</a>
+<a href='https://rafaelbiriba.com/tag/rubyonrails' class='tag-link-105 tag-link-position-33' title='5 tópicos' style='font-size: 8pt;'>rubyonrails</a>
+<a href='https://rafaelbiriba.com/tag/sistema' class='tag-link-133 tag-link-position-34' title='5 tópicos' style='font-size: 8pt;'>sistema</a>
+<a href='https://rafaelbiriba.com/tag/sistema-operacional' class='tag-link-12 tag-link-position-35' title='5 tópicos' style='font-size: 8pt;'>sistema operacional</a>
+<a href='https://rafaelbiriba.com/tag/stream' class='tag-link-25 tag-link-position-36' title='8 tópicos' style='font-size: 12.76pt;'>stream</a>
+<a href='https://rafaelbiriba.com/tag/tecnologia' class='tag-link-490 tag-link-position-37' title='17 tópicos' style='font-size: 21.44pt;'>Tecnologia</a>
+<a href='https://rafaelbiriba.com/tag/travian' class='tag-link-49 tag-link-position-38' title='6 tópicos' style='font-size: 9.96pt;'>travian</a>
+<a href='https://rafaelbiriba.com/tag/ubuntu' class='tag-link-11 tag-link-position-39' title='9 tópicos' style='font-size: 14.16pt;'>ubuntu</a>
+<a href='https://rafaelbiriba.com/tag/versao' class='tag-link-129 tag-link-position-40' title='8 tópicos' style='font-size: 12.76pt;'>versão</a>
+<a href='https://rafaelbiriba.com/tag/video' class='tag-link-21 tag-link-position-41' title='18 tópicos' style='font-size: 22pt;'>video</a>
+<a href='https://rafaelbiriba.com/tag/virtual' class='tag-link-17 tag-link-position-42' title='6 tópicos' style='font-size: 9.96pt;'>virtual</a>
+<a href='https://rafaelbiriba.com/tag/web' class='tag-link-15 tag-link-position-43' title='16 tópicos' style='font-size: 20.6pt;'>web</a>
+<a href='https://rafaelbiriba.com/tag/web-browser' class='tag-link-56 tag-link-position-44' title='6 tópicos' style='font-size: 9.96pt;'>web browser</a>
+<a href='https://rafaelbiriba.com/tag/wordpress' class='tag-link-494 tag-link-position-45' title='13 tópicos' style='font-size: 18.36pt;'>Wordpress</a></div>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		<div class="cbd"></div>
+		<script src="https://rafaelbiriba.com/wp-content/plugins/shutter-reloaded//shutter-reloaded.js?ver=2.5" type="text/javascript"></script>
+	<script type="text/javascript">
+	var shutterSettings = {"imgDir":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/shutter-reloaded\/\/menu\/","imageCount":true,"FS":false,"textBtns":true,"oneSet":true};
+	try{}catch(e){}	</script>
+	
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+								<a href="https://br.wordpress.org/">Orgulhosamente mantido com WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	
+<script type="text/javascript"><!--
+wpa2a.targets=[
+{title:"VirtualBox: VMs com IPs est\u00e1ticos e internet de maneira simples",url:"https://rafaelbiriba.com/2010/02/22/virtualbox-vms-com-ips-estaticos-e-internet-de-maneira-simples.html"},
+{title:"Retrospectiva 2009: Os posts mais visitados do blog",url:"https://rafaelbiriba.com/2010/01/02/retrospectiva-2009-os-posts-mais-visitados-do-blog.html"},
+{title:"Ubuntu: Configurando teclado ABNT2 no vmware-server-console",url:"https://rafaelbiriba.com/2009/08/22/ubuntu-configurando-teclado-abnt2-no-vmware-server-console.html"},
+{title:"Ubuntu: Instala\u00e7\u00e3o do vmware-server-console",url:"https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html"},
+{title:"QR Code: Gere com o Google Chart API",url:"https://rafaelbiriba.com/2009/05/02/qr-code-gere-com-o-google-chart-api.html"},
+{title:"QR Code: Gere com o Kaywa",url:"https://rafaelbiriba.com/2009/03/20/qr-code-gere-com-o-kaywa.html"},
+{title:"QR Code: Fa\u00e7a a leitura pelo seu celular",url:"https://rafaelbiriba.com/2009/03/14/qr-code-faca-a-leitura-pelo-seu-celular.html"},
+{title:"QR Code: C\u00f3digo de barras do presente",url:"https://rafaelbiriba.com/2009/03/12/qr-code-codigo-de-barras-do-presente.html"}];
+wpa2a.html_done=true;if(wpa2a.script_ready&&!wpa2a.done)wpa2a.init();wpa2a.script_load();
+//--></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var scriptParams = {"google_search_engine_id":"partner-pub-1303939561252359:5952361189"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/wp-google-search/assets/js/google_cse_v2.js?ver=1'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.rafaelbiriba.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Enviando ..."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.4.2'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/themes/twentyfourteen/js/functions.js?ver=20150315'></script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-includes/js/wp-embed.min.js?ver=4.5.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"rafaelbiriba"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://rafaelbiriba.com/wp-content/plugins/disqus-comment-system/media/js/count.js?ver=4.5.3'></script>
+</body>
+</html>

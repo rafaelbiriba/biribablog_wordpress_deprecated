@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Desenvolvimento &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/desenvolvimento/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>User Agent do Internet Explorer 11 muda e quebra um monte de projetos</title>
+		<link>https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html</link>
+		<comments>https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html#respond</comments>
+		<pubDate>Wed, 10 Sep 2014 21:35:47 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[ie]]></category>
+		<category><![CDATA[internet explorer]]></category>
+		<category><![CDATA[javasscript]]></category>
+		<category><![CDATA[useragent]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3149</guid>
+		<description><![CDATA[Fala galerinha&#8230;. Estou sumido a muito tempo aqui do blog&#8230; Vou tentar voltar a postar coisas&#8230; Serão posts curtos e objetivos, então qualquer dúvida pode me procurar nos comentários&#8230; (Preciso arrumar um tempo pra limpar esse layout horroso) :p :p Hoje, após algumas reclamações de usuários, descobri que o IE 11 mudou seu user agent, &#8230; <a href="https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html" class="more-link">Continue lendo <span class="screen-reader-text">User Agent do Internet Explorer 11 muda e quebra um monte de projetos</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="alignleft wp-image-3151 size-medium" src="https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-300x297.jpg" alt="internet-explorer-stopped-working" width="300" height="297" srcset="https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-300x297.jpg 300w, https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-150x150.jpg 150w, https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-373x370.jpg 373w, https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working.jpg 540w" sizes="(max-width: 300px) 100vw, 300px" /><br />Fala galerinha&#8230;. Estou sumido a muito tempo aqui do blog&#8230; Vou tentar voltar a postar coisas&#8230; Serão posts curtos e objetivos, então qualquer dúvida pode me procurar nos comentários&#8230; (Preciso arrumar um tempo pra limpar esse layout horroso) :p :p</p>
+<p style="text-align: justify;">Hoje, após algumas reclamações de usuários, descobri que o IE 11 mudou seu user agent, e isso quebra vários javascripts.</p>
+<p style="text-align: justify;">Verifique o seu projeto e veja se não foi impactado.</p>
+<p style="text-align: justify;">Antes um user agent, por exemplo do IE 10 vinha assim:<br /><strong>Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)</strong></p>
+<p style="text-align: justify;">Então no seu javascript, para verificar se o navegador era IE, você pega o user agent e procura pela string MSIE. Provavelmente era um código assim:<br /><strong>this.navigator.userAgent().match(/MSIE\s([\d]+)/);</strong></p>
+<p style="text-align: justify;">Com o novo e belíssimo IE 11, além de bonito e rápido, ele não podia perder a reputação e continuar uma droga&#8230; O user agent mudou para:<br /><strong>Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko</strong></p>
+<p style="text-align: justify;">Com isso seu belíssimo javascript retorna que você não está no IE e sua aplicação se comporta de forma completamente diferente.</p>
+<p style="text-align: justify;">Para resolver isso, após muita muita pesquisa, forums, stack overflows, confesso que vi soluções que davam vontade de chorar&#8230; Então resolvi juntar um pedacinho de cada, e cheguei na seguinte solução:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> isIE<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+ <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>
+  <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">appName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #3366CC;">'Microsoft Internet Explorer'</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span>
+  <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">userAgent</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">match</span><span style="color: #009900;">&#40;</span><span style="color: #009966; font-style: italic;">/MSIE\s([\d]+)/</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span>
+  <span style="color: #009900;">&#40;</span>
+   <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">appName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #3366CC;">'Netscape'</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span>
+   <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> RegExp<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Trident/.*rv:([0-9]{1,}[<span style="color: #000099; font-weight: bold;">\.</span>0-9]{0,})&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">exec</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">userAgent</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #003366; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#41;</span>
+ <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Assim eu consigo fazer 3 verificações antes de dizer que não é IE. Se o navegador se chama &#8220;Internet Explorer&#8221;, se ele tem uma versão válida de MSIE ou se ele é um Netscape com alguma versão de Trident.</p>
+<p style="text-align: justify;">Já estou rodando esse código em produção e o problema foi solucionado. Espero que sirva para mais alguém&#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2428" data-post-type="none" ><small class="wp_rp_publish_date">27/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html" class="wp_rp_title">HTML5: Trocando mensagens entre a página e iframes</a></li><li data-position="1" data-poid="in-1078" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2009</small> <a href="https://rafaelbiriba.com/2009/07/14/liberdade-aos-desenvolvedores-atualize-seu-navegador.html" class="wp_rp_title">Liberdade aos desenvolvedores: Atualize seu Navegador </a></li><li data-position="2" data-poid="in-2956" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser.html" class="wp_rp_title">5 bons motivos para você não perder tempo com travian ou outro jogo web browser</a></li><li data-position="3" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="4" data-poid="in-2430" data-post-type="none" ><small class="wp_rp_publish_date">04/05/2011</small> <a href="https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html" class="wp_rp_title">The Wilderness Downtown: Experimento do Google usando HTML5</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2014%2F09%2F10%2Fuser-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html&amp;linkname=User%20Agent%20do%20Internet%20Explorer%2011%20muda%20e%20quebra%20um%20monte%20de%20projetos" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2014%2F09%2F10%2Fuser-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html&amp;linkname=User%20Agent%20do%20Internet%20Explorer%2011%20muda%20e%20quebra%20um%20monte%20de%20projetos" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2014%2F09%2F10%2Fuser-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html&amp;title=User%20Agent%20do%20Internet%20Explorer%2011%20muda%20e%20quebra%20um%20monte%20de%20projetos" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>OpenCart: Com o aumento do dolar, veja como atualizar o preço de todos os seus produtos via SQL</title>
+		<link>https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html</link>
+		<comments>https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html#respond</comments>
+		<pubDate>Thu, 01 Aug 2013 01:34:13 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[desconto]]></category>
+		<category><![CDATA[dica]]></category>
+		<category><![CDATA[opencart]]></category>
+		<category><![CDATA[produto]]></category>
+		<category><![CDATA[servidor]]></category>
+		<category><![CDATA[sql]]></category>
+		<category><![CDATA[tabela]]></category>
+		<category><![CDATA[valor]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3120</guid>
+		<description><![CDATA[Com o aumento do dolar, resolvi postar aqui como fazer para aumentar o preço de todos os seus produtos baseado numa porcentagem. No caso tive que aumentar 0.05% em cima de todos os produtos. Para fazer isso, você precisa rodar uma linha SQL diretamente no servidor (pode ser feito facilmente pelo phpmysql admin do seu &#8230; <a href="https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html" class="more-link">Continue lendo <span class="screen-reader-text">OpenCart: Com o aumento do dolar, veja como atualizar o preço de todos os seus produtos via SQL</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="alignleft size-full wp-image-3121" alt="opencart-634x250" src="https://rafaelbiriba.com/wp-content/uploads/2013/07/opencart-634x250.jpg" width="634" height="250" srcset="https://rafaelbiriba.com/wp-content/uploads/2013/07/opencart-634x250.jpg 634w, https://rafaelbiriba.com/wp-content/uploads/2013/07/opencart-634x250-300x118.jpg 300w" sizes="(max-width: 634px) 100vw, 634px" /></p>
+<p style="text-align: justify;">Com o aumento do dolar, resolvi postar aqui como fazer para aumentar o preço de todos os seus produtos baseado numa porcentagem.</p>
+<p style="text-align: justify;">No caso tive que aumentar 0.05% em cima de todos os produtos.</p>
+<p style="text-align: justify;">Para fazer isso, você precisa rodar uma linha SQL diretamente no servidor (pode ser feito facilmente pelo phpmysql admin do seu provedor de hospedagem)</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="sql" style="font-family:monospace;"><span style="color: #993333; font-weight: bold;">UPDATE</span> opencart_product <span style="color: #993333; font-weight: bold;">SET</span> price <span style="color: #66cc66;">=</span> round<span style="color: #66cc66;">&#40;</span>price<span style="color: #66cc66;">*</span><span style="color: #cc66cc;">1.05</span><span style="color: #66cc66;">,</span><span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Onde &#8220;opencart_product&#8221; é o nome da minha tabela de produtos e &#8220;1.05&#8221; é o valor que quero deixar no produto, no caso 100% + 0.05%.</p>
+<p style="text-align: justify;">Você também pode baixar o valor do produto proporcionalmente dessa mesma forma. Se você tirar 10% de todos os produtos a query ficaria assim:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="sql" style="font-family:monospace;"><span style="color: #993333; font-weight: bold;">UPDATE</span> opencart_product <span style="color: #993333; font-weight: bold;">SET</span> price <span style="color: #66cc66;">=</span> round<span style="color: #66cc66;">&#40;</span>price<span style="color: #66cc66;">*</span><span style="color: #cc66cc;">0.9</span><span style="color: #66cc66;">,</span><span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Espero que essa informação seja útil para você, assim como foi para mim <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-635" data-post-type="none" ><small class="wp_rp_publish_date">26/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/26/ubuntu-nao-foi-possivel-resolver-brarchiveubuntucom.html" class="wp_rp_title">Ubuntu: Não foi possível resolver &#8216;br.archive.ubuntu.com&#8217;</a></li><li data-position="1" data-poid="in-3113" data-post-type="none" ><small class="wp_rp_publish_date">18/05/2013</small> <a href="https://rafaelbiriba.com/2013/05/18/code-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html" class="wp_rp_title">Code School vai liberar 48 horas de acesso gratuito aos cursos online </a></li><li data-position="2" data-poid="in-1490" data-post-type="none" ><small class="wp_rp_publish_date">17/11/2009</small> <a href="https://rafaelbiriba.com/2009/11/17/melhor-prevenir-do-que-remediar-backup-do-blog.html" class="wp_rp_title">Melhor Prevenir do que Remediar: Backup do Blog</a></li><li data-position="3" data-poid="in-2702" data-post-type="none" ><small class="wp_rp_publish_date">23/02/2011</small> <a href="https://rafaelbiriba.com/2011/02/23/wordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html" class="wp_rp_title">WordPress: Cuidados e dicas para atualizar a versão para 3.1</a></li><li data-position="4" data-poid="in-188" data-post-type="none" ><small class="wp_rp_publish_date">27/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html" class="wp_rp_title">PHP: Ocultando erros de código</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F07%2F31%2Fopencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html&amp;linkname=OpenCart%3A%20Com%20o%20aumento%20do%20dolar%2C%20veja%20como%20atualizar%20o%20pre%C3%A7o%20de%20todos%20os%20seus%20produtos%20via%20SQL" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F07%2F31%2Fopencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html&amp;linkname=OpenCart%3A%20Com%20o%20aumento%20do%20dolar%2C%20veja%20como%20atualizar%20o%20pre%C3%A7o%20de%20todos%20os%20seus%20produtos%20via%20SQL" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F07%2F31%2Fopencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html&amp;title=OpenCart%3A%20Com%20o%20aumento%20do%20dolar%2C%20veja%20como%20atualizar%20o%20pre%C3%A7o%20de%20todos%20os%20seus%20produtos%20via%20SQL" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Code School vai liberar 48 horas de acesso gratuito aos cursos online</title>
+		<link>https://rafaelbiriba.com/2013/05/18/code-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html</link>
+		<comments>https://rafaelbiriba.com/2013/05/18/code-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html#respond</comments>
+		<pubDate>Sat, 18 May 2013 03:34:12 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Carreira]]></category>
+		<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[codeschool]]></category>
+		<category><![CDATA[curso]]></category>
+		<category><![CDATA[dica]]></category>
+		<category><![CDATA[new relic]]></category>
+		<category><![CDATA[online]]></category>
+		<category><![CDATA[promocao]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3113</guid>
+		<description><![CDATA[Em parceria com a New Relic, a Code School está oferecendo 48 horas de acesso gratuito a seu conteúdo. É uma boa oportunidade para quem quer ver como os cursos são. O link para acesso direto a promoção é: http://www.codeschool.com/free-weekend De acordo com o site da code school, a oferta é valida apenas para os dias &#8230; <a href="https://rafaelbiriba.com/2013/05/18/code-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html" class="more-link">Continue lendo <span class="screen-reader-text">Code School vai liberar 48 horas de acesso gratuito aos cursos online</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="size-full wp-image-3114 aligncenter" alt="249163_519143868133826_1683470596_n" src="https://rafaelbiriba.com/wp-content/uploads/2013/05/249163_519143868133826_1683470596_n.png" width="540" height="264" srcset="https://rafaelbiriba.com/wp-content/uploads/2013/05/249163_519143868133826_1683470596_n.png 540w, https://rafaelbiriba.com/wp-content/uploads/2013/05/249163_519143868133826_1683470596_n-300x146.png 300w" sizes="(max-width: 540px) 100vw, 540px" /></p>
+<p>Em parceria com a New Relic, a Code School está oferecendo 48 horas de acesso gratuito a seu conteúdo.</p>
+<p>É uma boa oportunidade para quem quer ver como os cursos são.</p>
+<p>O link para acesso direto a promoção é: <a title="http://www.codeschool.com/free-weekend" href="http://www.codeschool.com/free-weekend" target="_blank">http://www.codeschool.com/free-weekend</a></p>
+<p>De acordo com o site da code school, a oferta é valida apenas para os dias 25 e 26 de maio/2013.</p>
+<p>Então vamos aproveitar essas 48 horas de aprendizado <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-307" data-post-type="none" ><small class="wp_rp_publish_date">10/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/10/chart-api-medidor-em-formato-de-velocimetro.html" class="wp_rp_title">Chart API: Medidor em formato de velocímetro</a></li><li data-position="1" data-poid="in-3120" data-post-type="none" ><small class="wp_rp_publish_date">31/07/2013</small> <a href="https://rafaelbiriba.com/2013/07/31/opencart-com-o-aumento-do-dolar-veja-como-atualizar-o-preco-de-todos-os-seus-produtos-via-sql.html" class="wp_rp_title">OpenCart: Com o aumento do dolar, veja como atualizar o preço de todos os seus produtos via SQL</a></li><li data-position="2" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li><li data-position="3" data-poid="in-2831" data-post-type="none" ><small class="wp_rp_publish_date">06/05/2011</small> <a href="https://rafaelbiriba.com/2011/05/06/raptcha-um-captcha-simples-para-aplicacoes-rails.html" class="wp_rp_title">Raptcha: Um captcha simples para aplicações Rails</a></li><li data-position="4" data-poid="in-280" data-post-type="none" ><small class="wp_rp_publish_date">06/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/06/chart-api-grafico-de-visitantes-do-dia.html" class="wp_rp_title">Chart API: Gráfico de visitantes do dia</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F05%2F18%2Fcode-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html&amp;linkname=Code%20School%20vai%20liberar%2048%20horas%20de%20acesso%20gratuito%20aos%20cursos%20online" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F05%2F18%2Fcode-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html&amp;linkname=Code%20School%20vai%20liberar%2048%20horas%20de%20acesso%20gratuito%20aos%20cursos%20online" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2013%2F05%2F18%2Fcode-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html&amp;title=Code%20School%20vai%20liberar%2048%20horas%20de%20acesso%20gratuito%20aos%20cursos%20online" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2013/05/18/code-school-vai-liberar-48-horas-de-acesso-gratuito-aos-cursos-online.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Você sabia que dá para usar versões diferentes de ruby na mesma máquina ?</title>
+		<link>https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html</link>
+		<comments>https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html#comments</comments>
+		<pubDate>Fri, 21 Sep 2012 20:22:35 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[gem]]></category>
+		<category><![CDATA[gemset]]></category>
+		<category><![CDATA[projetos]]></category>
+		<category><![CDATA[rubygems]]></category>
+		<category><![CDATA[rvm]]></category>
+		<category><![CDATA[versionamento]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3075</guid>
+		<description><![CDATA[RVM ou Ruby Version Manager é o gerenciador de versões Ruby. Com ele você pode rodar projetos com rubys diferentes (exemplo: com a versão 1.8.7 e 1.9.3) mantendo os ambientes e as gems instaladas isoladas. Conheça mais sobre o RVM em: https://rvm.io/ Ou se preferir, pode ir direto para a página de instalação em https://rvm.io/rvm/install/ Um outro &#8230; <a href="https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html" class="more-link">Continue lendo <span class="screen-reader-text">Você sabia que dá para usar versões diferentes de ruby na mesma máquina ?</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="alignleft size-full wp-image-3076" title="logo" src="https://rafaelbiriba.com/wp-content/uploads/2012/09/logo.png" alt="" width="200" height="200" srcset="https://rafaelbiriba.com/wp-content/uploads/2012/09/logo.png 200w, https://rafaelbiriba.com/wp-content/uploads/2012/09/logo-150x150.png 150w" sizes="(max-width: 200px) 100vw, 200px" />RVM ou Ruby Version Manager é o gerenciador de versões Ruby.</p>
+<p style="text-align: justify;">Com ele você pode rodar projetos com rubys diferentes (exemplo: com a versão 1.8.7 e 1.9.3) mantendo os ambientes e as gems instaladas isoladas.</p>
+<p style="text-align: justify;">Conheça mais sobre o RVM em: <a title="https://rvm.io/" href="https://rvm.io/" target="_blank">https://rvm.io/</a></p>
+<p style="text-align: justify;">Ou se preferir, pode ir direto para a página de instalação em <a title="https://rvm.io/rvm/install/" href="https://rvm.io/rvm/install/" target="_blank">https://rvm.io/rvm/install/</a></p>
+<p style="text-align: justify;">Um outro bom exemplo de uso do RVM, não é só a utilização de multiplos Rubys, e sim a separação que ele faz entre os projetos.</p>
+<p style="text-align: justify;">Você pode criar com o RVM um &#8220;Gemset&#8221;, que é um grupo isolado onde se instalada as gem de seu projeto. Com isso você pode usar o mesmo ruby, e ter mais de um gemset configurado.</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-1900" data-post-type="none" ><small class="wp_rp_publish_date">08/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/08/cloud-crowd-a-primeira-action.html" class="wp_rp_title">Cloud Crowd: A primeira action</a></li><li data-position="1" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="2" data-poid="in-489" data-post-type="none" ><small class="wp_rp_publish_date">29/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/29/ruby-require-rubygems-alternativas.html" class="wp_rp_title">Ruby: Alternativas para require &#8216;rubygems&#8217;</a></li><li data-position="3" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="4" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F09%2F21%2Fvoce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html&amp;linkname=Voc%C3%AA%20sabia%20que%20d%C3%A1%20para%20usar%20vers%C3%B5es%20diferentes%20de%20ruby%20na%20mesma%20m%C3%A1quina%20%3F" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F09%2F21%2Fvoce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html&amp;linkname=Voc%C3%AA%20sabia%20que%20d%C3%A1%20para%20usar%20vers%C3%B5es%20diferentes%20de%20ruby%20na%20mesma%20m%C3%A1quina%20%3F" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F09%2F21%2Fvoce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html&amp;title=Voc%C3%AA%20sabia%20que%20d%C3%A1%20para%20usar%20vers%C3%B5es%20diferentes%20de%20ruby%20na%20mesma%20m%C3%A1quina%20%3F" id="wpa2a_8"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>10000 coisas que todos os estudantes de computação deveriam fazer antes da formatura</title>
+		<link>https://rafaelbiriba.com/2012/07/03/10000-coisas-que-todos-os-estudantes-de-computacao-deveriam-fazer-antes-da-formatura.html</link>
+		<comments>https://rafaelbiriba.com/2012/07/03/10000-coisas-que-todos-os-estudantes-de-computacao-deveriam-fazer-antes-da-formatura.html#comments</comments>
+		<pubDate>Tue, 03 Jul 2012 04:27:34 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[computação]]></category>
+		<category><![CDATA[dicas]]></category>
+		<category><![CDATA[estágio]]></category>
+		<category><![CDATA[estudantes]]></category>
+		<category><![CDATA[tdd]]></category>
+		<category><![CDATA[testes]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3026</guid>
+		<description><![CDATA[Esse post é uma tradução do original &#8220;10000 things all ICS students should do before graduating&#8221; Resolvi traduzir esse post pois achei a ideia do autor muito boa. Hoje, muitos alunos de análise de sistemas, ciência da computação, engenharia da computação, e outros cursos da área, estão sendo formados com base em tecnologias antigas e &#8230; <a href="https://rafaelbiriba.com/2012/07/03/10000-coisas-que-todos-os-estudantes-de-computacao-deveriam-fazer-antes-da-formatura.html" class="more-link">Continue lendo <span class="screen-reader-text">10000 coisas que todos os estudantes de computação deveriam fazer antes da formatura</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><br /><a href="https://rafaelbiriba.com/wp-content/uploads/2012/07/graduate1.jpeg"><img class="alignleft size-full wp-image-3028" title="graduate1" src="https://rafaelbiriba.com/wp-content/uploads/2012/07/graduate1.jpeg" alt="" width="250" height="350" srcset="https://rafaelbiriba.com/wp-content/uploads/2012/07/graduate1.jpeg 250w, https://rafaelbiriba.com/wp-content/uploads/2012/07/graduate1-214x300.jpeg 214w" sizes="(max-width: 250px) 100vw, 250px" /></a>Esse post é uma tradução do original <a title="http://tagide.com/blog/2011/06/things-ics-students-should-do-before-graduating/" href="http://tagide.com/blog/2011/06/things-ics-students-should-do-before-graduating/" target="_blank">&#8220;10000 things all ICS students should do before graduating&#8221;</a></p>
+<p>Resolvi traduzir esse post pois achei a ideia do autor muito boa.</p>
+<p>Hoje, muitos alunos de análise de sistemas, ciência da computação, engenharia da computação, e outros cursos da área, estão sendo formados com base em tecnologias antigas e ultrapassadas&#8230;</p>
+<p>Por exemplo, creio que 80% de uma turma de um último período em analise de sistemas, não vai saber que a linguagem Ruby existe, ou muito menos a definição de TDD (Coisas que são utilizados hoje em dia em empresas grandes como a Globo.com).</p>
+<p>Digo isso pois já entrevistei muitos candidatos para estágio, e o nível do pessoal está ainda bem no básico. Mesmo sabendo que para estagiar, você não precisa &#8220;saber nada&#8221;, existe algumas coisas que podem te ajudar a &#8220;se classificar melhor&#8221; numa seleção técnica.</p>
+<p>Então abaixo segue a lista na integra retirada do blog mencionado acima:</p>
+<p><strong>0000</strong> – Registrar seu próprio domínio<br /><strong>0001</strong> – Instalar o Apache web server e configura-lo de uma forma não tão simples (Por exemplo, múltiplos sites rodando no mesmo apache)<br /><strong>0010</strong> – Instale o WordPress e mantenha seu próprio Blog. Escreva bem os seus posts e regularmente. Uma boa escrita é uma habilidade fundamental para dominar esta profissão. <br /><strong>0011</strong> – Rode seu próprio site na sua casa ou numa empresa de hospedagem.<br /><strong>0100</strong> – Crie pelo menos uma aplicação web LAMP (Linux, Apache, Mysql, PHP). Seria legal se escrevesse duas. Uma em PHP e outra em Python…. Ou em Ruby (LAMR ?? haha)<br /><strong>0101</strong> – Tenha seu próprio servidor (físico ou virtual) na nuvem <br /><strong>0110</strong> – Instale o VMWare/Virtualbox ou equivalente para poder rodar mais de um sistema operacional em seu laptop<br /><strong>0111</strong> – Configure seu roteador da sua cada para servir um site ou alguns arquivos do computador da sua casa para os seus amigos acessarem&#8230;<br /><strong>1000</strong> &#8211; Use um sniffer de pacote (Wireshark) para aprender e ver as requisições de rede que são feitas entre seu computador e um jogo on-line favorito. <br /><strong>1001</strong> – Faça contribuições a projetos open-source.<br /><strong>1010</strong> – Desenvolva um aplicativo que use pelo menos umas das APIs Web mais populares como a do Facebook Connect ou do Google.<br /><strong>1011</strong> – Habilite o Google Adsense em seu blog ou site, e ganhe um pouco de dinheiro baseado no tráfego virtual. <br /><strong>1100</strong> – Compilar um projeto de código aberto complicado a partir do zero. Tente o FFMpeg por exemplo !<br /><strong>1101</strong> – Ler obras de literatura e, além de desfrutar a leitura, preste muita atenção à forma como o autor conta a história e faz uso das palavras. Os programas devem ser tão cuidadosamente escritos como aquelas obras de arte!<br /><strong>1110</strong> – Obter-se envolvido em um projeto de software onde os requisitos mudam no meio &#8211; cerca de 0,01% dos projetos pessoais e cerca de 99,99% dos projetos do mundo real, assim que encontrar um deste último tipo, concluir o projeto com a paciência e ter capacidade de aceitar críticas de forma construtiva.<br /><strong>1111</strong> – Escrever um aplicativo usando Map-Reduce. Executá-lo no Google app-engine ou na Amazon EC2.</p>
+<p>Eu particularmente teria adicionado na lista mais alguns pontos:</p>
+<p>&#8211; Colocar todo código desenvolvido em algum &#8220;controle de versão&#8221; (Exemplo: Git)<br />&#8211; Estudar sobre testes automatizados e desenvolver utilizando a técnica TDD<br />&#8211; Considerando que a maioria das empresas utilizam um linux em seus servidores de produção, estudar conceitos básicos de unix e saber dar um ssh de um servidor para outro, por exemplo.</p>
+<p>Espero que as dicas sirvam para alguns estudantes <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /> Não deixe de ler o post original na integra: <a title="http://tagide.com/blog/2011/06/things-ics-students-should-do-before-graduating/" href="http://tagide.com/blog/2011/06/things-ics-students-should-do-before-graduating/" target="_blank">http://tagide.com/blog/2011/06/things-ics-students-should-do-before-graduating/</a></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-402" data-post-type="none" ><small class="wp_rp_publish_date">04/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/04/ruby-aprenda-a-programar.html" class="wp_rp_title">Ruby: Aprenda a programar</a></li><li data-position="1" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="2" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li><li data-position="3" data-poid="in-489" data-post-type="none" ><small class="wp_rp_publish_date">29/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/29/ruby-require-rubygems-alternativas.html" class="wp_rp_title">Ruby: Alternativas para require &#8216;rubygems&#8217;</a></li><li data-position="4" data-poid="in-3075" data-post-type="none" ><small class="wp_rp_publish_date">21/09/2012</small> <a href="https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html" class="wp_rp_title">Você sabia que dá para usar versões diferentes de ruby na mesma máquina ?</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F07%2F03%2F10000-coisas-que-todos-os-estudantes-de-computacao-deveriam-fazer-antes-da-formatura.html&amp;linkname=10000%20coisas%20que%20todos%20os%20estudantes%20de%20computa%C3%A7%C3%A3o%20deveriam%20fazer%20antes%20da%20formatura" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F07%2F03%2F10000-coisas-que-todos-os-estudantes-de-computacao-deveriam-fazer-antes-da-formatura.html&amp;linkname=10000%20coisas%20que%20todos%20os%20estudantes%20de%20computa%C3%A7%C3%A3o%20deveriam%20fazer%20antes%20da%20formatura" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F07%2F03%2F10000-coisas-que-todos-os-estudantes-de-computacao-deveriam-fazer-antes-da-formatura.html&amp;title=10000%20coisas%20que%20todos%20os%20estudantes%20de%20computa%C3%A7%C3%A3o%20deveriam%20fazer%20antes%20da%20formatura" id="wpa2a_10"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/07/03/10000-coisas-que-todos-os-estudantes-de-computacao-deveriam-fazer-antes-da-formatura.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>GitHub alerta sobre vulnerabilidade no gerenciamento das chaves SSHs</title>
+		<link>https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html</link>
+		<comments>https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html#comments</comments>
+		<pubDate>Wed, 07 Mar 2012 18:44:20 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Serviços Online]]></category>
+		<category><![CDATA[audit]]></category>
+		<category><![CDATA[chaves]]></category>
+		<category><![CDATA[git]]></category>
+		<category><![CDATA[github]]></category>
+		<category><![CDATA[invasão]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[suspeita]]></category>
+		<category><![CDATA[vulnerabilidade]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2972</guid>
+		<description><![CDATA[Através de um email recebido hoje a tarde (dia 07/03/2012) o GitHub informa sobre uma vunerabilidade que permitia que através de um ataque, a alteração de chaves SSHs dos projetos. Isso permitia que o atacante pudesse fazer clone/pull/push nos repositórios&#8230; A vulnerabilidade foi fechada dia 04 de março de 2012 as 5:53 PM UTC. Como &#8230; <a href="https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html" class="more-link">Continue lendo <span class="screen-reader-text">GitHub alerta sobre vulnerabilidade no gerenciamento das chaves SSHs</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><a href="https://rafaelbiriba.com/wp-content/uploads/2012/03/github-profile.png"><img class="size-full wp-image-2973 alignright" title="github-profile" src="https://rafaelbiriba.com/wp-content/uploads/2012/03/github-profile.png" alt="" width="300" height="450" srcset="https://rafaelbiriba.com/wp-content/uploads/2012/03/github-profile.png 300w, https://rafaelbiriba.com/wp-content/uploads/2012/03/github-profile-200x300.png 200w" sizes="(max-width: 300px) 100vw, 300px" /></a>Através de um email recebido hoje a tarde (dia 07/03/2012) o GitHub informa sobre uma vunerabilidade que permitia que através de um ataque, a alteração de chaves SSHs dos projetos.</p>
+<p style="text-align: justify;">Isso permitia que o atacante pudesse fazer clone/pull/push nos repositórios&#8230; A vulnerabilidade foi fechada dia 04 de março de 2012 as 5:53 PM UTC.</p>
+<p style="text-align: justify;">Como forma de precaução, <strong>todas as chaves SSHs foram desabilitadas</strong> e você deve entrar no link: <a title="https://github.com/settings/ssh/audit" href="https://github.com/settings/ssh/audit" target="_blank">https://github.com/settings/<wbr>ssh/audit</wbr></a> para conferir e liberar as chaves SSHs cadastradas.</p>
+<p style="text-align: justify;">Para que isso não aconteça novamente, o email ainda informa que para adicionar novas chaves, agora é necessário informar a senha e um email é enviado avisado que uma nova chave foi adicionada. Em sua conta também irá ter um registro de alterações para poder analisar uma possivel atividade suspeita.</p>
+<p style="text-align: justify;">Então é isso&#8230; Olhem suas contas e confiram se está tudo ok&#8230;</p>
+<p style="text-align: justify;">GitHub, Espero que não aconteça de novo =)</p>
+<p style="text-align: justify;">E avisem seus amigos para revalidarem as chaves lá no github ou não conseguirão dar pull/pushes <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2455" data-post-type="none" ><small class="wp_rp_publish_date">02/12/2010</small> <a href="https://rafaelbiriba.com/2010/12/02/oi-velox-invade-a-privacidade-dos-usuarios-com-campanha-de-seu-navegador.html" class="wp_rp_title">OI Velox invade a privacidade de seus usuários com campanha de seu navegador</a></li><li data-position="1" data-poid="in-2908" data-post-type="none" ><small class="wp_rp_publish_date">03/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="wp_rp_title">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</a></li><li data-position="2" data-poid="in-1375" data-post-type="none" ><small class="wp_rp_publish_date">13/09/2009</small> <a href="https://rafaelbiriba.com/2009/09/13/vulnerabilidade-do-site-da-vivo-seu-windows-pode-ter-sido-afetado-e-ja-nao-ser-mais-seguro.html" class="wp_rp_title">Vulnerabilidade do site da VIVO: Seu windows pode ter sido afetado e já não ser mais seguro</a></li><li data-position="3" data-poid="in-1106" data-post-type="none" ><small class="wp_rp_publish_date">02/10/2009</small> <a href="https://rafaelbiriba.com/2009/10/02/tunneling-passe-por-bloqueios-de-proxy-ou-de-firewall-com-socks.html" class="wp_rp_title">Tunneling: Passe por bloqueios de proxy ou de firewall com Socks</a></li><li data-position="4" data-poid="in-2494" data-post-type="none" ><small class="wp_rp_publish_date">30/12/2010</small> <a href="https://rafaelbiriba.com/2010/12/30/nao-deixe-de-atualizar-seu-wordpress-versao-3-0-4-corrige-um-problema-critico-de-seguranca.html" class="wp_rp_title">Não deixe de atualizar seu wordpress: versão 3.0.4 corrige falha de segurança</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F03%2F07%2Fgithub-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html&amp;linkname=GitHub%20alerta%20sobre%20vulnerabilidade%20no%20gerenciamento%20das%20chaves%20SSHs" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F03%2F07%2Fgithub-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html&amp;linkname=GitHub%20alerta%20sobre%20vulnerabilidade%20no%20gerenciamento%20das%20chaves%20SSHs" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F03%2F07%2Fgithub-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html&amp;title=GitHub%20alerta%20sobre%20vulnerabilidade%20no%20gerenciamento%20das%20chaves%20SSHs" id="wpa2a_12"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/03/07/github-alerta-sobre-vulnerabilidade-no-gerenciamento-das-chaves-sshs.html/feed</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</title>
+		<link>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html</link>
+		<comments>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html#comments</comments>
+		<pubDate>Fri, 03 Feb 2012 21:41:13 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Sistemas Operacionais]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[bundler]]></category>
+		<category><![CDATA[gem]]></category>
+		<category><![CDATA[github]]></category>
+		<category><![CDATA[instalação]]></category>
+		<category><![CDATA[nginx]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[rubygems]]></category>
+		<category><![CDATA[rubyonrails]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[vps]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2908</guid>
+		<description><![CDATA[Andei procurando na internet por algum script para fazer uma instalação mais &#8220;automatizada&#8221; de um ambiente Ruby on Rails numa máquina virtual (VPS) rodando Ubuntu 11.10 Depois de pesquisar muito, só encontrei referências detalhadas  para ubuntu 10.* ou então alguns blogs sugerindo algumas linhas de comando apenas. Como eu já estava terminando um projeto de &#8230; <a href="https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html" class="more-link">Continue lendo <span class="screen-reader-text">Ubuntu 11.10 com Ruby on Rails + Nginx + Mysql de forma simples</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><a href="https://rafaelbiriba.com/wp-content/uploads/2012/02/install_ror_on_ubuntu.png"><img class="alignright size-full wp-image-2910" title="install_ror_on_ubuntu" src="https://rafaelbiriba.com/wp-content/uploads/2012/02/install_ror_on_ubuntu.png" alt="" width="258" height="159" /></a></p>
+<p style="text-align: justify;">Andei procurando na internet por algum script para fazer uma instalação mais &#8220;automatizada&#8221; de um ambiente Ruby on Rails numa máquina virtual (VPS) rodando Ubuntu 11.10</p>
+<p style="text-align: justify;">Depois de pesquisar muito, só encontrei referências detalhadas  para ubuntu 10.* ou então alguns blogs sugerindo algumas linhas de comando apenas.</p>
+<p style="text-align: justify;">Como eu já estava terminando um projeto de um site e precisava de um ambiente de produção, resolvi fazer um script (em bash), onde eu tivesse o controle de tudo que iria acontecer de forma segura e eficaz.</p>
+<p style="text-align: justify;">O script está disponível no meu github, use como quiser =)</p>
+<p style="text-align: justify;">Lembrando que só testei no Ubuntu 11.10, a instalação instala e configura o seguinte:<br />&#8211; Ruby 1.9.2-p290<br />&#8211;  Nginx Upload Module 2.2.0<br />&#8211; Nginx 1.1.12 <br />&#8211; iptables para as portas principais de ssh(22), http(80), https(443), dns(53)<br />&#8211; Mysql (versão estável do apt-get do ubuntu)<br />&#8211; Postfix (versão estável do apt-get do ubuntu)<br />&#8211; Gem Bundler (última versão pelo rubygems)</p>
+<p style="text-align: justify;">Com isso, basta configurar o domínio da sua aplicação corretamente na configuração do nginx, fazer o deploy e ser feliz! =)</p>
+<p style="text-align: justify;">Link do projeto: <a title="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" href="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" target="_blank">https://github.com/rafaelbiriba/Ubuntu-VPS-Builder </a></p>
+<p style="text-align: justify;">Abaixo segue uma cópia do código que eu coloquei no git assim você pode tirar suas dúvidas pelos comentários&#8230; Caso decida usar o script, baixe ele pelo <a title="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" href="https://github.com/rafaelbiriba/Ubuntu-VPS-Builder" target="_blank">link do github</a>. Não use o código abaixo pois o mesmo pode já estar desatualizado!</p>
+<p style="text-align: justify;">Modo de usar no servidor:<br /><strong><span style="color: #ff0000;">$</span> chmod +x vps_builder.sh</strong><br /><strong><span style="color: #ff0000;">$</span> ./vps_builder.sh seudominio.com </strong></p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+</pre></td><td class="code"><pre class="bash" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">#!/bin/bash</span>
+<span style="color: #666666; font-style: italic;"># &quot;Automated VPS Setup for Ubuntu 11.10 - Rails with Nginx&quot;</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># Created by: Rafael Biriba - www.rafaelbiriba.com - biribarj@gmail.com</span>
+<span style="color: #666666; font-style: italic;"># https://github.com/rafaelbiriba/Ubuntu-VPS-Builder/</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># USAGE:</span>
+<span style="color: #666666; font-style: italic;">#</span>
+<span style="color: #666666; font-style: italic;"># $ chmod +x vps_builder.sh</span>
+<span style="color: #666666; font-style: italic;"># $ ./vps_builder.sh yourdomain.com&quot;</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Updating before all&quot;</span>
+<span style="color: #c20cb9; font-weight: bold;">apt-get update</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">apt-get upgrade</span> <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Set Hostname&quot;</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #007800;">$1</span> <span style="color: #000000; font-weight: bold;">&gt;</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span><span style="color: #c20cb9; font-weight: bold;">hostname</span>
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;127.0.0.1 $1&quot;</span> <span style="color: #000000; font-weight: bold;">&gt;&gt;</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>hosts
+<span style="color: #c20cb9; font-weight: bold;">hostname</span> <span style="color: #660033;">-F</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span><span style="color: #c20cb9; font-weight: bold;">hostname</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Set Timezone&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">ln</span> <span style="color: #660033;">-sf</span> <span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>share<span style="color: #000000; font-weight: bold;">/</span>zoneinfo<span style="color: #000000; font-weight: bold;">/</span>America<span style="color: #000000; font-weight: bold;">/</span>Sao_Paulo <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>localtime
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Essencials&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> build-essential zlib1g-dev libreadline6-dev libssl-dev <span style="color: #c20cb9; font-weight: bold;">wget</span> git-core <span style="color: #c20cb9; font-weight: bold;">sudo</span> <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Ruby 1.9.2&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>ftp.ruby-lang.org<span style="color: #000000; font-weight: bold;">/</span>pub<span style="color: #000000; font-weight: bold;">/</span>ruby<span style="color: #000000; font-weight: bold;">/</span><span style="color: #000000;">1.9</span><span style="color: #000000; font-weight: bold;">/</span>ruby-1.9.2-p290.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf ruby-1.9.2-p290.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> ruby-1.9.2-p290
+.<span style="color: #000000; font-weight: bold;">/</span>configure
+<span style="color: #c20cb9; font-weight: bold;">make</span>
+<span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-rf</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install Passenger and Nginx&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">mkdir</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+<span style="color: #c20cb9; font-weight: bold;">wget</span> ftp:<span style="color: #000000; font-weight: bold;">//</span>ftp.csx.cam.ac.uk<span style="color: #000000; font-weight: bold;">/</span>pub<span style="color: #000000; font-weight: bold;">/</span>software<span style="color: #000000; font-weight: bold;">/</span>programming<span style="color: #000000; font-weight: bold;">/</span>pcre<span style="color: #000000; font-weight: bold;">/</span>pcre-<span style="color: #000000;">8.21</span>.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf pcre-<span style="color: #000000;">8.21</span>.tar.gz
+<span style="color: #7a0874; font-weight: bold;">cd</span> pcre-<span style="color: #000000;">8.21</span>
+.<span style="color: #000000; font-weight: bold;">/</span>configure <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #000000; font-weight: bold;">&amp;&amp;</span> <span style="color: #c20cb9; font-weight: bold;">make</span> <span style="color: #c20cb9; font-weight: bold;">install</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>nginx.org<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>nginx-1.1.12.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">wget</span> http:<span style="color: #000000; font-weight: bold;">//</span>www.grid.net.ru<span style="color: #000000; font-weight: bold;">/</span>nginx<span style="color: #000000; font-weight: bold;">/</span>download<span style="color: #000000; font-weight: bold;">/</span>nginx_upload_module-2.2.0.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf nginx-1.1.12.tar.gz
+<span style="color: #c20cb9; font-weight: bold;">tar</span> xzvf nginx_upload_module-2.2.0.tar.gz
+&nbsp;
+gem <span style="color: #c20cb9; font-weight: bold;">install</span> passenger
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> libcurl4-openssl-dev <span style="color: #660033;">-y</span>
+passenger-install-nginx-module <span style="color: #660033;">--prefix</span>=<span style="color: #000000; font-weight: bold;">/</span>opt<span style="color: #000000; font-weight: bold;">/</span>nginx <span style="color: #660033;">--nginx-source-dir</span>=<span style="color: #000000; font-weight: bold;">/</span>root<span style="color: #000000; font-weight: bold;">/</span>tmp<span style="color: #000000; font-weight: bold;">/</span>nginx-1.1.12 <span style="color: #660033;">--extra-configure-flags</span>=--add-module=<span style="color: #ff0000;">'/root/tmp/nginx_upload_module-2.2.0'</span>
+<span style="color: #666666; font-style: italic;">#passenger-install-nginx-module --auto --auto-download</span>
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">rm</span> <span style="color: #660033;">-rf</span> ~<span style="color: #000000; font-weight: bold;">/</span>tmp
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">cd</span> ~
+<span style="color: #c20cb9; font-weight: bold;">wget</span> https:<span style="color: #000000; font-weight: bold;">//</span>raw.github.com<span style="color: #000000; font-weight: bold;">/</span>rafaelbiriba<span style="color: #000000; font-weight: bold;">/</span>Ubuntu-VPS-Builder<span style="color: #000000; font-weight: bold;">/</span>master<span style="color: #000000; font-weight: bold;">/</span>ubuntu_11-<span style="color: #000000;">10</span>_desktop<span style="color: #000000; font-weight: bold;">/</span>nginx-init.sh
+<span style="color: #c20cb9; font-weight: bold;">cp</span> nginx-init.sh <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx
+<span style="color: #c20cb9; font-weight: bold;">rm</span> nginx-init.sh
+<span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx
+<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>sbin<span style="color: #000000; font-weight: bold;">/</span>update-rc.d <span style="color: #660033;">-f</span> nginx defaults
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>nginx start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Configure iptables&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> iptables
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">tee</span> <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall <span style="color: #cc0000; font-style: italic;">&lt;&lt;ENDOFFILE
+#!/bin/bash
+&nbsp;
+start(){
+# Accepting all connections made on the special lo - loopback - 127.0.0.1 - interface
+iptables -A INPUT -p tcp -i lo -j ACCEPT
+&nbsp;
+# Rule which allows established tcp connections to stay up
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+&nbsp;
+# SSH:
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+&nbsp;
+# DNS:
+iptables -A INPUT -p tcp --dport 53 -j ACCEPT
+iptables -A INPUT -p udp --dport 53 -j ACCEPT
+&nbsp;
+# HTTP e HTTPS:
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+&nbsp;
+# Block others ports
+iptables -A INPUT -p tcp --syn -j DROP
+iptables -A INPUT -p udp --dport 0:1023 -j DROP
+&nbsp;
+}
+stop(){
+iptables -F
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+}
+&nbsp;
+case &quot;\$1&quot; in
+&quot;start&quot;) start ;;
+&quot;stop&quot;) stop ;;
+&quot;restart&quot;) stop; start ;;
+*) echo &quot;start or stop params&quot;
+esac
+ENDOFFILE</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">chmod</span> +x <span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall
+update-rc.d firewall defaults <span style="color: #000000;">99</span>
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>firewall start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install MySQL&quot;</span>
+&nbsp;
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> mysql-server mysql-client libmysqlclient-dev <span style="color: #660033;">-y</span>
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install postfix&quot;</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;"># Install type: Internet Site</span>
+<span style="color: #666666; font-style: italic;"># Default email domain name: example.com</span>
+<span style="color: #c20cb9; font-weight: bold;">apt-get install</span> postfix mailutils telnet <span style="color: #660033;">-y</span>
+<span style="color: #000000; font-weight: bold;">/</span>usr<span style="color: #000000; font-weight: bold;">/</span>sbin<span style="color: #000000; font-weight: bold;">/</span>update-rc.d postfix defaults
+<span style="color: #000000; font-weight: bold;">/</span>etc<span style="color: #000000; font-weight: bold;">/</span>init.d<span style="color: #000000; font-weight: bold;">/</span>postfix start
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;Install gem bundler&quot;</span>
+&nbsp;
+gem <span style="color: #c20cb9; font-weight: bold;">install</span> bundler
+&nbsp;
+<span style="color: #7a0874; font-weight: bold;">echo</span> <span style="color: #ff0000;">&quot;VPS Setup Complete&quot;</span></pre></td></tr></table></div>
+
+
+
+<p><span style="font-size: medium;"><strong>Qualquer dúvida, estamos aí para trocar ideias <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></strong></span></p>
+<p>___________________________________________________</p>
+<p><strong>Atualização 1 &#8211; 07/fev/2012:</strong></p>
+<p style="text-align: justify;">Agradeço ao leitor Laércio pelo contato via email, reportando um problema, onde se o ubuntu estiver muito desatualizado, o script não roda direito. Com isso adicionei lá no github e no exemplo acima os comandos apt-get update e apt-get upgrade para atualizar o ubuntu antes de fazer qualquer coisa. Obrigado mais uma vez Laércio !</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-3075" data-post-type="none" ><small class="wp_rp_publish_date">21/09/2012</small> <a href="https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html" class="wp_rp_title">Você sabia que dá para usar versões diferentes de ruby na mesma máquina ?</a></li><li data-position="1" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li><li data-position="2" data-poid="in-489" data-post-type="none" ><small class="wp_rp_publish_date">29/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/29/ruby-require-rubygems-alternativas.html" class="wp_rp_title">Ruby: Alternativas para require &#8216;rubygems&#8217;</a></li><li data-position="3" data-poid="in-1190" data-post-type="none" ><small class="wp_rp_publish_date">09/08/2009</small> <a href="https://rafaelbiriba.com/2009/08/09/ubuntu-instalacao-do-vmware-server-console.html" class="wp_rp_title">Ubuntu: Instalação do vmware-server-console</a></li><li data-position="4" data-poid="in-1900" data-post-type="none" ><small class="wp_rp_publish_date">08/02/2010</small> <a href="https://rafaelbiriba.com/2010/02/08/cloud-crowd-a-primeira-action.html" class="wp_rp_title">Cloud Crowd: A primeira action</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;linkname=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;linkname=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2012%2F02%2F03%2Fubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html&amp;title=Ubuntu%2011.10%20com%20Ruby%20on%20Rails%20%2B%20Nginx%20%2B%20Mysql%20de%20forma%20simples" id="wpa2a_14"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2012/02/03/ubuntu-11-10-com-ruby-on-rails-nginx-mysql-de-forma-simples.html/feed</wfw:commentRss>
+		<slash:comments>5</slash:comments>
+		</item>
+		<item>
+		<title>Raptcha: Um captcha simples para aplicações Rails</title>
+		<link>https://rafaelbiriba.com/2011/05/06/raptcha-um-captcha-simples-para-aplicacoes-rails.html</link>
+		<comments>https://rafaelbiriba.com/2011/05/06/raptcha-um-captcha-simples-para-aplicacoes-rails.html#comments</comments>
+		<pubDate>Fri, 06 May 2011 18:10:10 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Ruby]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[catpcha]]></category>
+		<category><![CDATA[ghostscript]]></category>
+		<category><![CDATA[imagemagick]]></category>
+		<category><![CDATA[rails]]></category>
+		<category><![CDATA[raptcha]]></category>
+		<category><![CDATA[recaptcha]]></category>
+		<category><![CDATA[rubygems]]></category>
+		<category><![CDATA[rubyonrails]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2831</guid>
+		<description><![CDATA[&#160; Captcha é um teste de desafio cognitivo, utilizado como ferramenta anti-spam. O que acontece é que um script automatizado (um robô), não consegue ler o texto embaralhado nas imagens. Isso faz com que seja uma excelente ferramenta para combater o spam ou prevenir que scripts tenham acesso a determinadas áreas. Recentemente tive que procurar &#8230; <a href="https://rafaelbiriba.com/2011/05/06/raptcha-um-captcha-simples-para-aplicacoes-rails.html" class="more-link">Continue lendo <span class="screen-reader-text">Raptcha: Um captcha simples para aplicações Rails</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p>&nbsp;</p>
+
+<figure id="attachment_2832" style="width: 400px" class="wp-caption aligncenter"><img class="size-full wp-image-2832" title="Robot_Tattoo" src="https://rafaelbiriba.com/wp-content/uploads/2011/04/Robot_Tattoo.png" alt="" width="400" height="198" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/04/Robot_Tattoo.png 400w, https://rafaelbiriba.com/wp-content/uploads/2011/04/Robot_Tattoo-300x148.png 300w" sizes="(max-width: 400px) 100vw, 400px" /><figcaption class="wp-caption-text">Humor: Robôs lendo o captcha</figcaption></figure>
+<p style="text-align: justify;">Captcha é um teste de desafio cognitivo, utilizado como ferramenta anti-spam. O que acontece é que um script automatizado (um robô), não consegue ler o texto embaralhado nas imagens. Isso faz com que seja uma excelente ferramenta para combater o spam ou prevenir que scripts tenham acesso a determinadas áreas.</p>
+<p style="text-align: justify;">Recentemente tive que procurar uma gem (um pacote do <a title="http://rubygems.org/" href="http://rubygems.org/" target="_blank">rubygems</a>) de captcha para minha aplicação rails, mas que fosse a mais simples possível e sem nenhuma dependência externa.</p>
+<p style="text-align: justify;">Vi que a mais utilizada é a gem <a title="http://rubygems.org/gems/recaptcha" href="http://rubygems.org/gems/recaptcha" target="_blank">recaptcha</a>, que utiliza a estrutura da API do google de captcha (<a title="http://www.google.com/recaptcha" href="http://www.google.com/recaptcha" target="_blank">google.com/recaptcha</a>). Para resolver o meu problema ela não serve, já que o meu projeto vai rodar em máquinas sem acesso a internet.</p>
+<p style="text-align: justify;">Então ao continuar a busca por uma boa gem de captcha, recebi a recomendação de usar o <a title="http://rubygems.org/gems/raptcha" href="http://rubygems.org/gems/raptcha" target="_blank">Raptcha</a>.</p>
+<p style="text-align: justify;"><img class="alignright size-full wp-image-2834" title="raptcha-example" src="https://rafaelbiriba.com/wp-content/uploads/2011/04/raptcha-example.png" alt="" width="252" height="126" /></p>
+<p style="text-align: justify;">O Raptcha é realmente muito simples de configurar e de usar. Ele usa o Image Magick para renderizar as imagens em tempo real.</p>
+<p style="text-align: justify;">Em alguns casos isso pode ser um problema, mas no caso da minha aplicação, não havia necessidade de cachear as imagens.</p>
+<p style="text-align: justify;">Ao lado temos um exemplo do uso do raptcha.</p>
+<p style="text-align: justify;">Você pode conferir a documentação de instalação pelo link: <a title="https://github.com/ahoward/raptcha" href="https://github.com/ahoward/raptcha" target="_blank">https://github.com/ahoward/raptcha</a></p>
+<p style="text-align: justify;">Quando estava fazendo os meus testes, tive dificuldade para fazer as letras do captcha aparecer. Se isso acontecer, tente instalar o pacote GhostScript. Se você estiver usando o ubuntu, o <strong>imagemagick</strong> e o <strong>ghostscript</strong> tem no <span style="color: #ff0000;">synaptic</span>. Se você usa macbook, ambos os pacotes podem ser instalados pelo repositório do <span style="color: #ff0000;">brew</span> (não sei se tem no ports).</p>
+<p style="text-align: justify;">Um outro problema que eu tive que resolver, foi implementar o botão de gerar outro captcha. Infelizmente o raptcha não da suporte nativo a isso. Mas pode ser facilmente resolvido usando Ajax. O que eu fiz foi colocar no controller um render partial como mostra o código a seguir:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre class="ruby" style="font-family:monospace;"><span style="color:#9966CC; font-weight:bold;">class</span> RaptchaController <span style="color:#006600; font-weight:bold;">&lt;</span> ApplicationController
+&nbsp;
+  <span style="color:#9966CC; font-weight:bold;">def</span> index
+    Raptcha.<span style="color:#9900CC;">render</span><span style="color:#006600; font-weight:bold;">&#40;</span>controller=<span style="color:#0000FF; font-weight:bold;">self</span>, params<span style="color:#006600; font-weight:bold;">&#41;</span>
+  <span style="color:#9966CC; font-weight:bold;">end</span>
+&nbsp;
+  <span style="color:#9966CC; font-weight:bold;">def</span> get_form
+    render <span style="color:#ff3333; font-weight:bold;">:partial</span> <span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#996600;">&quot;form&quot;</span>
+  <span style="color:#9966CC; font-weight:bold;">end</span>
+&nbsp;
+<span style="color:#9966CC; font-weight:bold;">end</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">E no partial &#8220;form&#8221; ficou assim:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+</pre></td><td class="code"><pre class="ruby" style="font-family:monospace;"><span style="color:#006600; font-weight:bold;">&lt;%</span>= raw Raptcha.<span style="color:#9900CC;">input</span> <span style="color:#006600; font-weight:bold;">%&gt;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Dessa forma, a chamar a url: <strong>http://localhost:3000/raptcha/<span style="color: #ff0000;">get_form</span></strong> obtemos o retorno de todo o form do raptcha:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre class="ruby" style="font-family:monospace;"><span style="color:#006600; font-weight:bold;">&lt;</span>div <span style="color:#9966CC; font-weight:bold;">class</span>=<span style="color:#996600;">&quot;raptcha&quot;</span><span style="color:#006600; font-weight:bold;">&gt;</span>
+   <span style="color:#006600; font-weight:bold;">&lt;</span>img <span style="color:#9966CC; font-weight:bold;">class</span>=<span style="color:#996600;">&quot;raptcha-image&quot;</span> src=<span style="color:#996600;">&quot;/raptcha?e=DaROXGWrRTrLdYXmJ05iKg&quot;</span> alt=<span style="color:#996600;">&quot;Imagem de validação&quot;</span> width=<span style="color:#996600;">&quot;242&quot;</span> height=<span style="color:#996600;">&quot;68&quot;</span> <span style="color:#006600; font-weight:bold;">/&gt;</span>
+&nbsp;
+   <span style="color:#006600; font-weight:bold;">&lt;</span>label<span style="color:#006600; font-weight:bold;">&gt;&lt;</span>img id=<span style="color:#996600;">&quot;captcha-reload&quot;</span> title=<span style="color:#996600;">&quot;Recarregar imagem&quot;</span> src=<span style="color:#996600;">&quot;/images/mini-reload.gif&quot;</span> alt=<span style="color:#996600;">&quot;&quot;</span> <span style="color:#006600; font-weight:bold;">/&gt;</span>Digite as letras acima:<span style="color:#006600; font-weight:bold;">&lt;/</span>label<span style="color:#006600; font-weight:bold;">&gt;</span>
+&nbsp;
+   <span style="color:#006600; font-weight:bold;">&lt;</span>input <span style="color:#9966CC; font-weight:bold;">class</span>=<span style="color:#996600;">&quot;raptcha-input box&quot;</span> name=<span style="color:#996600;">&quot;raptcha[t]&quot;</span> type=<span style="color:#996600;">&quot;textarea&quot;</span> <span style="color:#006600; font-weight:bold;">/&gt;</span>
+   <span style="color:#006600; font-weight:bold;">&lt;</span>input <span style="color:#9966CC; font-weight:bold;">class</span>=<span style="color:#996600;">&quot;raptcha-word&quot;</span> name=<span style="color:#996600;">&quot;raptcha[w]&quot;</span> type=<span style="color:#996600;">&quot;hidden&quot;</span> value=<span style="color:#996600;">&quot;DaROXGWrRTrLdYXmJ05iKg&quot;</span> <span style="color:#006600; font-weight:bold;">/&gt;</span>
+   <span style="color:#006600; font-weight:bold;">&lt;</span>input <span style="color:#9966CC; font-weight:bold;">class</span>=<span style="color:#996600;">&quot;raptcha-timebomb&quot;</span> name=<span style="color:#996600;">&quot;raptcha[b]&quot;</span> type=<span style="color:#996600;">&quot;hidden&quot;</span> value=<span style="color:#996600;">&quot;nEZ-sQYpOFC2YIE2qhAjeQ&quot;</span> <span style="color:#006600; font-weight:bold;">/&gt;&lt;/</span>div<span style="color:#006600; font-weight:bold;">&gt;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Então basta você colocar uma ação no botão <strong>#captcha-reload </strong>e obter um novo form por ajax e substituir o form antigo na página de sua aplicação. Fazendo assim, você poderá recarregar o seu captcha quantas vezes precisar&#8230;</p>
+<p style="text-align: justify;">Então é isso&#8230; Se você precisa de uma solução simples para o captcha em seu projeto, experimente o Raptcha usando as dicas acima&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-405" data-post-type="none" ><small class="wp_rp_publish_date">13/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/13/ruby-require-rubygems.html" class="wp_rp_title">Ruby: require &#8216;rubygems&#8217;</a></li><li data-position="1" data-poid="in-489" data-post-type="none" ><small class="wp_rp_publish_date">29/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/29/ruby-require-rubygems-alternativas.html" class="wp_rp_title">Ruby: Alternativas para require &#8216;rubygems&#8217;</a></li><li data-position="2" data-poid="in-402" data-post-type="none" ><small class="wp_rp_publish_date">04/04/2009</small> <a href="https://rafaelbiriba.com/2009/04/04/ruby-aprenda-a-programar.html" class="wp_rp_title">Ruby: Aprenda a programar</a></li><li data-position="3" data-poid="in-2271" data-post-type="none" ><small class="wp_rp_publish_date">24/09/2010</small> <a href="https://rafaelbiriba.com/2010/09/24/problema-no-net-sftp-timeout-para-o-upload.html" class="wp_rp_title">Net-sftp: Solução para timeout durante o upload</a></li><li data-position="4" data-poid="in-3075" data-post-type="none" ><small class="wp_rp_publish_date">21/09/2012</small> <a href="https://rafaelbiriba.com/2012/09/21/voce-sabia-que-da-para-usar-versoes-diferentes-de-ruby-na-mesma-maquina.html" class="wp_rp_title">Você sabia que dá para usar versões diferentes de ruby na mesma máquina ?</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F05%2F06%2Fraptcha-um-captcha-simples-para-aplicacoes-rails.html&amp;linkname=Raptcha%3A%20Um%20captcha%20simples%20para%20aplica%C3%A7%C3%B5es%20Rails" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F05%2F06%2Fraptcha-um-captcha-simples-para-aplicacoes-rails.html&amp;linkname=Raptcha%3A%20Um%20captcha%20simples%20para%20aplica%C3%A7%C3%B5es%20Rails" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F05%2F06%2Fraptcha-um-captcha-simples-para-aplicacoes-rails.html&amp;title=Raptcha%3A%20Um%20captcha%20simples%20para%20aplica%C3%A7%C3%B5es%20Rails" id="wpa2a_16"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2011/05/06/raptcha-um-captcha-simples-para-aplicacoes-rails.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+		<item>
+		<title>The Wilderness Downtown: Experimento do Google usando HTML5</title>
+		<link>https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html</link>
+		<comments>https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html#respond</comments>
+		<pubDate>Wed, 04 May 2011 19:55:59 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Diversos]]></category>
+		<category><![CDATA[Google]]></category>
+		<category><![CDATA[HTML5]]></category>
+		<category><![CDATA[Serviços Online]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Canvas]]></category>
+		<category><![CDATA[experimento]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[SVG]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2430</guid>
+		<description><![CDATA[Apesar de ser um experimento já antigo, resolvi blogar assim mesmo, pois algumas pessoas ainda não o conhecem&#8230; The Wilderness Downtown foi um projeto experimental do google, lançado em 2010, usando HTML5 e o navegador Chrome. O projeto é simplesmente fantástico, baseado essencialmente em JavaScript, HTML5, Canvas, SVG, Google Street View e na API do &#8230; <a href="https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html" class="more-link">Continue lendo <span class="screen-reader-text">The Wilderness Downtown: Experimento do Google usando HTML5</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="aligncenter size-full wp-image-2810" title="the-wilderness-downtown" src="https://rafaelbiriba.com/wp-content/uploads/2011/04/the-wilderness-downtown.png" alt="" width="582" height="176" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/04/the-wilderness-downtown.png 582w, https://rafaelbiriba.com/wp-content/uploads/2011/04/the-wilderness-downtown-300x90.png 300w" sizes="(max-width: 582px) 100vw, 582px" /></p>
+<p style="text-align: justify;">Apesar de ser um experimento já antigo, resolvi blogar assim mesmo, pois algumas pessoas ainda não o conhecem&#8230;</p>
+<p style="text-align: justify;">The Wilderness Downtown foi um projeto experimental do google, lançado em 2010, usando HTML5 e o navegador Chrome.</p>
+<p style="text-align: justify;">O projeto é simplesmente fantástico, baseado essencialmente em JavaScript, HTML5, Canvas, SVG, Google Street View e na API do Google Maps.</p>
+<p style="text-align: justify;">Tudo começa ao informar um endereço real. A partir das imagens do Google Maps e Street View, o vídeo de um rapaz correndo abre em uma das abas, e na outra, a posição de onde o rapaz está correndo aparece na região que você informou.</p>
+<p style="text-align: justify;">Enquanto isso, alguns pássaros voam sobre os mapas e até pelo video, sendo que eles são animações feitas no canvas. Note que na tela inicial (onde você informa o endereço) os pássaros são sensíveis a posição do mouse. Então, se você tentar toca-los, eles irão mudar de direção&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Durante a exibição, você poderá fazer um desenho e inclusive podendo utilizar as letras do teclado para escrever algo. A cada tecla pressionada, uma animação de máquina de escrever é reproduzida  logo a baixo. O mais impressionante disso tudo, é que depois que passam alguns segundos, os pássaros voltam voando e pousam em todas as linhas que você fez no desenho.</p>
+<p style="text-align: justify;">Você pode acessar e conferir tudo em: <a title="http://www.thewildernessdowntown.com/" href="http://www.thewildernessdowntown.com/" target="_blank">http://www.thewildernessdowntown.com/</a> (recomenda-se o uso do navegador Chrome)</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2428" data-post-type="none" ><small class="wp_rp_publish_date">27/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html" class="wp_rp_title">HTML5: Trocando mensagens entre a página e iframes</a></li><li data-position="1" data-poid="in-2566" data-post-type="none" ><small class="wp_rp_publish_date">02/02/2011</small> <a href="https://rafaelbiriba.com/2011/02/02/google-tenta-provar-que-o-bing-utiliza-mesmo-seu-mecanismo-de-busca.html" class="wp_rp_title">Google tenta provar que o Bing utiliza mesmo seu mecanismo de busca</a></li><li data-position="2" data-poid="in-322" data-post-type="none" ><small class="wp_rp_publish_date">24/03/2009</small> <a href="https://rafaelbiriba.com/2009/03/24/google-docs-eficiencia-garantida.html" class="wp_rp_title">Google Docs: Eficiência garantida</a></li><li data-position="3" data-poid="in-149" data-post-type="none" ><small class="wp_rp_publish_date">26/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/26/google-pesquisar-por-arquivos-especificos.html" class="wp_rp_title">Google: Pesquisar por arquivos específicos</a></li><li data-position="4" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F05%2F04%2Fthe-wilderness-downtown-experimento-do-google-usando-html5.html&amp;linkname=The%20Wilderness%20Downtown%3A%20Experimento%20do%20Google%20usando%20HTML5" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F05%2F04%2Fthe-wilderness-downtown-experimento-do-google-usando-html5.html&amp;linkname=The%20Wilderness%20Downtown%3A%20Experimento%20do%20Google%20usando%20HTML5" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F05%2F04%2Fthe-wilderness-downtown-experimento-do-google-usando-html5.html&amp;title=The%20Wilderness%20Downtown%3A%20Experimento%20do%20Google%20usando%20HTML5" id="wpa2a_18"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>WordPress: Cuidados e dicas para atualizar a versão para 3.1</title>
+		<link>https://rafaelbiriba.com/2011/02/23/wordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html</link>
+		<comments>https://rafaelbiriba.com/2011/02/23/wordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html#comments</comments>
+		<pubDate>Wed, 23 Feb 2011 22:20:02 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Serviços Online]]></category>
+		<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[3.1]]></category>
+		<category><![CDATA[atualização]]></category>
+		<category><![CDATA[atualizar]]></category>
+		<category><![CDATA[blog]]></category>
+		<category><![CDATA[compatível]]></category>
+		<category><![CDATA[plugin]]></category>
+		<category><![CDATA[release]]></category>
+		<category><![CDATA[suporte]]></category>
+		<category><![CDATA[versão]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2702</guid>
+		<description><![CDATA[Foi lançado hoje a versão 3.1. Dentro das principais mudanças, temos: Linkagem interna: Permite você ao escrever um post, procurar e linkar um outro post que você já tenha publicado. Essa funcionalidade é muito importante quando você quiser linkar um texto à algo que já foi falado em outro post. Barra de adminstração: Adiciona uma &#8230; <a href="https://rafaelbiriba.com/2011/02/23/wordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html" class="more-link">Continue lendo <span class="screen-reader-text">WordPress: Cuidados e dicas para atualizar a versão para 3.1</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+
+<figure id="attachment_934" style="width: 300px" class="wp-caption aligncenter"><a href="https://rafaelbiriba.com/wp-content/uploads/2009/06/wordpress-logo-black.png"><img class="size-full wp-image-934" title="wordpress-logo-black" src="https://rafaelbiriba.com/wp-content/uploads/2009/06/wordpress-logo-black.png" alt="" width="300" height="69" /></a><figcaption class="wp-caption-text">http://www.wordpress.org/</figcaption></figure>
+<p style="text-align: justify;">Foi lançado hoje a versão 3.1. Dentro das principais mudanças, temos:</p>
+<ul style="text-align: justify;">
+	<li>Linkagem interna: Permite você ao escrever um post, procurar e linkar um outro post que você já tenha publicado. Essa funcionalidade é muito importante quando você quiser linkar um texto à algo que já foi falado em outro post.</li>
+	<li>Barra de adminstração: Adiciona uma barra similar ao que o WordPress.com usa. Quando você estiver logado, essa funcionalidade vai disponibilizar alguns atalhos úteis enquanto navega pelo blog.</li>
+	<li>Telas de Adminstração em Ajax: Torna a navegação, busca e etc&#8230; mais simples já que não haverá necessidade de atualizar toda a página para cada ação realizada.</li>
+	<li>Dentre outras funcionalidades&#8230; Veja mais no <a title="http://codex.wordpress.org/Version_3.1" href="http://codex.wordpress.org/Version_3.1" target="_blank">release notes da versão 3.1</a>.</li>
+</ul>
+<p style="text-align: justify;">Antes de você ficar animado e partir para a atualização, existe alguns pontos que merecem sua atenção&#8230;</p>
+<p style="text-align: justify;">Antes de fazer qualquer coisa, faça o backup do seu blog. Já postei aqui o que aconteceu <a title="https://rafaelbiriba.com/2009/11/17/melhor-prevenir-do-que-remediar-backup-do-blog.html" href="https://rafaelbiriba.com/2009/11/17/melhor-prevenir-do-que-remediar-backup-do-blog.html" target="_blank">quando eu não fiz o backup do meu blog</a>. Backups nunca são demais, afinal é melhor prevenir.</p>
+<p style="text-align: justify;">Outro detalhe a ser observado, é que alguns plugins podem não ser compativeis com a nova versão. Na época que foi lançada a versão 2.8 <a title="https://rafaelbiriba.com/2009/06/17/wordpress-28-cuidados-basicos-antes-de-atualizar-sua-versao.html" href="https://rafaelbiriba.com/2009/06/17/wordpress-28-cuidados-basicos-antes-de-atualizar-sua-versao.html" target="_blank">eu falei sobre isso</a>.</p>
+<p style="text-align: justify;">O ideal para você que quer fazer o update, é verificar na página de cada plugin se ele já é compatível. Para isso, acesse: <a title="http://wordpress.org/extend/plugins/" href="http://wordpress.org/extend/plugins/">http://wordpress.org/extend/plugins/</a> , busque pelos seus plugins e verifique se em: “<strong>Compatible up to</strong>” ele já foi testado na versão 3.1</p>
+<p style="text-align: justify;">Eis alguns exemplos: Google XML Sitemaps e All in One SEO Pack (compatível até 3.0.5)&#8230;</p>
+<p style="text-align: justify;">Dica de como atualizar testando tudo de uma só vez:</p>
+<p style="text-align: justify;">No horário que seu blog tiver menos acessos (exemplo: De madrugada), faça um backup completo (um .zip dos arquivos e um .sql do banco é suficiente, ou então o backup disponível no Cpanel).</p>
+<p style="text-align: justify;">Depois faça a atualização e teste tudo. Se alguma coisa não funcionar, analise bem o problema, tome nota e depois restaure o blog usando o backup gerado.</p>
+<p style="text-align: justify;">Agora que você já descobriu qual o plugin não está funcionando, basta pesquisar por uma solução e repetir o procedimento até que o seu blog esteja funcional na nova versão <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;">Boa sorte para você que vai atualizar&#8230; Eu já testei e descobri que vou ter que trocar  vários plugins pois alguns deles são antigos e deixaram de funcionar.</p>
+<p style="text-align: justify;">Vale ressaltar também que até a data em que esse POST foi escrito, a versão BR do wordpress ainda não tinha a 3.1 disponível.</p>
+<p style="text-align: justify;">Se houver alguma alteração sobre isso, eu posto aqui&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;"><strong>==========================================<br />Atualização &#8211; 24/fev/2011</strong><br />WordPress 3.1 disponível na versão BR: <a title="http://br.wordpress.org/" href="http://br.wordpress.org/" target="_blank">http://br.wordpress.org/</a><br /><img class="alignleft size-full wp-image-2727" title="pedido-atualizacao-3.1-wordpress" src="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-24-at-4.23.46-PM.png" alt="" width="406" height="45" srcset="https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-24-at-4.23.46-PM.png 406w, https://rafaelbiriba.com/wp-content/uploads/2011/02/Screen-shot-2011-02-24-at-4.23.46-PM-300x33.png 300w" sizes="(max-width: 406px) 100vw, 406px" /><br /><br /><br /><strong>==========================================</strong></p>
+<div id="_mcePaste" style="position: absolute; left: -10000px; top: 447px; width: 1px; height: 1px; overflow: hidden;"><strong>All in One SEO Pack</strong></div>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2820" data-post-type="none" ><small class="wp_rp_publish_date">06/04/2011</small> <a href="https://rafaelbiriba.com/2011/04/06/wordpress-3-1-1-corrige-falhas-de-seguranca.html" class="wp_rp_title">WordPress 3.1.1 corrige falhas de segurança</a></li><li data-position="1" data-poid="in-933" data-post-type="none" ><small class="wp_rp_publish_date">17/06/2009</small> <a href="https://rafaelbiriba.com/2009/06/17/wordpress-28-cuidados-basicos-antes-de-atualizar-sua-versao.html" class="wp_rp_title">WordPress 2.8: Cuidados básicos antes de atualizar sua versão</a></li><li data-position="2" data-poid="in-1490" data-post-type="none" ><small class="wp_rp_publish_date">17/11/2009</small> <a href="https://rafaelbiriba.com/2009/11/17/melhor-prevenir-do-que-remediar-backup-do-blog.html" class="wp_rp_title">Melhor Prevenir do que Remediar: Backup do Blog</a></li><li data-position="3" data-poid="in-1066" data-post-type="none" ><small class="wp_rp_publish_date">08/09/2009</small> <a href="https://rafaelbiriba.com/2009/09/08/wordpress-enviando-posts-para-o-twitter.html" class="wp_rp_title">WordPress: Enviando posts para o Twitter</a></li><li data-position="4" data-poid="in-2494" data-post-type="none" ><small class="wp_rp_publish_date">30/12/2010</small> <a href="https://rafaelbiriba.com/2010/12/30/nao-deixe-de-atualizar-seu-wordpress-versao-3-0-4-corrige-um-problema-critico-de-seguranca.html" class="wp_rp_title">Não deixe de atualizar seu wordpress: versão 3.0.4 corrige falha de segurança</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F02%2F23%2Fwordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html&amp;linkname=WordPress%3A%20Cuidados%20e%20dicas%20para%20atualizar%20a%20vers%C3%A3o%20para%203.1" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F02%2F23%2Fwordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html&amp;linkname=WordPress%3A%20Cuidados%20e%20dicas%20para%20atualizar%20a%20vers%C3%A3o%20para%203.1" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2011%2F02%2F23%2Fwordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html&amp;title=WordPress%3A%20Cuidados%20e%20dicas%20para%20atualizar%20a%20vers%C3%A3o%20para%203.1" id="wpa2a_20"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2011/02/23/wordpress-cuidados-e-dicas-para-atualizar-a-versao-para-3-1.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Javascript &#8211; Rafael Biriba Blog</title>
+	<atom:link href="https://rafaelbiriba.com/category/desenvolvimento/javascript/feed" rel="self" type="application/rss+xml" />
+	<link>https://rafaelbiriba.com</link>
+	<description>Tecnologia e informação no lugar certo !</description>
+	<lastBuildDate>Wed, 27 Jul 2016 02:24:36 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.3</generator>
+	<item>
+		<title>User Agent do Internet Explorer 11 muda e quebra um monte de projetos</title>
+		<link>https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html</link>
+		<comments>https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html#respond</comments>
+		<pubDate>Wed, 10 Sep 2014 21:35:47 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[ie]]></category>
+		<category><![CDATA[internet explorer]]></category>
+		<category><![CDATA[javasscript]]></category>
+		<category><![CDATA[useragent]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=3149</guid>
+		<description><![CDATA[Fala galerinha&#8230;. Estou sumido a muito tempo aqui do blog&#8230; Vou tentar voltar a postar coisas&#8230; Serão posts curtos e objetivos, então qualquer dúvida pode me procurar nos comentários&#8230; (Preciso arrumar um tempo pra limpar esse layout horroso) :p :p Hoje, após algumas reclamações de usuários, descobri que o IE 11 mudou seu user agent, &#8230; <a href="https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html" class="more-link">Continue lendo <span class="screen-reader-text">User Agent do Internet Explorer 11 muda e quebra um monte de projetos</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="alignleft wp-image-3151 size-medium" src="https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-300x297.jpg" alt="internet-explorer-stopped-working" width="300" height="297" srcset="https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-300x297.jpg 300w, https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-150x150.jpg 150w, https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working-373x370.jpg 373w, https://rafaelbiriba.com/wp-content/uploads/2014/09/internet-explorer-stopped-working.jpg 540w" sizes="(max-width: 300px) 100vw, 300px" /><br />Fala galerinha&#8230;. Estou sumido a muito tempo aqui do blog&#8230; Vou tentar voltar a postar coisas&#8230; Serão posts curtos e objetivos, então qualquer dúvida pode me procurar nos comentários&#8230; (Preciso arrumar um tempo pra limpar esse layout horroso) :p :p</p>
+<p style="text-align: justify;">Hoje, após algumas reclamações de usuários, descobri que o IE 11 mudou seu user agent, e isso quebra vários javascripts.</p>
+<p style="text-align: justify;">Verifique o seu projeto e veja se não foi impactado.</p>
+<p style="text-align: justify;">Antes um user agent, por exemplo do IE 10 vinha assim:<br /><strong>Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)</strong></p>
+<p style="text-align: justify;">Então no seu javascript, para verificar se o navegador era IE, você pega o user agent e procura pela string MSIE. Provavelmente era um código assim:<br /><strong>this.navigator.userAgent().match(/MSIE\s([\d]+)/);</strong></p>
+<p style="text-align: justify;">Com o novo e belíssimo IE 11, além de bonito e rápido, ele não podia perder a reputação e continuar uma droga&#8230; O user agent mudou para:<br /><strong>Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko</strong></p>
+<p style="text-align: justify;">Com isso seu belíssimo javascript retorna que você não está no IE e sua aplicação se comporta de forma completamente diferente.</p>
+<p style="text-align: justify;">Para resolver isso, após muita muita pesquisa, forums, stack overflows, confesso que vi soluções que davam vontade de chorar&#8230; Então resolvi juntar um pedacinho de cada, e cheguei na seguinte solução:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> isIE<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+ <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>
+  <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">appName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #3366CC;">'Microsoft Internet Explorer'</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span>
+  <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">userAgent</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">match</span><span style="color: #009900;">&#40;</span><span style="color: #009966; font-style: italic;">/MSIE\s([\d]+)/</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span>
+  <span style="color: #009900;">&#40;</span>
+   <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">appName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #3366CC;">'Netscape'</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span>
+   <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> RegExp<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Trident/.*rv:([0-9]{1,}[<span style="color: #000099; font-weight: bold;">\.</span>0-9]{0,})&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">exec</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">navigator</span>.<span style="color: #660066;">userAgent</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #003366; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#41;</span>
+ <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Assim eu consigo fazer 3 verificações antes de dizer que não é IE. Se o navegador se chama &#8220;Internet Explorer&#8221;, se ele tem uma versão válida de MSIE ou se ele é um Netscape com alguma versão de Trident.</p>
+<p style="text-align: justify;">Já estou rodando esse código em produção e o problema foi solucionado. Espero que sirva para mais alguém&#8230;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2428" data-post-type="none" ><small class="wp_rp_publish_date">27/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html" class="wp_rp_title">HTML5: Trocando mensagens entre a página e iframes</a></li><li data-position="1" data-poid="in-1078" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2009</small> <a href="https://rafaelbiriba.com/2009/07/14/liberdade-aos-desenvolvedores-atualize-seu-navegador.html" class="wp_rp_title">Liberdade aos desenvolvedores: Atualize seu Navegador </a></li><li data-position="2" data-poid="in-2956" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser.html" class="wp_rp_title">5 bons motivos para você não perder tempo com travian ou outro jogo web browser</a></li><li data-position="3" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="4" data-poid="in-2430" data-post-type="none" ><small class="wp_rp_publish_date">04/05/2011</small> <a href="https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html" class="wp_rp_title">The Wilderness Downtown: Experimento do Google usando HTML5</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2014%2F09%2F10%2Fuser-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html&amp;linkname=User%20Agent%20do%20Internet%20Explorer%2011%20muda%20e%20quebra%20um%20monte%20de%20projetos" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2014%2F09%2F10%2Fuser-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html&amp;linkname=User%20Agent%20do%20Internet%20Explorer%2011%20muda%20e%20quebra%20um%20monte%20de%20projetos" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2014%2F09%2F10%2Fuser-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html&amp;title=User%20Agent%20do%20Internet%20Explorer%2011%20muda%20e%20quebra%20um%20monte%20de%20projetos" id="wpa2a_2"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>HTML5: Trocando mensagens entre a página e iframes</title>
+		<link>https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html</link>
+		<comments>https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html#comments</comments>
+		<pubDate>Sat, 27 Nov 2010 17:00:31 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[HTML5]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[cross-document]]></category>
+		<category><![CDATA[cross-domain]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[iframe]]></category>
+		<category><![CDATA[mensagem]]></category>
+		<category><![CDATA[messaging]]></category>
+		<category><![CDATA[postmessage]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=2428</guid>
+		<description><![CDATA[Por questões de segurança e privacidade, os navegadores impedem que haja comunicação entre os conteúdo de diferentes domínios. Ou seja, scripts em diferentes dominios (cross-domain) não podem se interagir. Na prática seria assim&#8230; Já imaginou, se um simples anúncio do google adsense, pudesse controlar a página em que ele foi colocado ? Ele iria alterar &#8230; <a href="https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html" class="more-link">Continue lendo <span class="screen-reader-text">HTML5: Trocando mensagens entre a página e iframes</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p><img class="size-full wp-image-2432 alignright" title="HTML5" src="https://rafaelbiriba.com/wp-content/uploads/2010/11/html5.jpg" alt="" width="275" height="436" srcset="https://rafaelbiriba.com/wp-content/uploads/2010/11/html5.jpg 275w, https://rafaelbiriba.com/wp-content/uploads/2010/11/html5-189x300.jpg 189w" sizes="(max-width: 275px) 100vw, 275px" /></p>
+<p style="text-align: justify;">Por questões de segurança e privacidade, os navegadores impedem que haja comunicação entre os conteúdo de diferentes domínios. Ou seja, scripts em diferentes dominios (cross-domain) não podem se interagir.</p>
+<p style="text-align: justify;">Na prática seria assim&#8230; Já imaginou, se um simples anúncio do google adsense, pudesse controlar a  página em que ele foi colocado ? Ele iria alterar o background, trocar  titulos na página e bagunçar tudo.</p>
+<p style="text-align: justify;">Por isso essa é uma importante funcionalidade nos navegadores, pois evita com que páginas desconhecidas (em domínio diferente) de controlar a página atual em que está visitando.</p>
+<p style="text-align: justify;">Com o HTML5, podemos contornar esse problema facilmente. Utilizando o <a title="http://dev.w3.org/html5/postmsg/" href="http://dev.w3.org/html5/postmsg/" target="_blank">Cross-document messaging</a>, podemos estabelecer comunicação entre páginas e documentos no html, sem se procupar com a origem do domínio. Foi desenvolvido justamente para permitir essa comunicação, sem colocar em risco a segurança da página. (cross-site scripting   attacks).</p>
+<p style="text-align: justify;">Cross-site messaging funciona apenas no HTML5, e está disponível nas seguintes versões de navegadores:</p>
+<ul style="text-align: justify;">
+	<li> Internet Explorer 8.0+</li>
+	<li> Firefox 3.0+</li>
+	<li> Safari 4.0+</li>
+	<li> Google Chrome 1.0+</li>
+	<li> Opera 9.5+</li>
+</ul>
+<p style="text-align: justify;">Vejamos então um exemplo prático:</p>
+<p style="text-align: justify;">Digamos que em sua página inicial, você tem o seguinte iframe.</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+</pre></td><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #339933;">&lt;</span>iframe id<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;exemplo-iframe&quot;</span> src<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;http://www.exemplo.com/teste.html&quot;</span><span style="color: #339933;">&gt;&lt;/</span>iframe<span style="color: #339933;">&gt;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Se você quiser mandar o titulo do seu site para o iframe, você precisa usar o cross-document messaging pois ele está em um outro domínio. Veja abaixo como você faria para disparar essa mensagem:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #339933;">&lt;</span>script language<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;javascript&quot;</span><span style="color: #339933;">&gt;</span>
+<span style="color: #000066; font-weight: bold;">var</span> iframe <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;exemplo-iframe&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">contentWindow</span><span style="color: #339933;">;</span>
+iframe.<span style="color: #660066;">postMessage</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Titulo do Site&quot;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">&quot;*&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+<span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Na linha 2 é onde obtemos o controle do iframe. Na linha 3 é onde disparamos a mensagem. Note que estamos passando um &#8220;*&#8221; como segundo argumento do postMessage, o que significa que a mensagem é enviada para todos os domínios. Poderiamos ser mais específicos e disparar apenas para o domínio do iframe (exemplo.com).</p>
+<p style="text-align: justify;">Agora, no lado do iframe, só falta receber essa mensagem. Veja abaixo o exemplo do código que o iframe deve carregar:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #339933;">&lt;</span>script language<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;javascript&quot;</span><span style="color: #339933;">&gt;</span>
+<span style="color: #000066; font-weight: bold;">function</span> displayMessage<span style="color: #009900;">&#40;</span>event<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000066; font-weight: bold;">var</span> message <span style="color: #339933;">=</span> event.<span style="color: #660066;">data</span><span style="color: #339933;">;</span>
+    alert<span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    event.<span style="color: #660066;">source</span>.<span style="color: #660066;">postMessage</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Recebido com sucesso!&quot;</span><span style="color: #339933;">,</span>  <span style="color: #3366CC;">&quot;*&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+window.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;message&quot;</span><span style="color: #339933;">,</span> displayMessage<span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;">Vou começar explicando pela linha 7,  onde é estabelecido o listener, que é responsável por &#8220;escutar&#8221; as mensagens recebidas e chamar a função displayMessage. Na linha 3, recebemos a mensagem numa variável. Na linha 4 exibimos ela no alert do javascript. Na linha 5, é disparado uma mensagem para o &#8220;remetente&#8221;, ou seja, podemos enviar uma mensagem para confirmar o recebimento por exemplo.</p>
+<p style="text-align: justify;">Lembrando que para que a mensagem enviada na linha 5 seja recebida corretamente pela sua página inicial, você tem que adicionar um listener, da mesma forma que foi feito no iframe. Fazendo assim, é possível fazer trocas de informações entre as páginas de diferentes domínios.</p>
+<p style="text-align: justify;">No exemplo acima, qualquer site estaria habilitado em trocar informações com aquela página do iframe (http://www.exemplo.com/teste.html) e dependendo do contexto e de como foi implementado, pode vir a ser uma falha de segurança, portanto, utilize com cuidado.</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-2430" data-post-type="none" ><small class="wp_rp_publish_date">04/05/2011</small> <a href="https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html" class="wp_rp_title">The Wilderness Downtown: Experimento do Google usando HTML5</a></li><li data-position="1" data-poid="in-3149" data-post-type="none" ><small class="wp_rp_publish_date">10/09/2014</small> <a href="https://rafaelbiriba.com/2014/09/10/user-agent-do-internet-explorer-11-muda-e-quebra-um-monte-de-projetos.html" class="wp_rp_title">User Agent do Internet Explorer 11 muda e quebra um monte de projetos</a></li><li data-position="2" data-poid="in-1810" data-post-type="none" ><small class="wp_rp_publish_date">24/12/2009</small> <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="wp_rp_title">Feliz ano novo com javascript !</a></li><li data-position="3" data-poid="in-1078" data-post-type="none" ><small class="wp_rp_publish_date">14/07/2009</small> <a href="https://rafaelbiriba.com/2009/07/14/liberdade-aos-desenvolvedores-atualize-seu-navegador.html" class="wp_rp_title">Liberdade aos desenvolvedores: Atualize seu Navegador </a></li><li data-position="4" data-poid="in-2956" data-post-type="none" ><small class="wp_rp_publish_date">28/02/2012</small> <a href="https://rafaelbiriba.com/2012/02/28/5-bons-motivos-para-voce-nao-perder-tempo-com-travian-ou-outro-jogo-web-browser.html" class="wp_rp_title">5 bons motivos para você não perder tempo com travian ou outro jogo web browser</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F11%2F27%2Fhtml5-trocando-mensagens-entre-a-pagina-e-iframes.html&amp;linkname=HTML5%3A%20Trocando%20mensagens%20entre%20a%20p%C3%A1gina%20e%20iframes" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F11%2F27%2Fhtml5-trocando-mensagens-entre-a-pagina-e-iframes.html&amp;linkname=HTML5%3A%20Trocando%20mensagens%20entre%20a%20p%C3%A1gina%20e%20iframes" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2010%2F11%2F27%2Fhtml5-trocando-mensagens-entre-a-pagina-e-iframes.html&amp;title=HTML5%3A%20Trocando%20mensagens%20entre%20a%20p%C3%A1gina%20e%20iframes" id="wpa2a_4"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html/feed</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Feliz ano novo com javascript !</title>
+		<link>https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html</link>
+		<comments>https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html#comments</comments>
+		<pubDate>Thu, 24 Dec 2009 21:47:49 +0000</pubDate>
+		<dc:creator><![CDATA[Rafael Biriba]]></dc:creator>
+				<category><![CDATA[Desenvolvimento]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[alert]]></category>
+		<category><![CDATA[ano novo]]></category>
+		<category><![CDATA[codigo]]></category>
+		<category><![CDATA[natal]]></category>
+		<category><![CDATA[script]]></category>
+
+		<guid isPermaLink="false">https://rafaelbiriba.com/?p=1810</guid>
+		<description><![CDATA[Primeiramente, gostaria de desejar a todos os leitores e amigos que acompanham meu blog: Um feliz natal e um próspero ano novo ! Entrando nesse ritmo de natal e ano novo, desenvolvi um pequeno código em javascript para desejar feliz natal e ano novo para os leitores do meu blog. O código está realmente simples, &#8230; <a href="https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html" class="more-link">Continue lendo <span class="screen-reader-text">Feliz ano novo com javascript !</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[
+<p style="text-align: justify;"><img class="size-full wp-image-1817 alignleft" title="natal-16" src="https://rafaelbiriba.com/wp-content/uploads/2009/12/natal-16.jpg" alt="natal-16" width="233" height="350" srcset="https://rafaelbiriba.com/wp-content/uploads/2009/12/natal-16.jpg 233w, https://rafaelbiriba.com/wp-content/uploads/2009/12/natal-16-199x300.jpg 199w" sizes="(max-width: 233px) 100vw, 233px" />Primeiramente, gostaria de desejar a <strong>todos os leitores e amigos</strong> que acompanham meu blog:</p>
+<h3 style="text-align: justify;"><span style="color: #ff0000;"><strong>Um feliz natal e um próspero ano novo !</strong></span><br /></h3>
+<p style="text-align: justify;">Entrando nesse ritmo de natal e ano novo, desenvolvi um pequeno código em javascript para desejar feliz natal e ano novo para os leitores do meu blog.</p>
+<p style="text-align: justify;">O código está realmente simples, e pode ser alterado e utilizado aonde quiser&#8230; Só não esqueça de deixar sua opnião nos comentários abaixo!</p>
+<p style="text-align: justify;"><strong>O script funciona da seguinte maneira:</strong><br />3 variáveis são definidas no inicio: <br />Data atual (<span style="color: #ff0000;">var agora</span>).<br />Data do ano novo (<span style="color: #ff0000;">var anoNovo</span>).<br />Data máxima de exibição (<span style="color: #ff0000;">var anoNovoMax</span>).</p>
+<p style="text-align: justify;">O alert com a mensagem será exibida enquanto a data atual estiver dentro do intervalo das outras 2 datas.</p>
+<p style="text-align: justify;">Abaixo segue o código:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;"><span style="color: #339933;">&lt;</span>script language<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;JavaScript&quot;</span><span style="color: #339933;">&gt;</span>
+<span style="color: #000066; font-weight: bold;">var</span> agora <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> <span style="">Date</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> anoNovo <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> <span style="">Date</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">2010</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> anoNovoMax <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> <span style="">Date</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">2010</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">23</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">59</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">59</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>agora <span style="color: #339933;">&gt;=</span> anoNovo <span style="color: #339933;">&amp;&amp;</span> agora<span style="color: #339933;">&lt;</span>anoNovoMax<span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#123;</span>
+alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Feliz ano novo !&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span></pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;"><strong>Para implementar no wordpress, é bem simples:</strong><br />Adicione um Widget de texto em seu wordpress, e sem atribuir um titulo, insira o codigo javascript diretamente no campo de baixo &#8220;descrição&#8221;. Fazendo isso, o widget não ficará visível, mas o código vai funcionar&#8230; <img src="https://s.w.org/images/core/emoji/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p style="text-align: justify;"><strong>Para implementar em seu site:</strong><br />Basta inserir o javascript em sua página.</p>
+<p style="text-align: justify;"><span style="color: #ff0000;"><strong>Dica:</strong></span><br />Como o javascript pega a data da máquina do cliente, você corre o risco de pegar a data errada.  Uma solução seria usar o PHP para definir a data, ou seja,  seria a data atual seu servidor. Exemplo:</p>
+
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;">var agora = new Date(<span style="color: #000000; font-weight: bold;">&lt;?php</span> <span style="color: #b1b100;">echo</span> <span style="color: #990000;">date</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Y, m, d, H, i, s&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>);</pre></td></tr></table></div>
+
+
+
+<p style="text-align: justify;"><strong>Então é isso&#8230; Façam bom proveito !</strong></p>
+<p style="text-align: justify;">Aqui no blog, já está implementado as mensagens de Feliz Natal e Feliz Ano Novo&#8230; Serão exibidas durante todo o dia 25 e 01, respectivamente ! <strong>Visitem o Blog e confiram !</strong> <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>&nbsp;</p>
+
+<div class="wp_rp_wrap  wp_rp_plain" ><div class="wp_rp_content"><h3 class="related_post_title">Leia também:</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-188" data-post-type="none" ><small class="wp_rp_publish_date">27/02/2009</small> <a href="https://rafaelbiriba.com/2009/02/27/php-ocultando-erros-de-codigo.html" class="wp_rp_title">PHP: Ocultando erros de código</a></li><li data-position="1" data-poid="in-791" data-post-type="none" ><small class="wp_rp_publish_date">02/07/2009</small> <a href="https://rafaelbiriba.com/2009/07/02/php-arquivo-de-log-personalizado.html" class="wp_rp_title">PHP: Arquivo de log personalizado</a></li><li data-position="2" data-poid="in-2428" data-post-type="none" ><small class="wp_rp_publish_date">27/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/27/html5-trocando-mensagens-entre-a-pagina-e-iframes.html" class="wp_rp_title">HTML5: Trocando mensagens entre a página e iframes</a></li><li data-position="3" data-poid="in-2430" data-post-type="none" ><small class="wp_rp_publish_date">04/05/2011</small> <a href="https://rafaelbiriba.com/2011/05/04/the-wilderness-downtown-experimento-do-google-usando-html5.html" class="wp_rp_title">The Wilderness Downtown: Experimento do Google usando HTML5</a></li><li data-position="4" data-poid="in-2337" data-post-type="none" ><small class="wp_rp_publish_date">18/11/2010</small> <a href="https://rafaelbiriba.com/2010/11/18/net-sftp-calculando-o-progresso-do-upload.html" class="wp_rp_title">Net-SFTP: Calculando o progresso do upload</a></li></ul><div class="wp_rp_footer"><a class="wp_rp_backlink" target="_blank" href="http://www.zemanta.com/?wp-related-posts" rel="nofollow">Zemanta</a></div></div></div>
+<p><a class="a2a_button_twitter" href="http://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F12%2F24%2Ffeliz-ano-novo-com-javascript.html&amp;linkname=Feliz%20ano%20novo%20com%20javascript%20%21" title="Twitter" rel="nofollow" target="_blank"></a><a class="a2a_button_facebook" href="http://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F12%2F24%2Ffeliz-ano-novo-com-javascript.html&amp;linkname=Feliz%20ano%20novo%20com%20javascript%20%21" title="Facebook" rel="nofollow" target="_blank"></a><a class="a2a_dd a2a_target addtoany_share_save" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.rafaelbiriba.com%2F2009%2F12%2F24%2Ffeliz-ano-novo-com-javascript.html&amp;title=Feliz%20ano%20novo%20com%20javascript%20%21" id="wpa2a_6"><img src="https://rafaelbiriba.com/wp-content/plugins/add-to-any/share_save_171_16.png" width="171" height="16" alt="Share"/></a></p>]]></content:encoded>
+			<wfw:commentRss>https://rafaelbiriba.com/2009/12/24/feliz-ano-novo-com-javascript.html/feed</wfw:commentRss>
+		<slash:comments>3</slash:comments>
+		</item>
+	</channel>
+</rss>

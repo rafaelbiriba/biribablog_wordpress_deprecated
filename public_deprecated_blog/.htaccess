@@ -1,0 +1,8 @@
+ErrorDocument 404 /404.html
+
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{THE_REQUEST} (.*)\.php
+RewriteRule index.php blogwp.html [L]
+RewriteRule ^(.*)\.php $1.html [L]
