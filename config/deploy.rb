@@ -22,3 +22,5 @@ namespace :deploy do
   task :finalize_update do
   end
 end
+
+after "deploy:update", "deploy:cleanup"
