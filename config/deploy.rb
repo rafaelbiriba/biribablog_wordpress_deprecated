@@ -1,4 +1,4 @@
-set :application, "biribablog"
+set :application, "biribablog_deprecated"
 
 set :repository,  "."
 
@@ -8,7 +8,7 @@ set :deploy_via, :copy
 
 set :copy_cache, true
 
-set :copy_exclude, Dir.entries(".").reject{ |f| f =~ /public_deprecated_wordpress/ }
+set :copy_exclude, ["Gemfile", "Gemfile.lock", "config", "Capfile", "README.md"]
 
 set :user, "deploy"
 
