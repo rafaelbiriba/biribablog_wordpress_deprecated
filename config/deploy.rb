@@ -21,6 +21,11 @@ set :keep_releases, 2
 namespace :deploy do
   task :finalize_update do
   end
+
+  task :delete_revision_file do
+    run "cd #{deploy_to}/current/; rm -f REVISION"
+  end
 end
 
 after "deploy:update", "deploy:cleanup"
+after "deploy:cleanup", "deploy:delete_revision_file"
