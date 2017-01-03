@@ -8,7 +8,7 @@ set :deploy_via, :copy
 
 set :copy_cache, true
 
-set :copy_exclude, ["Gemfile", "Gemfile.lock", "config", "Capfile", "README.md"]
+set :copy_exclude, ["Gemfile", "Gemfile.lock", "config", "Capfile", "README.md", ".git", ".ruby*"]
 
 set :user, "deploy"
 
