@@ -2,7 +2,7 @@ set :application, "biribablog_deprecated"
 
 set :repository,  "."
 
-role :web, "45.55.169.72"
+role :web, ENV["rafaelbiribacom_server_deploy"] || ""
 
 set :deploy_via, :copy
 
@@ -10,7 +10,7 @@ set :copy_cache, true
 
 set :copy_exclude, ["Gemfile", "Gemfile.lock", "config", "Capfile", "README.md", ".git", ".ruby*"]
 
-set :user, "deploy"
+set :user, ENV["rafaelbiribacom_user_deploy"] || ""
 
 set :use_sudo, false
 
